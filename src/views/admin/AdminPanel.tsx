@@ -53,17 +53,17 @@ function KPISection({ title, icon, items, defaultOpen = true, onCardClick, onNav
   };
 
   return (
-    <div className="bg-white dark:bg-slate-800 rounded-2xl border border-gray-200/60 dark:border-slate-700/60 overflow-hidden">
+    <div className="bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 overflow-hidden">
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="w-full flex items-center justify-between p-4 hover:bg-gray-50 dark:hover:bg-slate-700/30 transition-colors"
+        className="w-full flex items-center justify-between p-4 hover:bg-gray-50 dark:hover:bg-gray-700/30 transition-colors"
       >
           <div className="flex items-center gap-3">
-          <div className="p-2 bg-red-100 dark:bg-red-900/40 rounded-xl text-red-600 dark:text-red-400">
+          <div className="p-2 bg-red-100 dark:bg-red-900/40 rounded text-red-600 dark:text-red-400">
             {icon}
           </div>
           <h3 className="text-base font-semibold text-gray-900 dark:text-white">{title}</h3>
-          <Badge label={`${items.length} metrics`} colorClass="bg-gray-100 text-gray-600 dark:bg-slate-700 dark:text-gray-300" />
+          <Badge label={`${items.length} metrics`} colorClass="bg-gray-100 text-gray-600 dark:bg-gray-700 dark:text-gray-300" />
         </div>
         <ChevronDown className={`w-5 h-5 text-gray-400 transition-transform ${isOpen ? 'rotate-180' : ''}`} />
       </button>
@@ -75,7 +75,7 @@ function KPISection({ title, icon, items, defaultOpen = true, onCardClick, onNav
               <button
                 key={idx}
                 onClick={() => kpi.navigateTo ? onNavigate?.(kpi.navigateTo) : onCardClick?.(kpi.type, kpi.detailTitle)}
-                className={`bg-gradient-to-br ${kpi.accent} to-transparent rounded-xl p-4 border border-gray-100 dark:border-slate-700/50 bg-white dark:bg-slate-800/80 text-left hover:shadow-md hover:scale-[1.02] transition-all cursor-pointer`}
+                className="bg-white dark:bg-gray-800 rounded p-4 border border-gray-200 dark:border-gray-700 text-left transition-colors cursor-pointer"
               >
                 <div className="flex items-center justify-between mb-2">
                   <div className={`p-1.5 rounded-lg ${getColorClass(kpi.accent)}`}>
@@ -249,7 +249,7 @@ export function AdminDashboard({ onNavigate }: AdminDashboardProps) {
           <select 
             value={timeRange} 
             onChange={(e) => setTimeRange(e.target.value)}
-            className="px-3 py-2 rounded-xl border border-gray-200 dark:border-slate-600 bg-white dark:bg-slate-800 text-gray-900 dark:text-white text-sm"
+            className="px-3 py-2 rounded border border-gray-200 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-white text-sm"
           >
             <option value="1tháng">1 tháng</option>
             <option value="3tháng">3 tháng</option>
@@ -295,7 +295,7 @@ export function AdminDashboard({ onNavigate }: AdminDashboardProps) {
       {/* Charts Row */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
         {/* Campaign Status Pie Chart */}
-        <div className="bg-white dark:bg-slate-800 rounded-2xl border border-gray-200/60 dark:border-slate-700/60 p-6">
+        <div className="bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 p-6">
           <div className="flex items-center justify-between mb-4">
             <h3 className="text-sm font-semibold text-gray-900 dark:text-white">Tình trạng chiến dịch</h3>
             <Badge label={`${campaigns.length} chiến dịch`} colorClass="bg-teal-100 text-teal-800 dark:bg-teal-900/40 dark:text-teal-300" />
@@ -323,7 +323,7 @@ export function AdminDashboard({ onNavigate }: AdminDashboardProps) {
         </div>
 
         {/* Campaign Performance Line Chart */}
-        <div className="bg-white dark:bg-slate-800 rounded-2xl border border-gray-200/60 dark:border-slate-700/60 p-6">
+        <div className="bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 p-6">
           <div className="flex items-center justify-between mb-4">
             <h3 className="text-sm font-semibold text-gray-900 dark:text-white">Lượt xem theo tháng</h3>
             <Award className="w-4 h-4 text-teal-500" />
@@ -341,7 +341,7 @@ export function AdminDashboard({ onNavigate }: AdminDashboardProps) {
         </div>
 
         {/* Top Brands Bar Chart */}
-        <div className="bg-white dark:bg-slate-800 rounded-2xl border border-gray-200/60 dark:border-slate-700/60 p-6">
+        <div className="bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 p-6">
           <div className="flex items-center justify-between mb-4">
             <h3 className="text-sm font-semibold text-gray-900 dark:text-white">Top Brand theo Views</h3>
             <Briefcase className="w-4 h-4 text-teal-500" />
@@ -362,19 +362,19 @@ export function AdminDashboard({ onNavigate }: AdminDashboardProps) {
       {/* Ranking Tables */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
         {/* Top KOL/KOC Ranking */}
-        <div className="bg-white dark:bg-slate-800 rounded-2xl border border-gray-200/60 dark:border-slate-700/60 p-6">
+        <div className="bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 p-6">
           <div className="flex items-center justify-between mb-4">
             <h3 className="text-sm font-semibold text-gray-900 dark:text-white">Top KOL/KOC</h3>
             <Button variant="ghost" size="sm" onClick={() => onNavigate?.('ranking')}>Xem tất cả</Button>
           </div>
           <div className="space-y-2">
             {kolRankings.slice(0, 5).map((kol) => (
-              <div key={kol.kolId} className="flex items-center gap-3 p-3 rounded-xl hover:bg-gray-50 dark:hover:bg-slate-700/30 transition-colors">
+              <div key={kol.kolId} className="flex items-center gap-3 p-3 rounded hover:bg-gray-50 dark:hover:bg-gray-700/30 transition-colors">
                 <div className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold ${
                   kol.rank === 1 ? 'bg-amber-500 text-white' : 
                   kol.rank === 2 ? 'bg-gray-400 text-white' : 
                   kol.rank === 3 ? 'bg-amber-700 text-white' : 
-                  'bg-gray-100 dark:bg-slate-600 text-gray-600 dark:text-gray-300'
+                  'bg-gray-100 dark:bg-gray-600 text-gray-600 dark:text-gray-300'
                 }`}>
                   {kol.rank}
                 </div>
@@ -393,19 +393,19 @@ export function AdminDashboard({ onNavigate }: AdminDashboardProps) {
         </div>
 
         {/* Top Campaign Ranking */}
-        <div className="bg-white dark:bg-slate-800 rounded-2xl border border-gray-200/60 dark:border-slate-700/60 p-6">
+        <div className="bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 p-6">
           <div className="flex items-center justify-between mb-4">
             <h3 className="text-sm font-semibold text-gray-900 dark:text-white">Top Chiến dịch</h3>
             <Button variant="ghost" size="sm" onClick={() => onNavigate?.('ranking')}>Xem tất cả</Button>
           </div>
           <div className="space-y-2">
             {campaignRankings.slice(0, 5).map((camp) => (
-              <div key={camp.campaignId} className="flex items-center gap-3 p-3 rounded-xl hover:bg-gray-50 dark:hover:bg-slate-700/30 transition-colors">
+              <div key={camp.campaignId} className="flex items-center gap-3 p-3 rounded hover:bg-gray-50 dark:hover:bg-gray-700/30 transition-colors">
                 <div className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold ${
                   camp.rank === 1 ? 'bg-amber-500 text-white' : 
                   camp.rank === 2 ? 'bg-gray-400 text-white' : 
                   camp.rank === 3 ? 'bg-amber-700 text-white' : 
-                  'bg-gray-100 dark:bg-slate-600 text-gray-600 dark:text-gray-300'
+                  'bg-gray-100 dark:bg-gray-600 text-gray-600 dark:text-gray-300'
                 }`}>
                   {camp.rank}
                 </div>
@@ -418,7 +418,7 @@ export function AdminDashboard({ onNavigate }: AdminDashboardProps) {
                   colorClass={
                     camp.status === 'active' ? 'bg-blue-100 text-blue-800 dark:bg-blue-900/40 dark:text-blue-300' :
                     camp.status === 'tracking' ? 'bg-amber-100 text-amber-800 dark:bg-amber-900/40 dark:text-amber-300' :
-                    'bg-gray-100 text-gray-700 dark:bg-slate-700 dark:text-gray-300'
+                    'bg-gray-100 text-gray-700 dark:bg-gray-700 dark:text-gray-300'
                   } 
                 />
               </div>
@@ -428,14 +428,14 @@ export function AdminDashboard({ onNavigate }: AdminDashboardProps) {
       </div>
 
       {/* Recent Activity */}
-      <div className="bg-white dark:bg-slate-800 rounded-2xl border border-gray-200/60 dark:border-slate-700/60 p-6">
+      <div className="bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 p-6">
         <div className="flex items-center justify-between mb-4">
           <h3 className="text-sm font-semibold text-gray-900 dark:text-white">Hoạt động gần đây</h3>
           <Badge label={`${recentActivities.length} sự kiện`} colorClass="bg-teal-100 text-teal-800 dark:bg-teal-900/40 dark:text-teal-300" />
         </div>
         <div className="space-y-3 max-h-72 overflow-y-auto">
           {recentActivities.map((item) => (
-            <div key={item.id} className="flex items-start gap-3 p-3 rounded-xl hover:bg-gray-50 dark:hover:bg-slate-700/30 transition-colors">
+            <div key={item.id} className="flex items-start gap-3 p-3 rounded hover:bg-gray-50 dark:hover:bg-gray-700/30 transition-colors">
               <div className={`mt-1.5 w-2.5 h-2.5 rounded-full shrink-0 ${
                 item.actor === 'admin' ? 'bg-red-500' : 
                 item.actor === 'brand' ? 'bg-teal-500' : 
@@ -479,7 +479,7 @@ export function AdminDashboard({ onNavigate }: AdminDashboardProps) {
               if (!kpi) return null;
               return (
                 <>
-                  <div className="bg-blue-50 dark:bg-blue-900/20 rounded-xl p-4 border border-blue-200 dark:border-blue-800/40">
+                  <div className="bg-blue-50 dark:bg-blue-900/20 rounded p-4 border border-blue-200 dark:border-blue-800/40">
                     <p className="text-sm text-blue-700 dark:text-blue-300">
                       <span className="font-semibold">Tổng cộng:</span> {kpi.data.length} mục • 
                       <span className="font-semibold ml-2">Giá trị:</span> {kpi.value}
@@ -487,7 +487,7 @@ export function AdminDashboard({ onNavigate }: AdminDashboardProps) {
                   </div>
                   <div className="overflow-x-auto max-h-96">
                     <table className="w-full">
-                      <thead className="sticky top-0 bg-gray-50 dark:bg-slate-700">
+                      <thead className="sticky top-0 bg-gray-50 dark:bg-gray-700">
                         <tr>
                           {kpi.detailColumns.map((col, i) => (
                             <th key={i} className="px-4 py-3 text-left text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider border-b">
@@ -496,11 +496,11 @@ export function AdminDashboard({ onNavigate }: AdminDashboardProps) {
                           ))}
                         </tr>
                       </thead>
-                      <tbody className="divide-y divide-gray-100 dark:divide-slate-700">
+                      <tbody className="divide-y divide-gray-100 dark:divide-gray-700">
                         {kpi.data.slice(0, 20).map((item: any, idx: number) => (
                           <tr 
                             key={idx} 
-                            className={`hover:bg-gray-50 dark:hover:bg-slate-700/30 ${kpi.onRowClick ? 'cursor-pointer' : ''}`}
+                            className={`hover:bg-gray-50 dark:hover:bg-gray-700/30 ${kpi.onRowClick ? 'cursor-pointer' : ''}`}
                             onClick={() => kpi.onRowClick?.(item)}
                           >
                             {kpi.detailRender(item).map((val: string, i: number) => (
@@ -534,9 +534,9 @@ export function AdminDashboard({ onNavigate }: AdminDashboardProps) {
             <div className="flex items-start gap-6">
               <div className="relative">
                 <Avatar initials={selectedKOL.avatar} size="xl" />
-                <div className={`absolute -bottom-1 -right-1 w-5 h-5 rounded-full border-2 border-white dark:border-slate-800 ${
+                <div className={`absolute -bottom-1 -right-1 w-5 h-5 rounded-full border-2 border-white dark:border-gray-800 ${
                   selectedKOL.platform === 'TikTok' ? 'bg-black' :
-                  selectedKOL.platform === 'Instagram' ? 'bg-gradient-to-br from-purple-600 via-pink-500 to-orange-400' :
+                  selectedKOL.platform === 'Instagram' ? 'bg-pink-500' :
                   selectedKOL.platform === 'YouTube' ? 'bg-red-600' : 'bg-blue-600'
                 }`}>
                   <span className="absolute inset-0 flex items-center justify-center text-white text-xs">
@@ -559,19 +559,19 @@ export function AdminDashboard({ onNavigate }: AdminDashboardProps) {
             </div>
 
             <div className="grid grid-cols-2 gap-4">
-              <div className="bg-gray-50 dark:bg-slate-700/50 rounded-xl p-4">
+              <div className="bg-gray-50 dark:bg-gray-700/50 rounded p-4">
                 <p className="text-sm text-gray-500 dark:text-gray-400">Người theo dõi</p>
                 <p className="text-2xl font-bold text-gray-900 dark:text-white">{selectedKOL.followersDisplay}</p>
               </div>
-              <div className="bg-gray-50 dark:bg-slate-700/50 rounded-xl p-4">
+              <div className="bg-gray-50 dark:bg-gray-700/50 rounded p-4">
                 <p className="text-sm text-gray-500 dark:text-gray-400">Tỷ lệ tương tác</p>
                 <p className="text-2xl font-bold text-teal-600 dark:text-teal-400">{selectedKOL.engagementRate}%</p>
               </div>
-              <div className="bg-gray-50 dark:bg-slate-700/50 rounded-xl p-4">
+              <div className="bg-gray-50 dark:bg-gray-700/50 rounded p-4">
                 <p className="text-sm text-gray-500 dark:text-gray-400">Lĩnh vực</p>
                 <p className="text-lg font-medium text-gray-900 dark:text-white">{selectedKOL.niche}</p>
               </div>
-              <div className="bg-gray-50 dark:bg-slate-700/50 rounded-xl p-4">
+              <div className="bg-gray-50 dark:bg-gray-700/50 rounded p-4">
                 <p className="text-sm text-gray-500 dark:text-gray-400">Giá booking</p>
                 <p className="text-lg font-medium text-gray-900 dark:text-white">{selectedKOL.bookingPrice.toLocaleString()} VNĐ</p>
               </div>
@@ -588,16 +588,16 @@ export function AdminDashboard({ onNavigate }: AdminDashboardProps) {
               <h4 className="text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">Liên kết mạng xã hội</h4>
               <div className="flex gap-2">
                 {selectedKOL.socialLinks.tiktok && (
-                  <a href={selectedKOL.socialLinks.tiktok} target="_blank" className="px-3 py-2 bg-black text-white rounded-xl text-sm hover:opacity-80">TikTok</a>
+                  <a href={selectedKOL.socialLinks.tiktok} target="_blank" className="px-3 py-2 bg-black text-white rounded text-sm hover:opacity-80">TikTok</a>
                 )}
                 {selectedKOL.socialLinks.instagram && (
-                  <a href={selectedKOL.socialLinks.instagram} target="_blank" className="px-3 py-2 bg-gradient-to-br from-purple-600 to-pink-500 text-white rounded-xl text-sm hover:opacity-80">Instagram</a>
+                  <a href={selectedKOL.socialLinks.instagram} target="_blank" className="px-3 py-2 bg-pink-500 text-white rounded text-sm hover:opacity-80">Instagram</a>
                 )}
                 {selectedKOL.socialLinks.youtube && (
-                  <a href={selectedKOL.socialLinks.youtube} target="_blank" className="px-3 py-2 bg-red-600 text-white rounded-xl text-sm hover:opacity-80">YouTube</a>
+                  <a href={selectedKOL.socialLinks.youtube} target="_blank" className="px-3 py-2 bg-red-600 text-white rounded text-sm hover:opacity-80">YouTube</a>
                 )}
                 {selectedKOL.socialLinks.facebook && (
-                  <a href={selectedKOL.socialLinks.facebook} target="_blank" className="px-3 py-2 bg-blue-600 text-white rounded-xl text-sm hover:opacity-80">Facebook</a>
+                  <a href={selectedKOL.socialLinks.facebook} target="_blank" className="px-3 py-2 bg-blue-600 text-white rounded text-sm hover:opacity-80">Facebook</a>
                 )}
               </div>
             </div>
@@ -607,7 +607,7 @@ export function AdminDashboard({ onNavigate }: AdminDashboardProps) {
                 <h4 className="text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">Kinh nghiệm hợp tác</h4>
                 <div className="space-y-2">
                   {selectedKOL.experience.map((exp, idx) => (
-                    <div key={idx} className="bg-gray-50 dark:bg-slate-700/50 rounded-lg p-3">
+                    <div key={idx} className="bg-gray-50 dark:bg-gray-700/50 rounded-lg p-3">
                       <div className="flex justify-between items-start">
                         <div>
                           <p className="font-medium text-gray-900 dark:text-white">{exp.campaign}</p>
@@ -690,13 +690,13 @@ export function BrandManagement() {
             placeholder="Tìm kiếm Brand..." 
             value={searchTerm} 
             onChange={(e) => setSearchTerm(e.target.value)} 
-            className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-gray-200 dark:border-slate-600 bg-white dark:bg-slate-800 text-gray-900 dark:text-white text-sm focus:ring-2 focus:ring-teal-500 outline-none" 
+            className="w-full pl-10 pr-4 py-2.5 rounded border border-gray-200 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-white text-sm focus:ring-2 focus:ring-teal-500 outline-none" 
           />
         </div>
         <select 
           value={filterIndustry} 
           onChange={(e) => setFilterIndustry(e.target.value)} 
-          className="px-4 py-2.5 rounded-xl border border-gray-200 dark:border-slate-600 bg-white dark:bg-slate-800 text-gray-900 dark:text-white text-sm"
+          className="px-4 py-2.5 rounded border border-gray-200 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-white text-sm"
         >
           <option value="all">Tất cả lĩnh vực</option>
           {industries.map(ind => <option key={ind} value={ind}>{ind}</option>)}
@@ -704,7 +704,7 @@ export function BrandManagement() {
         <select 
           value={filterStatus} 
           onChange={(e) => setFilterStatus(e.target.value)} 
-          className="px-4 py-2.5 rounded-xl border border-gray-200 dark:border-slate-600 bg-white dark:bg-slate-800 text-gray-900 dark:text-white text-sm"
+          className="px-4 py-2.5 rounded border border-gray-200 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-white text-sm"
         >
           <option value="all">Tất cả trạng thái</option>
           <option value="active">Hoạt động</option>
@@ -714,30 +714,30 @@ export function BrandManagement() {
 
       {/* Brand Stats Summary */}
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-        <div className="bg-white dark:bg-slate-800 rounded-2xl border border-gray-200/60 dark:border-slate-700/60 p-4 text-center">
+        <div className="bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 p-4 text-center">
           <p className="text-2xl font-bold text-gray-900 dark:text-white">{brands.length}</p>
           <p className="text-xs text-gray-500">Tổng Brand</p>
         </div>
-        <div className="bg-white dark:bg-slate-800 rounded-2xl border border-gray-200/60 dark:border-slate-700/60 p-4 text-center">
+        <div className="bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 p-4 text-center">
           <p className="text-2xl font-bold text-teal-600">{brands.filter(b => b.status === 'active').length}</p>
           <p className="text-xs text-gray-500">Đang hoạt động</p>
         </div>
-        <div className="bg-white dark:bg-slate-800 rounded-2xl border border-gray-200/60 dark:border-slate-700/60 p-4 text-center">
+        <div className="bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 p-4 text-center">
           <p className="text-2xl font-bold text-blue-600">{brands.reduce((s, b) => s + b.campaignCount, 0)}</p>
           <p className="text-xs text-gray-500">Chiến dịch</p>
         </div>
-        <div className="bg-white dark:bg-slate-800 rounded-2xl border border-gray-200/60 dark:border-slate-700/60 p-4 text-center">
+        <div className="bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 p-4 text-center">
           <p className="text-2xl font-bold text-amber-600">{brands.reduce((s, b) => s + b.kolCount, 0)}</p>
           <p className="text-xs text-gray-500">KOL/KOC</p>
         </div>
       </div>
 
       {/* Brands Table */}
-      <div className="bg-white dark:bg-slate-800 rounded-2xl border border-gray-200/60 dark:border-slate-700/60 overflow-hidden">
+      <div className="bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 overflow-hidden">
         <div className="overflow-x-auto">
           <table className="w-full min-w-[1100px]">
             <thead>
-              <tr className="border-b border-gray-100 dark:border-slate-700 bg-gray-50/50 dark:bg-slate-700/30">
+              <tr className="border-b border-gray-100 dark:border-gray-700 bg-gray-50/50 dark:bg-gray-700/30">
                 <th className="text-left px-6 py-4 text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider">Brand</th>
                 <th className="text-left px-6 py-4 text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider">Lĩnh vực</th>
                 <th className="text-left px-6 py-4 text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider">Gói</th>
@@ -752,7 +752,7 @@ export function BrandManagement() {
             </thead>
             <tbody>
               {filteredBrands.map((brand) => (
-                <tr key={brand.id} className="border-b border-gray-50 dark:border-slate-700/50 hover:bg-gray-50/50 dark:hover:bg-slate-700/30 transition-colors">
+                <tr key={brand.id} className="border-b border-gray-50 dark:border-gray-700/50 hover:bg-gray-50/50 dark:hover:bg-gray-700/30 transition-colors">
                   <td className="px-6 py-4">
                     <div className="flex items-center gap-3">
                       <Avatar initials={brand.name.slice(0, 2)} size="sm" />
@@ -769,7 +769,7 @@ export function BrandManagement() {
                       colorClass={
                         brand.plan === 'Enterprise' ? 'bg-purple-100 text-purple-800 dark:bg-purple-900/40 dark:text-purple-300' :
                         brand.plan === 'Agency' ? 'bg-blue-100 text-blue-800 dark:bg-blue-900/40 dark:text-blue-300' :
-                        'bg-gray-100 text-gray-700 dark:bg-slate-700 dark:text-gray-300'
+                        'bg-gray-100 text-gray-700 dark:bg-gray-700 dark:text-gray-300'
                       } 
                     />
                   </td>
@@ -813,7 +813,7 @@ export function BrandManagement() {
         <div className="space-y-5">
           {!createdCreds ? (
             <>
-              <div className="p-4 bg-blue-50 dark:bg-blue-900/20 rounded-xl border border-blue-200 dark:border-blue-800/40">
+              <div className="p-4 bg-blue-50 dark:bg-blue-900/20 rounded border border-blue-200 dark:border-blue-800/40">
                 <p className="text-sm text-blue-700 dark:text-blue-300">Hệ thống sẽ tự động tạo username và password cho Brand mới</p>
               </div>
               {[
@@ -823,12 +823,12 @@ export function BrandManagement() {
               ].map((f) => (
                 <div key={f.field}>
                   <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1.5">{f.label}</label>
-                  <input type="text" className="w-full px-4 py-2.5 rounded-xl border border-gray-200 dark:border-slate-600 bg-white dark:bg-slate-700 text-gray-900 dark:text-white text-sm focus:ring-2 focus:ring-teal-500 outline-none" placeholder={f.placeholder} />
+                  <input type="text" className="w-full px-4 py-2.5 rounded border border-gray-200 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white text-sm focus:ring-2 focus:ring-teal-500 outline-none" placeholder={f.placeholder} />
                 </div>
               ))}
               <div>
                 <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1.5">Lĩnh vực *</label>
-                <select className="w-full px-4 py-2.5 rounded-xl border border-gray-200 dark:border-slate-600 bg-white dark:bg-slate-700 text-gray-900 dark:text-white text-sm focus:ring-2 focus:ring-teal-500 outline-none">
+                <select className="w-full px-4 py-2.5 rounded border border-gray-200 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white text-sm focus:ring-2 focus:ring-teal-500 outline-none">
                   <option value="">Chọn lĩnh vực</option>
                   <option>Cosmetics</option><option>Food & Beverage</option><option>Technology</option><option>Fitness</option><option>Fashion</option><option>Travel</option>
                 </select>
@@ -844,7 +844,7 @@ export function BrandManagement() {
                 <CheckCircle2 className="w-5 h-5 text-emerald-500" />
                 <p className="text-sm font-semibold text-emerald-600 dark:text-emerald-400">Tài khoản Brand đã tạo thành công!</p>
               </div>
-              <div className="p-4 bg-amber-50 dark:bg-amber-900/20 rounded-xl border border-amber-200 dark:border-amber-800/40">
+              <div className="p-4 bg-amber-50 dark:bg-amber-900/20 rounded border border-amber-200 dark:border-amber-800/40">
                 <p className="text-xs text-amber-700 dark:text-amber-300 mb-2">⚠️ Vui lòng lưu lại thông tin đăng nhập. Đây là lần duy nhất hiển thị password.</p>
                 <CredentialDisplay username={createdCreds.username} password={createdCreds.password} />
               </div>
@@ -861,7 +861,7 @@ export function BrandManagement() {
         {selectedBrand && (
           <div className="space-y-6">
             {/* Brand Header */}
-            <div className="flex items-center gap-4 p-4 bg-gradient-to-r from-teal-500/10 to-blue-500/10 dark:from-teal-900/20 dark:to-blue-900/20 rounded-xl">
+            <div className="flex items-center gap-4 p-4 bg-white dark:bg-gray-800 rounded">
               <Avatar initials={selectedBrand.name.slice(0, 2)} size="lg" />
               <div className="flex-1">
                 <div className="flex items-center gap-3">
@@ -887,23 +887,23 @@ export function BrandManagement() {
 
             {/* Stats Overview */}
             <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
-              <div className="p-4 bg-white dark:bg-slate-700/50 rounded-xl border border-gray-200/60 dark:border-slate-600/60 text-center">
+              <div className="p-4 bg-white dark:bg-gray-700/50 rounded border border-gray-200 dark:border-gray-600 text-center">
                 <p className="text-2xl font-bold text-gray-900 dark:text-white">{selectedBrand.campaignCount}</p>
                 <p className="text-xs text-gray-500 mt-1">Tổng Campaign</p>
               </div>
-              <div className="p-4 bg-white dark:bg-slate-700/50 rounded-xl border border-gray-200/60 dark:border-slate-600/60 text-center">
+              <div className="p-4 bg-white dark:bg-gray-700/50 rounded border border-gray-200 dark:border-gray-600 text-center">
                 <p className="text-2xl font-bold text-blue-600 dark:text-blue-400">{campaigns.filter(c => c.brandId === selectedBrand.id && c.status === 'active').length}</p>
                 <p className="text-xs text-gray-500 mt-1">Campaign đang chạy</p>
               </div>
-              <div className="p-4 bg-white dark:bg-slate-700/50 rounded-xl border border-gray-200/60 dark:border-slate-600/60 text-center">
+              <div className="p-4 bg-white dark:bg-gray-700/50 rounded border border-gray-200 dark:border-gray-600 text-center">
                 <p className="text-2xl font-bold text-emerald-600 dark:text-emerald-400">{campaigns.filter(c => c.brandId === selectedBrand.id && c.status === 'completed').length}</p>
                 <p className="text-xs text-gray-500 mt-1">Hoàn thành</p>
               </div>
-              <div className="p-4 bg-white dark:bg-slate-700/50 rounded-xl border border-gray-200/60 dark:border-slate-600/60 text-center">
+              <div className="p-4 bg-white dark:bg-gray-700/50 rounded border border-gray-200 dark:border-gray-600 text-center">
                 <p className="text-2xl font-bold text-teal-600 dark:text-teal-400">{selectedBrand.kolCount}</p>
                 <p className="text-xs text-gray-500 mt-1">KOL/KOC</p>
               </div>
-              <div className="p-4 bg-white dark:bg-slate-700/50 rounded-xl border border-gray-200/60 dark:border-slate-600/60 text-center">
+              <div className="p-4 bg-white dark:bg-gray-700/50 rounded border border-gray-200 dark:border-gray-600 text-center">
                 <p className="text-2xl font-bold text-amber-600 dark:text-amber-400">{(selectedBrand.totalPayment / 1000000).toFixed(1)}M</p>
                 <p className="text-xs text-gray-500 mt-1">Tổng chi (VND)</p>
               </div>
@@ -911,30 +911,30 @@ export function BrandManagement() {
 
             {/* Performance Stats */}
             <div className="grid grid-cols-3 gap-4">
-              <div className="p-4 bg-white dark:bg-slate-700/50 rounded-xl border border-gray-200/60 dark:border-slate-600/60 text-center">
+              <div className="p-4 bg-white dark:bg-gray-700/50 rounded border border-gray-200 dark:border-gray-600 text-center">
                 <p className="text-xl font-bold text-gray-900 dark:text-white">{selectedBrand.totalViews >= 1000000 ? (selectedBrand.totalViews / 1000000).toFixed(1) + 'M' : (selectedBrand.totalViews / 1000).toFixed(0) + 'K'}</p>
                 <p className="text-xs text-gray-500 mt-1">Tổng Views</p>
               </div>
-              <div className="p-4 bg-white dark:bg-slate-700/50 rounded-xl border border-gray-200/60 dark:border-slate-600/60 text-center">
+              <div className="p-4 bg-white dark:bg-gray-700/50 rounded border border-gray-200 dark:border-gray-600 text-center">
                 <p className="text-xl font-bold text-teal-600 dark:text-teal-400">{selectedBrand.engagementRate}%</p>
                 <p className="text-xs text-gray-500 mt-1">TL Tương tác</p>
               </div>
-              <div className="p-4 bg-white dark:bg-slate-700/50 rounded-xl border border-gray-200/60 dark:border-slate-600/60 text-center">
+              <div className="p-4 bg-white dark:bg-gray-700/50 rounded border border-gray-200 dark:border-gray-600 text-center">
                 <p className="text-xl font-bold text-blue-600 dark:text-blue-400">{selectedBrand.conversionRate}%</p>
                 <p className="text-xs text-gray-500 mt-1">TL Chuyển đổi</p>
               </div>
             </div>
 
             {/* Tabs */}
-            <div className="border-b border-gray-200 dark:border-slate-700">
-              <div className="flex gap-1 p-1 bg-gray-100 dark:bg-slate-700/50 rounded-xl w-fit">
+            <div className="border-b border-gray-200 dark:border-gray-700">
+              <div className="flex gap-1 p-1 bg-gray-100 dark:bg-gray-700/50 rounded w-fit">
                 {['campaigns', 'products', 'kol', 'payments', 'activity'].map((tab) => (
                   <button
                     key={tab}
                     onClick={() => setActiveBrandTab(tab as any)}
                     className={`px-4 py-2 text-sm font-medium rounded-lg transition-colors ${
                       activeBrandTab === tab 
-                        ? 'bg-white dark:bg-slate-600 text-gray-900 dark:text-white shadow-sm' 
+                        ? 'bg-white dark:bg-gray-600 text-gray-900 dark:text-white' 
                         : 'text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300'
                     }`}
                   >
@@ -951,7 +951,7 @@ export function BrandManagement() {
                 <div className="overflow-x-auto">
                   <table className="w-full min-w-[800px]">
                     <thead>
-                      <tr className="border-b border-gray-100 dark:border-slate-700 bg-gray-50/50 dark:bg-slate-700/30">
+                      <tr className="border-b border-gray-100 dark:border-gray-700 bg-gray-50/50 dark:bg-gray-700/30">
                         <th className="text-left px-4 py-3 text-xs font-semibold text-gray-500 uppercase">Chiến dịch</th>
                         <th className="text-left px-4 py-3 text-xs font-semibold text-gray-500 uppercase">Sản phẩm</th>
                         <th className="text-left px-4 py-3 text-xs font-semibold text-gray-500 uppercase">Views</th>
@@ -963,19 +963,19 @@ export function BrandManagement() {
                       {brandCampaigns.map(c => {
                         const progress = Math.round((c.totalViews / c.kpiTarget.views) * 100);
                         return (
-                          <tr key={c.id} className="border-b border-gray-50 dark:border-slate-700/50">
+                          <tr key={c.id} className="border-b border-gray-50 dark:border-gray-700/50">
                             <td className="px-4 py-3"><p className="text-sm font-medium text-gray-900 dark:text-white">{c.name}</p></td>
                             <td className="px-4 py-3 text-sm text-gray-600">{c.productName}</td>
                             <td className="px-4 py-3 text-sm font-medium">{c.totalViews >= 1000000 ? (c.totalViews / 1000000).toFixed(1) + 'M' : (c.totalViews / 1000).toFixed(0) + 'K'}</td>
                             <td className="px-4 py-3">
                               <div className="flex items-center gap-2">
-                                <div className="w-16 h-1.5 bg-gray-200 dark:bg-slate-600 rounded-full overflow-hidden">
+                                <div className="w-16 h-1.5 bg-gray-200 dark:bg-gray-600 rounded-full overflow-hidden">
                                   <div className={`h-full rounded-full ${progress >= 100 ? 'bg-emerald-500' : 'bg-teal-500'}`} style={{ width: `${Math.min(progress, 100)}%` }} />
                                 </div>
                                 <span className="text-xs text-gray-500">{progress}%</span>
                               </div>
                             </td>
-                            <td className="px-4 py-3"><Badge label={campaignStatusLabels[c.status]} colorClass={c.status === 'active' ? 'bg-blue-100 text-blue-800 dark:bg-blue-900/40 dark:text-blue-300' : c.status === 'tracking' ? 'bg-amber-100 text-amber-800 dark:bg-amber-900/40 dark:text-amber-300' : 'bg-gray-100 text-gray-700 dark:bg-slate-700 dark:text-gray-300'} /></td>
+                            <td className="px-4 py-3"><Badge label={campaignStatusLabels[c.status]} colorClass={c.status === 'active' ? 'bg-blue-100 text-blue-800 dark:bg-blue-900/40 dark:text-blue-300' : c.status === 'tracking' ? 'bg-amber-100 text-amber-800 dark:bg-amber-900/40 dark:text-amber-300' : 'bg-gray-100 text-gray-700 dark:bg-gray-700 dark:text-gray-300'} /></td>
                           </tr>
                         );
                       })}
@@ -991,7 +991,7 @@ export function BrandManagement() {
                 <div className="overflow-x-auto">
                   <table className="w-full min-w-[600px]">
                     <thead>
-                      <tr className="border-b border-gray-100 dark:border-slate-700 bg-gray-50/50 dark:bg-slate-700/30">
+                      <tr className="border-b border-gray-100 dark:border-gray-700 bg-gray-50/50 dark:bg-gray-700/30">
                         <th className="text-left px-4 py-3 text-xs font-semibold text-gray-500 uppercase">Sản phẩm</th>
                         <th className="text-left px-4 py-3 text-xs font-semibold text-gray-500 uppercase">Danh mục</th>
                         <th className="text-left px-4 py-3 text-xs font-semibold text-gray-500 uppercase">Giá</th>
@@ -1001,12 +1001,12 @@ export function BrandManagement() {
                     </thead>
                     <tbody>
                       {brandProducts.map(p => (
-                        <tr key={p.id} className="border-b border-gray-50 dark:border-slate-700/50">
+                        <tr key={p.id} className="border-b border-gray-50 dark:border-gray-700/50">
                           <td className="px-4 py-3"><p className="text-sm font-medium text-gray-900 dark:text-white">{p.name}</p></td>
                           <td className="px-4 py-3 text-sm text-gray-600">{p.category}</td>
                           <td className="px-4 py-3 text-sm font-medium">{p.price}</td>
                           <td className="px-4 py-3 text-sm">{p.campaignCount}</td>
-                          <td className="px-4 py-3"><Badge label={p.status === 'active' ? 'Active' : 'Inactive'} colorClass={p.status === 'active' ? 'bg-emerald-100 text-emerald-800 dark:bg-emerald-900/40 dark:text-emerald-300' : 'bg-gray-100 text-gray-700 dark:bg-slate-700 dark:text-gray-300'} /></td>
+                          <td className="px-4 py-3"><Badge label={p.status === 'active' ? 'Active' : 'Inactive'} colorClass={p.status === 'active' ? 'bg-emerald-100 text-emerald-800 dark:bg-emerald-900/40 dark:text-emerald-300' : 'bg-gray-100 text-gray-700 dark:bg-gray-700 dark:text-gray-300'} /></td>
                         </tr>
                       ))}
                     </tbody>
@@ -1021,7 +1021,7 @@ export function BrandManagement() {
                 <div className="overflow-x-auto">
                   <table className="w-full min-w-[700px]">
                     <thead>
-                      <tr className="border-b border-gray-100 dark:border-slate-700 bg-gray-50/50 dark:bg-slate-700/30">
+                      <tr className="border-b border-gray-100 dark:border-gray-700 bg-gray-50/50 dark:bg-gray-700/30">
                         <th className="text-left px-4 py-3 text-xs font-semibold text-gray-500 uppercase">KOL/KOC</th>
                         <th className="text-left px-4 py-3 text-xs font-semibold text-gray-500 uppercase">Nền tảng</th>
                         <th className="text-left px-4 py-3 text-xs font-semibold text-gray-500 uppercase">Followers</th>
@@ -1031,7 +1031,7 @@ export function BrandManagement() {
                     </thead>
                     <tbody>
                       {brandKOLs.map(k => (
-                        <tr key={k.id} className="border-b border-gray-50 dark:border-slate-700/50">
+                        <tr key={k.id} className="border-b border-gray-50 dark:border-gray-700/50">
                           <td className="px-4 py-3">
                             <div className="flex items-center gap-2">
                               <Avatar initials={k.avatar} size="sm" />
@@ -1056,7 +1056,7 @@ export function BrandManagement() {
                 <div className="overflow-x-auto">
                   <table className="w-full min-w-[800px]">
                     <thead>
-                      <tr className="border-b border-gray-100 dark:border-slate-700 bg-gray-50/50 dark:bg-slate-700/30">
+                      <tr className="border-b border-gray-100 dark:border-gray-700 bg-gray-50/50 dark:bg-gray-700/30">
                         <th className="text-left px-4 py-3 text-xs font-semibold text-gray-500 uppercase">KOL/KOC</th>
                         <th className="text-left px-4 py-3 text-xs font-semibold text-gray-500 uppercase">Campaign</th>
                         <th className="text-left px-4 py-3 text-xs font-semibold text-gray-500 uppercase">Số tiền</th>
@@ -1066,12 +1066,12 @@ export function BrandManagement() {
                     </thead>
                     <tbody>
                       {brandPayments.map(p => (
-                        <tr key={p.id} className="border-b border-gray-50 dark:border-slate-700/50">
+                        <tr key={p.id} className="border-b border-gray-50 dark:border-gray-700/50">
                           <td className="px-4 py-3 text-sm font-medium text-gray-900 dark:text-white">{p.kolName}</td>
                           <td className="px-4 py-3 text-sm text-gray-600">{p.campaignName}</td>
                           <td className="px-4 py-3 text-sm font-medium">{p.totalAmount.toLocaleString()} VND</td>
                           <td className="px-4 py-3 text-sm text-emerald-600">{p.paidAmount.toLocaleString()} VND</td>
-                          <td className="px-4 py-3"><Badge label={paymentStatusLabels[p.status]} colorClass={p.status === 'paid' ? 'bg-emerald-100 text-emerald-800 dark:bg-emerald-900/40 dark:text-emerald-300' : p.status === 'pending' ? 'bg-amber-100 text-amber-800 dark:bg-amber-900/40 dark:text-amber-300' : 'bg-gray-100 text-gray-700 dark:bg-slate-700 dark:text-gray-300'} /></td>
+                          <td className="px-4 py-3"><Badge label={paymentStatusLabels[p.status]} colorClass={p.status === 'paid' ? 'bg-emerald-100 text-emerald-800 dark:bg-emerald-900/40 dark:text-emerald-300' : p.status === 'pending' ? 'bg-amber-100 text-amber-800 dark:bg-amber-900/40 dark:text-amber-300' : 'bg-gray-100 text-gray-700 dark:bg-gray-700 dark:text-gray-300'} /></td>
                         </tr>
                       ))}
                     </tbody>
@@ -1085,7 +1085,7 @@ export function BrandManagement() {
                 <h4 className="text-sm font-semibold text-gray-900 dark:text-white">Nhật ký hoạt động</h4>
                 <div className="space-y-2">
                   {workHistory.slice(0, 10).map((log, idx) => (
-                    <div key={idx} className="flex items-center gap-3 p-3 bg-gray-50 dark:bg-slate-700/50 rounded-xl">
+                    <div key={idx} className="flex items-center gap-3 p-3 bg-gray-50 dark:bg-gray-700/50 rounded">
                       <div className="p-2 bg-blue-100 dark:bg-blue-900/40 rounded-lg">
                         <Activity className="w-4 h-4 text-blue-600" />
                       </div>
@@ -1108,7 +1108,7 @@ export function BrandManagement() {
           <p className="text-sm text-gray-500 dark:text-gray-400">Đổi mật khẩu cho: <span className="font-medium text-gray-900 dark:text-white">{brands.find(a => a.id === showChangePassModal)?.name}</span></p>
           <div>
             <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1.5">Mật khẩu mới</label>
-            <input type="password" className="w-full px-4 py-2.5 rounded-xl border border-gray-200 dark:border-slate-600 bg-white dark:bg-slate-700 text-gray-900 dark:text-white text-sm focus:ring-2 focus:ring-teal-500 outline-none" placeholder="Nhập mật khẩu mới" />
+            <input type="password" className="w-full px-4 py-2.5 rounded border border-gray-200 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white text-sm focus:ring-2 focus:ring-teal-500 outline-none" placeholder="Nhập mật khẩu mới" />
           </div>
           <div className="flex justify-end gap-3 pt-2">
             <Button variant="secondary" onClick={() => setShowChangePassModal(null)}>Hủy</Button>
@@ -1152,9 +1152,9 @@ export function CampaignManagement() {
       <div className="flex items-center gap-3 flex-wrap">
         <div className="relative flex-1 min-w-[250px]">
           <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
-          <input type="text" placeholder="Tìm kiếm chiến dịch..." value={searchTerm} onChange={e => setSearchTerm(e.target.value)} className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-gray-200 dark:border-slate-600 bg-white dark:bg-slate-800 text-gray-900 dark:text-white text-sm focus:ring-2 focus:ring-teal-500 outline-none" />
+          <input type="text" placeholder="Tìm kiếm chiến dịch..." value={searchTerm} onChange={e => setSearchTerm(e.target.value)} className="w-full pl-10 pr-4 py-2.5 rounded border border-gray-200 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-white text-sm focus:ring-2 focus:ring-teal-500 outline-none" />
         </div>
-        <select value={filterStatus} onChange={e => setFilterStatus(e.target.value)} className="px-4 py-2.5 rounded-xl border border-gray-200 dark:border-slate-600 bg-white dark:bg-slate-800 text-gray-900 dark:text-white text-sm">
+        <select value={filterStatus} onChange={e => setFilterStatus(e.target.value)} className="px-4 py-2.5 rounded border border-gray-200 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-white text-sm">
           <option value="all">Tất cả trạng thái</option>
           <option value="draft">Bản nháp</option>
           <option value="active">Đang chạy</option>
@@ -1162,7 +1162,7 @@ export function CampaignManagement() {
           <option value="completed">Hoàn thành</option>
           <option value="cancelled">Đã hủy</option>
         </select>
-        <select value={filterBrand} onChange={e => setFilterBrand(e.target.value)} className="px-4 py-2.5 rounded-xl border border-gray-200 dark:border-slate-600 bg-white dark:bg-slate-800 text-gray-900 dark:text-white text-sm">
+        <select value={filterBrand} onChange={e => setFilterBrand(e.target.value)} className="px-4 py-2.5 rounded border border-gray-200 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-white text-sm">
           <option value="all">Tất cả Brand</option>
           {brands.map(b => <option key={b.id} value={b.id}>{b.name}</option>)}
         </select>
@@ -1170,34 +1170,34 @@ export function CampaignManagement() {
 
       {/* Campaign Stats */}
       <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
-        <div className="bg-white dark:bg-slate-800 rounded-2xl border border-gray-200/60 dark:border-slate-700/60 p-4 text-center">
+        <div className="bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 p-4 text-center">
           <p className="text-2xl font-bold text-gray-900 dark:text-white">{campaigns.length}</p>
           <p className="text-xs text-gray-500">Tổng chiến dịch</p>
         </div>
-        <div className="bg-white dark:bg-slate-800 rounded-2xl border border-gray-200/60 dark:border-slate-700/60 p-4 text-center">
+        <div className="bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 p-4 text-center">
           <p className="text-2xl font-bold text-blue-600">{campaigns.filter(c => c.status === 'active').length}</p>
           <p className="text-xs text-gray-500">Đang chạy</p>
         </div>
-        <div className="bg-white dark:bg-slate-800 rounded-2xl border border-gray-200/60 dark:border-slate-700/60 p-4 text-center">
+        <div className="bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 p-4 text-center">
           <p className="text-2xl font-bold text-amber-600">{campaigns.filter(c => c.status === 'tracking').length}</p>
           <p className="text-xs text-gray-500">Đang theo dõi</p>
         </div>
-        <div className="bg-white dark:bg-slate-800 rounded-2xl border border-gray-200/60 dark:border-slate-700/60 p-4 text-center">
+        <div className="bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 p-4 text-center">
           <p className="text-2xl font-bold text-emerald-600">{campaigns.filter(c => c.status === 'completed').length}</p>
           <p className="text-xs text-gray-500">Hoàn thành</p>
         </div>
-        <div className="bg-white dark:bg-slate-800 rounded-2xl border border-gray-200/60 dark:border-slate-700/60 p-4 text-center">
+        <div className="bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 p-4 text-center">
           <p className="text-2xl font-bold text-teal-600">{(campaigns.reduce((s, c) => s + c.totalViews, 0) / 1000000).toFixed(1)}M</p>
           <p className="text-xs text-gray-500">Tổng Views</p>
         </div>
       </div>
 
       {/* Campaigns Table */}
-      <div className="bg-white dark:bg-slate-800 rounded-2xl border border-gray-200/60 dark:border-slate-700/60 overflow-hidden">
+      <div className="bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 overflow-hidden">
         <div className="overflow-x-auto">
           <table className="w-full min-w-[1100px]">
             <thead>
-              <tr className="border-b border-gray-100 dark:border-slate-700 bg-gray-50/50 dark:bg-slate-700/30">
+              <tr className="border-b border-gray-100 dark:border-gray-700 bg-gray-50/50 dark:bg-gray-700/30">
                 <th className="text-left px-6 py-4 text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider">Chiến dịch</th>
                 <th className="text-left px-6 py-4 text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider">Brand</th>
                 <th className="text-left px-6 py-4 text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider">Sản phẩm</th>
@@ -1214,7 +1214,7 @@ export function CampaignManagement() {
                 const brand = brands.find(b => b.id === c.brandId);
                 const kolCount = tasks.filter(t => t.campaignId === c.id).length;
                 return (
-                  <tr key={c.id} className="border-b border-gray-50 dark:border-slate-700/50 hover:bg-gray-50/50 dark:hover:bg-slate-700/30">
+                  <tr key={c.id} className="border-b border-gray-50 dark:border-gray-700/50 hover:bg-gray-50/50 dark:hover:bg-gray-700/30">
                     <td className="px-6 py-4">
                       <div>
                         <p className="font-medium text-gray-900 dark:text-white text-sm">{c.name}</p>
@@ -1234,7 +1234,7 @@ export function CampaignManagement() {
                           c.status === 'active' ? 'bg-blue-100 text-blue-800 dark:bg-blue-900/40 dark:text-blue-300' :
                           c.status === 'tracking' ? 'bg-amber-100 text-amber-800 dark:bg-amber-900/40 dark:text-amber-300' :
                           c.status === 'completed' ? 'bg-emerald-100 text-emerald-800 dark:bg-emerald-900/40 dark:text-emerald-300' :
-                          'bg-gray-100 text-gray-700 dark:bg-slate-700 dark:text-gray-300'
+                          'bg-gray-100 text-gray-700 dark:bg-gray-700 dark:text-gray-300'
                         } 
                       />
                     </td>
@@ -1260,7 +1260,7 @@ export function CampaignManagement() {
         {selected && (
           <div className="space-y-6">
             {/* Campaign Info */}
-            <div className="flex items-center gap-4 p-4 bg-gray-50 dark:bg-slate-700/50 rounded-xl">
+            <div className="flex items-center gap-4 p-4 bg-gray-50 dark:bg-gray-700/50 rounded">
               <div className="flex-1">
                 <div className="flex items-center gap-2 mb-2">
                   <Badge 
@@ -1268,7 +1268,7 @@ export function CampaignManagement() {
                     colorClass={
                       selected.status === 'active' ? 'bg-blue-100 text-blue-800 dark:bg-blue-900/40 dark:text-blue-300' :
                       selected.status === 'tracking' ? 'bg-amber-100 text-amber-800 dark:bg-amber-900/40 dark:text-amber-300' :
-                      'bg-gray-100 text-gray-700 dark:bg-slate-700 dark:text-gray-300'
+                      'bg-gray-100 text-gray-700 dark:bg-gray-700 dark:text-gray-300'
                     } 
                   />
                   <span className="text-sm text-gray-500">• {selected.deadline}</span>
@@ -1283,22 +1283,22 @@ export function CampaignManagement() {
 
             {/* Stats */}
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-              <div className="p-4 bg-gray-50 dark:bg-slate-700/50 rounded-xl text-center">
+              <div className="p-4 bg-gray-50 dark:bg-gray-700/50 rounded text-center">
                 <p className="text-2xl font-bold text-gray-900 dark:text-white">{selected.totalViews >= 1000000 ? (selected.totalViews / 1000000).toFixed(1) + 'M' : (selected.totalViews / 1000).toFixed(0) + 'K'}</p>
                 <p className="text-xs text-gray-500">Lượt xem</p>
                 <p className="text-xs text-teal-600 mt-1">{Math.round(selected.totalViews / selected.kpiTarget.views * 100)}% đạt</p>
               </div>
-              <div className="p-4 bg-gray-50 dark:bg-slate-700/50 rounded-xl text-center">
+              <div className="p-4 bg-gray-50 dark:bg-gray-700/50 rounded text-center">
                 <p className="text-2xl font-bold text-teal-600 dark:text-teal-400">{selected.avgEngagementRate}%</p>
                 <p className="text-xs text-gray-500">TL tương tác</p>
                 <p className="text-xs text-teal-600 mt-1">{Math.round(selected.avgEngagementRate / selected.kpiTarget.engagementRate * 100)}% đạt</p>
               </div>
-              <div className="p-4 bg-gray-50 dark:bg-slate-700/50 rounded-xl text-center">
+              <div className="p-4 bg-gray-50 dark:bg-gray-700/50 rounded text-center">
                 <p className="text-2xl font-bold text-blue-600 dark:text-blue-400">{selected.totalConversions}</p>
                 <p className="text-xs text-gray-500">Chuyển đổi</p>
                 <p className="text-xs text-teal-600 mt-1">{Math.round(selected.totalConversions / selected.kpiTarget.conversions * 100)}% đạt</p>
               </div>
-              <div className="p-4 bg-gray-50 dark:bg-slate-700/50 rounded-xl text-center">
+              <div className="p-4 bg-gray-50 dark:bg-gray-700/50 rounded text-center">
                 <p className="text-2xl font-bold text-gray-900 dark:text-white">{campaignTasks.length}</p>
                 <p className="text-xs text-gray-500">KOL phân công</p>
               </div>
@@ -1308,15 +1308,15 @@ export function CampaignManagement() {
             <div>
               <h4 className="text-sm font-semibold text-gray-900 dark:text-white mb-3">Mục tiêu KPI</h4>
               <div className="grid grid-cols-3 gap-3">
-                <div className="p-3 bg-gray-50 dark:bg-slate-700/50 rounded-xl">
+                <div className="p-3 bg-gray-50 dark:bg-gray-700/50 rounded">
                   <p className="text-lg font-bold text-gray-900 dark:text-white">{selected.kpiTarget.views.toLocaleString()}</p>
                   <p className="text-xs text-gray-500">Mục tiêu views</p>
                 </div>
-                <div className="p-3 bg-gray-50 dark:bg-slate-700/50 rounded-xl">
+                <div className="p-3 bg-gray-50 dark:bg-gray-700/50 rounded">
                   <p className="text-lg font-bold text-gray-900 dark:text-white">{selected.kpiTarget.engagementRate}%</p>
                   <p className="text-xs text-gray-500">Mục tiêu ER</p>
                 </div>
-                <div className="p-3 bg-gray-50 dark:bg-slate-700/50 rounded-xl">
+                <div className="p-3 bg-gray-50 dark:bg-gray-700/50 rounded">
                   <p className="text-lg font-bold text-gray-900 dark:text-white">{selected.kpiTarget.conversions}</p>
                   <p className="text-xs text-gray-500">Mục tiêu conversion</p>
                 </div>
@@ -1328,7 +1328,7 @@ export function CampaignManagement() {
               <h4 className="text-sm font-semibold text-gray-900 dark:text-white mb-3">Nhiệm vụ KOL ({campaignTasks.length})</h4>
               <div className="space-y-2 max-h-64 overflow-y-auto">
                 {campaignTasks.length > 0 ? campaignTasks.map(t => (
-                  <div key={t.id} className="flex items-center justify-between p-3 bg-gray-50 dark:bg-slate-700/50 rounded-xl">
+                  <div key={t.id} className="flex items-center justify-between p-3 bg-gray-50 dark:bg-gray-700/50 rounded">
                     <div className="flex items-center gap-2">
                       <Avatar initials={t.kolAvatar} size="sm" />
                       <div>
@@ -1347,7 +1347,7 @@ export function CampaignManagement() {
               <h4 className="text-sm font-semibold text-gray-900 dark:text-white mb-3">Thanh toán</h4>
               <div className="space-y-2 max-h-48 overflow-y-auto">
                 {campaignPayments.length > 0 ? campaignPayments.map(p => (
-                  <div key={p.id} className="flex items-center justify-between p-3 bg-gray-50 dark:bg-slate-700/50 rounded-xl">
+                  <div key={p.id} className="flex items-center justify-between p-3 bg-gray-50 dark:bg-gray-700/50 rounded">
                     <div>
                       <p className="text-sm font-medium text-gray-900 dark:text-white">{p.kolName}</p>
                       <p className="text-xs text-gray-500">{p.campaignName}</p>
@@ -1398,13 +1398,13 @@ export function KOLManagement() {
       <div className="flex items-center gap-3 flex-wrap">
         <div className="relative flex-1 min-w-[250px]">
           <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
-          <input type="text" placeholder="Tìm KOL/KOC..." value={searchTerm} onChange={e => setSearchTerm(e.target.value)} className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-gray-200 dark:border-slate-600 bg-white dark:bg-slate-800 text-gray-900 dark:text-white text-sm focus:ring-2 focus:ring-teal-500 outline-none" />
+          <input type="text" placeholder="Tìm KOL/KOC..." value={searchTerm} onChange={e => setSearchTerm(e.target.value)} className="w-full pl-10 pr-4 py-2.5 rounded border border-gray-200 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-white text-sm focus:ring-2 focus:ring-teal-500 outline-none" />
         </div>
-        <select value={filterBrand} onChange={e => setFilterBrand(e.target.value)} className="px-4 py-2.5 rounded-xl border border-gray-200 dark:border-slate-600 bg-white dark:bg-slate-800 text-gray-900 dark:text-white text-sm">
+        <select value={filterBrand} onChange={e => setFilterBrand(e.target.value)} className="px-4 py-2.5 rounded border border-gray-200 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-white text-sm">
           <option value="all">Tất cả Brand</option>
           {brands.map(b => <option key={b.id} value={b.id}>{b.name}</option>)}
         </select>
-        <select value={filterPlatform} onChange={e => setFilterPlatform(e.target.value)} className="px-4 py-2.5 rounded-xl border border-gray-200 dark:border-slate-600 bg-white dark:bg-slate-800 text-gray-900 dark:text-white text-sm">
+        <select value={filterPlatform} onChange={e => setFilterPlatform(e.target.value)} className="px-4 py-2.5 rounded border border-gray-200 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-white text-sm">
           <option value="all">Tất cả nền tảng</option>
           <option>TikTok</option><option>Instagram</option><option>YouTube</option><option>Facebook</option>
         </select>
@@ -1412,30 +1412,30 @@ export function KOLManagement() {
 
       {/* Stats */}
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-        <div className="bg-white dark:bg-slate-800 rounded-2xl border border-gray-200/60 dark:border-slate-700/60 p-4 text-center">
+        <div className="bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 p-4 text-center">
           <p className="text-2xl font-bold text-gray-900 dark:text-white">{kols.length}</p>
           <p className="text-xs text-gray-500">Tổng KOL/KOC</p>
         </div>
-        <div className="bg-white dark:bg-slate-800 rounded-2xl border border-gray-200/60 dark:border-slate-700/60 p-4 text-center">
+        <div className="bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 p-4 text-center">
           <p className="text-2xl font-bold text-blue-600">{kols.filter(k => k.role === 'KOL').length}</p>
           <p className="text-xs text-gray-500">KOL</p>
         </div>
-        <div className="bg-white dark:bg-slate-800 rounded-2xl border border-gray-200/60 dark:border-slate-700/60 p-4 text-center">
+        <div className="bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 p-4 text-center">
           <p className="text-2xl font-bold text-teal-600">{kols.filter(k => k.role === 'KOC').length}</p>
           <p className="text-xs text-gray-500">KOC</p>
         </div>
-        <div className="bg-white dark:bg-slate-800 rounded-2xl border border-gray-200/60 dark:border-slate-700/60 p-4 text-center">
+        <div className="bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 p-4 text-center">
           <p className="text-2xl font-bold text-amber-600">{kols.reduce((s, k) => s + k.followers, 0) >= 1000000 ? (kols.reduce((s, k) => s + k.followers, 0) / 1000000).toFixed(1) + 'M' : (kols.reduce((s, k) => s + k.followers, 0) / 1000).toFixed(0) + 'K'}</p>
           <p className="text-xs text-gray-500">Tổng Followers</p>
         </div>
       </div>
 
       {/* KOLs Table */}
-      <div className="bg-white dark:bg-slate-800 rounded-2xl border border-gray-200/60 dark:border-slate-700/60 overflow-hidden">
+      <div className="bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 overflow-hidden">
         <div className="overflow-x-auto">
           <table className="w-full min-w-[1100px]">
             <thead>
-              <tr className="border-b border-gray-100 dark:border-slate-700 bg-gray-50/50 dark:bg-slate-700/30">
+              <tr className="border-b border-gray-100 dark:border-gray-700 bg-gray-50/50 dark:bg-gray-700/30">
                 <th className="text-left px-6 py-4 text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider">KOL/KOC</th>
                 <th className="text-left px-6 py-4 text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider">Brand</th>
                 <th className="text-left px-6 py-4 text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider">Nền tảng</th>
@@ -1452,7 +1452,7 @@ export function KOLManagement() {
                 const ranking = kolRankings.find(r => r.kolId === kol.id);
                 const kolTaskCount = tasks.filter(t => t.kolId === kol.id).length;
                 return (
-                  <tr key={kol.id} className="border-b border-gray-50 dark:border-slate-700/50 hover:bg-gray-50/50 dark:hover:bg-slate-700/30">
+                  <tr key={kol.id} className="border-b border-gray-50 dark:border-gray-700/50 hover:bg-gray-50/50 dark:hover:bg-gray-700/30">
                     <td className="px-6 py-4">
                       <div className="flex items-center gap-3">
                         <Avatar initials={kol.avatar} size="sm" />
@@ -1464,7 +1464,7 @@ export function KOLManagement() {
                     </td>
                     <td className="px-6 py-4 text-sm text-gray-700 dark:text-gray-300">{brand?.name}</td>
                     <td className="px-6 py-4">
-                      <Badge label={kol.platform} colorClass="bg-gray-100 text-gray-700 dark:bg-slate-700 dark:text-gray-300" />
+                      <Badge label={kol.platform} colorClass="bg-gray-100 text-gray-700 dark:bg-gray-700 dark:text-gray-300" />
                     </td>
                     <td className="px-6 py-4 text-sm font-medium text-gray-900 dark:text-white">{kol.followersDisplay}</td>
                     <td className="px-6 py-4 text-sm font-medium text-teal-600 dark:text-teal-400">{kol.engagementRate}%</td>
@@ -1475,7 +1475,7 @@ export function KOLManagement() {
                           ranking.rank === 1 ? 'bg-amber-500 text-white' : 
                           ranking.rank === 2 ? 'bg-gray-400 text-white' : 
                           ranking.rank === 3 ? 'bg-amber-700 text-white' : 
-                          'bg-gray-100 dark:bg-slate-600 text-gray-600 dark:text-gray-300'
+                          'bg-gray-100 dark:bg-gray-600 text-gray-600 dark:text-gray-300'
                         }`}>
                           {ranking.rank}
                         </div>
@@ -1503,14 +1503,14 @@ export function KOLManagement() {
         {selectedKOL && (
           <div className="space-y-6">
             {/* KOL Header */}
-            <div className="flex items-center gap-4 p-4 bg-gray-50 dark:bg-slate-700/50 rounded-xl">
+            <div className="flex items-center gap-4 p-4 bg-gray-50 dark:bg-gray-700/50 rounded">
               <Avatar initials={selectedKOL.avatar} size="lg" />
               <div className="flex-1">
                 <h3 className="text-lg font-bold text-gray-900 dark:text-white">{selectedKOL.name}</h3>
                 <p className="text-sm text-gray-500">{selectedKOL.handle} • {selectedKOL.platform} • {selectedKOL.role}</p>
                 <div className="flex flex-wrap gap-2 mt-2">
                   <Badge label={nicheLabels[selectedKOL.niche] || selectedKOL.niche} colorClass={nicheColors[selectedKOL.niche]} />
-                  <Badge label={`${selectedKOL.followersDisplay} followers`} colorClass="bg-gray-100 text-gray-700 dark:bg-slate-700 dark:text-gray-300" />
+                  <Badge label={`${selectedKOL.followersDisplay} followers`} colorClass="bg-gray-100 text-gray-700 dark:bg-gray-700 dark:text-gray-300" />
                 </div>
               </div>
               <div className="text-right">
@@ -1521,19 +1521,19 @@ export function KOLManagement() {
 
             {/* Stats */}
             <div className="grid grid-cols-4 gap-3">
-              <div className="p-3 bg-gray-50 dark:bg-slate-700/50 rounded-xl text-center">
+              <div className="p-3 bg-gray-50 dark:bg-gray-700/50 rounded text-center">
                 <p className="text-xl font-bold text-teal-600 dark:text-teal-400">{selectedKOL.engagementRate}%</p>
                 <p className="text-xs text-gray-500">TL tương tác</p>
               </div>
-              <div className="p-3 bg-gray-50 dark:bg-slate-700/50 rounded-xl text-center">
+              <div className="p-3 bg-gray-50 dark:bg-gray-700/50 rounded text-center">
                 <p className="text-xl font-bold text-gray-900 dark:text-white">{kolTasks.length}</p>
                 <p className="text-xs text-gray-500">Nhiệm vụ</p>
               </div>
-              <div className="p-3 bg-gray-50 dark:bg-slate-700/50 rounded-xl text-center">
+              <div className="p-3 bg-gray-50 dark:bg-gray-700/50 rounded text-center">
                 <p className="text-xl font-bold text-emerald-600 dark:text-emerald-400">{((selectedKOL.totalEarned || 0) / 1000000).toFixed(1)}M</p>
                 <p className="text-xs text-gray-500">Đã kiếm (VND)</p>
               </div>
-              <div className="p-3 bg-gray-50 dark:bg-slate-700/50 rounded-xl text-center">
+              <div className="p-3 bg-gray-50 dark:bg-gray-700/50 rounded text-center">
                 <p className="text-xl font-bold text-amber-600 dark:text-amber-400">{((selectedKOL.pendingPayment || 0) / 1000000).toFixed(1)}M</p>
                 <p className="text-xs text-gray-500">Chờ thanh toán</p>
               </div>
@@ -1543,7 +1543,7 @@ export function KOLManagement() {
             {selectedKOL.bio && (
               <div>
                 <h4 className="text-sm font-semibold text-gray-900 dark:text-white mb-2">Giới thiệu</h4>
-                <p className="text-sm text-gray-600 dark:text-gray-300 p-3 bg-gray-50 dark:bg-slate-700/50 rounded-xl">{selectedKOL.bio}</p>
+                <p className="text-sm text-gray-600 dark:text-gray-300 p-3 bg-gray-50 dark:bg-gray-700/50 rounded">{selectedKOL.bio}</p>
               </div>
             )}
 
@@ -1553,10 +1553,10 @@ export function KOLManagement() {
                 <h4 className="text-sm font-semibold text-gray-900 dark:text-white mb-2">Liên kết mạng xã hội</h4>
                 <div className="flex gap-2">
                   {selectedKOL.socialLinks.tiktok && (
-                    <a href={selectedKOL.socialLinks.tiktok} target="_blank" rel="noopener noreferrer" className="px-3 py-2 bg-gray-50 dark:bg-slate-700/50 rounded-xl text-sm text-blue-600 hover:underline">TikTok</a>
+                    <a href={selectedKOL.socialLinks.tiktok} target="_blank" rel="noopener noreferrer" className="px-3 py-2 bg-gray-50 dark:bg-gray-700/50 rounded text-sm text-blue-600 hover:underline">TikTok</a>
                   )}
                   {selectedKOL.socialLinks.instagram && (
-                    <a href={selectedKOL.socialLinks.instagram} target="_blank" rel="noopener noreferrer" className="px-3 py-2 bg-gray-50 dark:bg-slate-700/50 rounded-xl text-sm text-pink-600 hover:underline">Instagram</a>
+                    <a href={selectedKOL.socialLinks.instagram} target="_blank" rel="noopener noreferrer" className="px-3 py-2 bg-gray-50 dark:bg-gray-700/50 rounded text-sm text-pink-600 hover:underline">Instagram</a>
                   )}
                 </div>
               </div>
@@ -1568,7 +1568,7 @@ export function KOLManagement() {
                 <h4 className="text-sm font-semibold text-gray-900 dark:text-white mb-2">Kinh nghiệm chiến dịch</h4>
                 <div className="space-y-2 max-h-48 overflow-y-auto">
                   {selectedKOL.experience.map((exp, i) => (
-                    <div key={i} className="p-3 bg-gray-50 dark:bg-slate-700/50 rounded-xl">
+                    <div key={i} className="p-3 bg-gray-50 dark:bg-gray-700/50 rounded">
                       <div className="flex items-center justify-between">
                         <p className="text-sm font-medium text-gray-900 dark:text-white">{exp.campaign}</p>
                         <span className="text-xs text-gray-400">{exp.date}</span>
@@ -1586,7 +1586,7 @@ export function KOLManagement() {
               <h4 className="text-sm font-semibold text-gray-900 dark:text-white mb-2">Nhiệm vụ gần đây ({kolTasks.length})</h4>
               <div className="space-y-2 max-h-48 overflow-y-auto">
                 {kolTasks.slice(0, 5).map(t => (
-                  <div key={t.id} className="flex items-center justify-between p-3 bg-gray-50 dark:bg-slate-700/50 rounded-xl">
+                  <div key={t.id} className="flex items-center justify-between p-3 bg-gray-50 dark:bg-gray-700/50 rounded">
                     <div>
                       <p className="text-sm font-medium text-gray-900 dark:text-white">{t.campaignName}</p>
                       <p className="text-xs text-gray-500">{t.productName}</p>
@@ -1604,7 +1604,7 @@ export function KOLManagement() {
               </h4>
               <div className="space-y-2 max-h-48 overflow-y-auto">
                 {kolPayments.slice(0, 5).map(p => (
-                  <div key={p.id} className="flex items-center justify-between p-3 bg-gray-50 dark:bg-slate-700/50 rounded-xl">
+                  <div key={p.id} className="flex items-center justify-between p-3 bg-gray-50 dark:bg-gray-700/50 rounded">
                     <div className="flex items-center gap-3">
                       <div className={`w-10 h-10 rounded-lg flex items-center justify-center ${p.status === 'paid' ? 'bg-emerald-100 dark:bg-emerald-900/30' : 'bg-amber-100 dark:bg-amber-900/30'}`}>
                         {p.status === 'paid' ? (
@@ -1664,13 +1664,13 @@ export function ProductManagement() {
       <div className="flex items-center gap-3 flex-wrap">
         <div className="relative flex-1 min-w-[250px]">
           <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
-          <input type="text" placeholder="Tìm sản phẩm..." value={searchTerm} onChange={e => setSearchTerm(e.target.value)} className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-gray-200 dark:border-slate-600 bg-white dark:bg-slate-800 text-gray-900 dark:text-white text-sm focus:ring-2 focus:ring-teal-500 outline-none" />
+          <input type="text" placeholder="Tìm sản phẩm..." value={searchTerm} onChange={e => setSearchTerm(e.target.value)} className="w-full pl-10 pr-4 py-2.5 rounded border border-gray-200 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-white text-sm focus:ring-2 focus:ring-teal-500 outline-none" />
         </div>
-        <select value={filterBrand} onChange={e => setFilterBrand(e.target.value)} className="px-4 py-2.5 rounded-xl border border-gray-200 dark:border-slate-600 bg-white dark:bg-slate-800 text-gray-900 dark:text-white text-sm">
+        <select value={filterBrand} onChange={e => setFilterBrand(e.target.value)} className="px-4 py-2.5 rounded border border-gray-200 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-white text-sm">
           <option value="all">Tất cả Brand</option>
           {brands.map(b => <option key={b.id} value={b.id}>{b.name}</option>)}
         </select>
-        <select value={filterCategory} onChange={e => setFilterCategory(e.target.value)} className="px-4 py-2.5 rounded-xl border border-gray-200 dark:border-slate-600 bg-white dark:bg-slate-800 text-gray-900 dark:text-white text-sm">
+        <select value={filterCategory} onChange={e => setFilterCategory(e.target.value)} className="px-4 py-2.5 rounded border border-gray-200 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-white text-sm">
           <option value="all">Tất cả danh mục</option>
           {categories.map(c => <option key={c} value={c}>{c}</option>)}
         </select>
@@ -1678,30 +1678,30 @@ export function ProductManagement() {
 
       {/* Stats */}
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-        <div className="bg-white dark:bg-slate-800 rounded-2xl border border-gray-200/60 dark:border-slate-700/60 p-4 text-center">
+        <div className="bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 p-4 text-center">
           <p className="text-2xl font-bold text-gray-900 dark:text-white">{products.length}</p>
           <p className="text-xs text-gray-500">Tổng sản phẩm</p>
         </div>
-        <div className="bg-white dark:bg-slate-800 rounded-2xl border border-gray-200/60 dark:border-slate-700/60 p-4 text-center">
+        <div className="bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 p-4 text-center">
           <p className="text-2xl font-bold text-emerald-600">{products.filter(p => p.status === 'active').length}</p>
           <p className="text-xs text-gray-500">Đang hoạt động</p>
         </div>
-        <div className="bg-white dark:bg-slate-800 rounded-2xl border border-gray-200/60 dark:border-slate-700/60 p-4 text-center">
+        <div className="bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 p-4 text-center">
           <p className="text-2xl font-bold text-blue-600">{categories.length}</p>
           <p className="text-xs text-gray-500">Danh mục</p>
         </div>
-        <div className="bg-white dark:bg-slate-800 rounded-2xl border border-gray-200/60 dark:border-slate-700/60 p-4 text-center">
+        <div className="bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 p-4 text-center">
           <p className="text-2xl font-bold text-teal-600">{products.reduce((s, p) => s + p.campaignCount, 0)}</p>
           <p className="text-xs text-gray-500">Chiến dịch</p>
         </div>
       </div>
 
       {/* Products Table */}
-      <div className="bg-white dark:bg-slate-800 rounded-2xl border border-gray-200/60 dark:border-slate-700/60 overflow-hidden">
+      <div className="bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 overflow-hidden">
         <div className="overflow-x-auto">
           <table className="w-full min-w-[1000px]">
             <thead>
-              <tr className="border-b border-gray-100 dark:border-slate-700 bg-gray-50/50 dark:bg-slate-700/30">
+              <tr className="border-b border-gray-100 dark:border-gray-700 bg-gray-50/50 dark:bg-gray-700/30">
                 <th className="text-left px-6 py-4 text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider">Sản phẩm</th>
                 <th className="text-left px-6 py-4 text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider">Brand</th>
                 <th className="text-left px-6 py-4 text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider">Danh mục</th>
@@ -1714,7 +1714,7 @@ export function ProductManagement() {
               {filteredProducts.map(p => {
                 const brand = brands.find(b => b.id === p.brandId);
                 return (
-                  <tr key={p.id} className="border-b border-gray-50 dark:border-slate-700/50 hover:bg-gray-50/50 dark:hover:bg-slate-700/30">
+                  <tr key={p.id} className="border-b border-gray-50 dark:border-gray-700/50 hover:bg-gray-50/50 dark:hover:bg-gray-700/30">
                     <td className="px-6 py-4">
                       <div>
                         <p className="font-medium text-gray-900 dark:text-white text-sm">{p.name}</p>
@@ -1723,14 +1723,14 @@ export function ProductManagement() {
                     </td>
                     <td className="px-6 py-4 text-sm text-gray-700 dark:text-gray-300">{brand?.name}</td>
                     <td className="px-6 py-4">
-                      <Badge label={p.category} colorClass={nicheColors[p.category] || 'bg-gray-100 text-gray-700 dark:bg-slate-700 dark:text-gray-300'} />
+                      <Badge label={p.category} colorClass={nicheColors[p.category] || 'bg-gray-100 text-gray-700 dark:bg-gray-700 dark:text-gray-300'} />
                     </td>
                     <td className="px-6 py-4 text-sm font-medium text-gray-900 dark:text-white">{p.price}</td>
                     <td className="px-6 py-4 text-sm font-medium text-gray-900 dark:text-white">{p.campaignCount}</td>
                     <td className="px-6 py-4">
                       <Badge 
                         label={p.status === 'active' ? 'Active' : 'Inactive'} 
-                        colorClass={p.status === 'active' ? 'bg-emerald-100 text-emerald-800 dark:bg-emerald-900/40 dark:text-emerald-300' : 'bg-gray-100 text-gray-700 dark:bg-slate-700 dark:text-gray-300'} 
+                        colorClass={p.status === 'active' ? 'bg-emerald-100 text-emerald-800 dark:bg-emerald-900/40 dark:text-emerald-300' : 'bg-gray-100 text-gray-700 dark:bg-gray-700 dark:text-gray-300'} 
                       />
                     </td>
                   </tr>
@@ -1792,9 +1792,9 @@ export function PaymentMonitoring({ initialStatus }: { initialStatus?: string })
       <div className="flex items-center gap-3 flex-wrap">
         <div className="relative flex-1 min-w-[250px]">
           <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
-          <input type="text" placeholder="Tìm thanh toán..." value={searchTerm} onChange={e => setSearchTerm(e.target.value)} className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-gray-200 dark:border-slate-600 bg-white dark:bg-slate-800 text-gray-900 dark:text-white text-sm focus:ring-2 focus:ring-teal-500 outline-none" />
+          <input type="text" placeholder="Tìm thanh toán..." value={searchTerm} onChange={e => setSearchTerm(e.target.value)} className="w-full pl-10 pr-4 py-2.5 rounded border border-gray-200 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-white text-sm focus:ring-2 focus:ring-teal-500 outline-none" />
         </div>
-        <select value={filterStatus} onChange={e => setFilterStatus(e.target.value)} className="px-4 py-2.5 rounded-xl border border-gray-200 dark:border-slate-600 bg-white dark:bg-slate-800 text-gray-900 dark:text-white text-sm">
+        <select value={filterStatus} onChange={e => setFilterStatus(e.target.value)} className="px-4 py-2.5 rounded border border-gray-200 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-white text-sm">
           <option value="all">Tất cả trạng thái</option>
           <option value="unpaid">Chưa thanh toán</option>
           <option value="pending">Đang chờ</option>
@@ -1803,7 +1803,7 @@ export function PaymentMonitoring({ initialStatus }: { initialStatus?: string })
           <option value="hold">Tạm giữ</option>
           <option value="rejected">Bị từ chối</option>
         </select>
-        <select value={filterBrand} onChange={e => setFilterBrand(e.target.value)} className="px-4 py-2.5 rounded-xl border border-gray-200 dark:border-slate-600 bg-white dark:bg-slate-800 text-gray-900 dark:text-white text-sm">
+        <select value={filterBrand} onChange={e => setFilterBrand(e.target.value)} className="px-4 py-2.5 rounded border border-gray-200 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-white text-sm">
           <option value="all">Tất cả Brand</option>
           {brands.map(b => <option key={b.id} value={b.id}>{b.name}</option>)}
         </select>
@@ -1818,11 +1818,11 @@ export function PaymentMonitoring({ initialStatus }: { initialStatus?: string })
       </div>
 
       {/* Payments Table */}
-      <div className="bg-white dark:bg-slate-800 rounded-2xl border border-gray-200/60 dark:border-slate-700/60 overflow-hidden">
+      <div className="bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 overflow-hidden">
         <div className="overflow-x-auto">
           <table className="w-full min-w-[1100px]">
             <thead>
-              <tr className="border-b border-gray-100 dark:border-slate-700 bg-gray-50/50 dark:bg-slate-700/30">
+              <tr className="border-b border-gray-100 dark:border-gray-700 bg-gray-50/50 dark:bg-gray-700/30">
                 <th className="text-left px-6 py-4 text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider">KOL/KOC</th>
                 <th className="text-left px-6 py-4 text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider">Chiến dịch</th>
                 <th className="text-left px-6 py-4 text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider">Sản phẩm</th>
@@ -1836,7 +1836,7 @@ export function PaymentMonitoring({ initialStatus }: { initialStatus?: string })
               {filteredPayments.map(p => {
                 const remaining = p.totalAmount - p.paidAmount;
                 return (
-                  <tr key={p.id} className="border-b border-gray-50 dark:border-slate-700/50 hover:bg-gray-50/50 dark:hover:bg-slate-700/30">
+                  <tr key={p.id} className="border-b border-gray-50 dark:border-gray-700/50 hover:bg-gray-50/50 dark:hover:bg-gray-700/30">
                     <td className="px-6 py-4">
                       <div className="flex items-center gap-3">
                         <Avatar initials={p.kolAvatar} size="sm" />
@@ -1859,7 +1859,7 @@ export function PaymentMonitoring({ initialStatus }: { initialStatus?: string })
                           p.status === 'pending' ? 'bg-amber-100 text-amber-800 dark:bg-amber-900/40 dark:text-amber-300' :
                           p.status === 'partial_paid' ? 'bg-blue-100 text-blue-800 dark:bg-blue-900/40 dark:text-blue-300' :
                           p.status === 'hold' ? 'bg-red-100 text-red-800 dark:bg-red-900/40 dark:text-red-300' :
-                          'bg-gray-100 text-gray-700 dark:bg-slate-700 dark:text-gray-300'
+                          'bg-gray-100 text-gray-700 dark:bg-gray-700 dark:text-gray-300'
                         } 
                       />
                     </td>
@@ -1933,7 +1933,7 @@ export function PaymentProcessing() {
 
       {/* Stats */}
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-        <div className="bg-gradient-to-br from-amber-500/10 to-amber-600/5 rounded-xl p-5 border border-amber-200/60 dark:border-amber-800/40">
+        <div className="bg-white rounded p-5 border border-amber-200/60 dark:border-amber-800/40">
           <div className="flex items-center gap-3">
             <div className="w-10 h-10 rounded-full bg-amber-100 dark:bg-amber-900/40 flex items-center justify-center">
               <Clock className="w-5 h-5 text-amber-600" />
@@ -1944,7 +1944,7 @@ export function PaymentProcessing() {
             </div>
           </div>
         </div>
-        <div className="bg-gradient-to-br from-orange-500/10 to-orange-600/5 rounded-xl p-5 border border-orange-200/60 dark:border-orange-800/40">
+        <div className="bg-white rounded p-5 border border-orange-200/60 dark:border-orange-800/40">
           <div className="flex items-center gap-3">
             <div className="w-10 h-10 rounded-full bg-orange-100 dark:bg-orange-900/40 flex items-center justify-center">
               <Clock className="w-5 h-5 text-orange-600" />
@@ -1955,7 +1955,7 @@ export function PaymentProcessing() {
             </div>
           </div>
         </div>
-        <div className="bg-gradient-to-br from-blue-500/10 to-blue-600/5 rounded-xl p-5 border border-blue-200/60 dark:border-blue-800/40">
+        <div className="bg-white rounded p-5 border border-blue-200/60 dark:border-blue-800/40">
           <div className="flex items-center gap-3">
             <div className="w-10 h-10 rounded-full bg-blue-100 dark:bg-blue-900/40 flex items-center justify-center">
               <TrendingDown className="w-5 h-5 text-blue-600" />
@@ -1966,7 +1966,7 @@ export function PaymentProcessing() {
             </div>
           </div>
         </div>
-        <div className="bg-gradient-to-br from-teal-500/10 to-teal-600/5 rounded-xl p-5 border border-teal-200/60 dark:border-teal-800/40">
+        <div className="bg-white rounded p-5 border border-teal-200/60 dark:border-teal-800/40">
           <div className="flex items-center gap-3">
             <div className="w-10 h-10 rounded-full bg-teal-100 dark:bg-teal-900/40 flex items-center justify-center">
               <DollarSign className="w-5 h-5 text-teal-600" />
@@ -1983,9 +1983,9 @@ export function PaymentProcessing() {
       <div className="flex items-center gap-3 flex-wrap">
         <div className="relative flex-1 min-w-[250px]">
           <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
-          <input type="text" placeholder="Tìm KOL, chiến dịch..." value={searchTerm} onChange={e => setSearchTerm(e.target.value)} className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-gray-200 dark:border-slate-600 bg-white dark:bg-slate-800 text-gray-900 dark:text-white text-sm" />
+          <input type="text" placeholder="Tìm KOL, chiến dịch..." value={searchTerm} onChange={e => setSearchTerm(e.target.value)} className="w-full pl-10 pr-4 py-2.5 rounded border border-gray-200 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-white text-sm" />
         </div>
-        <select value={filterBrand} onChange={e => setFilterBrand(e.target.value)} className="px-4 py-2.5 rounded-xl border border-gray-200 dark:border-slate-600 bg-white dark:bg-slate-800 text-gray-900 dark:text-white text-sm">
+        <select value={filterBrand} onChange={e => setFilterBrand(e.target.value)} className="px-4 py-2.5 rounded border border-gray-200 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-white text-sm">
           <option value="all">Tất cả Brand</option>
           {brands.map(b => <option key={b.id} value={b.id}>{b.name}</option>)}
         </select>
@@ -1993,7 +1993,7 @@ export function PaymentProcessing() {
 
       {/* Selected Actions */}
       {selectedPayments.size > 0 && (
-        <div className="bg-blue-50 dark:bg-blue-900/20 rounded-xl p-4 border border-blue-200 dark:border-blue-800/40 flex items-center justify-between">
+        <div className="bg-blue-50 dark:bg-blue-900/20 rounded p-4 border border-blue-200 dark:border-blue-800/40 flex items-center justify-between">
           <div className="flex items-center gap-3">
             <CheckCircle2 className="w-5 h-5 text-blue-600" />
             <span className="text-sm font-medium text-gray-900 dark:text-white">
@@ -2012,11 +2012,11 @@ export function PaymentProcessing() {
       )}
 
       {/* Payments Table */}
-      <div className="bg-white dark:bg-slate-800 rounded-2xl border border-gray-200/60 dark:border-slate-700/60 overflow-hidden">
+      <div className="bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 overflow-hidden">
         <div className="overflow-x-auto">
           <table className="w-full min-w-[1200px]">
             <thead>
-              <tr className="border-b border-gray-100 dark:border-slate-700 bg-gray-50/50 dark:bg-slate-700/30">
+              <tr className="border-b border-gray-100 dark:border-gray-700 bg-gray-50/50 dark:bg-gray-700/30">
                 <th className="px-4 py-4">
                   <input type="checkbox" checked={selectedPayments.size === processingPayments.length && processingPayments.length > 0} onChange={selectAll} className="w-4 h-4 rounded border-gray-300" />
                 </th>
@@ -2036,7 +2036,7 @@ export function PaymentProcessing() {
                 const brand = campaigns.find(c => c.id === p.campaignId)?.brandId;
                 const brandName = brands.find(b => b.id === brand)?.name || 'N/A';
                 return (
-                  <tr key={p.id} className="border-b border-gray-50 dark:border-slate-700/50 hover:bg-gray-50/50 dark:hover:bg-slate-700/30">
+                  <tr key={p.id} className="border-b border-gray-50 dark:border-gray-700/50 hover:bg-gray-50/50 dark:hover:bg-gray-700/30">
                     <td className="px-4 py-4">
                       <input type="checkbox" checked={selectedPayments.has(p.id)} onChange={() => toggleSelect(p.id)} className="w-4 h-4 rounded border-gray-300" />
                     </td>
@@ -2063,7 +2063,7 @@ export function PaymentProcessing() {
                         colorClass={
                           p.status === 'pending' ? 'bg-amber-100 text-amber-800 dark:bg-amber-900/40 dark:text-amber-300' :
                           p.status === 'partial_paid' ? 'bg-blue-100 text-blue-800 dark:bg-blue-900/40 dark:text-blue-300' :
-                          'bg-gray-100 text-gray-700 dark:bg-slate-700 dark:text-gray-300'
+                          'bg-gray-100 text-gray-700 dark:bg-gray-700 dark:text-gray-300'
                         } 
                       />
                     </td>
@@ -2124,7 +2124,7 @@ export function PaymentHold() {
 
       {/* Stats */}
       <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-        <div className="bg-gradient-to-br from-red-500/10 to-red-600/5 rounded-xl p-5 border border-red-200/60 dark:border-red-800/40">
+        <div className="bg-white rounded p-5 border border-red-200/60 dark:border-red-800/40">
           <div className="flex items-center gap-3">
             <div className="w-10 h-10 rounded-full bg-red-100 dark:bg-red-900/40 flex items-center justify-center">
               <Lock className="w-5 h-5 text-red-600" />
@@ -2135,7 +2135,7 @@ export function PaymentHold() {
             </div>
           </div>
         </div>
-        <div className="bg-gradient-to-br from-red-500/10 to-red-600/5 rounded-xl p-5 border border-red-200/60 dark:border-red-800/40">
+        <div className="bg-white rounded p-5 border border-red-200/60 dark:border-red-800/40">
           <div className="flex items-center gap-3">
             <div className="w-10 h-10 rounded-full bg-red-100 dark:bg-red-900/40 flex items-center justify-center">
               <DollarSign className="w-5 h-5 text-red-600" />
@@ -2146,7 +2146,7 @@ export function PaymentHold() {
             </div>
           </div>
         </div>
-        <div className="bg-gradient-to-br from-purple-500/10 to-purple-600/5 rounded-xl p-5 border border-purple-200/60 dark:border-purple-800/40">
+        <div className="bg-white rounded p-5 border border-purple-200/60 dark:border-purple-800/40">
           <div className="flex items-center gap-3">
             <div className="w-10 h-10 rounded-full bg-purple-100 dark:bg-purple-900/40 flex items-center justify-center">
               <Ban className="w-5 h-5 text-purple-600" />
@@ -2163,16 +2163,16 @@ export function PaymentHold() {
       <div className="flex items-center gap-3 flex-wrap">
         <div className="relative flex-1 min-w-[250px]">
           <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
-          <input type="text" placeholder="Tìm KOL, chiến dịch..." value={searchTerm} onChange={e => setSearchTerm(e.target.value)} className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-gray-200 dark:border-slate-600 bg-white dark:bg-slate-800 text-gray-900 dark:text-white text-sm" />
+          <input type="text" placeholder="Tìm KOL, chiến dịch..." value={searchTerm} onChange={e => setSearchTerm(e.target.value)} className="w-full pl-10 pr-4 py-2.5 rounded border border-gray-200 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-white text-sm" />
         </div>
-        <select value={filterBrand} onChange={e => setFilterBrand(e.target.value)} className="px-4 py-2.5 rounded-xl border border-gray-200 dark:border-slate-600 bg-white dark:bg-slate-800 text-gray-900 dark:text-white text-sm">
+        <select value={filterBrand} onChange={e => setFilterBrand(e.target.value)} className="px-4 py-2.5 rounded border border-gray-200 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-white text-sm">
           <option value="all">Tất cả Brand</option>
           {brands.map(b => <option key={b.id} value={b.id}>{b.name}</option>)}
         </select>
       </div>
 
       {/* Alert Banner */}
-      <div className="bg-red-50 dark:bg-red-900/20 rounded-xl p-4 border border-red-200 dark:border-red-800/40">
+      <div className="bg-red-50 dark:bg-red-900/20 rounded p-4 border border-red-200 dark:border-red-800/40">
         <div className="flex items-start gap-3">
           <Lock className="w-5 h-5 text-red-600 mt-0.5" />
           <div>
@@ -2186,11 +2186,11 @@ export function PaymentHold() {
       </div>
 
       {/* Hold Payments Table */}
-      <div className="bg-white dark:bg-slate-800 rounded-2xl border border-gray-200/60 dark:border-slate-700/60 overflow-hidden">
+      <div className="bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 overflow-hidden">
         <div className="overflow-x-auto">
           <table className="w-full min-w-[1300px]">
             <thead>
-              <tr className="border-b border-gray-100 dark:border-slate-700 bg-gray-50/50 dark:bg-slate-700/30">
+              <tr className="border-b border-gray-100 dark:border-gray-700 bg-gray-50/50 dark:bg-gray-700/30">
                 <th className="text-left px-4 py-4 text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase">KOL/KOC</th>
                 <th className="text-left px-4 py-4 text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase">Chiến dịch</th>
                 <th className="text-left px-4 py-4 text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase">Brand</th>
@@ -2207,7 +2207,7 @@ export function PaymentHold() {
                 const brandName = brands.find(b => b.id === brand)?.name || 'N/A';
                 const holdReason = 'Chờ xác minh';
                 return (
-                  <tr key={p.id} className="border-b border-gray-50 dark:border-slate-700/50 hover:bg-gray-50/50 dark:hover:bg-slate-700/30">
+                  <tr key={p.id} className="border-b border-gray-50 dark:border-gray-700/50 hover:bg-gray-50/50 dark:hover:bg-gray-700/30">
                     <td className="px-4 py-4">
                       <div className="flex items-center gap-3">
                         <Avatar initials={p.kolAvatar} size="sm" />
@@ -2297,7 +2297,7 @@ export function PaymentPaid() {
 
       {/* Stats */}
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-        <div className="bg-gradient-to-br from-emerald-500/10 to-emerald-600/5 rounded-xl p-5 border border-emerald-200/60 dark:border-emerald-800/40">
+        <div className="bg-white rounded p-5 border border-emerald-200/60 dark:border-emerald-800/40">
           <div className="flex items-center gap-3">
             <div className="w-10 h-10 rounded-full bg-emerald-100 dark:bg-emerald-900/40 flex items-center justify-center">
               <CheckCircle2 className="w-5 h-5 text-emerald-600" />
@@ -2308,7 +2308,7 @@ export function PaymentPaid() {
             </div>
           </div>
         </div>
-        <div className="bg-gradient-to-br from-teal-500/10 to-teal-600/5 rounded-xl p-5 border border-teal-200/60 dark:border-teal-800/40">
+        <div className="bg-white rounded p-5 border border-teal-200/60 dark:border-teal-800/40">
           <div className="flex items-center gap-3">
             <div className="w-10 h-10 rounded-full bg-teal-100 dark:bg-teal-900/40 flex items-center justify-center">
               <DollarSign className="w-5 h-5 text-teal-600" />
@@ -2319,7 +2319,7 @@ export function PaymentPaid() {
             </div>
           </div>
         </div>
-        <div className="bg-gradient-to-br from-blue-500/10 to-blue-600/5 rounded-xl p-5 border border-blue-200/60 dark:border-blue-800/40">
+        <div className="bg-white rounded p-5 border border-blue-200/60 dark:border-blue-800/40">
           <div className="flex items-center gap-3">
             <div className="w-10 h-10 rounded-full bg-blue-100 dark:bg-blue-900/40 flex items-center justify-center">
               <TrendingUp className="w-5 h-5 text-blue-600" />
@@ -2330,7 +2330,7 @@ export function PaymentPaid() {
             </div>
           </div>
         </div>
-        <div className="bg-gradient-to-br from-purple-500/10 to-purple-600/5 rounded-xl p-5 border border-purple-200/60 dark:border-purple-800/40">
+        <div className="bg-white rounded p-5 border border-purple-200/60 dark:border-purple-800/40">
           <div className="flex items-center gap-3">
             <div className="w-10 h-10 rounded-full bg-purple-100 dark:bg-purple-900/40 flex items-center justify-center">
               <CreditCard className="w-5 h-5 text-purple-600" />
@@ -2344,7 +2344,7 @@ export function PaymentPaid() {
       </div>
 
       {/* Monthly Trend Chart */}
-      <div className="bg-white dark:bg-slate-800 rounded-2xl border border-gray-200/60 dark:border-slate-700/60 p-6">
+      <div className="bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 p-6">
         <h3 className="text-sm font-semibold text-gray-900 dark:text-white mb-4">Xu hướng thanh toán 4 tháng gần nhất</h3>
         <div className="h-48">
           <ResponsiveContainer width="100%" height="100%">
@@ -2371,13 +2371,13 @@ export function PaymentPaid() {
       <div className="flex items-center gap-3 flex-wrap">
         <div className="relative flex-1 min-w-[250px]">
           <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
-          <input type="text" placeholder="Tìm KOL, chiến dịch..." value={searchTerm} onChange={e => setSearchTerm(e.target.value)} className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-gray-200 dark:border-slate-600 bg-white dark:bg-slate-800 text-gray-900 dark:text-white text-sm" />
+          <input type="text" placeholder="Tìm KOL, chiến dịch..." value={searchTerm} onChange={e => setSearchTerm(e.target.value)} className="w-full pl-10 pr-4 py-2.5 rounded border border-gray-200 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-white text-sm" />
         </div>
-        <select value={filterBrand} onChange={e => setFilterBrand(e.target.value)} className="px-4 py-2.5 rounded-xl border border-gray-200 dark:border-slate-600 bg-white dark:bg-slate-800 text-gray-900 dark:text-white text-sm">
+        <select value={filterBrand} onChange={e => setFilterBrand(e.target.value)} className="px-4 py-2.5 rounded border border-gray-200 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-white text-sm">
           <option value="all">Tất cả Brand</option>
           {brands.map(b => <option key={b.id} value={b.id}>{b.name}</option>)}
         </select>
-        <select value={selectedMonth} onChange={e => setSelectedMonth(e.target.value)} className="px-4 py-2.5 rounded-xl border border-gray-200 dark:border-slate-600 bg-white dark:bg-slate-800 text-gray-900 dark:text-white text-sm">
+        <select value={selectedMonth} onChange={e => setSelectedMonth(e.target.value)} className="px-4 py-2.5 rounded border border-gray-200 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-white text-sm">
           <option value="all">Tất cả tháng</option>
           <option value="2026-06">Tháng 6/2026</option>
           <option value="2026-05">Tháng 5/2026</option>
@@ -2387,7 +2387,7 @@ export function PaymentPaid() {
       </div>
 
       {/* Success Banner */}
-      <div className="bg-emerald-50 dark:bg-emerald-900/20 rounded-xl p-4 border border-emerald-200 dark:border-emerald-800/40">
+      <div className="bg-emerald-50 dark:bg-emerald-900/20 rounded p-4 border border-emerald-200 dark:border-emerald-800/40">
         <div className="flex items-start gap-3">
           <CheckCircle2 className="w-5 h-5 text-emerald-600 mt-0.5" />
           <div>
@@ -2400,11 +2400,11 @@ export function PaymentPaid() {
       </div>
 
       {/* Paid Payments Table */}
-      <div className="bg-white dark:bg-slate-800 rounded-2xl border border-gray-200/60 dark:border-slate-700/60 overflow-hidden">
+      <div className="bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 overflow-hidden">
         <div className="overflow-x-auto">
           <table className="w-full min-w-[1100px]">
             <thead>
-              <tr className="border-b border-gray-100 dark:border-slate-700 bg-gray-50/50 dark:bg-slate-700/30">
+              <tr className="border-b border-gray-100 dark:border-gray-700 bg-gray-50/50 dark:bg-gray-700/30">
                 <th className="text-left px-4 py-4 text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase">KOL/KOC</th>
                 <th className="text-left px-4 py-4 text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase">Chiến dịch</th>
                 <th className="text-left px-4 py-4 text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase">Brand</th>
@@ -2421,7 +2421,7 @@ export function PaymentPaid() {
                 const brandName = brands.find(b => b.id === brand)?.name || 'N/A';
                 const invoiceId = `INV-${p.id.toUpperCase()}-${p.campaignId.slice(-4).toUpperCase()}`;
                 return (
-                  <tr key={p.id} className="border-b border-gray-50 dark:border-slate-700/50 hover:bg-gray-50/50 dark:hover:bg-slate-700/30">
+                  <tr key={p.id} className="border-b border-gray-50 dark:border-gray-700/50 hover:bg-gray-50/50 dark:hover:bg-gray-700/30">
                     <td className="px-4 py-4">
                       <div className="flex items-center gap-3">
                         <Avatar initials={p.kolAvatar} size="sm" />
@@ -2508,7 +2508,7 @@ export function WorkHistory() {
   // Render content based on tab type
   const renderActivityItem = (item: typeof workHistory[0]) => {
     return (
-      <div key={item.id} className="flex items-start gap-4 p-4 hover:bg-gray-50/50 dark:hover:bg-slate-700/30 transition-colors">
+      <div key={item.id} className="flex items-start gap-4 p-4 hover:bg-gray-50/50 dark:hover:bg-gray-700/30 transition-colors">
         <div className={`mt-1.5 w-2.5 h-2.5 rounded-full shrink-0 ${
           item.actor === 'admin' ? 'bg-red-500' : 
           item.actor === 'brand' ? 'bg-teal-500' : 
@@ -2526,7 +2526,7 @@ export function WorkHistory() {
             />
             <span className="text-sm font-medium text-gray-900 dark:text-white">{item.actorName}</span>
             <span className="text-sm text-gray-600 dark:text-gray-400">{item.action}</span>
-            <Badge label={item.targetType} colorClass="bg-gray-100 text-gray-700 dark:bg-slate-700 dark:text-gray-300" />
+            <Badge label={item.targetType} colorClass="bg-gray-100 text-gray-700 dark:bg-gray-700 dark:text-gray-300" />
           </div>
           <p className="text-sm text-gray-700 dark:text-gray-300 mt-1">
             <span className="font-medium text-gray-900 dark:text-white">{item.target}</span>
@@ -2551,28 +2551,28 @@ export function WorkHistory() {
       </div>
 
       {/* Tab Navigation */}
-      <div className="flex gap-1 p-1 bg-gray-100 dark:bg-slate-700/50 rounded-xl w-fit">
+      <div className="flex gap-1 p-1 bg-gray-100 dark:bg-gray-700/50 rounded w-fit">
         <button 
           onClick={() => { setActiveTab('brand'); setSearchTerm(''); }}
-          className={`flex items-center gap-2 px-4 py-2.5 text-sm font-medium rounded-lg transition-all ${activeTab === 'brand' ? 'bg-white dark:bg-slate-600 text-teal-600 dark:text-teal-400 shadow-sm' : 'text-gray-500 dark:text-gray-400 hover:text-gray-700'}`}
+          className={`flex items-center gap-2 px-4 py-2.5 text-sm font-medium rounded-lg transition-colors ${activeTab === 'brand' ? 'bg-white dark:bg-gray-600 text-teal-600 dark:text-teal-400' : 'text-gray-500 dark:text-gray-400 hover:text-gray-700'}`}
         >
           <Briefcase className="w-4 h-4" /> Brand Activity
         </button>
         <button 
           onClick={() => { setActiveTab('kol'); setSearchTerm(''); }}
-          className={`flex items-center gap-2 px-4 py-2.5 text-sm font-medium rounded-lg transition-all ${activeTab === 'kol' ? 'bg-white dark:bg-slate-600 text-blue-600 dark:text-blue-400 shadow-sm' : 'text-gray-500 dark:text-gray-400 hover:text-gray-700'}`}
+          className={`flex items-center gap-2 px-4 py-2.5 text-sm font-medium rounded-lg transition-colors ${activeTab === 'kol' ? 'bg-white dark:bg-gray-600 text-blue-600 dark:text-blue-400' : 'text-gray-500 dark:text-gray-400 hover:text-gray-700'}`}
         >
           <Users className="w-4 h-4" /> KOL/KOC Activity
         </button>
         <button 
           onClick={() => { setActiveTab('campaign'); setSearchTerm(''); }}
-          className={`flex items-center gap-2 px-4 py-2.5 text-sm font-medium rounded-lg transition-all ${activeTab === 'campaign' ? 'bg-white dark:bg-slate-600 text-amber-600 dark:text-amber-400 shadow-sm' : 'text-gray-500 dark:text-gray-400 hover:text-gray-700'}`}
+          className={`flex items-center gap-2 px-4 py-2.5 text-sm font-medium rounded-lg transition-colors ${activeTab === 'campaign' ? 'bg-white dark:bg-gray-600 text-amber-600 dark:text-amber-400' : 'text-gray-500 dark:text-gray-400 hover:text-gray-700'}`}
         >
           <Target className="w-4 h-4" /> Campaign Activity
         </button>
         <button 
           onClick={() => { setActiveTab('payment'); setSearchTerm(''); }}
-          className={`flex items-center gap-2 px-4 py-2.5 text-sm font-medium rounded-lg transition-all ${activeTab === 'payment' ? 'bg-white dark:bg-slate-600 text-emerald-600 dark:text-emerald-400 shadow-sm' : 'text-gray-500 dark:text-gray-400 hover:text-gray-700'}`}
+          className={`flex items-center gap-2 px-4 py-2.5 text-sm font-medium rounded-lg transition-colors ${activeTab === 'payment' ? 'bg-white dark:bg-gray-600 text-emerald-600 dark:text-emerald-400' : 'text-gray-500 dark:text-gray-400 hover:text-gray-700'}`}
         >
           <CreditCard className="w-4 h-4" /> Payment Activity
         </button>
@@ -2582,9 +2582,9 @@ export function WorkHistory() {
       <div className="flex items-center gap-4">
         <div className="relative flex-1 max-w-md">
           <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
-          <input type="text" placeholder="Tìm kiếm hoạt động..." value={searchTerm} onChange={e => setSearchTerm(e.target.value)} className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-gray-200 dark:border-slate-600 bg-white dark:bg-slate-800 text-gray-900 dark:text-white text-sm focus:ring-2 focus:ring-teal-500 outline-none" />
+          <input type="text" placeholder="Tìm kiếm hoạt động..." value={searchTerm} onChange={e => setSearchTerm(e.target.value)} className="w-full pl-10 pr-4 py-2.5 rounded border border-gray-200 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-white text-sm focus:ring-2 focus:ring-teal-500 outline-none" />
         </div>
-        <div className={`flex items-center gap-2 px-4 py-2.5 rounded-xl border ${
+        <div className={`flex items-center gap-2 px-4 py-2.5 rounded border ${
           activeTab === 'brand' ? 'bg-teal-50 dark:bg-teal-900/20 border-teal-200 dark:border-teal-800/40' :
           activeTab === 'kol' ? 'bg-blue-50 dark:bg-blue-900/20 border-blue-200 dark:border-blue-800/40' :
           activeTab === 'campaign' ? 'bg-amber-50 dark:bg-amber-900/20 border-amber-200 dark:border-amber-800/40' :
@@ -2601,8 +2601,8 @@ export function WorkHistory() {
       </div>
 
       {/* Activity List - Each tab shows different data */}
-      <div className="bg-white dark:bg-slate-800 rounded-2xl border border-gray-200/60 dark:border-slate-700/60 overflow-hidden">
-        <div className="divide-y divide-gray-100 dark:divide-slate-700 max-h-[600px] overflow-y-auto">
+      <div className="bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 overflow-hidden">
+        <div className="divide-y divide-gray-100 dark:divide-gray-700 max-h-[600px] overflow-y-auto">
           {currentHistory.length > 0 ? currentHistory.map(item => renderActivityItem(item)) : (
             <div className="text-center py-12">
               <tabStats.icon className={`w-12 h-12 mx-auto mb-3 ${
@@ -2662,7 +2662,7 @@ export function SystemRanking() {
           <select 
             value={sortBy} 
             onChange={(e) => setSortBy(e.target.value as any)} 
-            className="px-3 py-2 rounded-xl border border-gray-200 dark:border-slate-600 bg-white dark:bg-slate-800 text-gray-900 dark:text-white text-sm"
+            className="px-3 py-2 rounded border border-gray-200 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-white text-sm"
           >
             <option value="score">Điểm</option>
             <option value="views">Lượt xem</option>
@@ -2672,22 +2672,22 @@ export function SystemRanking() {
       </div>
 
       {/* Tabs */}
-      <div className="flex gap-1 p-1 bg-gray-100 dark:bg-slate-700/50 rounded-xl w-fit">
+      <div className="flex gap-1 p-1 bg-gray-100 dark:bg-gray-700/50 rounded w-fit">
         <button 
           onClick={() => setActiveTab('kol')} 
-          className={`px-6 py-3 text-sm font-medium rounded-lg transition-colors ${activeTab === 'kol' ? 'bg-white dark:bg-slate-600 text-gray-900 dark:text-white shadow-sm' : 'text-gray-500 dark:text-gray-400 hover:text-gray-700'}`}
+          className={`px-6 py-3 text-sm font-medium rounded-lg transition-colors ${activeTab === 'kol' ? 'bg-white dark:bg-gray-600 text-gray-900 dark:text-white' : 'text-gray-500 dark:text-gray-400 hover:text-gray-700'}`}
         >
           Xếp hạng KOL/KOC
         </button>
         <button 
           onClick={() => setActiveTab('campaign')} 
-          className={`px-6 py-3 text-sm font-medium rounded-lg transition-colors ${activeTab === 'campaign' ? 'bg-white dark:bg-slate-600 text-gray-900 dark:text-white shadow-sm' : 'text-gray-500 dark:text-gray-400 hover:text-gray-700'}`}
+          className={`px-6 py-3 text-sm font-medium rounded-lg transition-colors ${activeTab === 'campaign' ? 'bg-white dark:bg-gray-600 text-gray-900 dark:text-white' : 'text-gray-500 dark:text-gray-400 hover:text-gray-700'}`}
         >
           Xếp hạng chiến dịch
         </button>
         <button 
           onClick={() => setActiveTab('brand')} 
-          className={`px-6 py-3 text-sm font-medium rounded-lg transition-colors ${activeTab === 'brand' ? 'bg-white dark:bg-slate-600 text-gray-900 dark:text-white shadow-sm' : 'text-gray-500 dark:text-gray-400 hover:text-gray-700'}`}
+          className={`px-6 py-3 text-sm font-medium rounded-lg transition-colors ${activeTab === 'brand' ? 'bg-white dark:bg-gray-600 text-gray-900 dark:text-white' : 'text-gray-500 dark:text-gray-400 hover:text-gray-700'}`}
         >
           Xếp hạng Brand
         </button>
@@ -2695,11 +2695,11 @@ export function SystemRanking() {
 
       {/* KOL Ranking */}
       {activeTab === 'kol' && (
-        <div className="bg-white dark:bg-slate-800 rounded-2xl border border-gray-200/60 dark:border-slate-700/60 overflow-hidden">
+        <div className="bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 overflow-hidden">
           <div className="overflow-x-auto">
             <table className="w-full min-w-[1000px]">
               <thead>
-                <tr className="border-b border-gray-100 dark:border-slate-700 bg-gray-50/50 dark:bg-slate-700/30">
+                <tr className="border-b border-gray-100 dark:border-gray-700 bg-gray-50/50 dark:bg-gray-700/30">
                   <th className="text-left px-6 py-4 text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider">Hạng</th>
                   <th className="text-left px-6 py-4 text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider">KOL/KOC</th>
                   <th className="text-left px-6 py-4 text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider">Nền tảng</th>
@@ -2712,13 +2712,13 @@ export function SystemRanking() {
               </thead>
               <tbody>
                 {sortedKolRankings.map(kol => (
-                  <tr key={kol.kolId} className="border-b border-gray-50 dark:border-slate-700/50 hover:bg-gray-50/50">
+                  <tr key={kol.kolId} className="border-b border-gray-50 dark:border-gray-700/50 hover:bg-gray-50/50">
                     <td className="px-6 py-4">
                       <div className={`w-10 h-10 rounded-full flex items-center justify-center text-sm font-bold ${
                         kol.rank === 1 ? 'bg-amber-500 text-white' : 
                         kol.rank === 2 ? 'bg-gray-400 text-white' : 
                         kol.rank === 3 ? 'bg-amber-700 text-white' : 
-                        'bg-gray-100 dark:bg-slate-600 text-gray-600 dark:text-gray-300'
+                        'bg-gray-100 dark:bg-gray-600 text-gray-600 dark:text-gray-300'
                       }`}>
                         {kol.rank === 1 ? '🥇' : kol.rank === 2 ? '🥈' : kol.rank === 3 ? '🥉' : kol.rank}
                       </div>
@@ -2729,7 +2729,7 @@ export function SystemRanking() {
                           const foundKOL = kols.find(k => k.id === kol.kolId);
                           if (foundKOL) setSelectedKOL(foundKOL);
                         }}
-                        className="flex items-center gap-3 hover:bg-gray-50 dark:hover:bg-slate-700/50 -mx-2 px-2 py-1 rounded-lg transition-colors"
+                        className="flex items-center gap-3 hover:bg-gray-50 dark:hover:bg-gray-700/50 -mx-2 px-2 py-1 rounded-lg transition-colors"
                       >
                         <Avatar initials={kol.kolAvatar} size="sm" />
                         <p className="font-medium text-gray-900 dark:text-white">{kol.kolName}</p>
@@ -2741,7 +2741,7 @@ export function SystemRanking() {
                     <td className="px-6 py-4 text-sm font-medium text-blue-600 dark:text-blue-400">{kol.conversionRate}%</td>
                     <td className="px-6 py-4">
                       <div className="flex items-center gap-2">
-                        <div className="w-24 h-2 bg-gray-100 dark:bg-slate-600 rounded-full overflow-hidden">
+                        <div className="w-24 h-2 bg-gray-100 dark:bg-gray-600 rounded-full overflow-hidden">
                           <div className="h-full bg-teal-500 rounded-full" style={{ width: `${(kol.tasksCompleted / kol.totalTasks) * 100 || 0}%` }} />
                         </div>
                         <span className="text-xs text-gray-500">{kol.tasksCompleted}/{kol.totalTasks}</span>
@@ -2760,11 +2760,11 @@ export function SystemRanking() {
 
       {/* Campaign Ranking */}
       {activeTab === 'campaign' && (
-        <div className="bg-white dark:bg-slate-800 rounded-2xl border border-gray-200/60 dark:border-slate-700/60 overflow-hidden">
+        <div className="bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 overflow-hidden">
           <div className="overflow-x-auto">
             <table className="w-full min-w-[1100px]">
               <thead>
-                <tr className="border-b border-gray-100 dark:border-slate-700 bg-gray-50/50 dark:bg-slate-700/30">
+                <tr className="border-b border-gray-100 dark:border-gray-700 bg-gray-50/50 dark:bg-gray-700/30">
                   <th className="text-left px-6 py-4 text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider">Hạng</th>
                   <th className="text-left px-6 py-4 text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider">Chiến dịch</th>
                   <th className="text-left px-6 py-4 text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider">Brand</th>
@@ -2777,13 +2777,13 @@ export function SystemRanking() {
               </thead>
               <tbody>
                 {sortedCampaignRankings.map(camp => (
-                  <tr key={camp.campaignId} className="border-b border-gray-50 dark:border-slate-700/50 hover:bg-gray-50/50">
+                  <tr key={camp.campaignId} className="border-b border-gray-50 dark:border-gray-700/50 hover:bg-gray-50/50">
                     <td className="px-6 py-4">
                       <div className={`w-10 h-10 rounded-full flex items-center justify-center text-sm font-bold ${
                         camp.rank === 1 ? 'bg-amber-500 text-white' : 
                         camp.rank === 2 ? 'bg-gray-400 text-white' : 
                         camp.rank === 3 ? 'bg-amber-700 text-white' : 
-                        'bg-gray-100 dark:bg-slate-600 text-gray-600 dark:text-gray-300'
+                        'bg-gray-100 dark:bg-gray-600 text-gray-600 dark:text-gray-300'
                       }`}>
                         {camp.rank === 1 ? '🥇' : camp.rank === 2 ? '🥈' : camp.rank === 3 ? '🥉' : camp.rank}
                       </div>
@@ -2801,7 +2801,7 @@ export function SystemRanking() {
                         colorClass={
                           camp.status === 'active' ? 'bg-blue-100 text-blue-800 dark:bg-blue-900/40 dark:text-blue-300' :
                           camp.status === 'tracking' ? 'bg-amber-100 text-amber-800 dark:bg-amber-900/40 dark:text-amber-300' :
-                          'bg-gray-100 text-gray-700 dark:bg-slate-700 dark:text-gray-300'
+                          'bg-gray-100 text-gray-700 dark:bg-gray-700 dark:text-gray-300'
                         } 
                       />
                     </td>
@@ -2809,7 +2809,7 @@ export function SystemRanking() {
                     <td className="px-6 py-4 text-sm font-medium text-teal-600 dark:text-teal-400">{camp.avgEngagementRate}%</td>
                     <td className="px-6 py-4">
                       <div className="flex items-center gap-2">
-                        <div className="w-24 h-2 bg-gray-100 dark:bg-slate-600 rounded-full overflow-hidden">
+                        <div className="w-24 h-2 bg-gray-100 dark:bg-gray-600 rounded-full overflow-hidden">
                           <div className="h-full bg-teal-500 rounded-full" style={{ width: `${camp.kpiProgress}%` }} />
                         </div>
                         <span className="text-xs text-gray-500">{camp.kpiProgress}%</span>
@@ -2828,11 +2828,11 @@ export function SystemRanking() {
 
       {/* Brand Ranking */}
       {activeTab === 'brand' && (
-        <div className="bg-white dark:bg-slate-800 rounded-2xl border border-gray-200/60 dark:border-slate-700/60 overflow-hidden">
+        <div className="bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 overflow-hidden">
           <div className="overflow-x-auto">
             <table className="w-full min-w-[1100px]">
               <thead>
-                <tr className="border-b border-gray-100 dark:border-slate-700 bg-gray-50/50 dark:bg-slate-700/30">
+                <tr className="border-b border-gray-100 dark:border-gray-700 bg-gray-50/50 dark:bg-gray-700/30">
                   <th className="text-left px-6 py-4 text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider">Hạng</th>
                   <th className="text-left px-6 py-4 text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider">Brand</th>
                   <th className="text-left px-6 py-4 text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider">Ngành</th>
@@ -2845,13 +2845,13 @@ export function SystemRanking() {
               </thead>
               <tbody>
                 {sortedBrandRankings.map(brand => (
-                  <tr key={brand.brandId} className="border-b border-gray-50 dark:border-slate-700/50 hover:bg-gray-50/50">
+                  <tr key={brand.brandId} className="border-b border-gray-50 dark:border-gray-700/50 hover:bg-gray-50/50">
                     <td className="px-6 py-4">
                       <div className={`w-10 h-10 rounded-full flex items-center justify-center text-sm font-bold ${
                         brand.rank === 1 ? 'bg-amber-500 text-white' : 
                         brand.rank === 2 ? 'bg-gray-400 text-white' : 
                         brand.rank === 3 ? 'bg-amber-700 text-white' : 
-                        'bg-gray-100 dark:bg-slate-600 text-gray-600 dark:text-gray-300'
+                        'bg-gray-100 dark:bg-gray-600 text-gray-600 dark:text-gray-300'
                       }`}>
                         {brand.rank === 1 ? '🥇' : brand.rank === 2 ? '🥈' : brand.rank === 3 ? '🥉' : brand.rank}
                       </div>
@@ -2862,7 +2862,7 @@ export function SystemRanking() {
                           const b = brands.find(b => b.id === brand.brandId);
                           if (b) setSelectedBrand(b);
                         }}
-                        className="flex items-center gap-3 hover:bg-gray-50 dark:hover:bg-slate-700/50 -mx-2 px-2 py-1 rounded-lg transition-colors"
+                        className="flex items-center gap-3 hover:bg-gray-50 dark:hover:bg-gray-700/50 -mx-2 px-2 py-1 rounded-lg transition-colors"
                       >
                         <Avatar initials={brand.brandName.slice(0, 2)} size="sm" />
                         <p className="font-medium text-gray-900 dark:text-white">{brand.brandName}</p>
@@ -2896,9 +2896,9 @@ export function SystemRanking() {
             <div className="flex items-start gap-6">
               <div className="relative">
                 <Avatar initials={selectedKOL.avatar} size="xl" />
-                <div className={`absolute -bottom-1 -right-1 w-5 h-5 rounded-full border-2 border-white dark:border-slate-800 ${
+                <div className={`absolute -bottom-1 -right-1 w-5 h-5 rounded-full border-2 border-white dark:border-gray-800 ${
                   selectedKOL.platform === 'TikTok' ? 'bg-black' :
-                  selectedKOL.platform === 'Instagram' ? 'bg-gradient-to-br from-purple-600 via-pink-500 to-orange-400' :
+                  selectedKOL.platform === 'Instagram' ? 'bg-pink-500' :
                   selectedKOL.platform === 'YouTube' ? 'bg-red-600' : 'bg-blue-600'
                 }`}>
                   <span className="absolute inset-0 flex items-center justify-center text-white text-xs">
@@ -2921,19 +2921,19 @@ export function SystemRanking() {
             </div>
 
             <div className="grid grid-cols-2 gap-4">
-              <div className="bg-gray-50 dark:bg-slate-700/50 rounded-xl p-4">
+              <div className="bg-gray-50 dark:bg-gray-700/50 rounded p-4">
                 <p className="text-sm text-gray-500 dark:text-gray-400">Người theo dõi</p>
                 <p className="text-2xl font-bold text-gray-900 dark:text-white">{selectedKOL.followersDisplay}</p>
               </div>
-              <div className="bg-gray-50 dark:bg-slate-700/50 rounded-xl p-4">
+              <div className="bg-gray-50 dark:bg-gray-700/50 rounded p-4">
                 <p className="text-sm text-gray-500 dark:text-gray-400">Tỷ lệ tương tác</p>
                 <p className="text-2xl font-bold text-teal-600 dark:text-teal-400">{selectedKOL.engagementRate}%</p>
               </div>
-              <div className="bg-gray-50 dark:bg-slate-700/50 rounded-xl p-4">
+              <div className="bg-gray-50 dark:bg-gray-700/50 rounded p-4">
                 <p className="text-sm text-gray-500 dark:text-gray-400">Lĩnh vực</p>
                 <p className="text-lg font-medium text-gray-900 dark:text-white">{selectedKOL.niche}</p>
               </div>
-              <div className="bg-gray-50 dark:bg-slate-700/50 rounded-xl p-4">
+              <div className="bg-gray-50 dark:bg-gray-700/50 rounded p-4">
                 <p className="text-sm text-gray-500 dark:text-gray-400">Giá booking</p>
                 <p className="text-lg font-medium text-gray-900 dark:text-white">{selectedKOL.bookingPrice.toLocaleString()} VNĐ</p>
               </div>
@@ -2950,16 +2950,16 @@ export function SystemRanking() {
               <h4 className="text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">Liên kết mạng xã hội</h4>
               <div className="flex gap-2">
                 {selectedKOL.socialLinks.tiktok && (
-                  <a href={selectedKOL.socialLinks.tiktok} target="_blank" className="px-3 py-2 bg-black text-white rounded-xl text-sm hover:opacity-80">TikTok</a>
+                  <a href={selectedKOL.socialLinks.tiktok} target="_blank" className="px-3 py-2 bg-black text-white rounded text-sm hover:opacity-80">TikTok</a>
                 )}
                 {selectedKOL.socialLinks.instagram && (
-                  <a href={selectedKOL.socialLinks.instagram} target="_blank" className="px-3 py-2 bg-gradient-to-br from-purple-600 to-pink-500 text-white rounded-xl text-sm hover:opacity-80">Instagram</a>
+                  <a href={selectedKOL.socialLinks.instagram} target="_blank" className="px-3 py-2 bg-pink-500 text-white rounded text-sm hover:opacity-80">Instagram</a>
                 )}
                 {selectedKOL.socialLinks.youtube && (
-                  <a href={selectedKOL.socialLinks.youtube} target="_blank" className="px-3 py-2 bg-red-600 text-white rounded-xl text-sm hover:opacity-80">YouTube</a>
+                  <a href={selectedKOL.socialLinks.youtube} target="_blank" className="px-3 py-2 bg-red-600 text-white rounded text-sm hover:opacity-80">YouTube</a>
                 )}
                 {selectedKOL.socialLinks.facebook && (
-                  <a href={selectedKOL.socialLinks.facebook} target="_blank" className="px-3 py-2 bg-blue-600 text-white rounded-xl text-sm hover:opacity-80">Facebook</a>
+                  <a href={selectedKOL.socialLinks.facebook} target="_blank" className="px-3 py-2 bg-blue-600 text-white rounded text-sm hover:opacity-80">Facebook</a>
                 )}
               </div>
             </div>
@@ -2969,7 +2969,7 @@ export function SystemRanking() {
                 <h4 className="text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">Kinh nghiệm hợp tác</h4>
                 <div className="space-y-2">
                   {selectedKOL.experience.map((exp, idx) => (
-                    <div key={idx} className="bg-gray-50 dark:bg-slate-700/50 rounded-lg p-3">
+                    <div key={idx} className="bg-gray-50 dark:bg-gray-700/50 rounded-lg p-3">
                       <div className="flex justify-between items-start">
                         <div>
                           <p className="font-medium text-gray-900 dark:text-white">{exp.campaign}</p>
@@ -3004,7 +3004,7 @@ export function SystemRanking() {
                   { date: '15/05/2026', campaign: 'Spring Collection', amount: '12,500,000', status: 'paid', method: 'Chuyển khoản' },
                   { date: '01/05/2026', campaign: 'Tech Review Campaign', amount: '8,000,000', status: 'paid', method: 'Momo' },
                 ].map((payment, i) => (
-                  <div key={i} className="flex items-center justify-between p-3 bg-gray-50 dark:bg-slate-700/50 rounded-xl">
+                  <div key={i} className="flex items-center justify-between p-3 bg-gray-50 dark:bg-gray-700/50 rounded">
                     <div className="flex items-center gap-3">
                       <div className="w-10 h-10 rounded-lg flex items-center justify-center bg-emerald-100 dark:bg-emerald-900/30">
                         <CheckCircle2 className="w-5 h-5 text-emerald-600" />
@@ -3048,36 +3048,36 @@ export function SystemRanking() {
             </div>
 
             <div className="grid grid-cols-3 gap-4">
-              <div className="bg-gray-50 dark:bg-slate-700/50 rounded-xl p-4 text-center">
+              <div className="bg-gray-50 dark:bg-gray-700/50 rounded p-4 text-center">
                 <p className="text-sm text-gray-500 dark:text-gray-400">Chiến dịch</p>
                 <p className="text-2xl font-bold text-gray-900 dark:text-white">{selectedBrand.campaignCount}</p>
               </div>
-              <div className="bg-gray-50 dark:bg-slate-700/50 rounded-xl p-4 text-center">
+              <div className="bg-gray-50 dark:bg-gray-700/50 rounded p-4 text-center">
                 <p className="text-sm text-gray-500 dark:text-gray-400">Sản phẩm</p>
                 <p className="text-2xl font-bold text-gray-900 dark:text-white">{selectedBrand.productCount}</p>
               </div>
-              <div className="bg-gray-50 dark:bg-slate-700/50 rounded-xl p-4 text-center">
+              <div className="bg-gray-50 dark:bg-gray-700/50 rounded p-4 text-center">
                 <p className="text-sm text-gray-500 dark:text-gray-400">KOL/KOC</p>
                 <p className="text-2xl font-bold text-gray-900 dark:text-white">{selectedBrand.kolCount}</p>
               </div>
             </div>
 
             <div className="grid grid-cols-2 gap-4">
-              <div className="bg-gray-50 dark:bg-slate-700/50 rounded-xl p-4">
+              <div className="bg-gray-50 dark:bg-gray-700/50 rounded p-4">
                 <p className="text-sm text-gray-500 dark:text-gray-400">Tổng lượt xem</p>
                 <p className="text-xl font-bold text-gray-900 dark:text-white">
                   {selectedBrand.totalViews >= 1000000 ? (selectedBrand.totalViews / 1000000).toFixed(1) + 'M' : (selectedBrand.totalViews / 1000).toFixed(0) + 'K'}
                 </p>
               </div>
-              <div className="bg-gray-50 dark:bg-slate-700/50 rounded-xl p-4">
+              <div className="bg-gray-50 dark:bg-gray-700/50 rounded p-4">
                 <p className="text-sm text-gray-500 dark:text-gray-400">Tổng thanh toán</p>
                 <p className="text-xl font-bold text-gray-900 dark:text-white">{selectedBrand.totalPayment.toLocaleString()}đ</p>
               </div>
-              <div className="bg-gray-50 dark:bg-slate-700/50 rounded-xl p-4">
+              <div className="bg-gray-50 dark:bg-gray-700/50 rounded p-4">
                 <p className="text-sm text-gray-500 dark:text-gray-400">TL tương tác</p>
                 <p className="text-xl font-bold text-teal-600 dark:text-teal-400">{selectedBrand.engagementRate}%</p>
               </div>
-              <div className="bg-gray-50 dark:bg-slate-700/50 rounded-xl p-4">
+              <div className="bg-gray-50 dark:bg-gray-700/50 rounded p-4">
                 <p className="text-sm text-gray-500 dark:text-gray-400">TL chuyển đổi</p>
                 <p className="text-xl font-bold text-blue-600 dark:text-blue-400">{selectedBrand.conversionRate}%</p>
               </div>
@@ -3282,11 +3282,11 @@ export function PerformanceCenter() {
           <p className="text-sm text-gray-500 dark:text-gray-400">Theo dõi hiệu suất chi tiết theo Brand, Campaign và KOL</p>
         </div>
         <div className="flex items-center gap-3">
-          <select value={selectedBrand} onChange={e => setSelectedBrand(e.target.value)} className="px-4 py-2 rounded-xl border border-gray-200 dark:border-slate-600 bg-white dark:bg-slate-800 text-gray-900 dark:text-white text-sm">
+          <select value={selectedBrand} onChange={e => setSelectedBrand(e.target.value)} className="px-4 py-2 rounded border border-gray-200 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-white text-sm">
             <option value="all">Tất cả Brand</option>
             {brands.map(b => <option key={b.id} value={b.id}>{b.name}</option>)}
           </select>
-          <select value={timeRange} onChange={e => setTimeRange(e.target.value)} className="px-4 py-2 rounded-xl border border-gray-200 dark:border-slate-600 bg-white dark:bg-slate-800 text-gray-900 dark:text-white text-sm">
+          <select value={timeRange} onChange={e => setTimeRange(e.target.value)} className="px-4 py-2 rounded border border-gray-200 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-white text-sm">
             <option value="1tháng">1 tháng</option>
             <option value="3tháng">3 tháng</option>
             <option value="6tháng">6 tháng</option>
@@ -3296,14 +3296,14 @@ export function PerformanceCenter() {
       </div>
 
       {/* Tabs */}
-      <div className="flex gap-1 p-1 bg-gray-100 dark:bg-slate-700/50 rounded-xl w-fit">
+      <div className="flex gap-1 p-1 bg-gray-100 dark:bg-gray-700/50 rounded w-fit">
         {['overview', 'brand', 'campaign', 'kol'].map((tab) => (
           <button
             key={tab}
             onClick={() => setActiveTab(tab as any)}
             className={`px-6 py-3 text-sm font-medium rounded-lg transition-colors ${
               activeTab === tab 
-                ? 'bg-white dark:bg-slate-600 text-gray-900 dark:text-white shadow-sm' 
+                ? 'bg-white dark:bg-gray-600 text-gray-900 dark:text-white' 
                 : 'text-gray-500 dark:text-gray-400 hover:text-gray-700'
             }`}
           >
@@ -3316,9 +3316,9 @@ export function PerformanceCenter() {
       {activeTab === 'overview' && (
         <>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-            <div className="bg-white dark:bg-slate-800 rounded-2xl border border-gray-200/60 dark:border-slate-700/60 p-6">
+            <div className="bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 p-6">
               <div className="flex items-center gap-3 mb-4">
-                <div className="p-3 bg-blue-100 dark:bg-blue-900/40 rounded-xl">
+                <div className="p-3 bg-blue-100 dark:bg-blue-900/40 rounded">
                   <Eye className="w-6 h-6 text-blue-600" />
                 </div>
               </div>
@@ -3327,27 +3327,27 @@ export function PerformanceCenter() {
               </p>
               <p className="text-sm text-gray-500 mt-1">Tổng lượt xem</p>
             </div>
-            <div className="bg-white dark:bg-slate-800 rounded-2xl border border-gray-200/60 dark:border-slate-700/60 p-6">
+            <div className="bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 p-6">
               <div className="flex items-center gap-3 mb-4">
-                <div className="p-3 bg-teal-100 dark:bg-teal-900/40 rounded-xl">
+                <div className="p-3 bg-teal-100 dark:bg-teal-900/40 rounded">
                   <TrendingUp className="w-6 h-6 text-teal-600" />
                 </div>
               </div>
               <p className="text-3xl font-bold text-gray-900 dark:text-white">{filteredEngagement.toLocaleString()}</p>
               <p className="text-sm text-gray-500 mt-1">Tổng tương tác</p>
             </div>
-            <div className="bg-white dark:bg-slate-800 rounded-2xl border border-gray-200/60 dark:border-slate-700/60 p-6">
+            <div className="bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 p-6">
               <div className="flex items-center gap-3 mb-4">
-                <div className="p-3 bg-amber-100 dark:bg-amber-900/40 rounded-xl">
+                <div className="p-3 bg-amber-100 dark:bg-amber-900/40 rounded">
                   <BarChart3 className="w-6 h-6 text-amber-600" />
                 </div>
               </div>
               <p className="text-3xl font-bold text-gray-900 dark:text-white">{filteredConversions.toLocaleString()}</p>
               <p className="text-sm text-gray-500 mt-1">Tổng chuyển đổi</p>
             </div>
-            <div className="bg-white dark:bg-slate-800 rounded-2xl border border-gray-200/60 dark:border-slate-700/60 p-6">
+            <div className="bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 p-6">
               <div className="flex items-center gap-3 mb-4">
-                <div className="p-3 bg-emerald-100 dark:bg-emerald-900/40 rounded-xl">
+                <div className="p-3 bg-emerald-100 dark:bg-emerald-900/40 rounded">
                   <DollarSign className="w-6 h-6 text-emerald-600" />
                 </div>
               </div>
@@ -3357,7 +3357,7 @@ export function PerformanceCenter() {
           </div>
 
           {/* Performance Chart */}
-          <div className="bg-white dark:bg-slate-800 rounded-2xl border border-gray-200/60 dark:border-slate-700/60 p-6">
+          <div className="bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 p-6">
             <h3 className="text-sm font-semibold text-gray-900 dark:text-white mb-4">Biểu đồ hiệu suất</h3>
             <div className="h-80">
               <ResponsiveContainer width="100%" height="100%">
@@ -3376,16 +3376,16 @@ export function PerformanceCenter() {
           {/* Top Rankings */}
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
             {/* Top Brands */}
-            <div className="bg-white dark:bg-slate-800 rounded-2xl border border-gray-200/60 dark:border-slate-700/60 p-6">
+            <div className="bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 p-6">
               <div className="flex items-center justify-between mb-4">
                 <h3 className="text-sm font-semibold text-gray-900 dark:text-white">Top Brand</h3>
                 <Award className="w-4 h-4 text-amber-500" />
               </div>
               <div className="space-y-3">
                 {topBrands.map((brand, idx) => (
-                  <div key={brand.id} className="flex items-center gap-3 p-2 rounded-lg hover:bg-gray-50 dark:hover:bg-slate-700/30">
+                  <div key={brand.id} className="flex items-center gap-3 p-2 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700/30">
                     <div className={`w-7 h-7 rounded-full flex items-center justify-center text-xs font-bold ${
-                      idx === 0 ? 'bg-amber-500 text-white' : idx === 1 ? 'bg-gray-400 text-white' : idx === 2 ? 'bg-amber-700 text-white' : 'bg-gray-100 dark:bg-slate-600'
+                      idx === 0 ? 'bg-amber-500 text-white' : idx === 1 ? 'bg-gray-400 text-white' : idx === 2 ? 'bg-amber-700 text-white' : 'bg-gray-100 dark:bg-gray-600'
                     }`}>
                       {idx + 1}
                     </div>
@@ -3400,16 +3400,16 @@ export function PerformanceCenter() {
             </div>
 
             {/* Top Campaigns */}
-            <div className="bg-white dark:bg-slate-800 rounded-2xl border border-gray-200/60 dark:border-slate-700/60 p-6">
+            <div className="bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 p-6">
               <div className="flex items-center justify-between mb-4">
                 <h3 className="text-sm font-semibold text-gray-900 dark:text-white">Top Campaign</h3>
                 <Activity className="w-4 h-4 text-teal-500" />
               </div>
               <div className="space-y-3">
                 {topCampaigns.map((camp, idx) => (
-                  <div key={camp.id} className="flex items-center gap-3 p-2 rounded-lg hover:bg-gray-50 dark:hover:bg-slate-700/30">
+                  <div key={camp.id} className="flex items-center gap-3 p-2 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700/30">
                     <div className={`w-7 h-7 rounded-full flex items-center justify-center text-xs font-bold ${
-                      idx === 0 ? 'bg-amber-500 text-white' : idx === 1 ? 'bg-gray-400 text-white' : idx === 2 ? 'bg-amber-700 text-white' : 'bg-gray-100 dark:bg-slate-600'
+                      idx === 0 ? 'bg-amber-500 text-white' : idx === 1 ? 'bg-gray-400 text-white' : idx === 2 ? 'bg-amber-700 text-white' : 'bg-gray-100 dark:bg-gray-600'
                     }`}>
                       {idx + 1}
                     </div>
@@ -3423,16 +3423,16 @@ export function PerformanceCenter() {
             </div>
 
             {/* Top KOLs */}
-            <div className="bg-white dark:bg-slate-800 rounded-2xl border border-gray-200/60 dark:border-slate-700/60 p-6">
+            <div className="bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 p-6">
               <div className="flex items-center justify-between mb-4">
                 <h3 className="text-sm font-semibold text-gray-900 dark:text-white">Top KOL/KOC</h3>
                 <Users className="w-4 h-4 text-blue-500" />
               </div>
               <div className="space-y-3">
                 {topKOLs.map((kol, idx) => (
-                  <div key={kol.kolId} className="flex items-center gap-3 p-2 rounded-lg hover:bg-gray-50 dark:hover:bg-slate-700/30">
+                  <div key={kol.kolId} className="flex items-center gap-3 p-2 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700/30">
                     <div className={`w-7 h-7 rounded-full flex items-center justify-center text-xs font-bold ${
-                      idx === 0 ? 'bg-amber-500 text-white' : idx === 1 ? 'bg-gray-400 text-white' : idx === 2 ? 'bg-amber-700 text-white' : 'bg-gray-100 dark:bg-slate-600'
+                      idx === 0 ? 'bg-amber-500 text-white' : idx === 1 ? 'bg-gray-400 text-white' : idx === 2 ? 'bg-amber-700 text-white' : 'bg-gray-100 dark:bg-gray-600'
                     }`}>
                       {idx + 1}
                     </div>
@@ -3456,9 +3456,9 @@ export function PerformanceCenter() {
           <div className="flex items-center gap-3 flex-wrap">
             <div className="relative flex-1 min-w-[250px]">
               <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
-              <input type="text" placeholder="Tìm kiếm Brand..." value={searchBrand} onChange={e => setSearchBrand(e.target.value)} className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-gray-200 dark:border-slate-600 bg-white dark:bg-slate-800 text-gray-900 dark:text-white text-sm focus:ring-2 focus:ring-teal-500 outline-none" />
+              <input type="text" placeholder="Tìm kiếm Brand..." value={searchBrand} onChange={e => setSearchBrand(e.target.value)} className="w-full pl-10 pr-4 py-2.5 rounded border border-gray-200 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-white text-sm focus:ring-2 focus:ring-teal-500 outline-none" />
             </div>
-            <select value={brandSortBy} onChange={e => setBrandSortBy(e.target.value as any)} className="px-4 py-2.5 rounded-xl border border-gray-200 dark:border-slate-600 bg-white dark:bg-slate-800 text-gray-900 dark:text-white text-sm">
+            <select value={brandSortBy} onChange={e => setBrandSortBy(e.target.value as any)} className="px-4 py-2.5 rounded border border-gray-200 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-white text-sm">
               <option value="views">Sắp xếp: Views</option>
               <option value="engagement">Sắp xếp: Tương tác</option>
               <option value="conversion">Sắp xếp: Chuyển đổi</option>
@@ -3468,38 +3468,38 @@ export function PerformanceCenter() {
 
           {/* Stats Summary */}
           <div className="grid grid-cols-2 md:grid-cols-6 gap-3">
-            <div className="bg-gradient-to-br from-blue-500/10 to-blue-600/5 rounded-xl p-4 border border-blue-200/40 dark:border-blue-800/40">
+            <div className="bg-white rounded p-4 border border-blue-200/40 dark:border-blue-800/40">
               <p className="text-2xl font-bold text-blue-600">{brandPerformanceData.length}</p>
               <p className="text-xs text-gray-500">Brand</p>
             </div>
-            <div className="bg-gradient-to-br from-purple-500/10 to-purple-600/5 rounded-xl p-4 border border-purple-200/40 dark:border-purple-800/40">
+            <div className="bg-white rounded p-4 border border-purple-200/40 dark:border-purple-800/40">
               <p className="text-2xl font-bold text-purple-600">{brandPerformanceData.reduce((s, b) => s + b.campaigns, 0)}</p>
               <p className="text-xs text-gray-500">Campaigns</p>
             </div>
-            <div className="bg-gradient-to-br from-cyan-500/10 to-cyan-600/5 rounded-xl p-4 border border-cyan-200/40 dark:border-cyan-800/40">
+            <div className="bg-white rounded p-4 border border-cyan-200/40 dark:border-cyan-800/40">
               <p className="text-2xl font-bold text-cyan-600">{brandPerformanceData.reduce((s, b) => s + b.views, 0) >= 1000000 ? (brandPerformanceData.reduce((s, b) => s + b.views, 0) / 1000000).toFixed(1) + 'M' : (brandPerformanceData.reduce((s, b) => s + b.views, 0) / 1000).toFixed(0) + 'K'}</p>
               <p className="text-xs text-gray-500">Tổng Views</p>
             </div>
-            <div className="bg-gradient-to-br from-teal-500/10 to-teal-600/5 rounded-xl p-4 border border-teal-200/40 dark:border-teal-800/40">
+            <div className="bg-white rounded p-4 border border-teal-200/40 dark:border-teal-800/40">
               <p className="text-2xl font-bold text-teal-600">{brandPerformanceData.reduce((s, b) => s + b.engagement, 0).toLocaleString()}</p>
               <p className="text-xs text-gray-500">Tổng Tương tác</p>
             </div>
-            <div className="bg-gradient-to-br from-amber-500/10 to-amber-600/5 rounded-xl p-4 border border-amber-200/40 dark:border-amber-800/40">
+            <div className="bg-white rounded p-4 border border-amber-200/40 dark:border-amber-800/40">
               <p className="text-2xl font-bold text-amber-600">{brandPerformanceData.reduce((s, b) => s + b.conversions, 0).toLocaleString()}</p>
               <p className="text-xs text-gray-500">Tổng Chuyển đổi</p>
             </div>
-            <div className="bg-gradient-to-br from-emerald-500/10 to-emerald-600/5 rounded-xl p-4 border border-emerald-200/40 dark:border-emerald-800/40">
+            <div className="bg-white rounded p-4 border border-emerald-200/40 dark:border-emerald-800/40">
               <p className="text-2xl font-bold text-emerald-600">{(totalViews > 0 ? (brandPerformanceData.reduce((s, b) => s + b.conversions, 0) / brandPerformanceData.reduce((s, b) => s + b.views, 0) * 100) : 0).toFixed(2)}%</p>
               <p className="text-xs text-gray-500">TL Chuyển đổi</p>
             </div>
           </div>
 
           {/* Detailed Brand Table */}
-          <div className="bg-white dark:bg-slate-800 rounded-2xl border border-gray-200/60 dark:border-slate-700/60 overflow-hidden">
+          <div className="bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 overflow-hidden">
             <div className="overflow-x-auto">
               <table className="w-full min-w-[1600px]">
                 <thead>
-                  <tr className="border-b border-gray-100 dark:border-slate-700 bg-gray-50/50 dark:bg-slate-700/30">
+                  <tr className="border-b border-gray-100 dark:border-gray-700 bg-gray-50/50 dark:bg-gray-700/30">
                     <th className="text-left px-4 py-4 text-xs font-semibold text-gray-500 uppercase w-52">Brand</th>
                     <th className="text-left px-4 py-4 text-xs font-semibold text-gray-500 uppercase">Campaigns</th>
                     <th className="text-left px-4 py-4 text-xs font-semibold text-gray-500 uppercase">Tasks</th>
@@ -3533,7 +3533,7 @@ export function PerformanceCenter() {
                       { name: 'Shares', value: brand.shares, color: '#8B5CF6' },
                     ];
                     return (
-                      <tr key={brand.id} className="border-b border-gray-50 dark:border-slate-700/50 hover:bg-gray-50/50 dark:hover:bg-slate-700/30">
+                      <tr key={brand.id} className="border-b border-gray-50 dark:border-gray-700/50 hover:bg-gray-50/50 dark:hover:bg-gray-700/30">
                         <td className="px-4 py-4">
                           <div className="flex items-center gap-3">
                             <Avatar initials={brand.name.slice(0, 2)} size="sm" />
@@ -3585,7 +3585,7 @@ export function PerformanceCenter() {
                         <td className="px-4 py-4 text-sm font-bold text-emerald-600">{brand.conversionRate.toFixed(2)}%</td>
                         <td className="px-4 py-4 text-sm">
                           <div className="flex items-center gap-2">
-                            <div className="w-16 h-2 bg-gray-100 dark:bg-slate-600 rounded-full overflow-hidden">
+                            <div className="w-16 h-2 bg-gray-100 dark:bg-gray-600 rounded-full overflow-hidden">
                               <div className={`h-full rounded-full ${brand.taskCompletionRate >= 80 ? 'bg-emerald-500' : brand.taskCompletionRate >= 50 ? 'bg-amber-500' : 'bg-red-500'}`} style={{ width: `${brand.taskCompletionRate}%` }} />
                             </div>
                             <span className="text-xs font-medium">{brand.taskCompletionRate.toFixed(0)}%</span>
@@ -3609,13 +3609,13 @@ export function PerformanceCenter() {
           <div className="flex items-center gap-3 flex-wrap">
             <div className="relative flex-1 min-w-[250px]">
               <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
-              <input type="text" placeholder="Tìm kiếm Campaign..." value={searchCampaign} onChange={e => setSearchCampaign(e.target.value)} className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-gray-200 dark:border-slate-600 bg-white dark:bg-slate-800 text-gray-900 dark:text-white text-sm focus:ring-2 focus:ring-teal-500 outline-none" />
+              <input type="text" placeholder="Tìm kiếm Campaign..." value={searchCampaign} onChange={e => setSearchCampaign(e.target.value)} className="w-full pl-10 pr-4 py-2.5 rounded border border-gray-200 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-white text-sm focus:ring-2 focus:ring-teal-500 outline-none" />
             </div>
-            <select value={selectedCampaign} onChange={e => setSelectedCampaign(e.target.value)} className="px-4 py-2.5 rounded-xl border border-gray-200 dark:border-slate-600 bg-white dark:bg-slate-800 text-gray-900 dark:text-white text-sm">
+            <select value={selectedCampaign} onChange={e => setSelectedCampaign(e.target.value)} className="px-4 py-2.5 rounded border border-gray-200 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-white text-sm">
               <option value="all">Tất cả</option>
               {filteredCampaigns.map(c => <option key={c.id} value={c.id}>{c.name}</option>)}
             </select>
-            <select value={campaignSortBy} onChange={e => setCampaignSortBy(e.target.value as any)} className="px-4 py-2.5 rounded-xl border border-gray-200 dark:border-slate-600 bg-white dark:bg-slate-800 text-gray-900 dark:text-white text-sm">
+            <select value={campaignSortBy} onChange={e => setCampaignSortBy(e.target.value as any)} className="px-4 py-2.5 rounded border border-gray-200 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-white text-sm">
               <option value="views">Sắp xếp: Views</option>
               <option value="engagement">Sắp xếp: Tương tác</option>
               <option value="conversion">Sắp xếp: KPI Progress</option>
@@ -3625,38 +3625,38 @@ export function PerformanceCenter() {
 
           {/* Stats Summary */}
           <div className="grid grid-cols-2 md:grid-cols-6 gap-3">
-            <div className="bg-gradient-to-br from-blue-500/10 to-blue-600/5 rounded-xl p-4 border border-blue-200/40 dark:border-blue-800/40">
+            <div className="bg-white rounded p-4 border border-blue-200/40 dark:border-blue-800/40">
               <p className="text-2xl font-bold text-blue-600">{campaignPerformanceData.length}</p>
               <p className="text-xs text-gray-500">Campaigns</p>
             </div>
-            <div className="bg-gradient-to-br from-purple-500/10 to-purple-600/5 rounded-xl p-4 border border-purple-200/40 dark:border-purple-800/40">
+            <div className="bg-white rounded p-4 border border-purple-200/40 dark:border-purple-800/40">
               <p className="text-2xl font-bold text-purple-600">{campaignPerformanceData.reduce((s, c) => s + c.kolCount, 0)}</p>
               <p className="text-xs text-gray-500">KOLs</p>
             </div>
-            <div className="bg-gradient-to-br from-cyan-500/10 to-cyan-600/5 rounded-xl p-4 border border-cyan-200/40 dark:border-cyan-800/40">
+            <div className="bg-white rounded p-4 border border-cyan-200/40 dark:border-cyan-800/40">
               <p className="text-2xl font-bold text-cyan-600">{campaignPerformanceData.reduce((s, c) => s + c.views, 0) >= 1000000 ? (campaignPerformanceData.reduce((s, c) => s + c.views, 0) / 1000000).toFixed(1) + 'M' : (campaignPerformanceData.reduce((s, c) => s + c.views, 0) / 1000).toFixed(0) + 'K'}</p>
               <p className="text-xs text-gray-500">Tổng Views</p>
             </div>
-            <div className="bg-gradient-to-br from-teal-500/10 to-teal-600/5 rounded-xl p-4 border border-teal-200/40 dark:border-teal-800/40">
+            <div className="bg-white rounded p-4 border border-teal-200/40 dark:border-teal-800/40">
               <p className="text-2xl font-bold text-teal-600">{campaignPerformanceData.reduce((s, c) => s + c.engagement, 0).toLocaleString()}</p>
               <p className="text-xs text-gray-500">Tổng Tương tác</p>
             </div>
-            <div className="bg-gradient-to-br from-pink-500/10 to-pink-600/5 rounded-xl p-4 border border-pink-200/40 dark:border-pink-800/40">
+            <div className="bg-white rounded p-4 border border-pink-200/40 dark:border-pink-800/40">
               <p className="text-2xl font-bold text-pink-600">{campaignPerformanceData.reduce((s, c) => s + c.comments, 0).toLocaleString()}</p>
               <p className="text-xs text-gray-500">Comments</p>
             </div>
-            <div className="bg-gradient-to-br from-amber-500/10 to-amber-600/5 rounded-xl p-4 border border-amber-200/40 dark:border-amber-800/40">
+            <div className="bg-white rounded p-4 border border-amber-200/40 dark:border-amber-800/40">
               <p className="text-2xl font-bold text-amber-600">{campaignPerformanceData.reduce((s, c) => s + c.viewsPerTask, 0) >= 1000 ? (campaignPerformanceData.reduce((s, c) => s + c.viewsPerTask, 0) / campaignPerformanceData.length / 1000).toFixed(1) + 'K' : Math.round(campaignPerformanceData.reduce((s, c) => s + c.viewsPerTask, 0) / campaignPerformanceData.length)}</p>
               <p className="text-xs text-gray-500">Avg Views/Task</p>
             </div>
           </div>
 
           {/* Detailed Campaign Table */}
-          <div className="bg-white dark:bg-slate-800 rounded-2xl border border-gray-200/60 dark:border-slate-700/60 overflow-hidden">
+          <div className="bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 overflow-hidden">
             <div className="overflow-x-auto">
               <table className="w-full min-w-[1800px]">
                 <thead>
-                  <tr className="border-b border-gray-100 dark:border-slate-700 bg-gray-50/50 dark:bg-slate-700/30">
+                  <tr className="border-b border-gray-100 dark:border-gray-700 bg-gray-50/50 dark:bg-gray-700/30">
                     <th className="text-left px-4 py-4 text-xs font-semibold text-gray-500 uppercase w-52">Campaign</th>
                     <th className="text-left px-4 py-4 text-xs font-semibold text-gray-500 uppercase">Brand</th>
                     <th className="text-left px-4 py-4 text-xs font-semibold text-gray-500 uppercase">KOLs</th>
@@ -3691,7 +3691,7 @@ export function PerformanceCenter() {
                       { name: 'Shares', value: camp.shares, color: '#8B5CF6' },
                     ];
                     return (
-                      <tr key={camp.id} className="border-b border-gray-50 dark:border-slate-700/50 hover:bg-gray-50/50 dark:hover:bg-slate-700/30">
+                      <tr key={camp.id} className="border-b border-gray-50 dark:border-gray-700/50 hover:bg-gray-50/50 dark:hover:bg-gray-700/30">
                         <td className="px-4 py-4">
                           <div>
                             <p className="font-medium text-gray-900 dark:text-white">{camp.name}</p>
@@ -3739,7 +3739,7 @@ export function PerformanceCenter() {
                         <td className="px-4 py-4 text-sm font-bold text-teal-600">{camp.er}%</td>
                         <td className="px-4 py-4">
                           <div className="flex items-center gap-2">
-                            <div className="w-20 h-2 bg-gray-100 dark:bg-slate-600 rounded-full overflow-hidden">
+                            <div className="w-20 h-2 bg-gray-100 dark:bg-gray-600 rounded-full overflow-hidden">
                               <div className={`h-full rounded-full ${camp.kpiProgress >= 100 ? 'bg-emerald-500' : camp.kpiProgress >= 80 ? 'bg-teal-500' : camp.kpiProgress >= 50 ? 'bg-amber-500' : 'bg-red-500'}`} style={{ width: `${Math.min(camp.kpiProgress, 100)}%` }} />
                             </div>
                             <span className="text-xs font-medium">{camp.kpiProgress}%</span>
@@ -3748,7 +3748,7 @@ export function PerformanceCenter() {
                         <td className="px-4 py-4 text-sm">{camp.viewsPerTask >= 1000 ? (camp.viewsPerTask / 1000).toFixed(1) + 'K' : Math.round(camp.viewsPerTask)}</td>
                         <td className="px-4 py-4 text-sm">
                           <div className="flex items-center gap-2">
-                            <div className="w-16 h-2 bg-gray-100 dark:bg-slate-600 rounded-full overflow-hidden">
+                            <div className="w-16 h-2 bg-gray-100 dark:bg-gray-600 rounded-full overflow-hidden">
                               <div className={`h-full rounded-full ${camp.taskCompletionRate >= 80 ? 'bg-emerald-500' : camp.taskCompletionRate >= 50 ? 'bg-amber-500' : 'bg-red-500'}`} style={{ width: `${camp.taskCompletionRate}%` }} />
                             </div>
                             <span className="text-xs font-medium">{camp.taskCompletionRate.toFixed(0)}%</span>
@@ -3774,9 +3774,9 @@ export function PerformanceCenter() {
           <div className="flex items-center gap-3 flex-wrap">
             <div className="relative flex-1 min-w-[250px]">
               <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
-              <input type="text" placeholder="Tìm kiếm KOL..." value={searchKOL} onChange={e => setSearchKOL(e.target.value)} className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-gray-200 dark:border-slate-600 bg-white dark:bg-slate-800 text-gray-900 dark:text-white text-sm focus:ring-2 focus:ring-teal-500 outline-none" />
+              <input type="text" placeholder="Tìm kiếm KOL..." value={searchKOL} onChange={e => setSearchKOL(e.target.value)} className="w-full pl-10 pr-4 py-2.5 rounded border border-gray-200 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-white text-sm focus:ring-2 focus:ring-teal-500 outline-none" />
             </div>
-            <select value={kolSortBy} onChange={e => setKolSortBy(e.target.value as any)} className="px-4 py-2.5 rounded-xl border border-gray-200 dark:border-slate-600 bg-white dark:bg-slate-800 text-gray-900 dark:text-white text-sm">
+            <select value={kolSortBy} onChange={e => setKolSortBy(e.target.value as any)} className="px-4 py-2.5 rounded border border-gray-200 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-white text-sm">
               <option value="views">Sắp xếp: Views</option>
               <option value="er">Sắp xếp: ER</option>
               <option value="tasks">Sắp xếp: Tasks</option>
@@ -3786,38 +3786,38 @@ export function PerformanceCenter() {
 
           {/* Stats Summary */}
           <div className="grid grid-cols-2 md:grid-cols-6 gap-3">
-            <div className="bg-gradient-to-br from-blue-500/10 to-blue-600/5 rounded-xl p-4 border border-blue-200/40 dark:border-blue-800/40">
+            <div className="bg-white rounded p-4 border border-blue-200/40 dark:border-blue-800/40">
               <p className="text-2xl font-bold text-blue-600">{kolPerformanceData.length}</p>
               <p className="text-xs text-gray-500">KOLs</p>
             </div>
-            <div className="bg-gradient-to-br from-purple-500/10 to-purple-600/5 rounded-xl p-4 border border-purple-200/40 dark:border-purple-800/40">
+            <div className="bg-white rounded p-4 border border-purple-200/40 dark:border-purple-800/40">
               <p className="text-2xl font-bold text-purple-600">{kolPerformanceData.reduce((s, k) => s + k.campaigns, 0)}</p>
               <p className="text-xs text-gray-500">Campaigns</p>
             </div>
-            <div className="bg-gradient-to-br from-cyan-500/10 to-cyan-600/5 rounded-xl p-4 border border-cyan-200/40 dark:border-cyan-800/40">
+            <div className="bg-white rounded p-4 border border-cyan-200/40 dark:border-cyan-800/40">
               <p className="text-2xl font-bold text-cyan-600">{kolPerformanceData.reduce((s, k) => s + k.views, 0) >= 1000000 ? (kolPerformanceData.reduce((s, k) => s + k.views, 0) / 1000000).toFixed(1) + 'M' : (kolPerformanceData.reduce((s, k) => s + k.views, 0) / 1000).toFixed(0) + 'K'}</p>
               <p className="text-xs text-gray-500">Tổng Views</p>
             </div>
-            <div className="bg-gradient-to-br from-teal-500/10 to-teal-600/5 rounded-xl p-4 border border-teal-200/40 dark:border-teal-800/40">
+            <div className="bg-white rounded p-4 border border-teal-200/40 dark:border-teal-800/40">
               <p className="text-2xl font-bold text-teal-600">{kolPerformanceData.reduce((s, k) => s + k.engagement, 0).toLocaleString()}</p>
               <p className="text-xs text-gray-500">Tổng Tương tác</p>
             </div>
-            <div className="bg-gradient-to-br from-pink-500/10 to-pink-600/5 rounded-xl p-4 border border-pink-200/40 dark:border-pink-800/40">
+            <div className="bg-white rounded p-4 border border-pink-200/40 dark:border-pink-800/40">
               <p className="text-2xl font-bold text-pink-600">{kolPerformanceData.reduce((s, k) => s + k.comments, 0).toLocaleString()}</p>
               <p className="text-xs text-gray-500">Comments</p>
             </div>
-            <div className="bg-gradient-to-br from-amber-500/10 to-amber-600/5 rounded-xl p-4 border border-amber-200/40 dark:border-amber-800/40">
+            <div className="bg-white rounded p-4 border border-amber-200/40 dark:border-amber-800/40">
               <p className="text-2xl font-bold text-amber-600">{kolPerformanceData.reduce((s, k) => s + k.completedTasks, 0)}</p>
               <p className="text-xs text-gray-500">Tasks Done</p>
             </div>
           </div>
 
           {/* Detailed KOL Table */}
-          <div className="bg-white dark:bg-slate-800 rounded-2xl border border-gray-200/60 dark:border-slate-700/60 overflow-hidden">
+          <div className="bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 overflow-hidden">
             <div className="overflow-x-auto">
               <table className="w-full min-w-[1700px]">
                 <thead>
-                  <tr className="border-b border-gray-100 dark:border-slate-700 bg-gray-50/50 dark:bg-slate-700/30">
+                  <tr className="border-b border-gray-100 dark:border-gray-700 bg-gray-50/50 dark:bg-gray-700/30">
                     <th className="text-left px-4 py-4 text-xs font-semibold text-gray-500 uppercase">KOL/KOC</th>
                     <th className="text-left px-4 py-4 text-xs font-semibold text-gray-500 uppercase">Platform</th>
                     <th className="text-left px-4 py-4 text-xs font-semibold text-gray-500 uppercase">Followers</th>
@@ -3837,7 +3837,7 @@ export function PerformanceCenter() {
                 </thead>
                 <tbody>
                   {kolPerformanceData.map(kol => (
-                    <tr key={kol.id} className="border-b border-gray-50 dark:border-slate-700/50 hover:bg-gray-50/50 dark:hover:bg-slate-700/30">
+                    <tr key={kol.id} className="border-b border-gray-50 dark:border-gray-700/50 hover:bg-gray-50/50 dark:hover:bg-gray-700/30">
                       <td className="px-4 py-4">
                         <div className="flex items-center gap-3">
                           <Avatar initials={kol.avatar} size="sm" />
@@ -3867,7 +3867,7 @@ export function PerformanceCenter() {
                       <td className="px-4 py-4 text-sm">{kol.avgViewsPerTask >= 1000 ? (kol.avgViewsPerTask / 1000).toFixed(1) + 'K' : Math.round(kol.avgViewsPerTask)}</td>
                       <td className="px-4 py-4 text-sm">
                         <div className="flex items-center gap-2">
-                          <div className="w-16 h-2 bg-gray-100 dark:bg-slate-600 rounded-full overflow-hidden">
+                          <div className="w-16 h-2 bg-gray-100 dark:bg-gray-600 rounded-full overflow-hidden">
                             <div className={`h-full rounded-full ${kol.taskCompletionRate >= 80 ? 'bg-emerald-500' : kol.taskCompletionRate >= 50 ? 'bg-amber-500' : 'bg-red-500'}`} style={{ width: `${kol.taskCompletionRate}%` }} />
                           </div>
                           <span className="text-xs font-medium">{kol.taskCompletionRate.toFixed(0)}%</span>
@@ -3876,7 +3876,7 @@ export function PerformanceCenter() {
                       <td className="px-4 py-4 text-sm font-bold text-amber-600">{kol.score.toFixed(1)}</td>
                       <td className="px-4 py-4 text-sm">
                         <div className="flex items-center gap-2">
-                          <div className="w-16 h-2 bg-gray-100 dark:bg-slate-600 rounded-full overflow-hidden">
+                          <div className="w-16 h-2 bg-gray-100 dark:bg-gray-600 rounded-full overflow-hidden">
                             <div className="h-full rounded-full bg-teal-500" style={{ width: `${kol.consistencyScore}%` }} />
                           </div>
                           <span className="text-xs font-medium">{kol.consistencyScore.toFixed(0)}%</span>
@@ -3992,13 +3992,13 @@ export function ReportCenter() {
             <button
               key={type.id}
               onClick={() => handleReportTypeChange(type.id)}
-              className={`p-6 rounded-2xl border-2 text-left transition-all ${
+              className={`p-6 rounded-lg border-2 text-left transition-colors ${
                 isActive 
                   ? `${colors.bg} ${colors.border}` 
-                  : 'border-gray-200 dark:border-slate-700 hover:border-teal-300'
+                  : 'border-gray-200 dark:border-gray-700 hover:border-teal-300'
               }`}
             >
-              <div className={`p-3 rounded-xl w-fit mb-4 ${isActive ? colors.icon : 'bg-gray-100 dark:bg-slate-700'}`}>
+              <div className={`p-3 rounded w-fit mb-4 ${isActive ? colors.icon : 'bg-gray-100 dark:bg-gray-700'}`}>
                 <Icon className={`w-6 h-6 ${isActive ? colors.text : 'text-gray-500'}`} />
               </div>
               <h3 className="font-semibold text-gray-900 dark:text-white">{type.label}</h3>
@@ -4009,7 +4009,7 @@ export function ReportCenter() {
       </div>
 
       {/* Filters */}
-      <div className="bg-white dark:bg-slate-800 rounded-2xl border border-gray-200/60 dark:border-slate-700/60 p-6">
+      <div className="bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 p-6">
         <h3 className="text-sm font-semibold text-gray-900 dark:text-white mb-4">Bộ lọc báo cáo</h3>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
           <div>
@@ -4018,7 +4018,7 @@ export function ReportCenter() {
               type="date" 
               value={dateRange.from} 
               onChange={e => setDateRange({ ...dateRange, from: e.target.value })}
-              className="w-full px-4 py-2.5 rounded-xl border border-gray-200 dark:border-slate-600 bg-white dark:bg-slate-700 text-gray-900 dark:text-white text-sm"
+              className="w-full px-4 py-2.5 rounded border border-gray-200 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white text-sm"
             />
           </div>
           <div>
@@ -4027,7 +4027,7 @@ export function ReportCenter() {
               type="date" 
               value={dateRange.to} 
               onChange={e => setDateRange({ ...dateRange, to: e.target.value })}
-              className="w-full px-4 py-2.5 rounded-xl border border-gray-200 dark:border-slate-600 bg-white dark:bg-slate-700 text-gray-900 dark:text-white text-sm"
+              className="w-full px-4 py-2.5 rounded border border-gray-200 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white text-sm"
             />
           </div>
           
@@ -4038,7 +4038,7 @@ export function ReportCenter() {
               <select 
                 value={selectedBrand} 
                 onChange={e => { setSelectedBrand(e.target.value); setReportGenerated(false); }}
-                className="w-full px-4 py-2.5 rounded-xl border border-gray-200 dark:border-slate-600 bg-white dark:bg-slate-700 text-gray-900 dark:text-white text-sm"
+                className="w-full px-4 py-2.5 rounded border border-gray-200 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white text-sm"
               >
                 <option value="all">Tất cả Brand</option>
                 {brands.map(b => <option key={b.id} value={b.id}>{b.name}</option>)}
@@ -4053,7 +4053,7 @@ export function ReportCenter() {
               <select 
                 value={selectedKOL} 
                 onChange={e => { setSelectedKOL(e.target.value); setReportGenerated(false); }}
-                className="w-full px-4 py-2.5 rounded-xl border border-gray-200 dark:border-slate-600 bg-white dark:bg-slate-700 text-gray-900 dark:text-white text-sm"
+                className="w-full px-4 py-2.5 rounded border border-gray-200 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white text-sm"
               >
                 <option value="all">Tất cả KOL</option>
                 {kols.map(k => <option key={k.id} value={k.id}>{k.name}</option>)}
@@ -4068,7 +4068,7 @@ export function ReportCenter() {
               <select 
                 value={selectedCampaign} 
                 onChange={e => { setSelectedCampaign(e.target.value); setReportGenerated(false); }}
-                className="w-full px-4 py-2.5 rounded-xl border border-gray-200 dark:border-slate-600 bg-white dark:bg-slate-700 text-gray-900 dark:text-white text-sm"
+                className="w-full px-4 py-2.5 rounded border border-gray-200 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white text-sm"
               >
                 <option value="all">Tất cả Campaign</option>
                 {(selectedBrand !== 'all' ? campaigns.filter(c => c.brandId === selectedBrand) : campaigns).map(c => (
@@ -4107,27 +4107,27 @@ export function ReportCenter() {
       {/* SYSTEM REPORT */}
       {reportType === 'system' && (
         <div className="space-y-6">
-          <div className="bg-white dark:bg-slate-800 rounded-2xl border border-gray-200/60 dark:border-slate-700/60 overflow-hidden">
-            <div className="p-6 border-b border-gray-100 dark:border-slate-700">
+          <div className="bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 overflow-hidden">
+            <div className="p-6 border-b border-gray-100 dark:border-gray-700">
               <h3 className="text-lg font-bold text-gray-900 dark:text-white">BÁO CÁO HỆ THỐNG KOLLAB</h3>
               <p className="text-sm text-gray-500 mt-1">Thời gian: {dateRange.from} - {dateRange.to}</p>
             </div>
             
             {/* System Overview Stats */}
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4 p-6">
-              <div className="bg-gradient-to-br from-blue-500/10 to-blue-600/5 rounded-xl p-4 border border-blue-200/40">
+              <div className="bg-white rounded p-4 border border-blue-200/40">
                 <p className="text-2xl font-bold text-blue-600">{brands.length}</p>
                 <p className="text-xs text-gray-500">Tổng Brand</p>
               </div>
-              <div className="bg-gradient-to-br from-teal-500/10 to-teal-600/5 rounded-xl p-4 border border-teal-200/40">
+              <div className="bg-white rounded p-4 border border-teal-200/40">
                 <p className="text-2xl font-bold text-teal-600">{campaigns.length}</p>
                 <p className="text-xs text-gray-500">Tổng Campaign</p>
               </div>
-              <div className="bg-gradient-to-br from-purple-500/10 to-purple-600/5 rounded-xl p-4 border border-purple-200/40">
+              <div className="bg-white rounded p-4 border border-purple-200/40">
                 <p className="text-2xl font-bold text-purple-600">{kols.length}</p>
                 <p className="text-xs text-gray-500">Tổng KOL/KOC</p>
               </div>
-              <div className="bg-gradient-to-br from-amber-500/10 to-amber-600/5 rounded-xl p-4 border border-amber-200/40">
+              <div className="bg-white rounded p-4 border border-amber-200/40">
                 <p className="text-2xl font-bold text-amber-600">{(systemStats.totalPayment / 1000000000).toFixed(1)}B</p>
                 <p className="text-xs text-gray-500">Tổng Thanh toán</p>
               </div>
@@ -4136,7 +4136,7 @@ export function ReportCenter() {
             {/* System Summary Table */}
             <div className="overflow-x-auto">
               <table className="w-full">
-                <thead className="bg-gray-50 dark:bg-slate-700/50">
+                <thead className="bg-gray-50 dark:bg-gray-700/50">
                   <tr>
                     <th className="px-6 py-3 text-left text-xs font-semibold text-gray-500 uppercase">Loại</th>
                     <th className="px-6 py-3 text-left text-xs font-semibold text-gray-500 uppercase">Tổng số</th>
@@ -4145,7 +4145,7 @@ export function ReportCenter() {
                     <th className="px-6 py-3 text-left text-xs font-semibold text-gray-500 uppercase">Tổng Tương tác</th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-gray-100 dark:divide-slate-700">
+                <tbody className="divide-y divide-gray-100 dark:divide-gray-700">
                   <tr>
                     <td className="px-6 py-4 text-sm font-medium text-gray-900 dark:text-white">Brands</td>
                     <td className="px-6 py-4 text-sm">{brands.length}</td>
@@ -4179,8 +4179,8 @@ export function ReportCenter() {
         <div className="space-y-6">
           {/* Brand Detail Card */}
           {selectedBrandData && brandMetrics ? (
-            <div className="bg-white dark:bg-slate-800 rounded-2xl border border-gray-200/60 dark:border-slate-700/60 overflow-hidden">
-              <div className="p-6 border-b border-gray-100 dark:border-slate-700 bg-gradient-to-r from-teal-500/10 to-transparent">
+            <div className="bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 overflow-hidden">
+              <div className="p-6 border-b border-gray-100 dark:border-gray-700 bg-white dark:bg-gray-800">
                 <div className="flex items-center gap-4">
                   <Avatar initials={selectedBrandData.name.slice(0, 2)} size="lg" />
                   <div>
@@ -4193,23 +4193,23 @@ export function ReportCenter() {
 
               {/* Brand KPIs */}
               <div className="grid grid-cols-2 md:grid-cols-5 gap-4 p-6">
-                <div className="text-center p-4 bg-blue-50 dark:bg-blue-900/20 rounded-xl">
+                <div className="text-center p-4 bg-blue-50 dark:bg-blue-900/20 rounded">
                   <p className="text-2xl font-bold text-blue-600">{brandMetrics.campaigns.length}</p>
                   <p className="text-xs text-gray-500 mt-1">Campaigns</p>
                 </div>
-                <div className="text-center p-4 bg-cyan-50 dark:bg-cyan-900/20 rounded-xl">
+                <div className="text-center p-4 bg-cyan-50 dark:bg-cyan-900/20 rounded">
                   <p className="text-2xl font-bold text-cyan-600">{brandMetrics.totalViews >= 1000000 ? (brandMetrics.totalViews / 1000000).toFixed(1) + 'M' : (brandMetrics.totalViews / 1000).toFixed(0) + 'K'}</p>
                   <p className="text-xs text-gray-500 mt-1">Tổng Views</p>
                 </div>
-                <div className="text-center p-4 bg-teal-50 dark:bg-teal-900/20 rounded-xl">
+                <div className="text-center p-4 bg-teal-50 dark:bg-teal-900/20 rounded">
                   <p className="text-2xl font-bold text-teal-600">{brandMetrics.totalEngagement.toLocaleString()}</p>
                   <p className="text-xs text-gray-500 mt-1">Tương tác</p>
                 </div>
-                <div className="text-center p-4 bg-amber-50 dark:bg-amber-900/20 rounded-xl">
+                <div className="text-center p-4 bg-amber-50 dark:bg-amber-900/20 rounded">
                   <p className="text-2xl font-bold text-amber-600">{brandMetrics.avgER.toFixed(1)}%</p>
                   <p className="text-xs text-gray-500 mt-1">ER Trung bình</p>
                 </div>
-                <div className="text-center p-4 bg-emerald-50 dark:bg-emerald-900/20 rounded-xl">
+                <div className="text-center p-4 bg-emerald-50 dark:bg-emerald-900/20 rounded">
                   <p className="text-2xl font-bold text-emerald-600">{brandMetrics.totalConversions.toLocaleString()}</p>
                   <p className="text-xs text-gray-500 mt-1">Chuyển đổi</p>
                 </div>
@@ -4218,7 +4218,7 @@ export function ReportCenter() {
               {/* Brand Campaigns Table */}
               <div className="overflow-x-auto">
                 <table className="w-full">
-                  <thead className="bg-gray-50 dark:bg-slate-700/50">
+                  <thead className="bg-gray-50 dark:bg-gray-700/50">
                     <tr>
                       <th className="px-6 py-3 text-left text-xs font-semibold text-gray-500 uppercase">Campaign</th>
                       <th className="px-6 py-3 text-left text-xs font-semibold text-gray-500 uppercase">Sản phẩm</th>
@@ -4229,7 +4229,7 @@ export function ReportCenter() {
                       <th className="px-6 py-3 text-right text-xs font-semibold text-gray-500 uppercase">Chuyển đổi</th>
                     </tr>
                   </thead>
-                  <tbody className="divide-y divide-gray-100 dark:divide-slate-700">
+                  <tbody className="divide-y divide-gray-100 dark:divide-gray-700">
                     {brandMetrics.campaigns.map(camp => (
                       <tr key={camp.id}>
                         <td className="px-6 py-4 text-sm font-medium text-gray-900 dark:text-white">{camp.name}</td>
@@ -4246,7 +4246,7 @@ export function ReportCenter() {
               </div>
             </div>
           ) : (
-            <div className="bg-white dark:bg-slate-800 rounded-2xl border border-gray-200/60 dark:border-slate-700/60 p-12 text-center">
+            <div className="bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 p-12 text-center">
               <Package className="w-12 h-12 text-gray-300 mx-auto mb-4" />
               <p className="text-gray-500">Vui lòng chọn Brand để xem báo cáo chi tiết</p>
             </div>
@@ -4258,8 +4258,8 @@ export function ReportCenter() {
       {reportType === 'campaign' && (
         <div className="space-y-6">
           {selectedCampaignData && campaignMetrics ? (
-            <div className="bg-white dark:bg-slate-800 rounded-2xl border border-gray-200/60 dark:border-slate-700/60 overflow-hidden">
-              <div className="p-6 border-b border-gray-100 dark:border-slate-700 bg-gradient-to-r from-amber-500/10 to-transparent">
+            <div className="bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 overflow-hidden">
+              <div className="p-6 border-b border-gray-100 dark:border-gray-700 bg-white dark:bg-gray-800">
                 <div className="flex items-center justify-between">
                   <div>
                     <h3 className="text-lg font-bold text-gray-900 dark:text-white">{selectedCampaignData.name}</h3>
@@ -4272,23 +4272,23 @@ export function ReportCenter() {
 
               {/* Campaign KPIs */}
               <div className="grid grid-cols-2 md:grid-cols-5 gap-4 p-6">
-                <div className="text-center p-4 bg-blue-50 dark:bg-blue-900/20 rounded-xl">
+                <div className="text-center p-4 bg-blue-50 dark:bg-blue-900/20 rounded">
                   <p className="text-2xl font-bold text-blue-600">{campaignMetrics.kolList.length}</p>
                   <p className="text-xs text-gray-500 mt-1">KOLs tham gia</p>
                 </div>
-                <div className="text-center p-4 bg-cyan-50 dark:bg-cyan-900/20 rounded-xl">
+                <div className="text-center p-4 bg-cyan-50 dark:bg-cyan-900/20 rounded">
                   <p className="text-2xl font-bold text-cyan-600">{campaignMetrics.totalViews >= 1000000 ? (campaignMetrics.totalViews / 1000000).toFixed(1) + 'M' : (campaignMetrics.totalViews / 1000).toFixed(0) + 'K'}</p>
                   <p className="text-xs text-gray-500 mt-1">Tổng Views</p>
                 </div>
-                <div className="text-center p-4 bg-pink-50 dark:bg-pink-900/20 rounded-xl">
+                <div className="text-center p-4 bg-pink-50 dark:bg-pink-900/20 rounded">
                   <p className="text-2xl font-bold text-pink-600">{campaignMetrics.totalLikes.toLocaleString()}</p>
                   <p className="text-xs text-gray-500 mt-1">Likes (React)</p>
                 </div>
-                <div className="text-center p-4 bg-blue-50 dark:bg-blue-900/20 rounded-xl">
+                <div className="text-center p-4 bg-blue-50 dark:bg-blue-900/20 rounded">
                   <p className="text-2xl font-bold text-blue-600">{campaignMetrics.totalComments.toLocaleString()}</p>
                   <p className="text-xs text-gray-500 mt-1">Comments</p>
                 </div>
-                <div className="text-center p-4 bg-violet-50 dark:bg-violet-900/20 rounded-xl">
+                <div className="text-center p-4 bg-violet-50 dark:bg-violet-900/20 rounded">
                   <p className="text-2xl font-bold text-violet-600">{campaignMetrics.totalShares.toLocaleString()}</p>
                   <p className="text-xs text-gray-500 mt-1">Shares</p>
                 </div>
@@ -4296,14 +4296,14 @@ export function ReportCenter() {
 
               {/* Engagement Breakdown */}
               <div className="px-6 pb-6">
-                <div className="bg-gray-50 dark:bg-slate-700/50 rounded-xl p-4">
+                <div className="bg-gray-50 dark:bg-gray-700/50 rounded p-4">
                   <h4 className="text-sm font-semibold text-gray-900 dark:text-white mb-3">Chi tiết Engagement</h4>
                   <div className="grid grid-cols-3 gap-4">
                     <div className="text-center">
                       <p className="text-xl font-bold text-pink-600">{campaignMetrics.totalLikes.toLocaleString()}</p>
                       <p className="text-xs text-gray-500">Likes</p>
                     </div>
-                    <div className="text-center border-x border-gray-200 dark:border-slate-600">
+                    <div className="text-center border-x border-gray-200 dark:border-gray-600">
                       <p className="text-xl font-bold text-blue-600">{campaignMetrics.totalComments.toLocaleString()}</p>
                       <p className="text-xs text-gray-500">Comments</p>
                     </div>
@@ -4324,7 +4324,7 @@ export function ReportCenter() {
               {/* KOLs in Campaign Table */}
               <div className="overflow-x-auto">
                 <table className="w-full">
-                  <thead className="bg-gray-50 dark:bg-slate-700/50">
+                  <thead className="bg-gray-50 dark:bg-gray-700/50">
                     <tr>
                       <th className="px-6 py-3 text-left text-xs font-semibold text-gray-500 uppercase">KOL/KOC</th>
                       <th className="px-6 py-3 text-left text-xs font-semibold text-gray-500 uppercase">Platform</th>
@@ -4335,7 +4335,7 @@ export function ReportCenter() {
                       <th className="px-6 py-3 text-right text-xs font-semibold text-gray-500 uppercase">Comments</th>
                     </tr>
                   </thead>
-                  <tbody className="divide-y divide-gray-100 dark:divide-slate-700">
+                  <tbody className="divide-y divide-gray-100 dark:divide-gray-700">
                     {campaignMetrics.kolList.filter(Boolean).map((kol: any) => {
                       const kolTask = tasks.find(t => t.campaignId === selectedCampaign && t.kolId === kol.id);
                       return (
@@ -4362,7 +4362,7 @@ export function ReportCenter() {
               </div>
             </div>
           ) : (
-            <div className="bg-white dark:bg-slate-800 rounded-2xl border border-gray-200/60 dark:border-slate-700/60 p-12 text-center">
+            <div className="bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 p-12 text-center">
               <Target className="w-12 h-12 text-gray-300 mx-auto mb-4" />
               <p className="text-gray-500">Vui lòng chọn Campaign để xem báo cáo chi tiết</p>
             </div>
@@ -4374,8 +4374,8 @@ export function ReportCenter() {
       {reportType === 'kol' && (
         <div className="space-y-6">
           {selectedKOLData && kolMetrics ? (
-            <div className="bg-white dark:bg-slate-800 rounded-2xl border border-gray-200/60 dark:border-slate-700/60 overflow-hidden">
-              <div className="p-6 border-b border-gray-100 dark:border-slate-700 bg-gradient-to-r from-purple-500/10 to-transparent">
+            <div className="bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 overflow-hidden">
+              <div className="p-6 border-b border-gray-100 dark:border-gray-700 bg-white dark:bg-gray-800">
                 <div className="flex items-center gap-4">
                   <Avatar initials={selectedKOLData.avatar} size="lg" />
                   <div className="flex-1">
@@ -4392,23 +4392,23 @@ export function ReportCenter() {
 
               {/* KOL KPIs */}
               <div className="grid grid-cols-2 md:grid-cols-5 gap-4 p-6">
-                <div className="text-center p-4 bg-blue-50 dark:bg-blue-900/20 rounded-xl">
+                <div className="text-center p-4 bg-blue-50 dark:bg-blue-900/20 rounded">
                   <p className="text-2xl font-bold text-blue-600">{kolMetrics.campaigns.length}</p>
                   <p className="text-xs text-gray-500 mt-1">Campaigns</p>
                 </div>
-                <div className="text-center p-4 bg-cyan-50 dark:bg-cyan-900/20 rounded-xl">
+                <div className="text-center p-4 bg-cyan-50 dark:bg-cyan-900/20 rounded">
                   <p className="text-2xl font-bold text-cyan-600">{kolMetrics.totalViews >= 1000000 ? (kolMetrics.totalViews / 1000000).toFixed(1) + 'M' : (kolMetrics.totalViews / 1000).toFixed(0) + 'K'}</p>
                   <p className="text-xs text-gray-500 mt-1">Tổng Views</p>
                 </div>
-                <div className="text-center p-4 bg-pink-50 dark:bg-pink-900/20 rounded-xl">
+                <div className="text-center p-4 bg-pink-50 dark:bg-pink-900/20 rounded">
                   <p className="text-2xl font-bold text-pink-600">{kolMetrics.totalLikes.toLocaleString()}</p>
                   <p className="text-xs text-gray-500 mt-1">Likes (React)</p>
                 </div>
-                <div className="text-center p-4 bg-blue-50 dark:bg-blue-900/20 rounded-xl">
+                <div className="text-center p-4 bg-blue-50 dark:bg-blue-900/20 rounded">
                   <p className="text-2xl font-bold text-blue-600">{kolMetrics.totalComments.toLocaleString()}</p>
                   <p className="text-xs text-gray-500 mt-1">Comments</p>
                 </div>
-                <div className="text-center p-4 bg-violet-50 dark:bg-violet-900/20 rounded-xl">
+                <div className="text-center p-4 bg-violet-50 dark:bg-violet-900/20 rounded">
                   <p className="text-2xl font-bold text-violet-600">{kolMetrics.totalShares.toLocaleString()}</p>
                   <p className="text-xs text-gray-500 mt-1">Shares</p>
                 </div>
@@ -4416,7 +4416,7 @@ export function ReportCenter() {
 
               {/* Performance Summary */}
               <div className="px-6 pb-6">
-                <div className="bg-gray-50 dark:bg-slate-700/50 rounded-xl p-4">
+                <div className="bg-gray-50 dark:bg-gray-700/50 rounded p-4">
                   <h4 className="text-sm font-semibold text-gray-900 dark:text-white mb-3">Chi tiết Hiệu suất</h4>
                   <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                     <div className="text-center">
@@ -4442,7 +4442,7 @@ export function ReportCenter() {
               {/* KOL Tasks Table */}
               <div className="overflow-x-auto">
                 <table className="w-full">
-                  <thead className="bg-gray-50 dark:bg-slate-700/50">
+                  <thead className="bg-gray-50 dark:bg-gray-700/50">
                     <tr>
                       <th className="px-6 py-3 text-left text-xs font-semibold text-gray-500 uppercase">Campaign</th>
                       <th className="px-6 py-3 text-left text-xs font-semibold text-gray-500 uppercase">Brand</th>
@@ -4453,7 +4453,7 @@ export function ReportCenter() {
                       <th className="px-6 py-3 text-right text-xs font-semibold text-gray-500 uppercase">Shares</th>
                     </tr>
                   </thead>
-                  <tbody className="divide-y divide-gray-100 dark:divide-slate-700">
+                  <tbody className="divide-y divide-gray-100 dark:divide-gray-700">
                     {kolMetrics.tasks.slice(0, 10).map(task => {
                       const camp = campaigns.find(c => c.id === task.campaignId);
                       const brand = brands.find(b => b.id === camp?.brandId);
@@ -4476,7 +4476,7 @@ export function ReportCenter() {
               </div>
             </div>
           ) : (
-            <div className="bg-white dark:bg-slate-800 rounded-2xl border border-gray-200/60 dark:border-slate-700/60 p-12 text-center">
+            <div className="bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 p-12 text-center">
               <Users className="w-12 h-12 text-gray-300 mx-auto mb-4" />
               <p className="text-gray-500">Vui lòng chọn KOL/KOC để xem báo cáo chi tiết</p>
             </div>

@@ -210,7 +210,7 @@ export const taskStatusColors: Record<TaskStatus, string> = {
   assigned: 'bg-blue-100 text-blue-800 dark:bg-blue-900/40 dark:text-blue-300',
   draft_submitted: 'bg-purple-100 text-purple-800 dark:bg-purple-900/40 dark:text-purple-300',
   revision_required: 'bg-red-100 text-red-800 dark:bg-red-900/40 dark:text-red-300',
-  approved_to_publish: 'bg-teal-100 text-teal-800 dark:bg-teal-900/40 dark:text-teal-300',
+  approved_to_publish: 'bg-gray-100 text-gray-800 dark:bg-gray-700 dark:text-gray-300',
   published: 'bg-cyan-100 text-cyan-800 dark:bg-cyan-900/40 dark:text-cyan-300',
   tracking: 'bg-amber-100 text-amber-800 dark:bg-amber-900/40 dark:text-amber-300',
   metrics_submitted: 'bg-indigo-100 text-indigo-800 dark:bg-indigo-900/40 dark:text-indigo-300',
@@ -219,7 +219,7 @@ export const taskStatusColors: Record<TaskStatus, string> = {
   payment_pending: 'bg-orange-100 text-orange-800 dark:bg-orange-900/40 dark:text-orange-300',
   paid: 'bg-emerald-100 text-emerald-800 dark:bg-emerald-900/40 dark:text-emerald-300',
   hold: 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900/40 dark:text-yellow-300',
-  rejected: 'bg-gray-200 text-gray-700 dark:bg-slate-700 dark:text-gray-300',
+  rejected: 'bg-gray-200 text-gray-700 dark:bg-gray-700 dark:text-gray-300',
 };
 
 export const campaignStatusLabels: Record<CampaignStatus, string> = {
@@ -235,7 +235,7 @@ export const nicheColors: Record<string, string> = {
   Skincare: 'bg-pink-100 text-pink-800 dark:bg-pink-900/40 dark:text-pink-300',
   Beauty: 'bg-rose-100 text-rose-800 dark:bg-rose-900/40 dark:text-rose-300',
   Fitness: 'bg-orange-100 text-orange-800 dark:bg-orange-900/40 dark:text-orange-300',
-  Tech: 'bg-slate-100 text-slate-800 dark:bg-slate-900/40 dark:text-slate-300',
+  Tech: 'bg-gray-100 text-gray-800 dark:bg-gray-700 dark:text-gray-300',
   Food: 'bg-amber-100 text-amber-800 dark:bg-amber-900/40 dark:text-amber-300',
   Lifestyle: 'bg-violet-100 text-violet-800 dark:bg-violet-900/40 dark:text-violet-300',
   Health: 'bg-green-100 text-green-800 dark:bg-green-900/40 dark:text-green-300',
@@ -314,14 +314,14 @@ export function BrandDashboard({ initialView = 'overview' }: { initialView?: str
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-2">
           {activeView !== 'overview' && (
-            <button onClick={goBack} className="flex items-center gap-1 px-3 py-2 rounded-xl text-sm font-medium text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-slate-700 transition-colors border border-gray-200 dark:border-slate-600">
+            <button onClick={goBack} className="flex items-center gap-1 px-3 py-2 rounded text-sm font-medium text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors border border-gray-200 dark:border-gray-600">
               <ChevronLeft className="w-4 h-4" />Quay lại
             </button>
           )}
         </div>
         <div className="flex items-center gap-2">
           <select value={selectedProject} onChange={e => setSelectedProject(e.target.value)}
-            className="min-w-[220px] px-4 py-2 rounded-xl border border-gray-200 dark:border-slate-600 bg-white dark:bg-slate-800 text-sm text-gray-900 dark:text-white focus:ring-2 focus:ring-teal-500 outline-none">
+            className="min-w-[220px] px-4 py-2 rounded border border-gray-200 dark:border-gray-600 bg-white dark:bg-gray-800 text-sm text-gray-900 dark:text-white focus:ring-2 focus:ring-gray-500 outline-none">
             {projectOptions.map(p => <option key={p.value} value={p.value}>{p.label}</option>)}
           </select>
           <Button variant="secondary" size="sm" onClick={() => setActiveView('products')}>
@@ -424,30 +424,30 @@ function OverviewView({ selectedProject, onNavigate, onOpenPopup, onOpenItem }: 
   return (
     <div className="space-y-6">
       {/* Filter Bar */}
-      <div className="flex items-center gap-3 flex-wrap bg-white dark:bg-slate-800 rounded-2xl border border-gray-200/60 dark:border-slate-700/60 p-4">
+      <div className="flex items-center gap-3 bg-white dark:bg-gray-800 rounded border border-gray-200 dark:border-gray-700 p-4">
         <div className="flex items-center gap-2 text-gray-500">
           <Filter className="w-4 h-4" />
           <span className="text-sm font-medium text-gray-700 dark:text-gray-300">Bộ lọc:</span>
         </div>
         <select value={filterKOL} onChange={e => setFilterKOL(e.target.value)}
-          className="px-3 py-2 rounded-xl border border-gray-200 dark:border-slate-600 bg-white dark:bg-slate-700 text-gray-900 dark:text-white text-sm focus:ring-2 focus:ring-teal-500 outline-none">
+          className="px-3 py-2 rounded border border-gray-200 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white text-sm focus:ring-2 focus:ring-gray-500 outline-none">
           <option value="all">Tất cả KOL/KOC</option>
           {brandKOLs.map(k => <option key={k.id} value={k.id}>{k.name}</option>)}
         </select>
         <select value={filterTimeRange} onChange={e => setFilterTimeRange(e.target.value)}
-          className="px-3 py-2 rounded-xl border border-gray-200 dark:border-slate-600 bg-white dark:bg-slate-700 text-gray-900 dark:text-white text-sm focus:ring-2 focus:ring-teal-500 outline-none">
+          className="px-3 py-2 rounded border border-gray-200 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white text-sm focus:ring-2 focus:ring-gray-500 outline-none">
           <option value="all">Tất cả thời gian</option>
           <option value="7d">7 ngày gần đây</option>
           <option value="30d">30 ngày gần đây</option>
           <option value="90d">90 ngày gần đây</option>
         </select>
         <select value={filterProduct} onChange={e => setFilterProduct(e.target.value)}
-          className="px-3 py-2 rounded-xl border border-gray-200 dark:border-slate-600 bg-white dark:bg-slate-700 text-gray-900 dark:text-white text-sm focus:ring-2 focus:ring-teal-500 outline-none">
+          className="px-3 py-2 rounded border border-gray-200 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white text-sm focus:ring-2 focus:ring-gray-500 outline-none">
           <option value="all">Tất cả sản phẩm</option>
           {productList.map(p => <option key={p} value={p}>{p}</option>)}
         </select>
         <select value={filterCampaign} onChange={e => setFilterCampaign(e.target.value)}
-          className="px-3 py-2 rounded-xl border border-gray-200 dark:border-slate-600 bg-white dark:bg-slate-700 text-gray-900 dark:text-white text-sm focus:ring-2 focus:ring-teal-500 outline-none">
+          className="px-3 py-2 rounded border border-gray-200 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white text-sm focus:ring-2 focus:ring-gray-500 outline-none">
           <option value="all">Tất cả chiến dịch</option>
           {campaignList.map(c => <option key={c.id} value={c.id}>{c.name}</option>)}
         </select>
@@ -456,18 +456,18 @@ function OverviewView({ selectedProject, onNavigate, onOpenPopup, onOpenItem }: 
       {/* KPI Row — 8 cards matching spec */}
       <div className="grid grid-cols-2 md:grid-cols-4 xl:grid-cols-8 gap-3">
         <div onClick={() => onNavigate('performance')} className="cursor-pointer hover:opacity-80 transition-opacity"><KPIWidget label="Total Views" value={totalViews >= 1000000 ? `${(totalViews / 1000000).toFixed(1)}M` : `${Math.round(totalViews / 1000)}K`} icon={<Eye className="w-5 h-5" />} /></div>
-        <div onClick={() => onNavigate('performance')} className="cursor-pointer hover:opacity-80 transition-opacity"><KPIWidget label="Average Views" value={avgViews >= 1000 ? `${Math.round(avgViews / 1000)}K` : avgViews.toString()} icon={<TrendingUp className="w-5 h-5" />} accent="from-blue-500/10 to-blue-600/5" /></div>
-        <div onClick={() => onNavigate('performance')} className="cursor-pointer hover:opacity-80 transition-opacity"><KPIWidget label="Engagement" value={totalEngagement >= 1000000 ? `${(totalEngagement / 1000000).toFixed(1)}M` : `${Math.round(totalEngagement / 1000)}K`} icon={<Heart className="w-5 h-5" />} accent="from-pink-500/10 to-pink-600/5" /></div>
-        <div onClick={() => onNavigate('performance')} className="cursor-pointer hover:opacity-80 transition-opacity"><KPIWidget label="Engagement Rate" value={`${engagementRate}%`} icon={<TrendingUp className="w-5 h-5" />} accent="from-rose-500/10 to-rose-600/5" /></div>
-        <div onClick={() => onNavigate('performance')} className="cursor-pointer hover:opacity-80 transition-opacity"><KPIWidget label="Conversion Rate" value={`${conversionRate}%`} icon={<Target className="w-5 h-5" />} accent="from-emerald-500/10 to-emerald-600/5" /></div>
-        <div onClick={() => onNavigate('kol')} className="cursor-pointer hover:opacity-80 transition-opacity"><KPIWidget label="KOL/KOC" value={kolCount.toString()} icon={<Users className="w-5 h-5" />} accent="from-cyan-500/10 to-cyan-600/5" /></div>
-        <div onClick={() => onNavigate('tasks')} className="cursor-pointer hover:opacity-80 transition-opacity"><KPIWidget label="Task Progress" value={`${completedTasks}/${filteredTasks.length}`} icon={<CheckCircle2 className="w-5 h-5" />} accent="from-amber-500/10 to-amber-600/5" /></div>
-        <div onClick={() => onNavigate('kol')} className="cursor-pointer hover:opacity-80 transition-opacity"><KPIWidget label="Top Rank KOL" value={topKOL?.kolName?.split(' ')[0] || '-'} icon={<Award className="w-5 h-5" />} accent="from-violet-500/10 to-violet-600/5" /></div>
+        <div onClick={() => onNavigate('performance')} className="cursor-pointer hover:opacity-80 transition-opacity"><KPIWidget label="Average Views" value={avgViews >= 1000 ? `${Math.round(avgViews / 1000)}K` : avgViews.toString()} icon={<TrendingUp className="w-5 h-5" />} /></div>
+        <div onClick={() => onNavigate('performance')} className="cursor-pointer hover:opacity-80 transition-opacity"><KPIWidget label="Engagement" value={totalEngagement >= 1000000 ? `${(totalEngagement / 1000000).toFixed(1)}M` : `${Math.round(totalEngagement / 1000)}K`} icon={<Heart className="w-5 h-5" />} /></div>
+        <div onClick={() => onNavigate('performance')} className="cursor-pointer hover:opacity-80 transition-opacity"><KPIWidget label="Engagement Rate" value={`${engagementRate}%`} icon={<TrendingUp className="w-5 h-5" />} /></div>
+        <div onClick={() => onNavigate('performance')} className="cursor-pointer hover:opacity-80 transition-opacity"><KPIWidget label="Conversion Rate" value={`${conversionRate}%`} icon={<Target className="w-5 h-5" />} /></div>
+        <div onClick={() => onNavigate('kol')} className="cursor-pointer hover:opacity-80 transition-opacity"><KPIWidget label="KOL/KOC" value={kolCount.toString()} icon={<Users className="w-5 h-5" />} /></div>
+        <div onClick={() => onNavigate('tasks')} className="cursor-pointer hover:opacity-80 transition-opacity"><KPIWidget label="Task Progress" value={`${completedTasks}/${filteredTasks.length}`} icon={<CheckCircle2 className="w-5 h-5" />} /></div>
+        <div onClick={() => onNavigate('kol')} className="cursor-pointer hover:opacity-80 transition-opacity"><KPIWidget label="Top Rank KOL" value={topKOL?.kolName?.split(' ')[0] || '-'} icon={<Award className="w-5 h-5" />} /></div>
       </div>
 
       {/* Charts */}
       <div className="grid grid-cols-1 xl:grid-cols-3 gap-4">
-        <div className="bg-white dark:bg-slate-800 rounded-2xl border border-gray-200/60 dark:border-slate-700/60 p-6">
+        <div className="bg-white dark:bg-gray-800 rounded border border-gray-200 dark:border-gray-700 p-6">
           <h3 className="text-sm font-semibold text-gray-900 dark:text-white mb-4">Campaign Status</h3>
           <div className="h-56">
             <ResponsiveContainer width="100%" height="100%">
@@ -487,7 +487,7 @@ function OverviewView({ selectedProject, onNavigate, onOpenPopup, onOpenItem }: 
             ))}
           </div>
         </div>
-        <div className="bg-white dark:bg-slate-800 rounded-2xl border border-gray-200/60 dark:border-slate-700/60 p-6 xl:col-span-2">
+        <div className="bg-white dark:bg-gray-800 rounded border border-gray-200 dark:border-gray-700 p-6 xl:col-span-2">
           <div className="flex items-center justify-between mb-4">
             <h3 className="text-sm font-semibold text-gray-900 dark:text-white">Performance Trend</h3>
             <span className="text-xs text-gray-500">Views & Conversions</span>
@@ -509,22 +509,22 @@ function OverviewView({ selectedProject, onNavigate, onOpenPopup, onOpenItem }: 
       {/* Rankings */}
       <div className="grid grid-cols-1 xl:grid-cols-2 gap-4">
         {/* Campaign Ranking */}
-        <div className="bg-white dark:bg-slate-800 rounded-2xl border border-gray-200/60 dark:border-slate-700/60 p-6">
+        <div className="bg-white dark:bg-gray-800 rounded border border-gray-200 dark:border-gray-700 p-6">
           <div className="flex items-center justify-between mb-4">
             <h3 className="text-sm font-semibold text-gray-900 dark:text-white flex items-center gap-2">
               <Award className="w-4 h-4 text-amber-500" />Campaign Rankings
             </h3>
-            <button onClick={() => onOpenPopup('campaigns', 'Tất cả chiến dịch')} className="text-xs text-teal-600 dark:text-teal-400 hover:underline font-medium">Xem tất cả →</button>
+            <button onClick={() => onOpenPopup('campaigns', 'Tất cả chiến dịch')} className="text-xs text-gray-600 dark:text-gray-400 hover:underline font-medium">Xem tất cả →</button>
           </div>
           <div className="space-y-2">
             {campaignRankings.slice(0, 5).map((r, i) => (
               <div key={r.campaignId} onClick={() => onOpenItem('campaign', r.campaignId)}
-                className="flex items-center gap-3 p-3 rounded-xl bg-gray-50 dark:bg-slate-700/50 hover:bg-gray-100 dark:hover:bg-slate-700 cursor-pointer transition-colors">
+                className="flex items-center gap-3 p-3 rounded bg-gray-50 dark:bg-gray-700 hover:bg-gray-100 dark:hover:bg-gray-700 cursor-pointer transition-colors">
                 <div className={`w-7 h-7 rounded-full flex items-center justify-center text-xs font-bold ${
-                  i === 0 ? 'bg-amber-500 text-white' :
+                  i === 0 ? 'bg-gray-500 text-white' :
                   i === 1 ? 'bg-gray-400 text-white' :
                   i === 2 ? 'bg-amber-700 text-white' :
-                  'bg-gray-200 dark:bg-slate-600 text-gray-600 dark:text-gray-300'
+                  'bg-gray-200 dark:bg-gray-600 text-gray-600 dark:text-gray-300'
                 }`}>{i + 1}</div>
                 <div className="flex-1 min-w-0">
                   <p className="text-sm font-medium text-gray-900 dark:text-white truncate">{r.campaignName}</p>
@@ -540,22 +540,22 @@ function OverviewView({ selectedProject, onNavigate, onOpenPopup, onOpenItem }: 
         </div>
 
         {/* KOL/KOC Ranking */}
-        <div className="bg-white dark:bg-slate-800 rounded-2xl border border-gray-200/60 dark:border-slate-700/60 p-6">
+        <div className="bg-white dark:bg-gray-800 rounded border border-gray-200 dark:border-gray-700 p-6">
           <div className="flex items-center justify-between mb-4">
             <h3 className="text-sm font-semibold text-gray-900 dark:text-white flex items-center gap-2">
-              <Users className="w-4 h-4 text-teal-500" />KOL/KOC Rankings
+              <Users className="w-4 h-4 text-gray-400" />KOL/KOC Rankings
             </h3>
-            <button onClick={() => onOpenPopup('kol', 'Tất cả KOL/KOC')} className="text-xs text-teal-600 dark:text-teal-400 hover:underline font-medium">Xem tất cả →</button>
+            <button onClick={() => onOpenPopup('kol', 'Tất cả KOL/KOC')} className="text-xs text-gray-600 dark:text-gray-400 hover:underline font-medium">Xem tất cả →</button>
           </div>
           <div className="space-y-2">
             {kolRankings.slice(0, 5).map((r, i) => (
               <div key={r.kolId} onClick={() => onOpenItem('kol', r.kolId)}
-                className="flex items-center gap-3 p-3 rounded-xl bg-gray-50 dark:bg-slate-700/50 hover:bg-gray-100 dark:hover:bg-slate-700 cursor-pointer transition-colors">
+                className="flex items-center gap-3 p-3 rounded bg-gray-50 dark:bg-gray-700 hover:bg-gray-100 dark:hover:bg-gray-700 cursor-pointer transition-colors">
                 <div className={`w-7 h-7 rounded-full flex items-center justify-center text-xs font-bold ${
-                  i === 0 ? 'bg-amber-500 text-white' :
+                  i === 0 ? 'bg-gray-500 text-white' :
                   i === 1 ? 'bg-gray-400 text-white' :
                   i === 2 ? 'bg-amber-700 text-white' :
-                  'bg-gray-200 dark:bg-slate-600 text-gray-600 dark:text-gray-300'
+                  'bg-gray-200 dark:bg-gray-600 text-gray-600 dark:text-gray-300'
                 }`}>{i + 1}</div>
                 <div className="flex-1 min-w-0">
                   <p className="text-sm font-medium text-gray-900 dark:text-white truncate">{r.kolName}</p>
@@ -574,15 +574,15 @@ function OverviewView({ selectedProject, onNavigate, onOpenPopup, onOpenItem }: 
       {/* Activity Grid */}
       <div className="grid grid-cols-1 xl:grid-cols-2 gap-4">
         {/* Recent Campaigns */}
-        <div className="bg-white dark:bg-slate-800 rounded-2xl border border-gray-200/60 dark:border-slate-700/60 p-6">
+        <div className="bg-white dark:bg-gray-800 rounded border border-gray-200 dark:border-gray-700 p-6">
           <div className="flex items-center justify-between mb-4">
             <h3 className="text-sm font-semibold text-gray-900 dark:text-white">Recent Campaigns</h3>
-            <button onClick={() => onOpenPopup('campaigns', 'Tất cả chiến dịch')} className="text-xs text-teal-600 dark:text-teal-400 hover:underline font-medium">Xem tất cả →</button>
+            <button onClick={() => onOpenPopup('campaigns', 'Tất cả chiến dịch')} className="text-xs text-gray-600 dark:text-gray-400 hover:underline font-medium">Xem tất cả →</button>
           </div>
           <div className="space-y-3">
             {brandCampaigns.slice(0, 5).map(c => (
               <div key={c.id} onClick={() => onOpenItem('campaign', c.id)}
-                className="flex items-center justify-between rounded-xl bg-gray-50 dark:bg-slate-700/50 hover:bg-gray-100 dark:hover:bg-slate-700 cursor-pointer transition-colors px-4 py-3">
+                className="flex items-center justify-between rounded bg-gray-50 dark:bg-gray-700 hover:bg-gray-100 dark:hover:bg-gray-700 cursor-pointer transition-colors px-4 py-3">
                 <div>
                   <p className="text-sm font-medium text-gray-900 dark:text-white">{c.name}</p>
                   <p className="text-xs text-gray-500">{c.productName}</p>
@@ -591,7 +591,7 @@ function OverviewView({ selectedProject, onNavigate, onOpenPopup, onOpenItem }: 
                   c.status === 'completed' ? 'bg-emerald-100 text-emerald-800 dark:bg-emerald-900/40 dark:text-emerald-300' :
                   c.status === 'tracking' ? 'bg-amber-100 text-amber-800 dark:bg-amber-900/40 dark:text-amber-300' :
                   c.status === 'active' ? 'bg-blue-100 text-blue-800 dark:bg-blue-900/40 dark:text-blue-300' :
-                  'bg-gray-100 text-gray-700 dark:bg-slate-700 dark:text-gray-300'
+                  'bg-gray-100 text-gray-700 dark:bg-gray-700 dark:text-gray-300'
                 } />
               </div>
             ))}
@@ -599,15 +599,15 @@ function OverviewView({ selectedProject, onNavigate, onOpenPopup, onOpenItem }: 
         </div>
 
         {/* Recent Activities */}
-        <div className="bg-white dark:bg-slate-800 rounded-2xl border border-gray-200/60 dark:border-slate-700/60 p-6">
+        <div className="bg-white dark:bg-gray-800 rounded border border-gray-200 dark:border-gray-700 p-6">
           <div className="flex items-center justify-between mb-4">
             <h3 className="text-sm font-semibold text-gray-900 dark:text-white">Recent Activities</h3>
-            <button onClick={() => onOpenPopup('activities', 'Tất cả hoạt động')} className="text-xs text-teal-600 dark:text-teal-400 hover:underline font-medium">Xem tất cả →</button>
+            <button onClick={() => onOpenPopup('activities', 'Tất cả hoạt động')} className="text-xs text-gray-600 dark:text-gray-400 hover:underline font-medium">Xem tất cả →</button>
           </div>
           <div className="space-y-3">
             {recentTasks.map(t => (
               <div key={t.id} onClick={() => onOpenItem('kol', t.kolId)}
-                className="flex items-center justify-between rounded-xl bg-gray-50 dark:bg-slate-700/50 hover:bg-gray-100 dark:hover:bg-slate-700 cursor-pointer transition-colors px-4 py-3">
+                className="flex items-center justify-between rounded bg-gray-50 dark:bg-gray-700 hover:bg-gray-100 dark:hover:bg-gray-700 cursor-pointer transition-colors px-4 py-3">
                 <div>
                   <p className="text-sm font-medium text-gray-900 dark:text-white">{t.kolName}</p>
                   <p className="text-xs text-gray-500">{t.campaignName}</p>
@@ -619,15 +619,15 @@ function OverviewView({ selectedProject, onNavigate, onOpenPopup, onOpenItem }: 
         </div>
 
         {/* Pending Reviews */}
-        <div className="bg-white dark:bg-slate-800 rounded-2xl border border-gray-200/60 dark:border-slate-700/60 p-6">
+        <div className="bg-white dark:bg-gray-800 rounded border border-gray-200 dark:border-gray-700 p-6">
           <div className="flex items-center justify-between mb-4">
             <h3 className="text-sm font-semibold text-gray-900 dark:text-white">Pending Reviews</h3>
-            <button onClick={() => onOpenPopup('reviews', 'Bài chờ duyệt')} className="text-xs text-teal-600 dark:text-teal-400 hover:underline font-medium">Xem tất cả →</button>
+            <button onClick={() => onOpenPopup('reviews', 'Bài chờ duyệt')} className="text-xs text-gray-600 dark:text-gray-400 hover:underline font-medium">Xem tất cả →</button>
           </div>
           <div className="space-y-3">
             {pendingReviews.length > 0 ? pendingReviews.map(t => (
               <div key={t.id} onClick={() => onOpenItem('kol', t.kolId)}
-                className="flex items-center justify-between rounded-xl bg-gray-50 dark:bg-slate-700/50 hover:bg-gray-100 dark:hover:bg-slate-700 cursor-pointer transition-colors px-4 py-3">
+                className="flex items-center justify-between rounded bg-gray-50 dark:bg-gray-700 hover:bg-gray-100 dark:hover:bg-gray-700 cursor-pointer transition-colors px-4 py-3">
                 <div>
                   <p className="text-sm font-medium text-gray-900 dark:text-white">{t.kolName}</p>
                   <p className="text-xs text-gray-500">{t.campaignName}</p>
@@ -639,22 +639,22 @@ function OverviewView({ selectedProject, onNavigate, onOpenPopup, onOpenItem }: 
         </div>
 
         {/* Pending Payments */}
-        <div className="bg-white dark:bg-slate-800 rounded-2xl border border-gray-200/60 dark:border-slate-700/60 p-6">
+        <div className="bg-white dark:bg-gray-800 rounded border border-gray-200 dark:border-gray-700 p-6">
           <div className="flex items-center justify-between mb-4">
             <h3 className="text-sm font-semibold text-gray-900 dark:text-white">Pending Payments</h3>
-            <button onClick={() => onOpenPopup('payments', 'Thanh toán chờ')} className="text-xs text-teal-600 dark:text-teal-400 hover:underline font-medium">Xem tất cả →</button>
+            <button onClick={() => onOpenPopup('payments', 'Thanh toán chờ')} className="text-xs text-gray-600 dark:text-gray-400 hover:underline font-medium">Xem tất cả →</button>
           </div>
           <div className="space-y-3">
             {pendingPayments.length > 0 ? pendingPayments.map(p => (
               <div key={p.id} onClick={() => onOpenItem('kol', p.kolId)}
-                className="flex items-center justify-between rounded-xl bg-gray-50 dark:bg-slate-700/50 hover:bg-gray-100 dark:hover:bg-slate-700 cursor-pointer transition-colors px-4 py-3">
+                className="flex items-center justify-between rounded bg-gray-50 dark:bg-gray-700 hover:bg-gray-100 dark:hover:bg-gray-700 cursor-pointer transition-colors px-4 py-3">
                 <div>
                   <p className="text-sm font-medium text-gray-900 dark:text-white">{p.kolName}</p>
                   <p className="text-xs text-gray-500">{p.campaignName}</p>
                 </div>
                 <Badge label={paymentStatusLabels[p.status]} colorClass={
                   p.status === 'paid' ? 'bg-emerald-100 text-emerald-800 dark:bg-emerald-900/40 dark:text-emerald-300' :
-                  p.status === 'hold' ? 'bg-slate-100 text-slate-700 dark:bg-slate-700 dark:text-slate-300' :
+                  p.status === 'hold' ? 'bg-gray-50 dark:bg-gray-700' :
                   'bg-amber-100 text-amber-800 dark:bg-amber-900/40 dark:text-amber-300'
                 } />
               </div>
@@ -678,8 +678,8 @@ function OverviewPopupTable({ type }: { type: 'campaigns' | 'kol' | 'tasks' | 'p
     return (
       <div className="overflow-x-auto max-h-[60vh] overflow-y-auto">
         <table className="w-full text-sm">
-          <thead className="sticky top-0 bg-gray-50 dark:bg-slate-700/80">
-            <tr className="border-b border-gray-200 dark:border-slate-600">
+          <thead className="sticky top-0 bg-gray-50 dark:bg-gray-700/80">
+            <tr className="border-b border-gray-200 dark:border-gray-600">
               <th className="text-left px-4 py-3 text-xs font-semibold text-gray-500 uppercase">Chiến dịch</th>
               <th className="text-left px-4 py-3 text-xs font-semibold text-gray-500 uppercase">Sản phẩm</th>
               <th className="text-left px-4 py-3 text-xs font-semibold text-gray-500 uppercase">Mục tiêu</th>
@@ -690,7 +690,7 @@ function OverviewPopupTable({ type }: { type: 'campaigns' | 'kol' | 'tasks' | 'p
           </thead>
           <tbody>
             {campaigns.filter(c => c.brandId === currentBrandId).map(c => (
-              <tr key={c.id} className="border-b border-gray-50 dark:border-slate-700/50 hover:bg-gray-50 dark:hover:bg-slate-700/20">
+              <tr key={c.id} className="border-b border-gray-50 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700/20">
                 <td className="px-4 py-3 font-medium text-gray-900 dark:text-white">{c.name}</td>
                 <td className="px-4 py-3 text-gray-600 dark:text-gray-300">{c.productName}</td>
                 <td className="px-4 py-3 text-gray-500 text-xs">{c.objective}</td>
@@ -699,7 +699,7 @@ function OverviewPopupTable({ type }: { type: 'campaigns' | 'kol' | 'tasks' | 'p
                     c.status === 'completed' ? 'bg-emerald-100 text-emerald-800 dark:bg-emerald-900/40 dark:text-emerald-300' :
                     c.status === 'tracking' ? 'bg-amber-100 text-amber-800 dark:bg-amber-900/40 dark:text-amber-300' :
                     c.status === 'active' ? 'bg-blue-100 text-blue-800 dark:bg-blue-900/40 dark:text-blue-300' :
-                    'bg-gray-100 text-gray-700 dark:bg-slate-700 dark:text-gray-300'
+                    'bg-gray-100 text-gray-700 dark:bg-gray-700 dark:text-gray-300'
                   } />
                 </td>
                 <td className="px-4 py-3 text-gray-500">{c.deadline}</td>
@@ -716,8 +716,8 @@ function OverviewPopupTable({ type }: { type: 'campaigns' | 'kol' | 'tasks' | 'p
     return (
       <div className="overflow-x-auto max-h-[60vh] overflow-y-auto">
         <table className="w-full text-sm">
-          <thead className="sticky top-0 bg-gray-50 dark:bg-slate-700/80">
-            <tr className="border-b border-gray-200 dark:border-slate-600">
+          <thead className="sticky top-0 bg-gray-50 dark:bg-gray-700/80">
+            <tr className="border-b border-gray-200 dark:border-gray-600">
               <th className="text-left px-4 py-3 text-xs font-semibold text-gray-500 uppercase">KOL/KOC</th>
               <th className="text-left px-4 py-3 text-xs font-semibold text-gray-500 uppercase">Nền tảng</th>
               <th className="text-left px-4 py-3 text-xs font-semibold text-gray-500 uppercase">Lĩnh vực</th>
@@ -731,7 +731,7 @@ function OverviewPopupTable({ type }: { type: 'campaigns' | 'kol' | 'tasks' | 'p
               const taskCount = brandTasks.filter(t => t.kolId === k.id).length;
               const rank = kolRankings.find(r => r.kolId === k.id);
               return (
-                <tr key={k.id} className="border-b border-gray-50 dark:border-slate-700/50 hover:bg-gray-50 dark:hover:bg-slate-700/20">
+                <tr key={k.id} className="border-b border-gray-50 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700/20">
                   <td className="px-4 py-3">
                     <div className="flex items-center gap-2">
                       <Avatar initials={k.avatar} size="sm" />
@@ -739,7 +739,7 @@ function OverviewPopupTable({ type }: { type: 'campaigns' | 'kol' | 'tasks' | 'p
                     </div>
                   </td>
                   <td className="px-4 py-3 text-gray-600 dark:text-gray-300">{k.platform}</td>
-                  <td className="px-4 py-3"><Badge label={k.niche} colorClass="bg-blue-50 text-blue-700 dark:bg-blue-900/30 dark:text-blue-300" /></td>
+                  <td className="px-4 py-3"><Badge label={k.niche} colorClass="bg-gray-50 text-blue-700 dark:bg-blue-900/30 dark:text-blue-300" /></td>
                   <td className="px-4 py-3 text-gray-600 dark:text-gray-300">{k.followersDisplay}</td>
                   <td className="px-4 py-3 text-gray-600 dark:text-gray-300">{taskCount}</td>
                   <td className="px-4 py-3 font-bold text-gray-900 dark:text-white">{rank?.score || '-'}</td>
@@ -756,8 +756,8 @@ function OverviewPopupTable({ type }: { type: 'campaigns' | 'kol' | 'tasks' | 'p
     return (
       <div className="overflow-x-auto max-h-[60vh] overflow-y-auto">
         <table className="w-full text-sm">
-          <thead className="sticky top-0 bg-gray-50 dark:bg-slate-700/80">
-            <tr className="border-b border-gray-200 dark:border-slate-600">
+          <thead className="sticky top-0 bg-gray-50 dark:bg-gray-700/80">
+            <tr className="border-b border-gray-200 dark:border-gray-600">
               <th className="text-left px-4 py-3 text-xs font-semibold text-gray-500 uppercase">KOL/KOC</th>
               <th className="text-left px-4 py-3 text-xs font-semibold text-gray-500 uppercase">Chiến dịch</th>
               <th className="text-left px-4 py-3 text-xs font-semibold text-gray-500 uppercase">Mô tả</th>
@@ -768,7 +768,7 @@ function OverviewPopupTable({ type }: { type: 'campaigns' | 'kol' | 'tasks' | 'p
           </thead>
           <tbody>
             {brandTasks.map(t => (
-              <tr key={t.id} className="border-b border-gray-50 dark:border-slate-700/50 hover:bg-gray-50 dark:hover:bg-slate-700/20">
+              <tr key={t.id} className="border-b border-gray-50 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700/20">
                 <td className="px-4 py-3 font-medium text-gray-900 dark:text-white">{t.kolName}</td>
                 <td className="px-4 py-3 text-gray-600 dark:text-gray-300">{t.campaignName}</td>
                 <td className="px-4 py-3 text-gray-500 text-xs max-w-[200px] truncate">{t.brief}</td>
@@ -790,8 +790,8 @@ function OverviewPopupTable({ type }: { type: 'campaigns' | 'kol' | 'tasks' | 'p
     return (
       <div className="overflow-x-auto max-h-[60vh] overflow-y-auto">
         <table className="w-full text-sm">
-          <thead className="sticky top-0 bg-gray-50 dark:bg-slate-700/80">
-            <tr className="border-b border-gray-200 dark:border-slate-600">
+          <thead className="sticky top-0 bg-gray-50 dark:bg-gray-700/80">
+            <tr className="border-b border-gray-200 dark:border-gray-600">
               <th className="text-left px-4 py-3 text-xs font-semibold text-gray-500 uppercase">KOL/KOC</th>
               <th className="text-left px-4 py-3 text-xs font-semibold text-gray-500 uppercase">Chiến dịch</th>
               <th className="text-left px-4 py-3 text-xs font-semibold text-gray-500 uppercase">Nội dung</th>
@@ -801,7 +801,7 @@ function OverviewPopupTable({ type }: { type: 'campaigns' | 'kol' | 'tasks' | 'p
           </thead>
           <tbody>
             {reviewTasks.length > 0 ? reviewTasks.map(t => (
-              <tr key={t.id} className="border-b border-gray-50 dark:border-slate-700/50 hover:bg-gray-50 dark:hover:bg-slate-700/20">
+              <tr key={t.id} className="border-b border-gray-50 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700/20">
                 <td className="px-4 py-3 font-medium text-gray-900 dark:text-white">{t.kolName}</td>
                 <td className="px-4 py-3 text-gray-600 dark:text-gray-300">{t.campaignName}</td>
                 <td className="px-4 py-3 text-gray-500 text-xs max-w-[200px] truncate">{t.brief}</td>
@@ -823,8 +823,8 @@ function OverviewPopupTable({ type }: { type: 'campaigns' | 'kol' | 'tasks' | 'p
     return (
       <div className="overflow-x-auto max-h-[60vh] overflow-y-auto">
         <table className="w-full text-sm">
-          <thead className="sticky top-0 bg-gray-50 dark:bg-slate-700/80">
-            <tr className="border-b border-gray-200 dark:border-slate-600">
+          <thead className="sticky top-0 bg-gray-50 dark:bg-gray-700/80">
+            <tr className="border-b border-gray-200 dark:border-gray-600">
               <th className="text-left px-4 py-3 text-xs font-semibold text-gray-500 uppercase">KOL/KOC</th>
               <th className="text-left px-4 py-3 text-xs font-semibold text-gray-500 uppercase">Chiến dịch</th>
               <th className="text-left px-4 py-3 text-xs font-semibold text-gray-500 uppercase">Số tiền</th>
@@ -834,14 +834,14 @@ function OverviewPopupTable({ type }: { type: 'campaigns' | 'kol' | 'tasks' | 'p
           </thead>
           <tbody>
             {brandPayments.map(p => (
-              <tr key={p.id} className="border-b border-gray-50 dark:border-slate-700/50 hover:bg-gray-50 dark:hover:bg-slate-700/20">
+              <tr key={p.id} className="border-b border-gray-50 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700/20">
                 <td className="px-4 py-3 font-medium text-gray-900 dark:text-white">{p.kolName}</td>
                 <td className="px-4 py-3 text-gray-600 dark:text-gray-300">{p.campaignName}</td>
                 <td className="px-4 py-3 font-bold text-gray-900 dark:text-white">{(Number(p.amount) || 0).toLocaleString()}₫</td>
                 <td className="px-4 py-3">
                   <Badge label={paymentStatusLabels[p.status]} colorClass={
                     p.status === 'paid' ? 'bg-emerald-100 text-emerald-800 dark:bg-emerald-900/40 dark:text-emerald-300' :
-                    p.status === 'hold' ? 'bg-slate-100 text-slate-700 dark:bg-slate-700 dark:text-slate-300' :
+                    p.status === 'hold' ? 'bg-gray-50 dark:bg-gray-700' :
                     'bg-amber-100 text-amber-800 dark:bg-amber-900/40 dark:text-amber-300'
                   } />
                 </td>
@@ -876,7 +876,7 @@ function ItemDetailPopup({ type, id }: { type: 'campaign' | 'kol'; id: string })
     return (
       <div className="space-y-4">
         {/* Header */}
-        <div className="p-4 bg-gradient-to-r from-blue-50 to-teal-50 dark:from-blue-900/20 dark:to-teal-900/20 rounded-xl border border-blue-200 dark:border-blue-800/40">
+        <div className="p-4 bg-gray-50 dark:bg-gray-800 rounded border border-gray-200 dark:border-gray-700">
           <div className="flex items-start justify-between">
             <div>
               <h2 className="text-lg font-bold text-gray-900 dark:text-white">{c.name}</h2>
@@ -887,7 +887,7 @@ function ItemDetailPopup({ type, id }: { type: 'campaign' | 'kol'; id: string })
               c.status === 'completed' ? 'bg-emerald-100 text-emerald-800 dark:bg-emerald-900/40 dark:text-emerald-300' :
               c.status === 'tracking' ? 'bg-amber-100 text-amber-800 dark:bg-amber-900/40 dark:text-amber-300' :
               c.status === 'active' ? 'bg-blue-100 text-blue-800 dark:bg-blue-900/40 dark:text-blue-300' :
-              'bg-gray-100 text-gray-700 dark:bg-slate-700 dark:text-gray-300'
+              'bg-gray-100 text-gray-700 dark:bg-gray-700 dark:text-gray-300'
             } />
           </div>
         </div>
@@ -900,7 +900,7 @@ function ItemDetailPopup({ type, id }: { type: 'campaign' | 'kol'; id: string })
             { label: 'Tỷ lệ ER', value: `${c.avgEngagementRate}%`, icon: <TrendingUp className="w-4 h-4" /> },
             { label: 'Chuyển đổi', value: (c.totalConversions || 0).toLocaleString(), icon: <Target className="w-4 h-4" /> },
           ].map(s => (
-            <div key={s.label} className="bg-gray-50 dark:bg-slate-700/50 rounded-xl p-3 text-center">
+            <div key={s.label} className="bg-gray-50 dark:bg-gray-700 rounded p-3 text-center">
               <div className="flex justify-center mb-1 text-gray-400">{s.icon}</div>
               <p className="text-base font-bold text-gray-900 dark:text-white">{s.value}</p>
               <p className="text-xs text-gray-500">{s.label}</p>
@@ -914,12 +914,12 @@ function ItemDetailPopup({ type, id }: { type: 'campaign' | 'kol'; id: string })
             <Clock className="w-3.5 h-3.5" />
             <span>Bắt đầu: <span className="font-medium text-gray-700 dark:text-gray-200">{(c as any).startDate || '-'}</span></span>
           </div>
-          <div className="w-px h-4 bg-gray-300 dark:bg-slate-600" />
+          <div className="w-px h-4 bg-gray-300 dark:bg-gray-600" />
           <div className="flex items-center gap-1.5 text-gray-500">
             <Calendar className="w-3.5 h-3.5" />
             <span>Hạn chót: <span className="font-medium text-gray-700 dark:text-gray-200">{c.deadline}</span></span>
           </div>
-          <div className="w-px h-4 bg-gray-300 dark:bg-slate-600" />
+          <div className="w-px h-4 bg-gray-300 dark:bg-gray-600" />
           <div className="flex items-center gap-1.5 text-gray-500">
             <Users className="w-3.5 h-3.5" />
             <span>{kolList.length} KOL/KOC</span>
@@ -934,7 +934,7 @@ function ItemDetailPopup({ type, id }: { type: 'campaign' | 'kol'; id: string })
             </h4>
             <div className="space-y-2 max-h-[250px] overflow-y-auto">
               {kolTaskData.map(({ kol, task }) => (
-                <div key={kol.id} className="flex items-center gap-3 p-3 bg-gray-50 dark:bg-slate-700/50 rounded-xl">
+                <div key={kol.id} className="flex items-center gap-3 p-3 bg-gray-50 dark:bg-gray-700 rounded">
                   <Avatar initials={kol.avatar} size="sm" />
                   <div className="flex-1 min-w-0">
                     <p className="text-sm font-medium text-gray-900 dark:text-white">{kol.name}</p>
@@ -943,7 +943,7 @@ function ItemDetailPopup({ type, id }: { type: 'campaign' | 'kol'; id: string })
                   {task ? (
                     <Badge label={taskStatusLabels[task.status as TaskStatus]} colorClass={taskStatusColors[task.status as TaskStatus]} />
                   ) : (
-                    <Badge label="Chưa giao" colorClass="bg-gray-100 text-gray-600 dark:bg-slate-700 dark:text-gray-400" />
+                    <Badge label="Chưa giao" colorClass="bg-gray-100 text-gray-600 dark:bg-gray-700 dark:text-gray-400" />
                   )}
                 </div>
               ))}
@@ -973,17 +973,17 @@ function ItemDetailPopup({ type, id }: { type: 'campaign' | 'kol'; id: string })
   return (
     <div className="space-y-4">
       {/* Header */}
-      <div className="flex items-start gap-4 p-4 bg-gradient-to-r from-teal-50 to-cyan-50 dark:from-teal-900/20 dark:to-cyan-900/20 rounded-xl border border-teal-200 dark:border-teal-800/40">
+      <div className="flex items-start gap-4 p-4 bg-gray-50 dark:bg-gray-800 rounded border border-gray-200 dark:border-gray-700">
         <Avatar initials={k.avatar} size="lg" />
         <div className="flex-1">
           <div className="flex items-center gap-2">
             <h2 className="text-lg font-bold text-gray-900 dark:text-white">{k.name}</h2>
-            <Badge label={k.niche} colorClass="bg-blue-50 text-blue-700 dark:bg-blue-900/30 dark:text-blue-300" />
+            <Badge label={k.niche} colorClass="bg-gray-50 text-blue-700 dark:bg-blue-900/30 dark:text-blue-300" />
           </div>
           <p className="text-sm text-gray-500 mt-0.5">{k.platform} / {k.followersDisplay} followers</p>
           <div className="flex items-center gap-4 mt-2 text-xs text-gray-400">
             <span>Điểm: <span className="font-bold text-amber-500">{kRank?.score || '-'}</span></span>
-            <span>Task: <span className="font-bold text-teal-600">{kTasks.length}</span></span>
+            <span>Task: <span className="font-bold text-gray-600">{kTasks.length}</span></span>
             <span>Thanh toán: <span className="font-bold text-emerald-600">{(kPayments.reduce((s, p) => s + Number(p.amount), 0)).toLocaleString()}₫</span></span>
           </div>
         </div>
@@ -991,15 +991,15 @@ function ItemDetailPopup({ type, id }: { type: 'campaign' | 'kol'; id: string })
 
       {/* Stats */}
       <div className="grid grid-cols-3 gap-3">
-        <div className="bg-teal-50 dark:bg-teal-900/20 rounded-xl p-3 text-center">
-          <p className="text-lg font-bold text-teal-600">{kTasks.filter(t => ['completed', 'paid', 'metrics_approved'].includes(t.status as string)).length}</p>
+        <div className="bg-gray-50 dark:bg-gray-700 rounded p-3 text-center">
+          <p className="text-lg font-bold text-gray-600">{kTasks.filter(t => ['completed', 'paid', 'metrics_approved'].includes(t.status as string)).length}</p>
           <p className="text-xs text-gray-500">Hoàn thành</p>
         </div>
-        <div className="bg-amber-50 dark:bg-amber-900/20 rounded-xl p-3 text-center">
+        <div className="bg-gray-50 dark:bg-gray-700 rounded p-3 text-center">
           <p className="text-lg font-bold text-amber-600">{pendingDrafts.length}</p>
           <p className="text-xs text-gray-500">Chờ duyệt</p>
         </div>
-        <div className="bg-blue-50 dark:bg-blue-900/20 rounded-xl p-3 text-center">
+        <div className="bg-gray-50 dark:bg-gray-700 rounded p-3 text-center">
           <p className="text-lg font-bold text-blue-600">{kTasks.filter(t => t.status === 'in_progress').length}</p>
           <p className="text-xs text-gray-500">Đang làm</p>
         </div>
@@ -1013,9 +1013,9 @@ function ItemDetailPopup({ type, id }: { type: 'campaign' | 'kol'; id: string })
           </h4>
           <div className="space-y-3 max-h-[300px] overflow-y-auto">
             {pendingDrafts.map((d, i) => (
-              <div key={i} className="rounded-xl border border-gray-200 dark:border-slate-600 overflow-hidden">
+              <div key={i} className="rounded border border-gray-200 dark:border-gray-600 overflow-hidden">
                 <img src={d.contentUrl} alt={`Draft ${i+1}`} className="w-full h-40 object-cover" />
-                <div className="p-3 bg-white dark:bg-slate-800">
+                <div className="p-3 bg-white dark:bg-gray-800">
                   <div className="flex items-center justify-between mb-1.5">
                     <p className="text-xs text-gray-500">{d.campaignName}</p>
                     <Badge label={d.status === 'draft_submitted' ? 'Chờ duyệt' : 'Cần sửa'} colorClass={
@@ -1040,7 +1040,7 @@ function ItemDetailPopup({ type, id }: { type: 'campaign' | 'kol'; id: string })
           </h4>
           <div className="space-y-2">
             {kTasks.slice(0, 4).map(t => (
-              <div key={t.id} className="flex items-center justify-between p-2.5 bg-gray-50 dark:bg-slate-700/50 rounded-xl">
+              <div key={t.id} className="flex items-center justify-between p-2.5 bg-gray-50 dark:bg-gray-700 rounded">
                 <div>
                   <p className="text-sm font-medium text-gray-900 dark:text-white">{t.campaignName}</p>
                   <p className="text-xs text-gray-500">{t.brief}</p>
@@ -1078,24 +1078,24 @@ function ProductsView({ selectedProject }: { selectedProject: string }) {
       <div className="relative">
         <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
         <input type="text" placeholder="Tìm sản phẩm..." value={search} onChange={e => setSearch(e.target.value)}
-          className="w-full max-w-sm pl-10 pr-4 py-2 rounded-xl border border-gray-200 dark:border-slate-600 bg-white dark:bg-slate-800 text-gray-900 dark:text-white text-sm focus:ring-2 focus:ring-teal-500 outline-none" />
+          className="w-full max-w-sm pl-10 pr-4 py-2 rounded border border-gray-200 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-white text-sm focus:ring-2 focus:ring-gray-500 outline-none" />
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
         {filtered.map(p => {
           const productCampaigns = campaigns.filter(c => c.productId === p.id);
           return (
-          <motion.div key={p.id} whileHover={{ y: -2 }}
-            className="bg-white dark:bg-slate-800 rounded-2xl border border-gray-200/60 dark:border-slate-700/60 p-5">
+          <div key={p.id}
+            className="bg-white dark:bg-gray-800 rounded border border-gray-200 dark:border-gray-700 p-5">
             <div className="flex items-start justify-between mb-3">
-              <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-teal-400 to-teal-600 flex items-center justify-center text-white text-lg font-bold">{p.name.charAt(0)}</div>
-              <Badge label={p.status === 'active' ? 'Active' : 'Inactive'} colorClass={p.status === 'active' ? 'bg-emerald-100 text-emerald-800 dark:bg-emerald-900/40 dark:text-emerald-300' : 'bg-gray-100 text-gray-700 dark:bg-slate-700 dark:text-gray-300'} />
+              <div className="w-12 h-12 rounded bg-gray-200 dark:bg-gray-700 flex items-center justify-center text-gray-600 dark:text-gray-300 text-lg font-bold">{p.name.charAt(0)}</div>
+              <Badge label={p.status === 'active' ? 'Active' : 'Inactive'} colorClass={p.status === 'active' ? 'bg-emerald-100 text-emerald-800 dark:bg-emerald-900/40 dark:text-emerald-300' : 'bg-gray-100 text-gray-700 dark:bg-gray-700 dark:text-gray-300'} />
             </div>
             <h3 className="text-base font-semibold text-gray-900 dark:text-white mb-1">{p.name}</h3>
             <p className="text-sm text-gray-500 mb-1">{p.category}</p>
-            <p className="text-lg font-bold text-teal-600 dark:text-teal-400 mb-1">{p.price}</p>
+            <p className="text-lg font-bold text-gray-600 dark:text-gray-400 mb-1">{p.price}</p>
             <div className="flex flex-wrap gap-1 mb-3">
               {productCampaigns.length > 0 ? productCampaigns.map(c => (
-                <span key={c.id} className="inline-flex items-center gap-0.5 px-2 py-0.5 bg-blue-50 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 text-xs rounded-full font-medium">
+                <span key={c.id} className="inline-flex items-center gap-0.5 px-2 py-0.5 bg-gray-50 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 text-xs rounded-full font-medium">
                   {c.name.length > 20 ? c.name.slice(0, 20) + '…' : c.name}
                 </span>
               )) : (
@@ -1107,7 +1107,7 @@ function ProductsView({ selectedProject }: { selectedProject: string }) {
               <Button size="sm" variant="ghost" onClick={() => setShowEdit(p.id)}><Edit3 className="w-3.5 h-3.5" /></Button>
               <Button size="sm" variant="ghost" className="text-red-500 hover:text-red-600" onClick={() => setDeleteProduct(p.id)}><Trash2 className="w-3.5 h-3.5" /></Button>
             </div>
-          </motion.div>
+          </div>
           );
         })}
       </div>
@@ -1130,7 +1130,7 @@ function ProductsView({ selectedProject }: { selectedProject: string }) {
           const p = products.find(pr => pr.id === deleteProduct);
           return p ? (
             <div className="space-y-4">
-              <div className="p-4 bg-red-50 dark:bg-red-900/20 rounded-xl border border-red-200 dark:border-red-800/40">
+              <div className="p-4 bg-red-50 dark:bg-red-900/20 rounded border border-red-200 dark:border-red-800/40">
                 <p className="text-sm text-red-700 dark:text-red-300">
                   Bạn có chắc muốn xóa sản phẩm <strong>"{p.name}"</strong>? Hành động này không thể hoàn tác.
                 </p>
@@ -1155,33 +1155,33 @@ function ProductForm({ onClose, mode, productId }: { onClose: () => void; mode: 
     <div className="space-y-4">
       <div><label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Tên sản phẩm</label>
         <input type="text" defaultValue={p?.name} placeholder="VD: Glow Serum Cấp Ẩm"
-          className="w-full px-4 py-2.5 rounded-xl border border-gray-200 dark:border-slate-600 bg-white dark:bg-slate-700 text-gray-900 dark:text-white text-sm focus:ring-2 focus:ring-teal-500 outline-none" />
+          className="w-full px-4 py-2.5 rounded border border-gray-200 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white text-sm focus:ring-2 focus:ring-gray-500 outline-none" />
       </div>
       <div>
         <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1.5">Hình ảnh sản phẩm</label>
-        <div className="border-2 border-dashed border-gray-300 dark:border-slate-600 rounded-xl p-4 text-center hover:border-teal-400 transition-colors cursor-pointer">
+        <div className="border-2 border-dashed border-gray-300 dark:border-gray-600 rounded p-4 text-center hover:border-gray-400 transition-colors cursor-pointer">
           <p className="text-sm text-gray-500">Tải lên hình ảnh sản phẩm</p>
           <p className="text-xs text-gray-400 mt-1">JPG, PNG tối đa 5MB</p>
         </div>
       </div>
       <div className="grid grid-cols-2 gap-4">
         <div><label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Danh mục</label>
-          <select defaultValue={p?.category} className="w-full px-4 py-2.5 rounded-xl border border-gray-200 dark:border-slate-600 bg-white dark:bg-slate-700 text-gray-900 dark:text-white text-sm">
+          <select defaultValue={p?.category} className="w-full px-4 py-2.5 rounded border border-gray-200 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white text-sm">
             {productCategories.map(c => <option key={c}>{c}</option>)}
           </select>
         </div>
         <div><label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Giá</label>
           <input type="text" defaultValue={p?.price} placeholder="VD: 299.000 VND"
-            className="w-full px-4 py-2.5 rounded-xl border border-gray-200 dark:border-slate-600 bg-white dark:bg-slate-700 text-gray-900 dark:text-white text-sm" />
+            className="w-full px-4 py-2.5 rounded border border-gray-200 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white text-sm" />
         </div>
       </div>
       <div><label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Link sản phẩm</label>
         <input type="url" defaultValue={p?.productLink} placeholder="https://..."
-          className="w-full px-4 py-2.5 rounded-xl border border-gray-200 dark:border-slate-600 bg-white dark:bg-slate-700 text-gray-900 dark:text-white text-sm" />
+          className="w-full px-4 py-2.5 rounded border border-gray-200 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white text-sm" />
       </div>
       <div><label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Mô tả</label>
         <textarea rows={3} defaultValue={p?.description} placeholder="Mô tả sản phẩm..."
-          className="w-full px-4 py-2.5 rounded-xl border border-gray-200 dark:border-slate-600 bg-white dark:bg-slate-700 text-gray-900 dark:text-white text-sm resize-none focus:ring-2 focus:ring-teal-500 outline-none" />
+          className="w-full px-4 py-2.5 rounded border border-gray-200 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white text-sm resize-none focus:ring-2 focus:ring-gray-500 outline-none" />
       </div>
       <div className="flex justify-end gap-3 pt-2">
         <Button variant="secondary" onClick={onClose}>Hủy</Button>
@@ -1197,8 +1197,8 @@ function ProductDetail({ productId, onClose }: { productId: string; onClose: () 
   const related = campaigns.filter(c => c.productId === p.id);
   return (
     <div className="space-y-4">
-      <div className="flex items-center gap-4 p-4 bg-gray-50 dark:bg-slate-700/50 rounded-xl">
-        <div className="w-16 h-16 rounded-xl bg-gradient-to-br from-teal-400 to-teal-600 flex items-center justify-center text-white text-2xl font-bold">{p.name.charAt(0)}</div>
+      <div className="flex items-center gap-4 p-4 bg-gray-50 dark:bg-gray-700 rounded">
+        <div className="w-16 h-16 rounded bg-gray-200 dark:bg-gray-700 flex items-center justify-center text-gray-600 dark:text-gray-300 text-2xl font-bold">{p.name.charAt(0)}</div>
         <div>
           <h3 className="text-lg font-bold text-gray-900 dark:text-white">{p.name}</h3>
           <p className="text-sm text-gray-500">{p.category} • {p.price}</p>
@@ -1206,12 +1206,12 @@ function ProductDetail({ productId, onClose }: { productId: string; onClose: () 
         </div>
       </div>
       <p className="text-sm text-gray-600 dark:text-gray-300">{p.description}</p>
-      <div><a href={p.productLink} className="text-sm text-teal-600 hover:underline flex items-center gap-1"><ExternalLink className="w-3 h-3" />{p.productLink}</a></div>
+      <div><a href={p.productLink} className="text-sm text-gray-600 hover:underline flex items-center gap-1"><ExternalLink className="w-3 h-3" />{p.productLink}</a></div>
       <div>
         <h4 className="text-sm font-semibold text-gray-900 dark:text-white mb-2">Chiến dịch liên quan ({related.length})</h4>
         <div className="space-y-2">
           {related.map(c => (
-            <div key={c.id} className="p-3 bg-gray-50 dark:bg-slate-700/50 rounded-xl">
+            <div key={c.id} className="p-3 bg-gray-50 dark:bg-gray-700 rounded">
               <p className="text-sm font-medium text-gray-900 dark:text-white">{c.name}</p>
               <p className="text-xs text-gray-500">{campaignStatusLabels[c.status]}</p>
             </div>
@@ -1271,10 +1271,10 @@ function CampaignsView({ selectedProject }: { selectedProject: string }) {
         <div className="relative flex-1 max-w-sm">
           <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
           <input type="text" placeholder="Tìm chiến dịch..." value={search} onChange={e => setSearch(e.target.value)}
-            className="w-full pl-10 pr-4 py-2 rounded-xl border border-gray-200 dark:border-slate-600 bg-white dark:bg-slate-800 text-gray-900 dark:text-white text-sm focus:ring-2 focus:ring-teal-500 outline-none" />
+            className="w-full pl-10 pr-4 py-2 rounded border border-gray-200 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-white text-sm focus:ring-2 focus:ring-gray-500 outline-none" />
         </div>
         <select value={filterStatus} onChange={e => setFilterStatus(e.target.value)}
-          className="px-4 py-2 rounded-xl border border-gray-200 dark:border-slate-600 bg-white dark:bg-slate-800 text-gray-900 dark:text-white text-sm">
+          className="px-4 py-2 rounded border border-gray-200 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-white text-sm">
           <option value="all">Tất cả trạng thái</option>
           <option value="draft">Bản nháp</option>
           <option value="active">Đang chạy</option>
@@ -1283,11 +1283,11 @@ function CampaignsView({ selectedProject }: { selectedProject: string }) {
           <option value="cancelled">Đã hủy</option>
         </select>
       </div>
-      <div className="bg-white dark:bg-slate-800 rounded-2xl border border-gray-200/60 dark:border-slate-700/60 overflow-hidden">
+      <div className="bg-white dark:bg-gray-800 rounded border border-gray-200 dark:border-gray-700 overflow-hidden">
         <div className="overflow-x-auto">
           <table className="w-full min-w-[900px]">
             <thead>
-              <tr className="border-b border-gray-100 dark:border-slate-700">
+              <tr className="border-b border-gray-100 dark:border-gray-700">
                 <SortHeader field="name" label="Chiến dịch" />
                 <th className="text-left px-6 py-3 text-xs font-semibold text-gray-500 uppercase">Sản phẩm</th>
                 <SortHeader field="totalViews" label="Lượt xem" />
@@ -1299,7 +1299,7 @@ function CampaignsView({ selectedProject }: { selectedProject: string }) {
             </thead>
             <tbody>
               {filtered.map(c => (
-                <tr key={c.id} className="border-b border-gray-50 dark:border-slate-700/50 hover:bg-gray-50/50 dark:hover:bg-slate-700/20">
+                <tr key={c.id} className="border-b border-gray-50 dark:border-gray-700 hover:bg-gray-50/50 dark:hover:bg-gray-700/20">
                   <td className="px-6 py-4">
                     <p className="font-medium text-gray-900 dark:text-white text-sm">{c.name}</p>
                     <p className="text-xs text-gray-500">{c.objective}</p>
@@ -1311,7 +1311,7 @@ function CampaignsView({ selectedProject }: { selectedProject: string }) {
                       c.status === 'active' ? 'bg-blue-100 text-blue-800 dark:bg-blue-900/40 dark:text-blue-300' :
                       c.status === 'tracking' ? 'bg-amber-100 text-amber-800 dark:bg-amber-900/40 dark:text-amber-300' :
                       c.status === 'completed' ? 'bg-emerald-100 text-emerald-800 dark:bg-emerald-900/40 dark:text-emerald-300' :
-                      c.status === 'draft' ? 'bg-gray-100 text-gray-700 dark:bg-slate-700 dark:text-gray-300' :
+                      c.status === 'draft' ? 'bg-gray-100 text-gray-700 dark:bg-gray-700 dark:text-gray-300' :
                       'bg-red-100 text-red-800 dark:bg-red-900/40 dark:text-red-300'
                     } />
                   </td>
@@ -1369,20 +1369,20 @@ function CampaignsView({ selectedProject }: { selectedProject: string }) {
             <div className="space-y-4">
               <div><label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Tên chiến dịch</label>
                 <input type="text" defaultValue={c.name}
-                  className="w-full px-4 py-2.5 rounded-xl border border-gray-200 dark:border-slate-600 bg-white dark:bg-slate-700 text-gray-900 dark:text-white text-sm" />
+                  className="w-full px-4 py-2.5 rounded border border-gray-200 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white text-sm" />
               </div>
               <div><label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Mục tiêu</label>
                 <input type="text" defaultValue={c.objective}
-                  className="w-full px-4 py-2.5 rounded-xl border border-gray-200 dark:border-slate-600 bg-white dark:bg-slate-700 text-gray-900 dark:text-white text-sm" />
+                  className="w-full px-4 py-2.5 rounded border border-gray-200 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white text-sm" />
               </div>
               <div className="grid grid-cols-2 gap-4">
                 <div><label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Ngày bắt đầu</label>
                   <input type="date" defaultValue={(c as any).startDate || ''}
-                    className="w-full px-4 py-2.5 rounded-xl border border-gray-200 dark:border-slate-600 bg-white dark:bg-slate-700 text-gray-900 dark:text-white text-sm" />
+                    className="w-full px-4 py-2.5 rounded border border-gray-200 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white text-sm" />
                 </div>
                 <div><label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Ngày kết thúc</label>
                   <input type="date" defaultValue={c.deadline}
-                    className="w-full px-4 py-2.5 rounded-xl border border-gray-200 dark:border-slate-600 bg-white dark:bg-slate-700 text-gray-900 dark:text-white text-sm" />
+                    className="w-full px-4 py-2.5 rounded border border-gray-200 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white text-sm" />
                 </div>
               </div>
               <div className="flex justify-end gap-3 pt-2">
@@ -1420,7 +1420,7 @@ function CampaignsView({ selectedProject }: { selectedProject: string }) {
           const isResume = campaignStatusAction.action === 'resume';
           return (
             <div className="space-y-4">
-              <div className={`p-4 rounded-xl border ${isPause ? 'bg-amber-50 dark:bg-amber-900/20 border-amber-200 dark:border-amber-800/40' : isComplete ? 'bg-emerald-50 dark:bg-emerald-900/20 border-emerald-200 dark:border-emerald-800/40' : 'bg-blue-50 dark:bg-blue-900/20 border-blue-200 dark:border-blue-800/40'}`}>
+              <div className={`p-4 rounded border ${isPause ? 'bg-gray-50 dark:bg-gray-700 border-amber-200 dark:border-amber-800/40' : isComplete ? 'bg-gray-50 dark:bg-gray-700 border-emerald-200 dark:border-emerald-800/40' : 'bg-gray-50 dark:bg-gray-700 border-blue-200 dark:border-blue-800/40'}`}>
                 <p className="text-sm font-semibold text-gray-900 dark:text-white">{c.name}</p>
                 <p className="text-xs text-gray-500 mt-1">Sản phẩm: {c.productName}</p>
               </div>
@@ -1478,7 +1478,7 @@ function TaskCreationFormLite({ campaignId, campaignName, productName, onClose }
 
   return (
     <div className="space-y-4">
-      <div className="p-3 bg-blue-50 dark:bg-blue-900/20 rounded-xl border border-blue-200 dark:border-blue-800/40 text-sm text-blue-700 dark:text-blue-300">
+      <div className="p-3 bg-gray-50 dark:bg-gray-700 rounded border border-blue-200 dark:border-blue-800/40 text-sm text-blue-700 dark:text-blue-300">
         <p className="font-semibold mb-0.5">{campaignName}</p>
         <p className="text-xs opacity-80">Sản phẩm: {productName}</p>
       </div>
@@ -1486,13 +1486,13 @@ function TaskCreationFormLite({ campaignId, campaignName, productName, onClose }
       {/* Chọn nhiều KOL */}
       <div>
         <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">KOL/KOC * <span className="text-xs text-gray-400">(chọn nhiều)</span></label>
-        <div className={`border rounded-xl p-3 max-h-48 overflow-y-auto space-y-1.5 ${errors.kolId ? 'border-red-400' : 'border-gray-200 dark:border-slate-600'} bg-white dark:bg-slate-700`}>
+        <div className={`border rounded p-3 max-h-48 overflow-y-auto space-y-1.5 ${errors.kolId ? 'border-red-400' : 'border-gray-200 dark:border-gray-600'} bg-white dark:bg-gray-700`}>
           {brandKOLs.map(k => {
             const checked = selectedKOLs.includes(k.id);
             return (
-              <label key={k.id} className={`flex items-center gap-3 p-2 rounded-lg cursor-pointer transition-colors ${checked ? 'bg-teal-50 dark:bg-teal-900/30' : 'hover:bg-gray-50 dark:hover:bg-slate-600/50'}`}>
+              <label key={k.id} className={`flex items-center gap-3 p-2 rounded cursor-pointer transition-colors ${checked ? 'bg-gray-50 dark:bg-gray-700' : 'hover:bg-gray-50 dark:hover:bg-gray-600/50'}`}>
                 <input type="checkbox" checked={checked} onChange={() => toggleKOL(k.id)}
-                  className="w-4 h-4 text-teal-600 rounded border-gray-300 dark:border-slate-500 focus:ring-teal-500" />
+                  className="w-4 h-4 text-gray-600 rounded border-gray-300 dark:border-gray-500 focus:ring-gray-500" />
                 <div className="flex items-center gap-2 flex-1 min-w-0">
                   <Avatar initials={k.avatar} size="sm" />
                   <div className="min-w-0">
@@ -1500,13 +1500,13 @@ function TaskCreationFormLite({ campaignId, campaignName, productName, onClose }
                     <p className="text-xs text-gray-500">{k.platform} / {k.followersDisplay}</p>
                   </div>
                 </div>
-                <Badge label={k.niche} colorClass="bg-blue-50 text-blue-700 dark:bg-blue-900/30 dark:text-blue-300" />
+                <Badge label={k.niche} colorClass="bg-gray-50 text-blue-700 dark:bg-blue-900/30 dark:text-blue-300" />
               </label>
             );
           })}
         </div>
         {selectedKOLs.length > 0 && (
-          <p className="text-xs text-teal-600 dark:text-teal-400 mt-1.5 font-medium">
+          <p className="text-xs text-gray-600 dark:text-gray-400 mt-1.5 font-medium">
             Đã chọn {selectedKOLs.length} KOL/KOC
           </p>
         )}
@@ -1516,7 +1516,7 @@ function TaskCreationFormLite({ campaignId, campaignName, productName, onClose }
       <div>
         <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Mô tả nhiệm vụ *</label>
         <textarea rows={3} value={brief} onChange={e => setBrief(e.target.value)} placeholder="VD: Quay video review sản phẩm, đăng Reels kèm CTA mua hàng..."
-          className={`w-full px-4 py-2.5 rounded-xl border text-sm focus:ring-2 focus:ring-teal-500 outline-none bg-white dark:bg-slate-700 text-gray-900 dark:text-white resize-none ${errors.brief ? 'border-red-400' : 'border-gray-200 dark:border-slate-600'}`} />
+          className={`w-full px-4 py-2.5 rounded border text-sm focus:ring-2 focus:ring-gray-500 outline-none bg-white dark:bg-gray-700 text-gray-900 dark:text-white resize-none ${errors.brief ? 'border-red-400' : 'border-gray-200 dark:border-gray-600'}`} />
         {errors.brief && <p className="text-xs text-red-500 mt-1">{errors.brief}</p>}
       </div>
 
@@ -1524,24 +1524,24 @@ function TaskCreationFormLite({ campaignId, campaignName, productName, onClose }
         <div>
           <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Hạn nộp *</label>
           <input type="date" value={deadline} onChange={e => setDeadline(e.target.value)}
-            className={`w-full px-4 py-2.5 rounded-xl border text-sm focus:ring-2 focus:ring-teal-500 outline-none bg-white dark:bg-slate-700 text-gray-900 dark:text-white ${errors.deadline ? 'border-red-400' : 'border-gray-200 dark:border-slate-600'}`} />
+            className={`w-full px-4 py-2.5 rounded border text-sm focus:ring-2 focus:ring-gray-500 outline-none bg-white dark:bg-gray-700 text-gray-900 dark:text-white ${errors.deadline ? 'border-red-400' : 'border-gray-200 dark:border-gray-600'}`} />
           {errors.deadline && <p className="text-xs text-red-500 mt-1">{errors.deadline}</p>}
         </div>
         <div>
           <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Thù lao / KOL (VND) *</label>
           <input type="number" value={payment} onChange={e => setPayment(e.target.value)} placeholder="VD: 5000000"
-            className={`w-full px-4 py-2.5 rounded-xl border text-sm focus:ring-2 focus:ring-teal-500 outline-none bg-white dark:bg-slate-700 text-gray-900 dark:text-white ${errors.payment ? 'border-red-400' : 'border-gray-200 dark:border-slate-600'}`} />
+            className={`w-full px-4 py-2.5 rounded border text-sm focus:ring-2 focus:ring-gray-500 outline-none bg-white dark:bg-gray-700 text-gray-900 dark:text-white ${errors.payment ? 'border-red-400' : 'border-gray-200 dark:border-gray-600'}`} />
           {errors.payment && <p className="text-xs text-red-500 mt-1">{errors.payment}</p>}
         </div>
       </div>
 
       {selectedKOLs.length > 0 && payment && (
-        <div className="p-3 bg-teal-50 dark:bg-teal-900/20 rounded-xl border border-teal-200 dark:border-teal-800/40">
+        <div className="p-3 bg-gray-50 dark:bg-gray-700 rounded border border-gray-200 dark:border-gray-700">
           <div className="flex justify-between items-center text-sm">
-            <span className="text-teal-700 dark:text-teal-300">
+            <span className="text-gray-700 dark:text-gray-300">
               Tổng chi phí ({selectedKOLs.length} KOL × {Number(payment).toLocaleString()}₫)
             </span>
-            <span className="font-bold text-teal-600 dark:text-teal-400">
+            <span className="font-bold text-gray-600 dark:text-gray-400">
               {totalAmount.toLocaleString()}₫
             </span>
           </div>
@@ -1612,17 +1612,17 @@ function CampaignForm({ onClose }: { onClose: () => void }) {
         {STEPS.map((s, i) => (
           <div key={s.n} className="flex items-center flex-1">
             <div className="flex flex-col items-center">
-              <div className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold transition-all ${
-                step > s.n ? 'bg-teal-600 text-white' :
-                step === s.n ? 'bg-teal-600 text-white ring-4 ring-teal-100 dark:ring-teal-900' :
-                'bg-gray-200 dark:bg-slate-600 text-gray-400'
+              <div className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold transition-colors ${
+                step > s.n ? 'bg-gray-600 text-white' :
+                step === s.n ? 'bg-gray-600 text-white ring-4 ring-gray-100 dark:ring-gray-900/40' :
+                'bg-gray-200 dark:bg-gray-600 text-gray-400'
               }`}>
                 {step > s.n ? <Check className="w-4 h-4" /> : s.n}
               </div>
-              <p className={`text-[10px] mt-1 text-center ${step === s.n ? 'text-teal-600 font-semibold' : 'text-gray-400'}`}>{s.label}</p>
+              <p className={`text-[10px] mt-1 text-center ${step === s.n ? 'text-gray-600 font-semibold' : 'text-gray-400'}`}>{s.label}</p>
             </div>
             {i < STEPS.length - 1 && (
-              <div className={`flex-1 h-0.5 mx-1 mb-4 ${step > s.n ? 'bg-teal-500' : 'bg-gray-200 dark:bg-slate-600'}`} />
+              <div className={`flex-1 h-0.5 mx-1 mb-4 ${step > s.n ? 'bg-gray-500' : 'bg-gray-200 dark:bg-gray-600'}`} />
             )}
           </div>
         ))}
@@ -1631,15 +1631,15 @@ function CampaignForm({ onClose }: { onClose: () => void }) {
       {/* ── Step 1: Basic Info ── */}
       {step === 1 && (
         <div className="space-y-4">
-          <div className="p-3 bg-blue-50 dark:bg-blue-900/20 rounded-xl border border-blue-200 dark:border-blue-800/40 text-sm text-blue-700 dark:text-blue-300">
+          <div className="p-3 bg-gray-50 dark:bg-gray-700 rounded border border-blue-200 dark:border-blue-800/40 text-sm text-blue-700 dark:text-blue-300">
             Chọn sản phẩm gắn với chiến dịch này trước khi bắt đầu.
           </div>
 
           <div>
             <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Sản phẩm *</label>
             <select value={form.productId} onChange={e => set('productId', e.target.value)}
-              className={`w-full px-4 py-2.5 rounded-xl border text-sm focus:ring-2 focus:ring-teal-500 outline-none bg-white dark:bg-slate-700 text-gray-900 dark:text-white ${
-                errors.productId ? 'border-red-400' : 'border-gray-200 dark:border-slate-600'
+              className={`w-full px-4 py-2.5 rounded border text-sm focus:ring-2 focus:ring-gray-500 outline-none bg-white dark:bg-gray-700 text-gray-900 dark:text-white ${
+                errors.productId ? 'border-red-400' : 'border-gray-200 dark:border-gray-600'
               }`}>
               <option value="">-- Chọn sản phẩm --</option>
               {brandProducts.map(p => <option key={p.id} value={p.id}>{p.name}</option>)}
@@ -1650,8 +1650,8 @@ function CampaignForm({ onClose }: { onClose: () => void }) {
           <div>
             <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Tên chiến dịch *</label>
             <input type="text" value={form.campaignName} onChange={e => set('campaignName', e.target.value)} placeholder="VD: Glow Serum Summer Launch 2026"
-              className={`w-full px-4 py-2.5 rounded-xl border text-sm focus:ring-2 focus:ring-teal-500 outline-none bg-white dark:bg-slate-700 text-gray-900 dark:text-white ${
-                errors.campaignName ? 'border-red-400' : 'border-gray-200 dark:border-slate-600'
+              className={`w-full px-4 py-2.5 rounded border text-sm focus:ring-2 focus:ring-gray-500 outline-none bg-white dark:bg-gray-700 text-gray-900 dark:text-white ${
+                errors.campaignName ? 'border-red-400' : 'border-gray-200 dark:border-gray-600'
               }`} />
             {errors.campaignName && <p className="text-xs text-red-500 mt-1">{errors.campaignName}</p>}
           </div>
@@ -1659,8 +1659,8 @@ function CampaignForm({ onClose }: { onClose: () => void }) {
           <div>
             <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Mục tiêu chiến dịch *</label>
             <input type="text" value={form.objective} onChange={e => set('objective', e.target.value)} placeholder="VD: Tăng nhận diện thương hiệu, tăng doanh số..."
-              className={`w-full px-4 py-2.5 rounded-xl border text-sm focus:ring-2 focus:ring-teal-500 outline-none bg-white dark:bg-slate-700 text-gray-900 dark:text-white ${
-                errors.objective ? 'border-red-400' : 'border-gray-200 dark:border-slate-600'
+              className={`w-full px-4 py-2.5 rounded border text-sm focus:ring-2 focus:ring-gray-500 outline-none bg-white dark:bg-gray-700 text-gray-900 dark:text-white ${
+                errors.objective ? 'border-red-400' : 'border-gray-200 dark:border-gray-600'
               }`} />
             {errors.objective && <p className="text-xs text-red-500 mt-1">{errors.objective}</p>}
           </div>
@@ -1669,16 +1669,16 @@ function CampaignForm({ onClose }: { onClose: () => void }) {
             <div>
               <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Ngày bắt đầu *</label>
               <input type="date" value={form.startDate} onChange={e => set('startDate', e.target.value)}
-                className={`w-full px-4 py-2.5 rounded-xl border text-sm focus:ring-2 focus:ring-teal-500 outline-none bg-white dark:bg-slate-700 text-gray-900 dark:text-white ${
-                  errors.startDate ? 'border-red-400' : 'border-gray-200 dark:border-slate-600'
+                className={`w-full px-4 py-2.5 rounded border text-sm focus:ring-2 focus:ring-gray-500 outline-none bg-white dark:bg-gray-700 text-gray-900 dark:text-white ${
+                  errors.startDate ? 'border-red-400' : 'border-gray-200 dark:border-gray-600'
                 }`} />
               {errors.startDate && <p className="text-xs text-red-500 mt-1">{errors.startDate}</p>}
             </div>
             <div>
               <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Ngày kết thúc *</label>
               <input type="date" value={form.endDate} onChange={e => set('endDate', e.target.value)}
-                className={`w-full px-4 py-2.5 rounded-xl border text-sm focus:ring-2 focus:ring-teal-500 outline-none bg-white dark:bg-slate-700 text-gray-900 dark:text-white ${
-                  errors.endDate ? 'border-red-400' : 'border-gray-200 dark:border-slate-600'
+                className={`w-full px-4 py-2.5 rounded border text-sm focus:ring-2 focus:ring-gray-500 outline-none bg-white dark:bg-gray-700 text-gray-900 dark:text-white ${
+                  errors.endDate ? 'border-red-400' : 'border-gray-200 dark:border-gray-600'
                 }`} />
               {errors.endDate && <p className="text-xs text-red-500 mt-1">{errors.endDate}</p>}
             </div>
@@ -1697,31 +1697,31 @@ function CampaignForm({ onClose }: { onClose: () => void }) {
             <div>
               <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Target Views *</label>
               <input type="number" value={form.targetViews} onChange={e => set('targetViews', e.target.value)} placeholder="VD: 100000"
-                className={`w-full px-3 py-2.5 rounded-xl border text-sm focus:ring-2 focus:ring-teal-500 outline-none bg-white dark:bg-slate-700 text-gray-900 dark:text-white ${
-                  errors.targetViews ? 'border-red-400' : 'border-gray-200 dark:border-slate-600'
+                className={`w-full px-3 py-2.5 rounded border text-sm focus:ring-2 focus:ring-gray-500 outline-none bg-white dark:bg-gray-700 text-gray-900 dark:text-white ${
+                  errors.targetViews ? 'border-red-400' : 'border-gray-200 dark:border-gray-600'
                 }`} />
               {errors.targetViews && <p className="text-xs text-red-500 mt-1">{errors.targetViews}</p>}
             </div>
             <div>
               <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Target ER (%) *</label>
               <input type="number" value={form.targetER} onChange={e => set('targetER', e.target.value)} placeholder="VD: 5"
-                className={`w-full px-3 py-2.5 rounded-xl border text-sm focus:ring-2 focus:ring-teal-500 outline-none bg-white dark:bg-slate-700 text-gray-900 dark:text-white ${
-                  errors.targetER ? 'border-red-400' : 'border-gray-200 dark:border-slate-600'
+                className={`w-full px-3 py-2.5 rounded border text-sm focus:ring-2 focus:ring-gray-500 outline-none bg-white dark:bg-gray-700 text-gray-900 dark:text-white ${
+                  errors.targetER ? 'border-red-400' : 'border-gray-200 dark:border-gray-600'
                 }`} />
               {errors.targetER && <p className="text-xs text-red-500 mt-1">{errors.targetER}</p>}
             </div>
             <div>
               <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Target Conversion</label>
               <input type="number" value={form.targetConversion} onChange={e => set('targetConversion', e.target.value)} placeholder="VD: 500"
-                className="w-full px-3 py-2.5 rounded-xl border border-gray-200 dark:border-slate-600 text-sm focus:ring-2 focus:ring-teal-500 outline-none bg-white dark:bg-slate-700 text-gray-900 dark:text-white" />
+                className="w-full px-3 py-2.5 rounded border border-gray-200 dark:border-gray-600 text-sm focus:ring-2 focus:ring-gray-500 outline-none bg-white dark:bg-gray-700 text-gray-900 dark:text-white" />
             </div>
           </div>
 
           <div>
             <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Ngân sách (VND) *</label>
             <input type="number" value={form.budget} onChange={e => set('budget', e.target.value)} placeholder="VD: 50000000"
-              className={`w-full px-4 py-2.5 rounded-xl border text-sm focus:ring-2 focus:ring-teal-500 outline-none bg-white dark:bg-slate-700 text-gray-900 dark:text-white ${
-                errors.budget ? 'border-red-400' : 'border-gray-200 dark:border-slate-600'
+              className={`w-full px-4 py-2.5 rounded border text-sm focus:ring-2 focus:ring-gray-500 outline-none bg-white dark:bg-gray-700 text-gray-900 dark:text-white ${
+                errors.budget ? 'border-red-400' : 'border-gray-200 dark:border-gray-600'
               }`} />
             {errors.budget && <p className="text-xs text-red-500 mt-1">{errors.budget}</p>}
           </div>
@@ -1729,14 +1729,14 @@ function CampaignForm({ onClose }: { onClose: () => void }) {
           <div>
             <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Hạn chót</label>
             <input type="date" value={form.deadline} onChange={e => set('deadline', e.target.value)}
-              className="w-full px-4 py-2.5 rounded-xl border border-gray-200 dark:border-slate-600 text-sm focus:ring-2 focus:ring-teal-500 outline-none bg-white dark:bg-slate-700 text-gray-900 dark:text-white" />
+              className="w-full px-4 py-2.5 rounded border border-gray-200 dark:border-gray-600 text-sm focus:ring-2 focus:ring-gray-500 outline-none bg-white dark:bg-gray-700 text-gray-900 dark:text-white" />
           </div>
 
           <div>
             <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Quy tắc thanh toán</label>
             <textarea rows={2} value={form.paymentRule} onChange={e => set('paymentRule', e.target.value)}
               placeholder="VD: Base 5M + bonus 500K cho mỗi 10K views vượt target..."
-              className="w-full px-4 py-2.5 rounded-xl border border-gray-200 dark:border-slate-600 text-sm resize-none focus:ring-2 focus:ring-teal-500 outline-none bg-white dark:bg-slate-700 text-gray-900 dark:text-white" />
+              className="w-full px-4 py-2.5 rounded border border-gray-200 dark:border-gray-600 text-sm resize-none focus:ring-2 focus:ring-gray-500 outline-none bg-white dark:bg-gray-700 text-gray-900 dark:text-white" />
           </div>
 
           <div className="flex justify-between pt-2">
@@ -1753,11 +1753,11 @@ function CampaignForm({ onClose }: { onClose: () => void }) {
             <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Brief chiến dịch</label>
             <textarea rows={4} value={form.brief} onChange={e => set('brief', e.target.value)}
               placeholder="Mô tả yêu cầu nội dung, key message, USP sản phẩm, đối tượng khách hàng mục tiêu..."
-              className="w-full px-4 py-2.5 rounded-xl border border-gray-200 dark:border-slate-600 text-sm resize-none focus:ring-2 focus:ring-teal-500 outline-none bg-white dark:bg-slate-700 text-gray-900 dark:text-white" />
+              className="w-full px-4 py-2.5 rounded border border-gray-200 dark:border-gray-600 text-sm resize-none focus:ring-2 focus:ring-gray-500 outline-none bg-white dark:bg-gray-700 text-gray-900 dark:text-white" />
           </div>
 
           {/* Review summary */}
-          <div className="p-4 bg-gray-50 dark:bg-slate-700/50 rounded-xl space-y-2">
+          <div className="p-4 bg-gray-50 dark:bg-gray-700 rounded space-y-2">
             <p className="text-sm font-semibold text-gray-900 dark:text-white mb-3">Xem lại thông tin</p>
             {[
               { label: 'Sản phẩm', value: selectedProduct?.name || '-' },
@@ -1792,24 +1792,24 @@ function CampaignDetail({ campaignId, onClose }: { campaignId: string; onClose: 
   return (
     <div className="space-y-4">
       <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
-        <div className="p-3 bg-gray-50 dark:bg-slate-700/50 rounded-xl text-center">
+        <div className="p-3 bg-gray-50 dark:bg-gray-700 rounded text-center">
           <p className="text-xl font-bold text-gray-900 dark:text-white">{c.totalViews >= 1000000 ? `${(c.totalViews/1000000).toFixed(1)}M` : `${Math.round(c.totalViews/1000)}K`}</p>
           <p className="text-xs text-gray-500">Lượt xem</p>
         </div>
-        <div className="p-3 bg-gray-50 dark:bg-slate-700/50 rounded-xl text-center">
-          <p className="text-xl font-bold text-teal-600">{c.avgEngagementRate}%</p>
+        <div className="p-3 bg-gray-50 dark:bg-gray-700 rounded text-center">
+          <p className="text-xl font-bold text-gray-600">{c.avgEngagementRate}%</p>
           <p className="text-xs text-gray-500">TL tương tác</p>
         </div>
-        <div className="p-3 bg-gray-50 dark:bg-slate-700/50 rounded-xl text-center">
+        <div className="p-3 bg-gray-50 dark:bg-gray-700 rounded text-center">
           <p className="text-xl font-bold text-blue-600">{c.totalConversions}</p>
           <p className="text-xs text-gray-500">Chuyển đổi</p>
         </div>
-        <div className="p-3 bg-gray-50 dark:bg-slate-700/50 rounded-xl text-center">
+        <div className="p-3 bg-gray-50 dark:bg-gray-700 rounded text-center">
           <p className="text-xl font-bold text-gray-900 dark:text-white">{c.assignedKOLs.length}</p>
           <p className="text-xs text-gray-500">KOL/KOC</p>
         </div>
       </div>
-      <div className="p-4 bg-gray-50 dark:bg-slate-700/50 rounded-xl">
+      <div className="p-4 bg-gray-50 dark:bg-gray-700 rounded">
         <p className="text-sm font-medium text-gray-900 dark:text-white mb-1">Mục tiêu</p>
         <p className="text-sm text-gray-600 dark:text-gray-300 mb-3">{c.objective}</p>
         <p className="text-sm font-medium text-gray-900 dark:text-white mb-1">Brief</p>
@@ -1820,9 +1820,9 @@ function CampaignDetail({ campaignId, onClose }: { campaignId: string; onClose: 
       <div>
         <h4 className="text-sm font-semibold text-gray-900 dark:text-white mb-2">KPI Target</h4>
         <div className="grid grid-cols-3 gap-3">
-          <div className="p-3 bg-gray-50 dark:bg-slate-700/50 rounded-xl"><p className="text-lg font-bold text-gray-900 dark:text-white">{c.kpiTarget.views.toLocaleString()}</p><p className="text-xs text-gray-500">Views</p></div>
-          <div className="p-3 bg-gray-50 dark:bg-slate-700/50 rounded-xl"><p className="text-lg font-bold text-gray-900 dark:text-white">{c.kpiTarget.engagementRate}%</p><p className="text-xs text-gray-500">ER Target</p></div>
-          <div className="p-3 bg-gray-50 dark:bg-slate-700/50 rounded-xl"><p className="text-lg font-bold text-gray-900 dark:text-white">{c.kpiTarget.conversions}</p><p className="text-xs text-gray-500">Conversions</p></div>
+          <div className="p-3 bg-gray-50 dark:bg-gray-700 rounded"><p className="text-lg font-bold text-gray-900 dark:text-white">{c.kpiTarget.views.toLocaleString()}</p><p className="text-xs text-gray-500">Views</p></div>
+          <div className="p-3 bg-gray-50 dark:bg-gray-700 rounded"><p className="text-lg font-bold text-gray-900 dark:text-white">{c.kpiTarget.engagementRate}%</p><p className="text-xs text-gray-500">ER Target</p></div>
+          <div className="p-3 bg-gray-50 dark:bg-gray-700 rounded"><p className="text-lg font-bold text-gray-900 dark:text-white">{c.kpiTarget.conversions}</p><p className="text-xs text-gray-500">Conversions</p></div>
         </div>
       </div>
 
@@ -1835,14 +1835,14 @@ function CampaignDetail({ campaignId, onClose }: { campaignId: string; onClose: 
               <div className="flex flex-col items-center">
                 <div className={`w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold ${
                   ['draft', 'active', 'tracking', 'completed'].indexOf(c.status) >= i
-                    ? 'bg-teal-600 text-white'
-                    : 'bg-gray-200 dark:bg-slate-600 text-gray-400'
+                    ? 'bg-gray-600 text-white'
+                    : 'bg-gray-200 dark:bg-gray-600 text-gray-400'
                 }`}>
                   {i + 1}
                 </div>
                 <span className="text-xs mt-1 text-center text-gray-500">{step === 'draft' ? 'Bản nháp' : step === 'active' ? 'Đang chạy' : step === 'tracking' ? 'Theo dõi' : 'Hoàn thành'}</span>
               </div>
-              {i < 3 && <div className={`flex-1 h-0.5 mx-2 ${['draft', 'active', 'tracking', 'completed'].indexOf(c.status) > i ? 'bg-teal-500' : 'bg-gray-200 dark:bg-slate-600'}`} />}
+              {i < 3 && <div className={`flex-1 h-0.5 mx-2 ${['draft', 'active', 'tracking', 'completed'].indexOf(c.status) > i ? 'bg-gray-500' : 'bg-gray-200 dark:bg-gray-600'}`} />}
             </div>
           ))}
         </div>
@@ -1855,12 +1855,12 @@ function CampaignDetail({ campaignId, onClose }: { campaignId: string; onClose: 
           {[
             { label: 'Đã phân công', count: campaignTasks.filter(t => t.status === 'assigned').length, color: 'bg-blue-100 text-blue-800 dark:bg-blue-900/40 dark:text-blue-300' },
             { label: 'Đã nộp bản nháp', count: campaignTasks.filter(t => t.status === 'draft_submitted').length, color: 'bg-amber-100 text-amber-800 dark:bg-amber-900/40 dark:text-amber-300' },
-            { label: 'Đã đăng bài', count: campaignTasks.filter(t => ['published', 'tracking'].includes(t.status)).length, color: 'bg-teal-100 text-teal-800 dark:bg-teal-900/40 dark:text-teal-300' },
+            { label: 'Đã đăng bài', count: campaignTasks.filter(t => ['published', 'tracking'].includes(t.status)).length, color: 'bg-gray-100 text-gray-800 dark:bg-gray-700 dark:text-gray-300' },
             { label: 'Hoàn thành', count: campaignTasks.filter(t => ['completed', 'paid'].includes(t.status)).length, color: 'bg-emerald-100 text-emerald-800 dark:bg-emerald-900/40 dark:text-emerald-300' },
             { label: 'Chờ sửa lại', count: campaignTasks.filter(t => t.status === 'revision_required').length, color: 'bg-orange-100 text-orange-800 dark:bg-orange-900/40 dark:text-orange-300' },
-            { label: 'Tổng nhiệm vụ', count: campaignTasks.length, color: 'bg-gray-100 text-gray-700 dark:bg-slate-700 dark:text-gray-300' },
+            { label: 'Tổng nhiệm vụ', count: campaignTasks.length, color: 'bg-gray-100 text-gray-700 dark:bg-gray-700 dark:text-gray-300' },
           ].map(item => (
-            <div key={item.label} className="p-3 bg-gray-50 dark:bg-slate-700/50 rounded-xl flex items-center justify-between">
+            <div key={item.label} className="p-3 bg-gray-50 dark:bg-gray-700 rounded flex items-center justify-between">
               <span className="text-xs text-gray-500">{item.label}</span>
               <span className={`px-2 py-0.5 rounded-full text-xs font-semibold ${item.color}`}>{item.count}</span>
             </div>
@@ -1871,7 +1871,7 @@ function CampaignDetail({ campaignId, onClose }: { campaignId: string; onClose: 
         <h4 className="text-sm font-semibold text-gray-900 dark:text-white mb-2">Nhiệm vụ KOL/KOC ({campaignTasks.length})</h4>
         <div className="space-y-2">
           {campaignTasks.map(t => (
-            <div key={t.id} className="flex items-center justify-between p-3 bg-gray-50 dark:bg-slate-700/50 rounded-xl">
+            <div key={t.id} className="flex items-center justify-between p-3 bg-gray-50 dark:bg-gray-700 rounded">
               <div className="flex items-center gap-2">
                 <Avatar initials={t.kolAvatar} size="sm" />
                 <div><p className="text-sm font-medium text-gray-900 dark:text-white">{t.kolName}</p><p className="text-xs text-gray-500">{t.kolPlatform}</p></div>
@@ -1916,13 +1916,13 @@ function KOLView({ selectedProject }: { selectedProject: string }) {
       <div className="relative">
         <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
         <input type="text" placeholder="Tìm KOL/KOC..." value={search} onChange={e => setSearch(e.target.value)}
-          className="w-full max-w-sm pl-10 pr-4 py-2 rounded-xl border border-gray-200 dark:border-slate-600 bg-white dark:bg-slate-800 text-gray-900 dark:text-white text-sm focus:ring-2 focus:ring-teal-500 outline-none" />
+          className="w-full max-w-sm pl-10 pr-4 py-2 rounded border border-gray-200 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-white text-sm focus:ring-2 focus:ring-gray-500 outline-none" />
       </div>
-      <div className="bg-white dark:bg-slate-800 rounded-2xl border border-gray-200/60 dark:border-slate-700/60 overflow-hidden">
+      <div className="bg-white dark:bg-gray-800 rounded border border-gray-200 dark:border-gray-700 overflow-hidden">
         <div className="overflow-x-auto">
           <table className="w-full min-w-[900px]">
             <thead>
-              <tr className="border-b border-gray-100 dark:border-slate-700">
+              <tr className="border-b border-gray-100 dark:border-gray-700">
                 <th className="text-left px-6 py-3 text-xs font-semibold text-gray-500 uppercase">KOL/KOC</th>
                 <th className="text-left px-6 py-3 text-xs font-semibold text-gray-500 uppercase">Nền tảng</th>
                 <th className="text-left px-6 py-3 text-xs font-semibold text-gray-500 uppercase">Theo dõi</th>
@@ -1937,7 +1937,7 @@ function KOLView({ selectedProject }: { selectedProject: string }) {
               {filtered.map(kol => {
                 const ranking = kolRankings.find(r => r.kolId === kol.id);
                 return (
-                  <tr key={kol.id} className="border-b border-gray-50 dark:border-slate-700/50 hover:bg-gray-50/50">
+                  <tr key={kol.id} className="border-b border-gray-50 dark:border-gray-700 hover:bg-gray-50/50">
                     <td className="px-6 py-4">
                       <div className="flex items-center gap-3">
                         <Avatar initials={kol.avatar} size="sm" />
@@ -1947,17 +1947,17 @@ function KOLView({ selectedProject }: { selectedProject: string }) {
                         </div>
                       </div>
                     </td>
-                    <td className="px-6 py-4"><Badge label={kol.platform} colorClass="bg-gray-100 text-gray-700 dark:bg-slate-700 dark:text-gray-300" /></td>
+                    <td className="px-6 py-4"><Badge label={kol.platform} colorClass="bg-gray-100 text-gray-700 dark:bg-gray-700 dark:text-gray-300" /></td>
                     <td className="px-6 py-4 text-sm font-medium text-gray-900 dark:text-white">{kol.followersDisplay}</td>
-                    <td className="px-6 py-4"><Badge label={kol.niche} colorClass="bg-blue-50 text-blue-700 dark:bg-blue-900/30 dark:text-blue-300" /></td>
-                    <td className="px-6 py-4 text-sm font-medium text-teal-600 dark:text-teal-400">{kol.engagementRate}%</td>
+                    <td className="px-6 py-4"><Badge label={kol.niche} colorClass="bg-gray-50 text-blue-700 dark:bg-blue-900/30 dark:text-blue-300" /></td>
+                    <td className="px-6 py-4 text-sm font-medium text-gray-600 dark:text-gray-400">{kol.engagementRate}%</td>
                     <td className="px-6 py-4">
                       {ranking ? (
-                        <div className={`w-6 h-6 rounded-full flex items-center justify-center text-xs font-bold ${ranking.rank === 1 ? 'bg-amber-500 text-white' : ranking.rank === 2 ? 'bg-gray-400 text-white' : 'bg-gray-100 dark:bg-slate-600 text-gray-600 dark:text-gray-300'}`}>{ranking.rank}</div>
+                        <div className={`w-6 h-6 rounded-full flex items-center justify-center text-xs font-bold ${ranking.rank === 1 ? 'bg-gray-500 text-white' : ranking.rank === 2 ? 'bg-gray-400 text-white' : 'bg-gray-100 dark:bg-gray-600 text-gray-600 dark:text-gray-300'}`}>{ranking.rank}</div>
                       ) : '-'}
                     </td>
                     <td className="px-6 py-4">
-                      <Badge label={kol.status === 'active' ? 'Hoạt động' : 'Tạm khóa'} colorClass={kol.status === 'active' ? 'bg-emerald-100 text-emerald-800 dark:bg-emerald-900/40 dark:text-emerald-300' : 'bg-gray-100 text-gray-700 dark:bg-slate-700 dark:text-gray-300'} />
+                      <Badge label={kol.status === 'active' ? 'Hoạt động' : 'Tạm khóa'} colorClass={kol.status === 'active' ? 'bg-emerald-100 text-emerald-800 dark:bg-emerald-900/40 dark:text-emerald-300' : 'bg-gray-100 text-gray-700 dark:bg-gray-700 dark:text-gray-300'} />
                     </td>
                     <td className="px-6 py-4">
                       <div className="flex gap-1">
@@ -1985,36 +1985,36 @@ function KOLView({ selectedProject }: { selectedProject: string }) {
             <>
               <div className="grid grid-cols-2 gap-4">
                 <div><label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Họ và tên</label>
-                  <input type="text" placeholder="VD: Linh Beauty" className="w-full px-4 py-2.5 rounded-xl border border-gray-200 dark:border-slate-600 bg-white dark:bg-slate-700 text-gray-900 dark:text-white text-sm" />
+                  <input type="text" placeholder="VD: Linh Beauty" className="w-full px-4 py-2.5 rounded border border-gray-200 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white text-sm" />
                 </div>
                 <div><label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Email</label>
-                  <input type="email" placeholder="email@example.com" className="w-full px-4 py-2.5 rounded-xl border border-gray-200 dark:border-slate-600 bg-white dark:bg-slate-700 text-gray-900 dark:text-white text-sm" />
+                  <input type="email" placeholder="email@example.com" className="w-full px-4 py-2.5 rounded border border-gray-200 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white text-sm" />
                 </div>
               </div>
               <div className="grid grid-cols-2 gap-4">
                 <div><label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Nền tảng</label>
-                  <select className="w-full px-4 py-2.5 rounded-xl border border-gray-200 dark:border-slate-600 bg-white dark:bg-slate-700 text-gray-900 dark:text-white text-sm">
+                  <select className="w-full px-4 py-2.5 rounded border border-gray-200 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white text-sm">
                     {['TikTok', 'Instagram', 'YouTube', 'Facebook'].map(p => <option key={p}>{p}</option>)}
                   </select>
                 </div>
                 <div><label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Vai trò</label>
-                  <select className="w-full px-4 py-2.5 rounded-xl border border-gray-200 dark:border-slate-600 bg-white dark:bg-slate-700 text-gray-900 dark:text-white text-sm">
+                  <select className="w-full px-4 py-2.5 rounded border border-gray-200 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white text-sm">
                     <option>KOL</option><option>KOC</option>
                   </select>
                 </div>
               </div>
               <div><label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Lĩnh vực</label>
-                <select className="w-full px-4 py-2.5 rounded-xl border border-gray-200 dark:border-slate-600 bg-white dark:bg-slate-700 text-gray-900 dark:text-white text-sm">
+                <select className="w-full px-4 py-2.5 rounded border border-gray-200 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white text-sm">
                   {productCategories.slice(0, 6).map(c => <option key={c}>{c}</option>)}
                 </select>
               </div>
               <div><label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Mật khẩu</label>
                 <input type="text" placeholder="Mật khẩu cho tài khoản"
-                  className="w-full px-4 py-2.5 rounded-xl border border-gray-200 dark:border-slate-600 bg-white dark:bg-slate-700 text-gray-900 dark:text-white text-sm" />
+                  className="w-full px-4 py-2.5 rounded border border-gray-200 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white text-sm" />
               </div>
               <div><label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Link mạng xã hội</label>
                 <input type="url" placeholder="VD: https://tiktok.com/@username"
-                  className="w-full px-4 py-2.5 rounded-xl border border-gray-200 dark:border-slate-600 bg-white dark:bg-slate-700 text-gray-900 dark:text-white text-sm" />
+                  className="w-full px-4 py-2.5 rounded border border-gray-200 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white text-sm" />
               </div>
               <div className="flex justify-end gap-3 pt-2">
                 <Button variant="secondary" onClick={() => setShowCreate(false)}>Hủy</Button>
@@ -2041,7 +2041,7 @@ function KOLView({ selectedProject }: { selectedProject: string }) {
       <Modal isOpen={!!changePassword} onClose={() => setChangePassword(null)} title="Đổi mật khẩu KOL/KOC" width="max-w-md">
         {changePassword && (
           <div className="space-y-4">
-            <div className="flex items-center gap-3 p-4 bg-gray-50 dark:bg-slate-700/50 rounded-xl">
+            <div className="flex items-center gap-3 p-4 bg-gray-50 dark:bg-gray-700 rounded">
               <Avatar initials={changePassword.kolName.charAt(0)} size="md" />
               <div>
                 <p className="font-semibold text-gray-900 dark:text-white">{changePassword.kolName}</p>
@@ -2055,11 +2055,11 @@ function KOLView({ selectedProject }: { selectedProject: string }) {
                 value={changePassword.newPassword}
                 onChange={e => setChangePassword(p => p ? { ...p, newPassword: e.target.value } : null)}
                 placeholder="VD: Koi@2026! — tối thiểu 8 ký tự"
-                className="w-full px-4 py-2.5 rounded-xl border border-gray-200 dark:border-slate-600 bg-white dark:bg-slate-700 text-gray-900 dark:text-white text-sm"
+                className="w-full px-4 py-2.5 rounded border border-gray-200 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white text-sm"
               />
               <p className="text-xs text-gray-400 mt-1">Mật khẩu phải có tối thiểu 8 ký tự, bao gồm chữ hoa, chữ thường và số.</p>
             </div>
-            <div className="bg-amber-50 dark:bg-amber-900/20 rounded-xl p-3 border border-amber-200 dark:border-amber-800/40">
+            <div className="bg-gray-50 dark:bg-gray-700 rounded p-3 border border-amber-200 dark:border-amber-800/40">
               <p className="text-xs text-amber-700 dark:text-amber-300">
                 KOL/KOC sẽ phải đăng nhập lại bằng mật khẩu mới. Hãy thông báo cho họ sau khi cập nhật.
               </p>
@@ -2084,7 +2084,7 @@ function KOLView({ selectedProject }: { selectedProject: string }) {
       <Modal isOpen={!!resetCreds} onClose={() => setResetCreds(null)} title="Cấp lại tài khoản KOL/KOC" width="max-w-md">
         {resetCreds && (
           <div className="space-y-4">
-            <div className="flex items-center gap-3 p-4 bg-blue-50 dark:bg-blue-900/20 rounded-xl border border-blue-200 dark:border-blue-800/40">
+            <div className="flex items-center gap-3 p-4 bg-gray-50 dark:bg-gray-700 rounded border border-blue-200 dark:border-blue-800/40">
               <Key className="w-5 h-5 text-blue-600" />
               <div>
                 <p className="text-sm font-semibold text-blue-800 dark:text-blue-200">Cấp lại tài khoản cho <strong>{resetCreds.kolName}</strong></p>
@@ -2095,7 +2095,7 @@ function KOLView({ selectedProject }: { selectedProject: string }) {
               username={resetCreds.username}
               password={resetCreds.password}
             />
-            <div className="bg-amber-50 dark:bg-amber-900/20 rounded-xl p-3 border border-amber-200 dark:border-amber-800/40">
+            <div className="bg-gray-50 dark:bg-gray-700 rounded p-3 border border-amber-200 dark:border-amber-800/40">
               <p className="text-xs text-amber-700 dark:text-amber-300">
                 Thông tin đăng nhập chỉ hiển thị <strong>một lần duy nhất</strong>. Hãy gửi cho KOL/KOC ngay sau khi cấp lại.
               </p>
@@ -2131,22 +2131,22 @@ function KOLDetail({ kolId, onClose }: { kolId: string; onClose: () => void }) {
           <p className="text-sm text-gray-500">{kol.handle} / {kol.platform} / {kol.role}</p>
           <div className="flex flex-wrap gap-2 mt-2">
             <Badge label={nicheLabels[kol.niche] || kol.niche} colorClass={nicheColors[kol.niche]} />
-            <Badge label={`${kol.followersDisplay} followers`} colorClass="bg-gray-100 text-gray-700 dark:bg-slate-700 dark:text-gray-300" />
+            <Badge label={`${kol.followersDisplay} followers`} colorClass="bg-gray-100 text-gray-700 dark:bg-gray-700 dark:text-gray-300" />
           </div>
         </div>
       </div>
       <div className="grid grid-cols-4 gap-3">
-        <div className="p-3 bg-gray-50 dark:bg-slate-700/50 rounded-xl text-center"><p className="text-xl font-bold text-teal-600">{kol.engagementRate}%</p><p className="text-xs text-gray-500">TL tương tác</p></div>
-        <div className="p-3 bg-gray-50 dark:bg-slate-700/50 rounded-xl text-center"><p className="text-xl font-bold text-gray-900 dark:text-white">{ranking?.rank || '-'}</p><p className="text-xs text-gray-500">Thứ hạng</p></div>
-        <div className="p-3 bg-gray-50 dark:bg-slate-700/50 rounded-xl text-center"><p className="text-xl font-bold text-emerald-600">{(kol.totalEarned / 1000000).toFixed(1)}M</p><p className="text-xs text-gray-500">Đã kiếm (VND)</p></div>
-        <div className="p-3 bg-gray-50 dark:bg-slate-700/50 rounded-xl text-center"><p className="text-xl font-bold text-amber-600">{(kol.pendingPayment / 1000000).toFixed(1)}M</p><p className="text-xs text-gray-500">Chờ thanh toán</p></div>
+        <div className="p-3 bg-gray-50 dark:bg-gray-700 rounded text-center"><p className="text-xl font-bold text-gray-600">{kol.engagementRate}%</p><p className="text-xs text-gray-500">TL tương tác</p></div>
+        <div className="p-3 bg-gray-50 dark:bg-gray-700 rounded text-center"><p className="text-xl font-bold text-gray-900 dark:text-white">{ranking?.rank || '-'}</p><p className="text-xs text-gray-500">Thứ hạng</p></div>
+        <div className="p-3 bg-gray-50 dark:bg-gray-700 rounded text-center"><p className="text-xl font-bold text-emerald-600">{(kol.totalEarned / 1000000).toFixed(1)}M</p><p className="text-xs text-gray-500">Đã kiếm (VND)</p></div>
+        <div className="p-3 bg-gray-50 dark:bg-gray-700 rounded text-center"><p className="text-xl font-bold text-amber-600">{(kol.pendingPayment / 1000000).toFixed(1)}M</p><p className="text-xs text-gray-500">Chờ thanh toán</p></div>
       </div>
       {kol.bio && <p className="text-sm text-gray-600 dark:text-gray-300">{kol.bio}</p>}
       <div>
         <h4 className="text-sm font-semibold text-gray-900 dark:text-white mb-2">Nhiệm vụ ({kolTasks.length})</h4>
         <div className="space-y-2">
           {kolTasks.map(t => (
-            <div key={t.id} className="flex items-center justify-between p-3 bg-gray-50 dark:bg-slate-700/50 rounded-xl">
+            <div key={t.id} className="flex items-center justify-between p-3 bg-gray-50 dark:bg-gray-700 rounded">
               <div><p className="text-sm font-medium text-gray-900 dark:text-white">{t.campaignName}</p><p className="text-xs text-gray-500">{t.productName}</p></div>
               <Badge label={taskStatusLabels[t.status as TaskStatus]} colorClass={taskStatusColors[t.status as TaskStatus]} />
             </div>
@@ -2202,17 +2202,17 @@ function TasksView({ selectedProject }: { selectedProject: string }) {
       </div>
       <div className="flex items-center gap-3 flex-wrap">
         <select value={filterStatus} onChange={e => setFilterStatus(e.target.value)}
-          className="px-4 py-2 rounded-xl border border-gray-200 dark:border-slate-600 bg-white dark:bg-slate-800 text-gray-900 dark:text-white text-sm">
+          className="px-4 py-2 rounded border border-gray-200 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-white text-sm">
           <option value="all">Tất cả trạng thái</option>
           {(Object.keys(taskStatusLabels) as TaskStatus[]).map(s => <option key={s} value={s}>{taskStatusLabels[s]}</option>)}
         </select>
         <span className="text-sm text-gray-500">{sorted.length} nhiệm vụ</span>
       </div>
-      <div className="bg-white dark:bg-slate-800 rounded-2xl border border-gray-200/60 dark:border-slate-700/60 overflow-hidden">
+      <div className="bg-white dark:bg-gray-800 rounded border border-gray-200 dark:border-gray-700 overflow-hidden">
         <div className="overflow-x-auto">
           <table className="w-full min-w-[900px]">
             <thead>
-              <tr className="border-b border-gray-100 dark:border-slate-700">
+              <tr className="border-b border-gray-100 dark:border-gray-700">
                 <SortTh field="kolName" label="KOL/KOC" />
                 <th className="text-left px-5 py-3 text-xs font-semibold text-gray-500 uppercase">Nền tảng</th>
                 <SortTh field="campaignName" label="Chiến dịch" />
@@ -2225,14 +2225,14 @@ function TasksView({ selectedProject }: { selectedProject: string }) {
             </thead>
             <tbody>
               {sorted.map(task => (
-                <tr key={task.id} className="border-b border-gray-50 dark:border-slate-700/50 hover:bg-gray-50/50 dark:hover:bg-slate-700/20">
+                <tr key={task.id} className="border-b border-gray-50 dark:border-gray-700 hover:bg-gray-50/50 dark:hover:bg-gray-700/20">
                   <td className="px-5 py-4">
                     <div className="flex items-center gap-3">
                       <Avatar initials={task.kolAvatar} size="sm" />
                       <p className="font-medium text-gray-900 dark:text-white text-sm">{task.kolName}</p>
                     </div>
                   </td>
-                  <td className="px-5 py-4"><Badge label={task.kolPlatform} colorClass="bg-gray-100 text-gray-700 dark:bg-slate-700 dark:text-gray-300" /></td>
+                  <td className="px-5 py-4"><Badge label={task.kolPlatform} colorClass="bg-gray-100 text-gray-700 dark:bg-gray-700 dark:text-gray-300" /></td>
                   <td className="px-5 py-4 text-sm text-gray-600 dark:text-gray-300">{task.campaignName}</td>
                   <td className="px-5 py-4"><Badge label={taskStatusLabels[task.status as TaskStatus]} colorClass={taskStatusColors[task.status as TaskStatus]} /></td>
                   <td className="px-5 py-4 text-sm text-gray-600 dark:text-gray-300">{task.productName}</td>
@@ -2272,7 +2272,7 @@ function TaskDetail({ taskId, onClose }: { taskId: string; onClose: () => void }
   const latestDraft = task.draftContent?.[task.draftContent.length - 1];
   return (
     <div className="space-y-4">
-      <div className="flex items-center gap-3 p-4 bg-gray-50 dark:bg-slate-700/50 rounded-xl">
+      <div className="flex items-center gap-3 p-4 bg-gray-50 dark:bg-gray-700 rounded">
         <Avatar initials={task.kolAvatar} size="lg" />
         <div className="flex-1">
           <p className="text-lg font-bold text-gray-900 dark:text-white">{task.kolName}</p>
@@ -2281,18 +2281,18 @@ function TaskDetail({ taskId, onClose }: { taskId: string; onClose: () => void }
         <Badge label={taskStatusLabels[task.status as TaskStatus]} colorClass={taskStatusColors[task.status as TaskStatus]} />
       </div>
       <div className="grid grid-cols-2 gap-4">
-        <div className="p-4 bg-gray-50 dark:bg-slate-700/50 rounded-xl"><p className="text-xs text-gray-500 mb-1">KPI Target Views</p><p className="text-lg font-bold">{task.kpiTarget.views.toLocaleString()}</p></div>
-        <div className="p-4 bg-gray-50 dark:bg-slate-700/50 rounded-xl"><p className="text-xs text-gray-500 mb-1">KPI Target ER</p><p className="text-lg font-bold">{task.kpiTarget.engagementRate}%</p></div>
+        <div className="p-4 bg-gray-50 dark:bg-gray-700 rounded"><p className="text-xs text-gray-500 mb-1">KPI Target Views</p><p className="text-lg font-bold">{task.kpiTarget.views.toLocaleString()}</p></div>
+        <div className="p-4 bg-gray-50 dark:bg-gray-700 rounded"><p className="text-xs text-gray-500 mb-1">KPI Target ER</p><p className="text-lg font-bold">{task.kpiTarget.engagementRate}%</p></div>
       </div>
       <div>
         <h4 className="text-sm font-semibold text-gray-900 dark:text-white mb-2">Brief nhiệm vụ</h4>
-        <p className="text-sm text-gray-600 dark:text-gray-300 p-3 bg-gray-50 dark:bg-slate-700/50 rounded-xl">{task.brief}</p>
+        <p className="text-sm text-gray-600 dark:text-gray-300 p-3 bg-gray-50 dark:bg-gray-700 rounded">{task.brief}</p>
       </div>
       {task.draftContent && task.draftContent.length > 0 && (
         <div>
           <h4 className="text-sm font-semibold text-gray-900 dark:text-white mb-2">Bản nháp ({task.draftContent.length})</h4>
           {task.draftContent.map((draft, i) => (
-            <div key={i} className={`p-3 rounded-xl ${i === task.draftContent!.length - 1 ? 'bg-teal-50 dark:bg-teal-900/20 border border-teal-200' : 'bg-gray-50 dark:bg-slate-700/50'} mb-2`}>
+            <div key={i} className={`p-3 rounded ${i === task.draftContent!.length - 1 ? 'bg-gray-50 dark:bg-gray-700 border border-gray-200' : 'bg-gray-50 dark:bg-gray-700'} mb-2`}>
               <div className="flex items-center justify-between mb-1">
                 <p className="text-sm font-medium text-gray-900 dark:text-white">Phiên bản {draft.version}</p>
                 <span className="text-xs text-gray-500">{draft.submittedAt}</span>
@@ -2305,12 +2305,12 @@ function TaskDetail({ taskId, onClose }: { taskId: string; onClose: () => void }
       {task.publishedContent && (
         <div>
           <h4 className="text-sm font-semibold text-gray-900 dark:text-white mb-2">Bài đăng</h4>
-          <div className="p-3 bg-emerald-50 dark:bg-emerald-900/20 rounded-xl space-y-2">
+          <div className="p-3 bg-gray-50 dark:bg-gray-700 rounded space-y-2">
             <div className="flex items-center gap-2">
-              <a href={task.publishedContent.postUrl} className="text-sm text-teal-600 hover:underline flex items-center gap-1"><ExternalLink className="w-3 h-3" />{task.publishedContent.postUrl}</a>
+              <a href={task.publishedContent.postUrl} className="text-sm text-gray-600 hover:underline flex items-center gap-1"><ExternalLink className="w-3 h-3" />{task.publishedContent.postUrl}</a>
             </div>
             <p className="text-xs text-gray-500">Đăng lúc: {task.publishedContent.publishedAt}</p>
-            <div className="border-2 border-dashed border-gray-300 dark:border-slate-600 rounded-xl p-3 text-center cursor-pointer hover:border-teal-400 transition-colors">
+            <div className="border-2 border-dashed border-gray-300 dark:border-gray-600 rounded p-3 text-center cursor-pointer hover:border-gray-400 transition-colors">
               <p className="text-xs text-gray-400">Tải lên screenshot bài đăng (JPG, PNG tối đa 5MB)</p>
             </div>
           </div>
@@ -2319,17 +2319,17 @@ function TaskDetail({ taskId, onClose }: { taskId: string; onClose: () => void }
       {task.metrics && (
         <div>
           <h4 className="text-sm font-semibold text-gray-900 dark:text-white mb-2">Metrics</h4>
-          <div className="p-3 bg-gray-50 dark:bg-slate-700/50 rounded-xl">
+          <div className="p-3 bg-gray-50 dark:bg-gray-700 rounded">
             <div className="grid grid-cols-5 gap-2 mb-2">
               {([['Views', task.metrics.views], ['Likes', task.metrics.likes], ['Comments', task.metrics.comments], ['Shares', task.metrics.shares], ['Saves', task.metrics.saves]] as [string, number][]).map(([k, v]) => (
                 <div key={k} className="text-center"><p className="text-lg font-bold">{v.toLocaleString()}</p><p className="text-xs text-gray-500">{k}</p></div>
               ))}
             </div>
-            <p className="text-sm text-center text-teal-600 font-medium">Engagement Rate: {task.metrics.engagementRate}%</p>
+            <p className="text-sm text-center text-gray-600 font-medium">Engagement Rate: {task.metrics.engagementRate}%</p>
             <p className="text-xs text-center text-gray-500 mt-1">
               {task.metrics.brandConfirmed ? <span className="text-emerald-600">✓ Đã xác nhận</span> : <span className="text-amber-600">Chờ xác nhận</span>}
             </p>
-            <div className="border-2 border-dashed border-gray-300 dark:border-slate-600 rounded-xl p-2 text-center cursor-pointer hover:border-teal-400 transition-colors mt-2">
+            <div className="border-2 border-dashed border-gray-300 dark:border-gray-600 rounded p-2 text-center cursor-pointer hover:border-gray-400 transition-colors mt-2">
               <p className="text-xs text-gray-400">Tải lên insight screenshot</p>
             </div>
           </div>
@@ -2338,7 +2338,7 @@ function TaskDetail({ taskId, onClose }: { taskId: string; onClose: () => void }
       {task.conversion && (
         <div>
           <h4 className="text-sm font-semibold text-gray-900 dark:text-white mb-2">Conversion Data</h4>
-          <div className="p-3 bg-emerald-50 dark:bg-emerald-900/20 rounded-xl">
+          <div className="p-3 bg-gray-50 dark:bg-gray-700 rounded">
             <div className="grid grid-cols-4 gap-2">
               {([['Orders', task.conversion.orders], ['Leads', task.conversion.leads], ['Coupon usage', task.conversion.couponUsage], ['Revenue', `${(task.conversion.revenue / 1000000).toFixed(1)}M`]] as [string, string | number][]).map(([k, v]) => (
                 <div key={k}><p className="text-lg font-bold text-gray-900 dark:text-white">{v}</p><p className="text-xs text-gray-500">{k}</p></div>
@@ -2398,7 +2398,7 @@ function WorkflowView({ selectedProject, initialNode }: { selectedProject: strin
   return (
     <div className="space-y-4">
       {/* Step Indicator */}
-      <div className="bg-white dark:bg-slate-800 rounded-2xl border border-gray-200/60 dark:border-slate-700/60 p-5">
+      <div className="bg-white dark:bg-gray-800 rounded border border-gray-200 dark:border-gray-700 p-5">
         <div className="flex items-center justify-between">
           {STEP_ORDER.map((step, i) => {
             const isActive = node === step;
@@ -2406,16 +2406,16 @@ function WorkflowView({ selectedProject, initialNode }: { selectedProject: strin
             return (
               <div key={step} className="flex items-center flex-1">
                 <div className="flex flex-col items-center">
-                  <div className={`w-9 h-9 rounded-full flex items-center justify-center font-bold text-sm transition-all
-                    ${isActive ? 'bg-teal-500 text-white ring-4 ring-teal-100 dark:ring-teal-900/40' : isPast ? 'bg-teal-500 text-white' : 'bg-gray-100 dark:bg-slate-700 text-gray-400'}`}>
+                  <div className={`w-9 h-9 rounded-full flex items-center justify-center font-bold text-sm transition-colors
+                    ${isActive ? 'bg-gray-500 text-white ring-4 ring-gray-100 dark:ring-gray-900/40/40' : isPast ? 'bg-gray-500 text-white' : 'bg-gray-100 dark:bg-gray-700 text-gray-400'}`}>
                     {isPast ? <Check className="w-4 h-4" /> : i + 1}
                   </div>
-                  <p className={`text-[11px] font-medium mt-2 text-center whitespace-pre-line ${isActive ? 'text-teal-600 dark:text-teal-400 font-bold' : isPast ? 'text-teal-500' : 'text-gray-400'}`}>
+                  <p className={`text-[11px] font-medium mt-2 text-center whitespace-pre-line ${isActive ? 'text-gray-600 dark:text-gray-400 font-bold' : isPast ? 'text-gray-400' : 'text-gray-400'}`}>
                     {STEP_LABELS[step]}
                   </p>
                 </div>
                 {i < STEP_ORDER.length - 1 && (
-                  <div className={`flex-1 h-0.5 mx-2 mb-5 transition-all ${currentStepIdx > i ? 'bg-teal-400' : 'bg-gray-200 dark:bg-slate-700'}`} />
+                  <div className={`flex-1 h-0.5 mx-2 mb-5 transition-colors ${currentStepIdx > i ? 'bg-gray-400' : 'bg-gray-200 dark:bg-gray-700'}`} />
                 )}
               </div>
             );
@@ -2424,11 +2424,11 @@ function WorkflowView({ selectedProject, initialNode }: { selectedProject: strin
       </div>
 
       {/* Workflow tabs */}
-      <div className="flex gap-1 p-1 bg-gray-100 dark:bg-slate-700/50 rounded-xl w-fit">
+      <div className="flex gap-1 p-1 bg-gray-100 dark:bg-gray-700 rounded w-fit">
         {WORKFLOW_NODES.map(n => (
           <button key={n.id} onClick={() => goTo(n.id)}
-            className={`px-4 py-2 rounded-lg text-sm font-medium transition-all ${node === n.id
-              ? 'bg-white dark:bg-slate-700 text-teal-600 shadow-sm'
+            className={`px-4 py-2 rounded text-sm font-medium transition-colors ${node === n.id
+              ? 'bg-white dark:bg-gray-700 text-gray-600 '
               : 'text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200'}`}>
             {n.label}
           </button>
@@ -2591,7 +2591,7 @@ function ActionDashboardModal({ selectedProject }: { selectedProject: string }) 
     published: { label: 'Đã đăng bài', color: 'bg-cyan-100 text-cyan-800 dark:bg-cyan-900/40 dark:text-cyan-300' },
     tracking: { label: 'Đang theo dõi', color: 'bg-blue-100 text-blue-800 dark:bg-blue-900/40 dark:text-blue-300' },
     metrics_submitted: { label: 'Đã gửi metrics', color: 'bg-indigo-100 text-indigo-800 dark:bg-indigo-900/40 dark:text-indigo-300' },
-    metrics_approved: { label: 'Metrics OK', color: 'bg-teal-100 text-teal-800 dark:bg-teal-900/40 dark:text-teal-300' },
+    metrics_approved: { label: 'Metrics OK', color: 'bg-gray-100 text-gray-800 dark:bg-gray-700 dark:text-gray-300' },
     payment_pending: { label: 'Chờ thanh toán', color: 'bg-amber-100 text-amber-800 dark:bg-amber-900/40 dark:text-amber-300' },
   };
 
@@ -2600,11 +2600,11 @@ function ActionDashboardModal({ selectedProject }: { selectedProject: string }) 
       {/* Stats row */}
       <div className="grid grid-cols-3 gap-3">
         {[
-          { label: 'Chờ duyệt bài', count: pendingContent.length, color: 'from-purple-500/10 to-purple-600/5', icon: <CheckCircle2 className="w-4 h-4" />, accent: 'text-purple-600', tabKey: 'content' },
-          { label: 'Chờ duyệt metrics', count: pendingMetrics.length, color: 'from-blue-500/10 to-blue-600/5', icon: <BarChart3 className="w-4 h-4" />, accent: 'text-blue-600', tabKey: 'metrics' },
-          { label: 'Chờ thanh toán', count: pendingPayment.length, color: 'from-emerald-500/10 to-emerald-600/5', icon: <CreditCard className="w-4 h-4" />, accent: 'text-emerald-600', tabKey: 'payment' },
+          { label: 'Chờ duyệt bài', count: pendingContent.length, color: 'bg-gray-50 dark:bg-gray-800', icon: <CheckCircle2 className="w-4 h-4" />, accent: 'text-gray-600 dark:text-gray-400', tabKey: 'content' },
+          { label: 'Chờ duyệt metrics', count: pendingMetrics.length, color: 'bg-gray-50 dark:bg-gray-800', icon: <BarChart3 className="w-4 h-4" />, accent: 'text-gray-600 dark:text-gray-400', tabKey: 'metrics' },
+          { label: 'Chờ thanh toán', count: pendingPayment.length, color: 'bg-gray-50 dark:bg-gray-800', icon: <CreditCard className="w-4 h-4" />, accent: 'text-gray-600 dark:text-gray-400', tabKey: 'payment' },
         ].map(item => (
-          <div key={item.label} className={`bg-gradient-to-br ${item.color} rounded-xl p-4 text-center cursor-pointer transition-all hover:scale-[1.02]`}
+          <div key={item.label} className={`${item.color} rounded p-4 text-center cursor-pointer border border-gray-200 dark:border-gray-700`}
             onClick={() => setTab(item.tabKey as typeof tab)}>
             <div className={`${item.accent} flex justify-center mb-1`}>{item.icon}</div>
             <p className="text-2xl font-bold text-gray-900 dark:text-white">{item.count}</p>
@@ -2617,15 +2617,15 @@ function ActionDashboardModal({ selectedProject }: { selectedProject: string }) 
       <div className="flex gap-2 flex-wrap">
         {TABS.map(t => (
           <button key={t.id} onClick={() => setTab(t.id)}
-            className={`px-4 py-2 rounded-xl text-sm font-medium transition-all flex items-center gap-2 ${
+            className={`px-4 py-2 rounded text-sm font-medium transition-colors flex items-center gap-2 ${
               tab === t.id
-                ? 'bg-teal-600 text-white shadow-sm'
-                : 'bg-gray-100 dark:bg-slate-700 text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-slate-600'
+                ? 'bg-gray-600 text-white '
+                : 'bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600'
             }`}>
             {t.label}
             {t.count > 0 && (
               <span className={`px-1.5 py-0.5 rounded-full text-[10px] font-bold ${
-                tab === t.id ? 'bg-white/20 text-white' : 'bg-gray-200 dark:bg-slate-600 text-gray-600 dark:text-gray-300'
+                tab === t.id ? 'bg-white/20 text-white' : 'bg-gray-200 dark:bg-gray-600 text-gray-600 dark:text-gray-300'
               }`}>{t.count}</span>
             )}
           </button>
@@ -2642,7 +2642,7 @@ function ActionDashboardModal({ selectedProject }: { selectedProject: string }) 
         ) : (
           pendingByType[tab].map(t => {
             const state = getState(t.id, t);
-            const badge = badgeMap[state] || { label: state, color: 'bg-gray-100 text-gray-700 dark:bg-slate-700 dark:text-gray-300' };
+            const badge = badgeMap[state] || { label: state, color: 'bg-gray-100 text-gray-700 dark:bg-gray-700 dark:text-gray-300' };
             const metricsData = t.metrics;
             const views = metricsData ? Number(metricsData.views) : 0;
             const er = metricsData ? metricsData.engagementRate : 0;
@@ -2650,9 +2650,9 @@ function ActionDashboardModal({ selectedProject }: { selectedProject: string }) 
 
             return (
               <div key={t.id}
-                className={`bg-white dark:bg-slate-800 rounded-2xl border transition-all ${
-                  openTask === t.id ? 'border-teal-400 shadow-md' : 'border-gray-200/60 dark:border-slate-700/60'
-                } hover:shadow-md cursor-pointer`}
+                className={`bg-white dark:bg-gray-800 rounded border transition-colors ${
+                  openTask === t.id ? 'border-gray-400 ' : 'border-gray-200 dark:border-gray-700'
+                } hover: cursor-pointer`}
                 onClick={() => setOpenTask(openTask === t.id ? null : t.id)}>
 
                 {/* Header */}
@@ -2672,26 +2672,26 @@ function ActionDashboardModal({ selectedProject }: { selectedProject: string }) 
 
                 {/* Expanded */}
                 {openTask === t.id && (
-                  <div className="px-4 pb-4 space-y-3 border-t border-gray-100 dark:border-slate-700 pt-3">
+                  <div className="px-4 pb-4 space-y-3 border-t border-gray-100 dark:border-gray-700 pt-3">
                     {/* KPIs */}
                     <div className="grid grid-cols-3 gap-2">
                       {metricsData ? (
                         <>
-                          <div className="p-2 bg-gray-50 dark:bg-slate-700/40 rounded-lg text-center">
+                          <div className="p-2 bg-gray-50 dark:bg-gray-800 rounded text-center">
                             <p className="text-sm font-bold">{views.toLocaleString()}</p>
                             <p className="text-[10px] text-gray-500">Views</p>
                           </div>
-                          <div className="p-2 bg-gray-50 dark:bg-slate-700/40 rounded-lg text-center">
+                          <div className="p-2 bg-gray-50 dark:bg-gray-800 rounded text-center">
                             <p className="text-sm font-bold">{er}%</p>
                             <p className="text-[10px] text-gray-500">ER</p>
                           </div>
-                          <div className="p-2 bg-gray-50 dark:bg-slate-700/40 rounded-lg text-center">
+                          <div className="p-2 bg-gray-50 dark:bg-gray-800 rounded text-center">
                             <p className="text-sm font-bold">{conv.toLocaleString()}</p>
                             <p className="text-[10px] text-gray-500">Conversions</p>
                           </div>
                         </>
                       ) : (
-                        <div className="col-span-3 p-2 bg-gray-50 dark:bg-slate-700/40 rounded-lg text-center text-xs text-gray-500">
+                        <div className="col-span-3 p-2 bg-gray-50 dark:bg-gray-800 rounded text-center text-xs text-gray-500">
                           Chưa có metrics — KOL chưa nộp số liệu
                         </div>
                       )}
@@ -2753,12 +2753,12 @@ function ActionDashboardModal({ selectedProject }: { selectedProject: string }) 
       {/* Reject feedback modal */}
       <Modal isOpen={!!rejectTarget} onClose={() => setRejectTarget(null)} title="Từ chối bài viết" width="max-w-md">
         <div className="space-y-4">
-          <div className="p-3 bg-red-50 dark:bg-red-900/20 rounded-xl border border-red-200 dark:border-red-800/40 text-sm text-red-700 dark:text-red-300">
+          <div className="p-3 bg-red-50 dark:bg-red-900/20 rounded border border-red-200 dark:border-red-800/40 text-sm text-red-700 dark:text-red-300">
             KOL sẽ nhận được thông báo và cần chỉnh sửa theo feedback trước khi nộp lại.
           </div>
           <div>
             <label className="block text-sm font-medium mb-1">Feedback cho KOL *</label>
-            <textarea rows={3} className="w-full px-4 py-2.5 rounded-xl border border-gray-200 dark:border-slate-600 bg-white dark:bg-slate-700 text-sm resize-none focus:ring-2 focus:ring-teal-500 outline-none"
+            <textarea rows={3} className="w-full px-4 py-2.5 rounded border border-gray-200 dark:border-gray-600 bg-white dark:bg-gray-700 text-sm resize-none focus:ring-2 focus:ring-gray-500 outline-none"
               placeholder="VD: Video quá ngắn, cần thêm phần giới thiệu sản phẩm và CTA rõ ràng hơn..."
               value={rejectFb} onChange={e => setRejectFb(e.target.value)} />
           </div>
@@ -2788,7 +2788,7 @@ function ActionDashboardModal({ selectedProject }: { selectedProject: string }) 
             {paymentDecision.action === 'partial' && (
               <div>
                 <label className="block text-sm font-medium mb-1">Số tiền thanh toán (VND)</label>
-                <input type="number" className="w-full px-4 py-2.5 rounded-xl border border-gray-200 dark:border-slate-600 bg-white dark:bg-slate-700 text-sm focus:ring-2 focus:ring-teal-500 outline-none"
+                <input type="number" className="w-full px-4 py-2.5 rounded border border-gray-200 dark:border-gray-600 bg-white dark:bg-gray-700 text-sm focus:ring-2 focus:ring-gray-500 outline-none"
                   placeholder="VD: 2500000"
                   onChange={e => setPaymentDecision(p => p ? { ...p, amount: Number(e.target.value) } : null)} />
               </div>
@@ -2797,7 +2797,7 @@ function ActionDashboardModal({ selectedProject }: { selectedProject: string }) 
               <label className="block text-sm font-medium mb-1">
                 Ghi chú / Lý do {paymentDecision.action === 'hold' ? '*' : '(tùy chọn)'}
               </label>
-              <textarea rows={2} className="w-full px-4 py-2.5 rounded-xl border border-gray-200 dark:border-slate-600 bg-white dark:bg-slate-700 text-sm resize-none focus:ring-2 focus:ring-teal-500 outline-none"
+              <textarea rows={2} className="w-full px-4 py-2.5 rounded border border-gray-200 dark:border-gray-600 bg-white dark:bg-gray-700 text-sm resize-none focus:ring-2 focus:ring-gray-500 outline-none"
                 placeholder={paymentDecision.action === 'hold' ? 'Lý do giữ tạm (bắt buộc)...' : 'Ghi chú thêm...'}
                 onChange={e => setPaymentDecision(p => p ? { ...p, reason: e.target.value } : null)} />
             </div>
@@ -2929,7 +2929,7 @@ function SmartActionHub({ selectedProject }: { selectedProject: string }) {
   const STATUS_COLORS: Record<string, string> = {
     draft_submitted: 'bg-purple-100 text-purple-800 dark:bg-purple-900/40 dark:text-purple-300',
     revision_required: 'bg-red-100 text-red-800 dark:bg-red-900/40 dark:text-red-300',
-    approved_to_publish: 'bg-teal-100 text-teal-800 dark:bg-teal-900/40 dark:text-teal-300',
+    approved_to_publish: 'bg-gray-100 text-gray-800 dark:bg-gray-700 dark:text-gray-300',
     published: 'bg-cyan-100 text-cyan-800 dark:bg-cyan-900/40 dark:text-cyan-300',
     tracking: 'bg-amber-100 text-amber-800 dark:bg-amber-900/40 dark:text-amber-300',
     metrics_submitted: 'bg-indigo-100 text-indigo-800 dark:bg-indigo-900/40 dark:text-indigo-300',
@@ -2937,17 +2937,17 @@ function SmartActionHub({ selectedProject }: { selectedProject: string }) {
     payment_pending: 'bg-orange-100 text-orange-800 dark:bg-orange-900/40 dark:text-orange-300',
     paid: 'bg-green-100 text-green-800 dark:bg-green-900/40 dark:text-green-300',
     hold: 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900/40 dark:text-yellow-300',
-    rejected: 'bg-gray-200 text-gray-700 dark:bg-slate-700 dark:text-gray-300',
+    rejected: 'bg-gray-200 text-gray-700 dark:bg-gray-700 dark:text-gray-300',
     assigned: 'bg-blue-100 text-blue-800 dark:bg-blue-900/40 dark:text-blue-300',
   };
 
   return (
     <div className="relative">
-      <div className={`transition-all duration-300 ${drawerTask ? 'pr-80' : ''}`}>
+      <div className={`transition-colors duration-300 ${drawerTask ? 'pr-80' : ''}`}>
         {/* ── Section 1: Charts + KPI Row ── */}
         <div className="grid grid-cols-12 gap-4 mb-5">
           {/* Donut chart */}
-          <div className="col-span-12 lg:col-span-4 bg-white dark:bg-slate-800 rounded-2xl border border-gray-200/60 dark:border-slate-700/60 p-4">
+          <div className="col-span-12 lg:col-span-4 bg-white dark:bg-gray-800 rounded border border-gray-200 dark:border-gray-700 p-4">
             <p className="text-sm font-semibold text-gray-900 dark:text-white mb-1">Phân bổ trạng thái</p>
             <p className="text-xs text-gray-500 mb-3">Click vào phần để lọc danh sách</p>
             {chartData.length > 0 ? (
@@ -2973,7 +2973,7 @@ function SmartActionHub({ selectedProject }: { selectedProject: string }) {
                       acc.cumPct += pct;
                       return acc;
                     }, { paths: [] as JSX.Element[], cumPct: 0 }).paths}
-                    <circle cx="18" cy="18" r="10" fill="white" className="dark:fill-slate-800" />
+                    <circle cx="18" cy="18" r="10" fill="white" className="dark:fill-gray-800" />
                   </svg>
                   <div className="absolute inset-0 flex flex-col items-center justify-center">
                     <p className="text-xl font-bold text-gray-900 dark:text-white">{totalChart}</p>
@@ -2993,8 +2993,8 @@ function SmartActionHub({ selectedProject }: { selectedProject: string }) {
                     );
                     return (
                       <button key={seg.name} onClick={() => handleChartClick(seg.name)}
-                        className={`flex items-center gap-2 w-full text-left px-2 py-1 rounded-lg transition-all text-xs group ${
-                          isActive ? 'bg-gray-100 dark:bg-slate-700 font-semibold' : 'hover:bg-gray-50 dark:hover:bg-slate-700/50'
+                        className={`flex items-center gap-2 w-full text-left px-2 py-1 rounded transition-colors text-xs group ${
+                          isActive ? 'bg-gray-100 dark:bg-gray-700 font-semibold' : 'hover:bg-gray-50 dark:hover:bg-gray-700'
                         }`}>
                         <span className="w-2.5 h-2.5 rounded-full flex-shrink-0" style={{ backgroundColor: seg.color }} />
                         <span className="text-gray-700 dark:text-gray-300 flex-1">{seg.name}</span>
@@ -3012,14 +3012,14 @@ function SmartActionHub({ selectedProject }: { selectedProject: string }) {
           {/* KPI action cards — click to filter */}
           <div className="col-span-12 lg:col-span-8 grid grid-cols-2 md:grid-cols-4 gap-3">
             {[
-              { key: 'draft_submitted', label: 'Mới nộp', sub: 'Cần duyệt bài', color: 'from-purple-500/10 to-purple-600/5', icon: <CheckCircle2 className="w-4 h-4 text-purple-600" />, count: counts.draft_submitted },
-              { key: 'revision_required', label: 'Cần sửa lại', sub: 'Feedback chờ gửi', color: 'from-red-500/10 to-red-600/5', icon: <MessageSquare className="w-4 h-4 text-red-600" />, count: counts.revision_required },
-              { key: 'metrics', label: 'Chờ duyệt Metrics', sub: 'Xác nhận số liệu', color: 'from-blue-500/10 to-blue-600/5', icon: <BarChart3 className="w-4 h-4 text-blue-600" />, count: counts.metrics },
-              { key: 'payment', label: 'Chờ thanh toán', sub: 'Duyệt & trả tiền', color: 'from-emerald-500/10 to-emerald-600/5', icon: <CreditCard className="w-4 h-4 text-emerald-600" />, count: counts.payment },
+              { key: 'draft_submitted', label: 'Mới nộp', sub: 'Cần duyệt bài', color: 'bg-gray-50 dark:bg-gray-800', icon: <CheckCircle2 className="w-4 h-4 text-gray-600 dark:text-gray-400" />, count: counts.draft_submitted },
+              { key: 'revision_required', label: 'Cần sửa lại', sub: 'Feedback chờ gửi', color: 'bg-gray-50 dark:bg-gray-800', icon: <MessageSquare className="w-4 h-4 text-gray-600 dark:text-gray-400" />, count: counts.revision_required },
+              { key: 'metrics', label: 'Chờ duyệt Metrics', sub: 'Xác nhận số liệu', color: 'bg-gray-50 dark:bg-gray-800', icon: <BarChart3 className="w-4 h-4 text-gray-600 dark:text-gray-400" />, count: counts.metrics },
+              { key: 'payment', label: 'Chờ thanh toán', sub: 'Duyệt & trả tiền', color: 'bg-gray-50 dark:bg-gray-800', icon: <CreditCard className="w-4 h-4 text-gray-600 dark:text-gray-400" />, count: counts.payment },
             ].map(card => (
               <button key={card.key} onClick={() => setFilter(card.key === 'metrics' ? 'metrics' : card.key as HubFilter)}
-                className={`bg-gradient-to-br ${card.color} rounded-xl p-4 text-left transition-all hover:scale-[1.02] hover:shadow-md ${
-                  filter === card.key || (card.key === 'metrics' && filter === 'metrics') ? 'ring-2 ring-teal-400' : ''
+                className={`${card.color} rounded p-4 text-left border border-gray-200 dark:border-gray-700 ${
+                  filter === card.key || (card.key === 'metrics' && filter === 'metrics') ? 'ring-2 ring-gray-400' : ''
                 }`}>
                 <div className="flex items-start justify-between mb-2">
                   <span className="text-2xl font-bold text-gray-900 dark:text-white">{card.count}</span>
@@ -3043,15 +3043,15 @@ function SmartActionHub({ selectedProject }: { selectedProject: string }) {
               { id: 'payment' as HubFilter, label: 'Thanh toán' },
             ] as { id: HubFilter; label: string }[]).map(chip => (
               <button key={chip.id} onClick={() => setFilter(chip.id)}
-                className={`px-4 py-2 rounded-xl text-sm font-medium transition-all ${
+                className={`px-4 py-2 rounded text-sm font-medium transition-colors ${
                   filter === chip.id
-                    ? 'bg-teal-600 text-white shadow-sm'
-                    : 'bg-gray-100 dark:bg-slate-700 text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-slate-600'
+                    ? 'bg-gray-600 text-white '
+                    : 'bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600'
                 }`}>
                 {chip.label}
                 {counts[chip.id] > 0 && (
                   <span className={`ml-1.5 px-1.5 py-0.5 rounded-full text-[10px] font-bold ${
-                    filter === chip.id ? 'bg-white/20 text-white' : 'bg-gray-200 dark:bg-slate-600'
+                    filter === chip.id ? 'bg-white/20 text-white' : 'bg-gray-200 dark:bg-gray-600'
                   }`}>{counts[chip.id]}</span>
                 )}
               </button>
@@ -3062,7 +3062,7 @@ function SmartActionHub({ selectedProject }: { selectedProject: string }) {
           <div className="relative flex-1 min-w-[200px]">
             <Search className="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
             <input type="text" value={searchTerm} onChange={e => setSearchTerm(e.target.value)} placeholder="Tìm KOL, sản phẩm..."
-              className="w-full pl-9 pr-4 py-2.5 rounded-xl border border-gray-200 dark:border-slate-600 bg-white dark:bg-slate-700 text-sm focus:ring-2 focus:ring-teal-500 outline-none text-gray-900 dark:text-white" />
+              className="w-full pl-9 pr-4 py-2.5 rounded border border-gray-200 dark:border-gray-600 bg-white dark:bg-gray-700 text-sm focus:ring-2 focus:ring-gray-500 outline-none text-gray-900 dark:text-white" />
           </div>
 
           {/* Result count */}
@@ -3070,11 +3070,11 @@ function SmartActionHub({ selectedProject }: { selectedProject: string }) {
         </div>
 
         {/* ── Section 3: Task Table ── */}
-        <div className="bg-white dark:bg-slate-800 rounded-2xl border border-gray-200/60 dark:border-slate-700/60 overflow-hidden">
+        <div className="bg-white dark:bg-gray-800 rounded border border-gray-200 dark:border-gray-700 overflow-hidden">
           <div className="overflow-x-auto">
             <table className="w-full min-w-[900px]">
               <thead>
-                <tr className="border-b border-gray-100 dark:border-slate-700">
+                <tr className="border-b border-gray-100 dark:border-gray-700">
                   <th className="text-left px-5 py-3 text-xs font-semibold text-gray-500 uppercase">KOL/KOC</th>
                   <th className="text-left px-5 py-3 text-xs font-semibold text-gray-500 uppercase">Sản phẩm</th>
                   <th className="text-left px-5 py-3 text-xs font-semibold text-gray-500 uppercase">Trạng thái</th>
@@ -3098,8 +3098,8 @@ function SmartActionHub({ selectedProject }: { selectedProject: string }) {
                     const isActionable = ['draft_submitted', 'revision_required', 'published', 'tracking', 'metrics_submitted', 'metrics_approved', 'payment_pending'].includes(state);
                     return (
                       <tr key={t.id}
-                        className={`border-b border-gray-50 dark:border-slate-700/50 transition-colors cursor-pointer ${
-                          drawerTask?.id === t.id ? 'bg-teal-50 dark:bg-teal-900/10' : 'hover:bg-gray-50/50 dark:hover:bg-slate-700/30'
+                        className={`border-b border-gray-50 dark:border-gray-700 transition-colors cursor-pointer ${
+                          drawerTask?.id === t.id ? 'bg-gray-50 dark:bg-gray-800' : 'hover:bg-gray-50/50 dark:hover:bg-gray-700'
                         }`}
                         onClick={() => setDrawerTask(drawerTask?.id === t.id ? null : t)}>
                         {/* KOL */}
@@ -3180,7 +3180,7 @@ function SmartActionHub({ selectedProject }: { selectedProject: string }) {
       </div>
 
       {/* ── Section 4: Sliding Drawer (Progressive Disclosure) ── */}
-      <div className={`fixed top-0 right-0 h-full w-80 bg-white dark:bg-slate-800 border-l border-gray-200 dark:border-slate-700 shadow-2xl z-50 transition-transform duration-300 overflow-y-auto ${
+      <div className={`fixed top-0 right-0 h-full w-80 bg-white dark:bg-gray-800 border-l border-gray-200 dark:border-gray-700  z-50 transition-transform duration-300 overflow-y-auto ${
         drawerTask ? 'translate-x-0' : 'translate-x-full'
       }`}>
         {drawerTask && (
@@ -3191,7 +3191,7 @@ function SmartActionHub({ selectedProject }: { selectedProject: string }) {
                 <h3 className="text-base font-bold text-gray-900 dark:text-white">{drawerTask.kolName}</h3>
                 <p className="text-sm text-gray-500">{drawerTask.productName}</p>
               </div>
-              <button onClick={() => setDrawerTask(null)} className="p-1 rounded-lg hover:bg-gray-100 dark:hover:bg-slate-700">
+              <button onClick={() => setDrawerTask(null)} className="p-1 rounded hover:bg-gray-100 dark:hover:bg-gray-700">
                 <XCircle className="w-5 h-5 text-gray-400" />
               </button>
             </div>
@@ -3212,7 +3212,7 @@ function SmartActionHub({ selectedProject }: { selectedProject: string }) {
                   { label: 'ER', value: drawerTask.metrics.engagementRate + '%' },
                   { label: 'Comments', value: Number((drawerTask.metrics as { comments?: number }).comments || 0).toLocaleString() },
                 ].map(k => (
-                  <div key={k.label} className="bg-gray-50 dark:bg-slate-700/50 rounded-lg p-2.5 text-center">
+                  <div key={k.label} className="bg-gray-50 dark:bg-gray-700 rounded p-2.5 text-center">
                     <p className="text-sm font-bold text-gray-900 dark:text-white">{k.value}</p>
                     <p className="text-[10px] text-gray-500">{k.label}</p>
                   </div>
@@ -3225,14 +3225,14 @@ function SmartActionHub({ selectedProject }: { selectedProject: string }) {
               <div>
                 <p className="text-xs font-semibold text-gray-500 uppercase mb-1.5">Link bài đăng</p>
                 <a href={drawerTask.publishedContent?.postUrl} target="_blank" rel="noopener noreferrer"
-                  className="flex items-center gap-1.5 text-sm text-teal-600 hover:text-teal-700 underline truncate">
+                  className="flex items-center gap-1.5 text-sm text-gray-600 hover:text-gray-700 underline truncate">
                   <ExternalLink className="w-3.5 h-3.5 flex-shrink-0" />{drawerTask.publishedContent?.postUrl}
                 </a>
               </div>
             )}
 
             {/* Payment info */}
-            <div className="p-3 bg-gray-50 dark:bg-slate-700/50 rounded-xl">
+            <div className="p-3 bg-gray-50 dark:bg-gray-700 rounded">
               <div className="flex justify-between mb-1">
                 <span className="text-xs text-gray-500">Thù lao</span>
                 <span className="text-sm font-bold text-gray-900 dark:text-white">{drawerTask.paymentAmount.toLocaleString()} VND</span>
@@ -3307,7 +3307,7 @@ function SmartActionHub({ selectedProject }: { selectedProject: string }) {
             {paymentDecision.action === 'partial' && (
               <div>
                 <label className="block text-sm font-medium mb-1">Số tiền thanh toán (VND)</label>
-                <input type="number" className="w-full px-4 py-2.5 rounded-xl border border-gray-200 dark:border-slate-600 bg-white dark:bg-slate-700 text-sm focus:ring-2 focus:ring-teal-500 outline-none"
+                <input type="number" className="w-full px-4 py-2.5 rounded border border-gray-200 dark:border-gray-600 bg-white dark:bg-gray-700 text-sm focus:ring-2 focus:ring-gray-500 outline-none"
                   placeholder="VD: 2500000"
                   onChange={e => setPaymentDecision(p => p ? { ...p, amount: Number(e.target.value) } : null)} />
               </div>
@@ -3316,7 +3316,7 @@ function SmartActionHub({ selectedProject }: { selectedProject: string }) {
               <label className="block text-sm font-medium mb-1">
                 Ghi chú {paymentDecision.action === 'hold' ? '*' : '(tùy chọn)'}
               </label>
-              <textarea rows={2} className="w-full px-4 py-2.5 rounded-xl border border-gray-200 dark:border-slate-600 bg-white dark:bg-slate-700 text-sm resize-none focus:ring-2 focus:ring-teal-500 outline-none"
+              <textarea rows={2} className="w-full px-4 py-2.5 rounded border border-gray-200 dark:border-gray-600 bg-white dark:bg-gray-700 text-sm resize-none focus:ring-2 focus:ring-gray-500 outline-none"
                 placeholder="Ghi chú thanh toán..."
                 onChange={e => setPaymentDecision(p => p ? { ...p, reason: e.target.value } : null)} />
             </div>
@@ -3362,15 +3362,15 @@ function TaskCreationForm({ campaign, onClose }: { campaign: Campaign; onClose: 
 
   return (
     <div className="space-y-4">
-      <div className="p-3 bg-blue-50 dark:bg-blue-900/20 rounded-xl border border-blue-200 dark:border-blue-800/40 text-sm text-blue-700 dark:text-blue-300">
+      <div className="p-3 bg-gray-50 dark:bg-gray-700 rounded border border-blue-200 dark:border-blue-800/40 text-sm text-blue-700 dark:text-blue-300">
         Tạo nhiệm vụ cho KOL/KOC tham gia chiến dịch <strong>{campaign.name}</strong>.
       </div>
 
       <div>
         <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">KOL/KOC *</label>
         <select value={form.kolId} onChange={e => set('kolId', e.target.value)}
-          className={`w-full px-4 py-2.5 rounded-xl border text-sm focus:ring-2 focus:ring-teal-500 outline-none bg-white dark:bg-slate-700 text-gray-900 dark:text-white ${
-            errors.kolId ? 'border-red-400' : 'border-gray-200 dark:border-slate-600'
+          className={`w-full px-4 py-2.5 rounded border text-sm focus:ring-2 focus:ring-gray-500 outline-none bg-white dark:bg-gray-700 text-gray-900 dark:text-white ${
+            errors.kolId ? 'border-red-400' : 'border-gray-200 dark:border-gray-600'
           }`}>
           <option value="">-- Chọn KOL/KOC --</option>
           {brandKOLs.map(k => <option key={k.id} value={k.id}>{k.name} (@{k.handle}) — {k.platform}</option>)}
@@ -3381,8 +3381,8 @@ function TaskCreationForm({ campaign, onClose }: { campaign: Campaign; onClose: 
       <div>
         <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Loại nội dung *</label>
         <select value={form.contentType} onChange={e => set('contentType', e.target.value)}
-          className={`w-full px-4 py-2.5 rounded-xl border text-sm focus:ring-2 focus:ring-teal-500 outline-none bg-white dark:bg-slate-700 text-gray-900 dark:text-white ${
-            errors.contentType ? 'border-red-400' : 'border-gray-200 dark:border-slate-600'
+          className={`w-full px-4 py-2.5 rounded border text-sm focus:ring-2 focus:ring-gray-500 outline-none bg-white dark:bg-gray-700 text-gray-900 dark:text-white ${
+            errors.contentType ? 'border-red-400' : 'border-gray-200 dark:border-gray-600'
           }`}>
           <option>Video ngắn (TikTok/Reels)</option>
           <option>Video dài (YouTube)</option>
@@ -3398,8 +3398,8 @@ function TaskCreationForm({ campaign, onClose }: { campaign: Campaign; onClose: 
         <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Yêu cầu chi tiết *</label>
         <textarea rows={4} value={form.requirement} onChange={e => set('requirement', e.target.value)}
           placeholder="VD: Video review sản phẩm Glow Serum 30–60s, nhấn mạnh công dụng cấp ẩm, có CTA 'Mua ngay' ở cuối video..."
-          className={`w-full px-4 py-2.5 rounded-xl border text-sm resize-none focus:ring-2 focus:ring-teal-500 outline-none bg-white dark:bg-slate-700 text-gray-900 dark:text-white ${
-            errors.requirement ? 'border-red-400' : 'border-gray-200 dark:border-slate-600'
+          className={`w-full px-4 py-2.5 rounded border text-sm resize-none focus:ring-2 focus:ring-gray-500 outline-none bg-white dark:bg-gray-700 text-gray-900 dark:text-white ${
+            errors.requirement ? 'border-red-400' : 'border-gray-200 dark:border-gray-600'
           }`} />
         {errors.requirement && <p className="text-xs text-red-500 mt-1">{errors.requirement}</p>}
       </div>
@@ -3408,16 +3408,16 @@ function TaskCreationForm({ campaign, onClose }: { campaign: Campaign; onClose: 
         <div>
           <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Hạn nộp bản nháp *</label>
           <input type="date" value={form.draftDeadline} onChange={e => set('draftDeadline', e.target.value)}
-            className={`w-full px-4 py-2.5 rounded-xl border text-sm focus:ring-2 focus:ring-teal-500 outline-none bg-white dark:bg-slate-700 text-gray-900 dark:text-white ${
-              errors.draftDeadline ? 'border-red-400' : 'border-gray-200 dark:border-slate-600'
+            className={`w-full px-4 py-2.5 rounded border text-sm focus:ring-2 focus:ring-gray-500 outline-none bg-white dark:bg-gray-700 text-gray-900 dark:text-white ${
+              errors.draftDeadline ? 'border-red-400' : 'border-gray-200 dark:border-gray-600'
             }`} />
           {errors.draftDeadline && <p className="text-xs text-red-500 mt-1">{errors.draftDeadline}</p>}
         </div>
         <div>
           <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Hạn đăng bài *</label>
           <input type="date" value={form.publishDeadline} onChange={e => set('publishDeadline', e.target.value)}
-            className={`w-full px-4 py-2.5 rounded-xl border text-sm focus:ring-2 focus:ring-teal-500 outline-none bg-white dark:bg-slate-700 text-gray-900 dark:text-white ${
-              errors.publishDeadline ? 'border-red-400' : 'border-gray-200 dark:border-slate-600'
+            className={`w-full px-4 py-2.5 rounded border text-sm focus:ring-2 focus:ring-gray-500 outline-none bg-white dark:bg-gray-700 text-gray-900 dark:text-white ${
+              errors.publishDeadline ? 'border-red-400' : 'border-gray-200 dark:border-gray-600'
             }`} />
           {errors.publishDeadline && <p className="text-xs text-red-500 mt-1">{errors.publishDeadline}</p>}
         </div>
@@ -3426,8 +3426,8 @@ function TaskCreationForm({ campaign, onClose }: { campaign: Campaign; onClose: 
       <div>
         <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Thù lao (VND) *</label>
         <input type="number" value={form.reward} onChange={e => set('reward', e.target.value)} placeholder="VD: 5000000"
-          className={`w-full px-4 py-2.5 rounded-xl border text-sm focus:ring-2 focus:ring-teal-500 outline-none bg-white dark:bg-slate-700 text-gray-900 dark:text-white ${
-            errors.reward ? 'border-red-400' : 'border-gray-200 dark:border-slate-600'
+          className={`w-full px-4 py-2.5 rounded border text-sm focus:ring-2 focus:ring-gray-500 outline-none bg-white dark:bg-gray-700 text-gray-900 dark:text-white ${
+            errors.reward ? 'border-red-400' : 'border-gray-200 dark:border-gray-600'
           }`} />
         {errors.reward && <p className="text-xs text-red-500 mt-1">{errors.reward}</p>}
       </div>
@@ -3463,11 +3463,11 @@ function KOLAccountManagementPanel({ selectedProject }: { selectedProject: strin
       <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
         {[
           { label: 'Tổng KOL/KOC', value: brandKOLs.length, icon: <Users className="w-4 h-4" /> },
-          { label: 'Đang hoạt động', value: activeCount, icon: <CheckCircle2 className="w-4 h-4" />, accent: 'from-emerald-500/10 to-emerald-600/5' },
-          { label: 'Tổng Followers', value: brandKOLs.reduce((s, k) => s + (k.followers || 0), 0) >= 1000000 ? `${(brandKOLs.reduce((s, k) => s + (k.followers || 0), 0) / 1000000).toFixed(1)}M` : `${Math.round(brandKOLs.reduce((s, k) => s + (k.followers || 0), 0) / 1000)}K`, icon: <Eye className="w-4 h-4" />, accent: 'from-blue-500/10 to-blue-600/5' },
-          { label: 'Avg ER', value: `${(brandKOLs.reduce((s, k) => s + (k.engagementRate || 0), 0) / Math.max(brandKOLs.length, 1)).toFixed(1)}%`, icon: <TrendingUp className="w-4 h-4" />, accent: 'from-pink-500/10 to-pink-600/5' },
+          { label: 'Đang hoạt động', value: activeCount, icon: <CheckCircle2 className="w-4 h-4" /> },
+          { label: 'Tổng Followers', value: brandKOLs.reduce((s, k) => s + (k.followers || 0), 0) >= 1000000 ? `${(brandKOLs.reduce((s, k) => s + (k.followers || 0), 0) / 1000000).toFixed(1)}M` : `${Math.round(brandKOLs.reduce((s, k) => s + (k.followers || 0), 0) / 1000)}K`, icon: <Eye className="w-4 h-4" /> },
+          { label: 'Avg ER', value: `${(brandKOLs.reduce((s, k) => s + (k.engagementRate || 0), 0) / Math.max(brandKOLs.length, 1)).toFixed(1)}%`, icon: <TrendingUp className="w-4 h-4" /> },
         ].map(item => (
-          <div key={item.label} className={`bg-gradient-to-br ${item.accent || 'from-gray-50 to-gray-100 dark:from-slate-800 dark:to-slate-700'} rounded-xl p-4 text-center`}>
+          <div key={item.label} className="bg-gray-50 dark:bg-gray-800 rounded p-4 text-center border border-gray-200 dark:border-gray-700">
             <p className="text-2xl font-bold text-gray-900 dark:text-white">{item.value}</p>
             <p className="text-xs text-gray-500 mt-0.5">{item.label}</p>
           </div>
@@ -3480,17 +3480,17 @@ function KOLAccountManagementPanel({ selectedProject }: { selectedProject: strin
           <Search className="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
           <input type="text" placeholder="Tìm kiếm tên hoặc handle..." value={searchTerm}
             onChange={e => setSearchTerm(e.target.value)}
-            className="w-full pl-9 pr-4 py-2.5 rounded-xl border border-gray-200 dark:border-slate-600 bg-white dark:bg-slate-700 text-gray-900 dark:text-white text-sm focus:ring-2 focus:ring-teal-500 outline-none" />
+            className="w-full pl-9 pr-4 py-2.5 rounded border border-gray-200 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white text-sm focus:ring-2 focus:ring-gray-500 outline-none" />
         </div>
         <Button onClick={() => setShowCreateModal(true)}><Plus className="w-4 h-4 mr-2" />Tạo tài khoản KOL/KOC</Button>
       </div>
 
       {/* KOL Account List */}
-      <div className="bg-white dark:bg-slate-800 rounded-2xl border border-gray-200/60 dark:border-slate-700/60 overflow-hidden">
+      <div className="bg-white dark:bg-gray-800 rounded border border-gray-200 dark:border-gray-700 overflow-hidden">
         <div className="overflow-x-auto">
           <table className="w-full min-w-[900px]">
             <thead>
-              <tr className="border-b border-gray-100 dark:border-slate-700">
+              <tr className="border-b border-gray-100 dark:border-gray-700">
                 <th className="text-left px-6 py-3 text-xs font-semibold text-gray-500 uppercase">KOL/KOC</th>
                 <th className="text-left px-6 py-3 text-xs font-semibold text-gray-500 uppercase">Nền tảng</th>
                 <th className="text-left px-6 py-3 text-xs font-semibold text-gray-500 uppercase">Vai trò</th>
@@ -3502,7 +3502,7 @@ function KOLAccountManagementPanel({ selectedProject }: { selectedProject: strin
             </thead>
             <tbody>
               {filtered.map(kol => (
-                <tr key={kol.id} className="border-b border-gray-50 dark:border-slate-700/50 hover:bg-gray-50/50">
+                <tr key={kol.id} className="border-b border-gray-50 dark:border-gray-700 hover:bg-gray-50/50">
                   <td className="px-6 py-4">
                     <div className="flex items-center gap-3">
                       <Avatar initials={kol.avatar} size="sm" />
@@ -3519,11 +3519,11 @@ function KOLAccountManagementPanel({ selectedProject }: { selectedProject: strin
                     </span>
                   </td>
                   <td className="px-6 py-4 text-sm font-medium text-gray-900 dark:text-white">{kol.followersDisplay}</td>
-                  <td className="px-6 py-4 text-sm font-medium text-teal-600 dark:text-teal-400">{kol.engagementRate}%</td>
+                  <td className="px-6 py-4 text-sm font-medium text-gray-600 dark:text-gray-400">{kol.engagementRate}%</td>
                   <td className="px-6 py-4">
                     <Badge label={kol.status === 'active' ? 'Hoạt động' : 'Tạm ngưng'} colorClass={
                       kol.status === 'active' ? 'bg-emerald-100 text-emerald-800 dark:bg-emerald-900/40 dark:text-emerald-300' :
-                      'bg-gray-100 text-gray-700 dark:bg-slate-700 dark:text-gray-300'
+                      'bg-gray-100 text-gray-700 dark:bg-gray-700 dark:text-gray-300'
                     } />
                   </td>
                   <td className="px-6 py-4">
@@ -3552,7 +3552,7 @@ function KOLAccountManagementPanel({ selectedProject }: { selectedProject: strin
       {/* Delete Confirmation Modal */}
       <Modal isOpen={!!deleteTarget} onClose={() => setDeleteTarget(null)} title="Xóa tài khoản KOL/KOC" width="max-w-sm">
         <div className="space-y-4">
-          <div className="p-4 bg-red-50 dark:bg-red-900/20 rounded-xl border border-red-200 dark:border-red-800/40 text-sm text-red-700 dark:text-red-300">
+          <div className="p-4 bg-red-50 dark:bg-red-900/20 rounded border border-red-200 dark:border-red-800/40 text-sm text-red-700 dark:text-red-300">
             Hành động này không thể hoàn tác. Tài khoản sẽ bị xóa vĩnh viễn khỏi hệ thống.
           </div>
           <div className="flex justify-end gap-3">
@@ -3590,7 +3590,7 @@ function KOLAccountForm({ onClose }: { onClose: () => void }) {
 
   return (
     <div className="space-y-4">
-      <div className="p-3 bg-blue-50 dark:bg-blue-900/20 rounded-xl border border-blue-200 dark:border-blue-800/40 text-sm text-blue-700 dark:text-blue-300">
+      <div className="p-3 bg-gray-50 dark:bg-gray-700 rounded border border-blue-200 dark:border-blue-800/40 text-sm text-blue-700 dark:text-blue-300">
         Điền thông tin để tạo tài khoản và cấp quyền truy cập cho KOL/KOC.
       </div>
 
@@ -3598,16 +3598,16 @@ function KOLAccountForm({ onClose }: { onClose: () => void }) {
         <div>
           <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Tên KOL/KOC *</label>
           <input type="text" value={form.name} onChange={e => set('name', e.target.value)} placeholder="VD: Nguyễn Thu Hà"
-            className={`w-full px-3 py-2.5 rounded-xl border text-sm focus:ring-2 focus:ring-teal-500 outline-none bg-white dark:bg-slate-700 text-gray-900 dark:text-white ${
-              errors.name ? 'border-red-400' : 'border-gray-200 dark:border-slate-600'
+            className={`w-full px-3 py-2.5 rounded border text-sm focus:ring-2 focus:ring-gray-500 outline-none bg-white dark:bg-gray-700 text-gray-900 dark:text-white ${
+              errors.name ? 'border-red-400' : 'border-gray-200 dark:border-gray-600'
             }`} />
           {errors.name && <p className="text-xs text-red-500 mt-1">{errors.name}</p>}
         </div>
         <div>
           <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Vai trò *</label>
           <select value={form.role} onChange={e => set('role', e.target.value)}
-            className={`w-full px-3 py-2.5 rounded-xl border text-sm focus:ring-2 focus:ring-teal-500 outline-none bg-white dark:bg-slate-700 text-gray-900 dark:text-white ${
-              errors.role ? 'border-red-400' : 'border-gray-200 dark:border-slate-600'
+            className={`w-full px-3 py-2.5 rounded border text-sm focus:ring-2 focus:ring-gray-500 outline-none bg-white dark:bg-gray-700 text-gray-900 dark:text-white ${
+              errors.role ? 'border-red-400' : 'border-gray-200 dark:border-gray-600'
             }`}>
             <option value="KOC">KOC (Key Opinion Consumer)</option>
             <option value="KOL">KOL (Key Opinion Leader)</option>
@@ -3620,8 +3620,8 @@ function KOLAccountForm({ onClose }: { onClose: () => void }) {
       <div>
         <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Email *</label>
         <input type="email" value={form.email} onChange={e => set('email', e.target.value)} placeholder="VD: thuha.kol@gmail.com"
-          className={`w-full px-4 py-2.5 rounded-xl border text-sm focus:ring-2 focus:ring-teal-500 outline-none bg-white dark:bg-slate-700 text-gray-900 dark:text-white ${
-            errors.email ? 'border-red-400' : 'border-gray-200 dark:border-slate-600'
+          className={`w-full px-4 py-2.5 rounded border text-sm focus:ring-2 focus:ring-gray-500 outline-none bg-white dark:bg-gray-700 text-gray-900 dark:text-white ${
+            errors.email ? 'border-red-400' : 'border-gray-200 dark:border-gray-600'
           }`} />
         {errors.email && <p className="text-xs text-red-500 mt-1">{errors.email}</p>}
       </div>
@@ -3629,8 +3629,8 @@ function KOLAccountForm({ onClose }: { onClose: () => void }) {
       <div>
         <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Mật khẩu *</label>
         <input type="password" value={form.password} onChange={e => set('password', e.target.value)} placeholder="Nhập mật khẩu tạm thời..."
-          className={`w-full px-4 py-2.5 rounded-xl border text-sm focus:ring-2 focus:ring-teal-500 outline-none bg-white dark:bg-slate-700 text-gray-900 dark:text-white ${
-            errors.password ? 'border-red-400' : 'border-gray-200 dark:border-slate-600'
+          className={`w-full px-4 py-2.5 rounded border text-sm focus:ring-2 focus:ring-gray-500 outline-none bg-white dark:bg-gray-700 text-gray-900 dark:text-white ${
+            errors.password ? 'border-red-400' : 'border-gray-200 dark:border-gray-600'
           }`} />
         {errors.password && <p className="text-xs text-red-500 mt-1">{errors.password}</p>}
       </div>
@@ -3639,8 +3639,8 @@ function KOLAccountForm({ onClose }: { onClose: () => void }) {
         <div>
           <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Nền tảng *</label>
           <select value={form.platform} onChange={e => set('platform', e.target.value)}
-            className={`w-full px-3 py-2.5 rounded-xl border text-sm focus:ring-2 focus:ring-teal-500 outline-none bg-white dark:bg-slate-700 text-gray-900 dark:text-white ${
-              errors.platform ? 'border-red-400' : 'border-gray-200 dark:border-slate-600'
+            className={`w-full px-3 py-2.5 rounded border text-sm focus:ring-2 focus:ring-gray-500 outline-none bg-white dark:bg-gray-700 text-gray-900 dark:text-white ${
+              errors.platform ? 'border-red-400' : 'border-gray-200 dark:border-gray-600'
             }`}>
             <option value="TikTok">TikTok</option>
             <option value="YouTube">YouTube</option>
@@ -3652,8 +3652,8 @@ function KOLAccountForm({ onClose }: { onClose: () => void }) {
         <div>
           <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Handle *</label>
           <input type="text" value={form.handle} onChange={e => set('handle', e.target.value)} placeholder="VD: @thuha.beauty"
-            className={`w-full px-3 py-2.5 rounded-xl border text-sm focus:ring-2 focus:ring-teal-500 outline-none bg-white dark:bg-slate-700 text-gray-900 dark:text-white ${
-              errors.handle ? 'border-red-400' : 'border-gray-200 dark:border-slate-600'
+            className={`w-full px-3 py-2.5 rounded border text-sm focus:ring-2 focus:ring-gray-500 outline-none bg-white dark:bg-gray-700 text-gray-900 dark:text-white ${
+              errors.handle ? 'border-red-400' : 'border-gray-200 dark:border-gray-600'
             }`} />
           {errors.handle && <p className="text-xs text-red-500 mt-1">{errors.handle}</p>}
         </div>
@@ -3662,7 +3662,7 @@ function KOLAccountForm({ onClose }: { onClose: () => void }) {
       <div>
         <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Link mạng xã hội</label>
         <input type="url" value={form.socialLink} onChange={e => set('socialLink', e.target.value)} placeholder="VD: https://tiktok.com/@thuha.beauty"
-          className="w-full px-4 py-2.5 rounded-xl border border-gray-200 dark:border-slate-600 text-sm focus:ring-2 focus:ring-teal-500 outline-none bg-white dark:bg-slate-700 text-gray-900 dark:text-white" />
+          className="w-full px-4 py-2.5 rounded border border-gray-200 dark:border-gray-600 text-sm focus:ring-2 focus:ring-gray-500 outline-none bg-white dark:bg-gray-700 text-gray-900 dark:text-white" />
       </div>
 
       <div className="flex justify-end gap-3 pt-2">
@@ -3709,13 +3709,13 @@ function ContentReviewPanel({ selectedProject, selectedTaskId, setSelectedTaskId
     <>
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
         <KPIWidget label="Chờ duyệt" value={reviewTasks.filter(t => getTaskState(t.id) === 'draft_submitted').length.toString()} icon={<MessageSquare className="w-5 h-5" />} />
-        <KPIWidget label="Cần chỉnh sửa" value={reviewTasks.filter(t => getTaskState(t.id) === 'revision_required').length.toString()} icon={<XCircle className="w-5 h-5" />} accent="from-red-500/10 to-red-600/5" />
-        <KPIWidget label="Đã duyệt" value={(brandTasks.filter(t => getTaskState(t.id) === 'approved_to_publish').length).toString()} icon={<CheckCircle2 className="w-5 h-5" />} accent="from-emerald-500/10 to-emerald-600/5" />
-        <KPIWidget label="Đã đăng bài" value={brandTasks.filter(t => getTaskState(t.id) === 'published').length.toString()} icon={<Play className="w-5 h-5" />} accent="from-blue-500/10 to-blue-600/5" />
+        <KPIWidget label="Cần chỉnh sửa" value={reviewTasks.filter(t => getTaskState(t.id) === 'revision_required').length.toString()} icon={<XCircle className="w-5 h-5" />} />
+        <KPIWidget label="Đã duyệt" value={(brandTasks.filter(t => getTaskState(t.id) === 'approved_to_publish').length).toString()} icon={<CheckCircle2 className="w-5 h-5" />} />
+        <KPIWidget label="Đã đăng bài" value={brandTasks.filter(t => getTaskState(t.id) === 'published').length.toString()} icon={<Play className="w-5 h-5" />} />
       </div>
 
       {reviewTasks.length === 0 ? (
-        <div className="bg-white dark:bg-slate-800 rounded-2xl border-dashed border border-gray-200 dark:border-slate-700 p-10 text-center">
+        <div className="bg-white dark:bg-gray-800 rounded border-dashed border border-gray-200 dark:border-gray-700 p-10 text-center">
           <MessageSquare className="w-12 h-12 text-gray-300 dark:text-gray-600 mx-auto mb-3" />
           <p className="text-sm font-medium text-gray-700 dark:text-gray-300">Không có nội dung cần duyệt</p>
         </div>
@@ -3727,8 +3727,8 @@ function ContentReviewPanel({ selectedProject, selectedTaskId, setSelectedTaskId
               const draft = task.draftContent?.[task.draftContent.length - 1];
               const s = getTaskState(task.id);
               return (
-                <motion.button key={task.id} layout onClick={() => { setSelectedTaskId(task.id); setFeedback(('feedback' in (draft || {})) ? (draft as { feedback?: string }).feedback || '' : ''); }}
-                  className={`w-full text-left p-4 rounded-2xl border transition-all ${selectedTask?.id === task.id ? 'border-teal-400 bg-teal-50/60 dark:bg-teal-900/10' : 'border-gray-200/60 dark:border-slate-700/60 bg-white dark:bg-slate-800 hover:border-gray-300 dark:hover:border-slate-600'}`}>
+                <button key={task.id} onClick={() => { setSelectedTaskId(task.id); setFeedback(('feedback' in (draft || {})) ? (draft as { feedback?: string }).feedback || '' : ''); }}
+                  className={`w-full text-left p-4 rounded border transition-colors ${selectedTask?.id === task.id ? 'border-gray-400 bg-gray-50 dark:bg-gray-800' : 'border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 hover:border-gray-300 dark:hover:border-gray-600'}`}>
                   <div className="flex items-center gap-3 mb-3">
                     <Avatar initials={task.kolAvatar} size="sm" />
                     <div className="flex-1 min-w-0">
@@ -3738,20 +3738,20 @@ function ContentReviewPanel({ selectedProject, selectedTaskId, setSelectedTaskId
                     <Badge label={taskStatusLabels[s]} colorClass={taskStatusColors[s]} />
                   </div>
                   <div className="grid grid-cols-3 gap-2 text-[10px] text-gray-500 dark:text-gray-400">
-                    <div className="rounded-xl bg-gray-50 dark:bg-slate-700/40 px-2 py-1.5 text-center">
+                    <div className="rounded bg-gray-50 dark:bg-gray-800 px-2 py-1.5 text-center">
                       <p className="uppercase tracking-wide text-[9px] mb-0.5">Phiên bản</p>
                       <p className="font-medium text-gray-700 dark:text-gray-200">v{draft?.version || 0}</p>
                     </div>
-                    <div className="rounded-xl bg-gray-50 dark:bg-slate-700/40 px-2 py-1.5 text-center">
+                    <div className="rounded bg-gray-50 dark:bg-gray-800 px-2 py-1.5 text-center">
                       <p className="uppercase tracking-wide text-[9px] mb-0.5">Trạng thái</p>
                       <p className="font-medium text-gray-700 dark:text-gray-200">{s === 'revision_required' ? 'Có góp ý' : 'Mới nộp'}</p>
                     </div>
-                    <div className="rounded-xl bg-gray-50 dark:bg-slate-700/40 px-2 py-1.5 text-center">
+                    <div className="rounded bg-gray-50 dark:bg-gray-800 px-2 py-1.5 text-center">
                       <p className="uppercase tracking-wide text-[9px] mb-0.5">Thời gian</p>
                       <p className="font-medium text-gray-700 dark:text-gray-200">{draft?.submittedAt?.split(' ')[0] || '-'}</p>
                     </div>
                   </div>
-                </motion.button>
+                </button>
               );
             })}
           </div>
@@ -3759,7 +3759,7 @@ function ContentReviewPanel({ selectedProject, selectedTaskId, setSelectedTaskId
           {/* Right: Draft Detail */}
           <div className="xl:col-span-2">
             {selectedTask && state ? (
-              <div className="bg-white dark:bg-slate-800 rounded-2xl border border-gray-200/60 dark:border-slate-700/60 p-6 space-y-5">
+              <div className="bg-white dark:bg-gray-800 rounded border border-gray-200 dark:border-gray-700 p-6 space-y-5">
                 {/* Header */}
                 <div className="flex items-start justify-between gap-4">
                   <div>
@@ -3774,7 +3774,7 @@ function ContentReviewPanel({ selectedProject, selectedTaskId, setSelectedTaskId
                   {submittedCampaign ? (
                     <div className="space-y-2">
                       <h4 className="text-sm font-semibold text-gray-900 dark:text-white">Thông tin Campaign</h4>
-                      <div className="p-3 bg-gray-50 dark:bg-slate-700/50 rounded-xl space-y-1.5">
+                      <div className="p-3 bg-gray-50 dark:bg-gray-700 rounded space-y-1.5">
                         <div className="flex justify-between"><span className="text-xs text-gray-500">Campaign</span><span className="text-xs font-medium text-gray-900 dark:text-white">{submittedCampaign.name}</span></div>
                         <div className="flex justify-between"><span className="text-xs text-gray-500">Product</span><span className="text-xs font-medium text-gray-900 dark:text-white">{selectedTask.productName}</span></div>
                         <div className="flex justify-between"><span className="text-xs text-gray-500">Brief</span><span className="text-xs text-gray-700 dark:text-gray-300 text-right line-clamp-2">{selectedTask.brief}</span></div>
@@ -3783,7 +3783,7 @@ function ContentReviewPanel({ selectedProject, selectedTaskId, setSelectedTaskId
                   ) : (
                     <div className="space-y-2">
                       <h4 className="text-sm font-semibold text-gray-900 dark:text-white">Thông tin Campaign</h4>
-                      <div className="p-3 bg-gray-50 dark:bg-slate-700/50 rounded-xl">
+                      <div className="p-3 bg-gray-50 dark:bg-gray-700 rounded">
                         <p className="text-xs text-gray-500">{selectedTask.productName}</p>
                         <p className="text-xs text-gray-700 dark:text-gray-300 mt-1">{selectedTask.brief}</p>
                       </div>
@@ -3791,7 +3791,7 @@ function ContentReviewPanel({ selectedProject, selectedTaskId, setSelectedTaskId
                   )}
                   <div className="space-y-2">
                     <h4 className="text-sm font-semibold text-gray-900 dark:text-white">Yêu cầu nội dung</h4>
-                    <div className="p-3 bg-gray-50 dark:bg-slate-700/50 rounded-xl space-y-1.5">
+                    <div className="p-3 bg-gray-50 dark:bg-gray-700 rounded space-y-1.5">
                       <div className="flex justify-between"><span className="text-xs text-gray-500">Content Type</span><span className="text-xs font-medium text-gray-900 dark:text-white">{selectedTask.contentRequirements ? 'Video ngắn' : '-'}</span></div>
                       <div className="flex justify-between"><span className="text-xs text-gray-500">Draft Deadline</span><span className="text-xs font-medium text-gray-900 dark:text-white">{selectedTask.deadline}</span></div>
                       <div className="flex justify-between"><span className="text-xs text-gray-500">Publish Deadline</span><span className="text-xs font-medium text-gray-900 dark:text-white">{selectedTask.deadline}</span></div>
@@ -3802,7 +3802,7 @@ function ContentReviewPanel({ selectedProject, selectedTaskId, setSelectedTaskId
                 </div>
 
                 {/* Video Preview */}
-                <div className="aspect-video bg-gradient-to-br from-gray-900 to-gray-700 rounded-2xl flex items-center justify-center overflow-hidden">
+                <div className="aspect-video bg-gray-900 dark:bg-gray-800 rounded flex items-center justify-center overflow-hidden">
                   <div className="text-center px-4">
                     <Play className="w-12 h-12 text-white/60 mx-auto mb-2" />
                     <p className="text-sm text-white/70">Xem trước video duyệt nội dung</p>
@@ -3814,7 +3814,7 @@ function ContentReviewPanel({ selectedProject, selectedTaskId, setSelectedTaskId
                 {latestDraft?.caption && (
                   <div className="space-y-2">
                     <h4 className="text-sm font-semibold text-gray-900 dark:text-white">Caption</h4>
-                    <p className="text-sm text-gray-600 dark:text-gray-300 p-3 bg-gray-50 dark:bg-slate-700/50 rounded-xl">{latestDraft.caption}</p>
+                    <p className="text-sm text-gray-600 dark:text-gray-300 p-3 bg-gray-50 dark:bg-gray-700 rounded">{latestDraft.caption}</p>
                   </div>
                 )}
 
@@ -3826,11 +3826,11 @@ function ContentReviewPanel({ selectedProject, selectedTaskId, setSelectedTaskId
                       {[...selectedTask.draftContent].reverse().map((draft, idx) => {
                         const isCurrent = idx === 0;
                         return (
-                          <div key={draft.submittedAt} className={`flex items-start gap-3 p-3 rounded-xl ${
-                            isCurrent ? 'bg-teal-50 dark:bg-teal-900/20 border border-teal-200 dark:border-teal-800/40' : 'bg-gray-50 dark:bg-slate-700/30'
+                          <div key={draft.submittedAt} className={`flex items-start gap-3 p-3 rounded ${
+                            isCurrent ? 'bg-gray-50 dark:bg-gray-700 border border-gray-200 dark:border-gray-700' : 'bg-gray-50 dark:bg-gray-700'
                           }`}>
                             <div className={`w-7 h-7 rounded-full flex items-center justify-center flex-shrink-0 text-xs font-bold ${
-                              isCurrent ? 'bg-teal-500 text-white' : 'bg-gray-300 dark:bg-slate-600 text-gray-600 dark:text-gray-300'
+                              isCurrent ? 'bg-gray-500 text-white' : 'bg-gray-300 dark:bg-gray-600 text-gray-600 dark:text-gray-300'
                             }`}>
                               v{draft.version}
                             </div>
@@ -3842,7 +3842,7 @@ function ContentReviewPanel({ selectedProject, selectedTaskId, setSelectedTaskId
                                 <p className="text-[10px] text-gray-400">{draft.submittedAt}</p>
                               </div>
                               {('feedback' in draft) && draft.feedback && (
-                                <div className="mt-1.5 p-2 bg-red-50 dark:bg-red-900/20 rounded-lg border border-red-100 dark:border-red-800/30">
+                                <div className="mt-1.5 p-2 bg-red-50 dark:bg-red-900/20 rounded border border-red-100 dark:border-red-800/30">
                                   <p className="text-[11px] text-red-600 dark:text-red-400 flex items-start gap-1.5">
                                     <MessageCircle className="w-3 h-3 mt-0.5 flex-shrink-0" />
                                     <span>Feedback Brand: {(draft as { feedback: string }).feedback}</span>
@@ -3867,7 +3867,7 @@ function ContentReviewPanel({ selectedProject, selectedTaskId, setSelectedTaskId
                     rows={3}
                     value={feedback}
                     onChange={e => setFeedback(e.target.value)}
-                    className="w-full px-4 py-2.5 rounded-xl border border-gray-200 dark:border-slate-600 bg-white dark:bg-slate-700 text-gray-900 dark:text-white text-sm resize-none focus:ring-2 focus:ring-teal-500 outline-none"
+                    className="w-full px-4 py-2.5 rounded border border-gray-200 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white text-sm resize-none focus:ring-2 focus:ring-gray-500 outline-none"
                     placeholder="Nhập comment/feedback cho video..."
                   />
                 </div>
@@ -3891,14 +3891,14 @@ function ContentReviewPanel({ selectedProject, selectedTaskId, setSelectedTaskId
                     )}
                   </div>
                 ) : state === 'approved_to_publish' ? (
-                  <div className="flex items-center gap-2 p-4 bg-emerald-50 dark:bg-emerald-900/20 rounded-xl border border-emerald-200 dark:border-emerald-800/40">
+                  <div className="flex items-center gap-2 p-4 bg-gray-50 dark:bg-gray-700 rounded border border-emerald-200 dark:border-emerald-800/40">
                     <CheckCircle2 className="w-5 h-5 text-emerald-500" />
                     <p className="text-sm text-emerald-700 dark:text-emerald-300">Đã phê duyệt — KOL có thể đăng bài ngay.</p>
                   </div>
                 ) : null}
               </div>
             ) : (
-              <div className="h-full min-h-[400px] flex items-center justify-center bg-white dark:bg-slate-800 rounded-2xl border border-gray-200/60 dark:border-slate-700/60 p-12 text-center">
+              <div className="h-full min-h-[400px] flex items-center justify-center bg-white dark:bg-gray-800 rounded border border-gray-200 dark:border-gray-700 p-12 text-center">
                 <div>
                   <MessageSquare className="w-12 h-12 text-gray-300 dark:text-gray-600 mx-auto mb-3" />
                   <p className="text-sm font-medium text-gray-700 dark:text-gray-300">Chọn một bản nháp để xem chi tiết</p>
@@ -3912,7 +3912,7 @@ function ContentReviewPanel({ selectedProject, selectedTaskId, setSelectedTaskId
       {/* Reject Modal */}
       <Modal isOpen={!!rejectModalTask} onClose={() => { setRejectModalTask(null); setRejectComment(''); }} title="Từ chối bản nháp" width="max-w-lg">
         <div className="space-y-4">
-          <div className="p-4 bg-red-50 dark:bg-red-900/20 rounded-xl border border-red-200 dark:border-red-800/40">
+          <div className="p-4 bg-red-50 dark:bg-red-900/20 rounded border border-red-200 dark:border-red-800/40">
             <p className="text-sm text-red-700 dark:text-red-300">Nếu từ chối, KOL sẽ nhận được feedback và phải chỉnh sửa rồi submit lại bản nháp mới.</p>
           </div>
           <div>
@@ -3922,7 +3922,7 @@ function ContentReviewPanel({ selectedProject, selectedTaskId, setSelectedTaskId
               value={rejectComment}
               onChange={e => setRejectComment(e.target.value)}
               placeholder="Ví dụ: Cần cắt ngắn phần intro, thêm logo ở đầu video, chỉnh màu sắc rõ hơn..."
-              className="w-full px-4 py-2.5 rounded-xl border border-gray-200 dark:border-slate-600 bg-white dark:bg-slate-700 text-gray-900 dark:text-white text-sm resize-none focus:ring-2 focus:ring-teal-500 outline-none"
+              className="w-full px-4 py-2.5 rounded border border-gray-200 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white text-sm resize-none focus:ring-2 focus:ring-gray-500 outline-none"
             />
           </div>
           <div className="flex justify-end gap-3">
@@ -3950,7 +3950,7 @@ function MetricsReviewPanel({ selectedProject, getTaskState, setMetricsConfirmed
   return (
     <div className="space-y-4">
       {/* ── Header bar: context only, NO KPI cards ── */}
-      <div className="flex items-center gap-3 px-4 py-3 bg-cyan-50 dark:bg-cyan-900/20 rounded-xl border border-cyan-200 dark:border-cyan-800/40">
+      <div className="flex items-center gap-3 px-4 py-3 bg-cyan-50 dark:bg-cyan-900/20 rounded border border-cyan-200 dark:border-cyan-800/40">
         <BarChart3 className="w-5 h-5 text-cyan-600 flex-shrink-0" />
         <p className="text-sm text-cyan-800 dark:text-cyan-200">
           Theo dõi hiệu suất: kiểm tra link bài đăng, xác minh số liệu KOL nhập với KPI mục tiêu, xác nhận hoặc yêu cầu cập nhật.
@@ -3960,7 +3960,7 @@ function MetricsReviewPanel({ selectedProject, getTaskState, setMetricsConfirmed
       {/* ── Task list with horizontal step indicator ── */}
       <div className="space-y-3">
         {metricsTasks.length === 0 ? (
-          <div className="bg-white dark:bg-slate-800 rounded-2xl border-dashed border border-gray-200 dark:border-slate-700 p-12 text-center">
+          <div className="bg-white dark:bg-gray-800 rounded border-dashed border border-gray-200 dark:border-gray-700 p-12 text-center">
             <BarChart3 className="w-10 h-10 text-gray-300 dark:text-gray-600 mx-auto mb-2" />
             <p className="text-sm font-medium text-gray-500">Chưa có nhiệm vụ nào được đăng bài.</p>
           </div>
@@ -3972,9 +3972,9 @@ function MetricsReviewPanel({ selectedProject, getTaskState, setMetricsConfirmed
           const allOk = viewsOk && erOk;
 
           return (
-            <div key={task.id} className="bg-white dark:bg-slate-800 rounded-2xl border border-gray-200/60 dark:border-slate-700/60 overflow-hidden">
+            <div key={task.id} className="bg-white dark:bg-gray-800 rounded border border-gray-200 dark:border-gray-700 overflow-hidden">
               {/* ── Task header ── */}
-              <div className="flex items-center justify-between px-5 py-4 border-b border-gray-100 dark:border-slate-700/50">
+              <div className="flex items-center justify-between px-5 py-4 border-b border-gray-100 dark:border-gray-700">
                 <div className="flex items-center gap-3">
                   <Avatar initials={task.kolAvatar} size="md" />
                   <div>
@@ -3989,7 +3989,7 @@ function MetricsReviewPanel({ selectedProject, getTaskState, setMetricsConfirmed
               </div>
 
               {/* ── Step indicator: 3 horizontal steps ── */}
-              <div className="px-5 py-4 bg-gray-50/50 dark:bg-slate-800/50">
+              <div className="px-5 py-4 bg-gray-50/50 dark:bg-gray-800/50">
                 <div className="flex items-center gap-0">
                   {[
                     { num: 1, label: 'Link bài đăng', done: !!task.publishedContent?.postUrl, active: !!task.publishedContent?.postUrl && !m },
@@ -3998,22 +3998,22 @@ function MetricsReviewPanel({ selectedProject, getTaskState, setMetricsConfirmed
                   ].map((step, idx) => (
                     <div key={step.num} className="flex items-center flex-1">
                       <div className="flex flex-col items-center">
-                        <div className={`w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold transition-all ${
+                        <div className={`w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold transition-colors ${
                           step.done
-                            ? 'bg-emerald-500 text-white'
+                            ? 'bg-gray-500 text-white'
                             : step.active
-                            ? 'bg-teal-500 text-white ring-4 ring-teal-200 dark:ring-teal-800/40'
-                            : 'bg-gray-200 dark:bg-slate-600 text-gray-400'
+                            ? 'bg-gray-500 text-white ring-4 ring-gray-200 dark:ring-gray-800/40'
+                            : 'bg-gray-200 dark:bg-gray-600 text-gray-400'
                         }`}>
                           {step.done ? <Check className="w-4 h-4" /> : step.num}
                         </div>
                         <p className={`text-[11px] mt-1.5 font-medium text-center ${
-                          step.done ? 'text-emerald-600 dark:text-emerald-400' : step.active ? 'text-teal-600 dark:text-teal-400' : 'text-gray-400'
+                          step.done ? 'text-emerald-600 dark:text-emerald-400' : step.active ? 'text-gray-600 dark:text-gray-400' : 'text-gray-400'
                         }`}>{step.label}</p>
                       </div>
                       {idx < 2 && (
                         <div className={`flex-1 h-0.5 mx-2 mb-5 rounded ${
-                          step.done ? 'bg-emerald-400' : 'bg-gray-200 dark:bg-slate-600'
+                          step.done ? 'bg-emerald-400' : 'bg-gray-200 dark:bg-gray-600'
                         }`} />
                       )}
                     </div>
@@ -4022,15 +4022,15 @@ function MetricsReviewPanel({ selectedProject, getTaskState, setMetricsConfirmed
               </div>
 
               {/* ── Step 1: Link bài đăng ── */}
-              <div className="px-5 py-4 border-t border-gray-100 dark:border-slate-700/50">
+              <div className="px-5 py-4 border-t border-gray-100 dark:border-gray-700">
                 <div className="flex items-start gap-3">
-                  <span className="w-5 h-5 rounded-full bg-gray-100 dark:bg-slate-700 flex items-center justify-center text-[10px] font-bold text-gray-500 flex-shrink-0 mt-0.5">1</span>
+                  <span className="w-5 h-5 rounded-full bg-gray-100 dark:bg-gray-700 flex items-center justify-center text-[10px] font-bold text-gray-500 flex-shrink-0 mt-0.5">1</span>
                   <div className="flex-1 min-w-0">
                     <p className="text-xs font-semibold text-gray-700 dark:text-gray-300 mb-1.5">Link bài đăng & Screenshot</p>
                     {task.publishedContent?.postUrl ? (
                       <div className="flex flex-col sm:flex-row gap-2">
                         <a href={task.publishedContent.postUrl} target="_blank" rel="noopener noreferrer"
-                          className="flex items-center gap-1.5 text-sm text-teal-600 hover:text-teal-700 underline truncate">
+                          className="flex items-center gap-1.5 text-sm text-gray-600 hover:text-gray-700 underline truncate">
                           <ExternalLink className="w-3.5 h-3.5 flex-shrink-0" />
                           <span className="truncate">{task.publishedContent.postUrl}</span>
                         </a>
@@ -4045,9 +4045,9 @@ function MetricsReviewPanel({ selectedProject, getTaskState, setMetricsConfirmed
 
               {/* ── Step 2: Số liệu ── */}
               {m && (
-                <div className="px-5 py-4 border-t border-gray-100 dark:border-slate-700/50">
+                <div className="px-5 py-4 border-t border-gray-100 dark:border-gray-700">
                   <div className="flex items-start gap-3">
-                    <span className="w-5 h-5 rounded-full bg-gray-100 dark:bg-slate-700 flex items-center justify-center text-[10px] font-bold text-gray-500 flex-shrink-0 mt-0.5">2</span>
+                    <span className="w-5 h-5 rounded-full bg-gray-100 dark:bg-gray-700 flex items-center justify-center text-[10px] font-bold text-gray-500 flex-shrink-0 mt-0.5">2</span>
                     <div className="flex-1 min-w-0 space-y-3">
                       <p className="text-xs font-semibold text-gray-700 dark:text-gray-300 mb-1.5">Số liệu KOL nhập vs KPI mục tiêu</p>
                       <div className="grid grid-cols-3 gap-2">
@@ -4056,19 +4056,19 @@ function MetricsReviewPanel({ selectedProject, getTaskState, setMetricsConfirmed
                           { label: 'ER', actual: `${m.engagementRate}%`, target: `${task.kpiTarget.engagementRate}%`, pct: Math.min(100, Math.round((m.engagementRate / task.kpiTarget.engagementRate) * 100)), ok: erOk },
                           { label: 'Likes', actual: (m.likes || 0).toLocaleString(), target: '—', pct: null, ok: null },
                         ].map(item => (
-                          <div key={item.label} className="text-center p-2 bg-gray-50 dark:bg-slate-700/40 rounded-xl">
+                          <div key={item.label} className="text-center p-2 bg-gray-50 dark:bg-gray-800 rounded">
                             <p className="text-sm font-bold text-gray-900 dark:text-white">{item.actual}</p>
                             <p className="text-[10px] text-gray-500">{item.label}{item.target !== '—' ? ` / ${item.target}` : ''}</p>
                             {item.pct !== null && (
-                              <div className="mt-1.5 h-1.5 bg-gray-200 dark:bg-slate-600 rounded-full overflow-hidden">
-                                <div className={`h-full rounded-full ${item.ok ? 'bg-emerald-500' : 'bg-amber-400'}`} style={{ width: `${item.pct}%` }} />
+                              <div className="mt-1.5 h-1.5 bg-gray-200 dark:bg-gray-600 rounded-full overflow-hidden">
+                                <div className={`h-full rounded-full ${item.ok ? 'bg-gray-500' : 'bg-amber-400'}`} style={{ width: `${item.pct}%` }} />
                               </div>
                             )}
                           </div>
                         ))}
                       </div>
-                      <div className={`flex items-center gap-2 px-3 py-2 rounded-lg text-xs font-medium ${
-                        allOk ? 'bg-emerald-50 dark:bg-emerald-900/20 text-emerald-700 dark:text-emerald-300' : 'bg-amber-50 dark:bg-amber-900/20 text-amber-700 dark:text-amber-300'
+                      <div className={`flex items-center gap-2 px-3 py-2 rounded text-xs font-medium ${
+                        allOk ? 'bg-gray-50 dark:bg-gray-700 text-emerald-700 dark:text-emerald-300' : 'bg-gray-50 dark:bg-gray-700 text-amber-700 dark:text-amber-300'
                       }`}>
                         {allOk ? <CheckCircle2 className="w-3.5 h-3.5" /> : <Clock className="w-3.5 h-3.5" />}
                         {allOk ? 'Đạt KPI — sẵn sàng xác nhận' : 'Chưa đạt KPI — xem lại trước khi xác nhận'}
@@ -4079,9 +4079,9 @@ function MetricsReviewPanel({ selectedProject, getTaskState, setMetricsConfirmed
               )}
 
               {/* ── Step 3: Xác nhận ── */}
-              <div className="px-5 py-4 border-t border-gray-100 dark:border-slate-700/50">
+              <div className="px-5 py-4 border-t border-gray-100 dark:border-gray-700">
                 <div className="flex items-start gap-3">
-                  <span className="w-5 h-5 rounded-full bg-gray-100 dark:bg-slate-700 flex items-center justify-center text-[10px] font-bold text-gray-500 flex-shrink-0 mt-0.5">3</span>
+                  <span className="w-5 h-5 rounded-full bg-gray-100 dark:bg-gray-700 flex items-center justify-center text-[10px] font-bold text-gray-500 flex-shrink-0 mt-0.5">3</span>
                   <div className="flex-1 min-w-0">
                     <p className="text-xs font-semibold text-gray-700 dark:text-gray-300 mb-2">Xác nhận hoặc yêu cầu cập nhật</p>
                     <div className="flex gap-2 flex-wrap">
@@ -4132,7 +4132,7 @@ function PayoutPanel({ selectedProject, paymentAction, setPaymentAction }: {
   return (
     <div className="space-y-4">
       {/* ── Header bar: financial context ── */}
-      <div className="flex items-center gap-3 px-4 py-3 bg-amber-50 dark:bg-amber-900/20 rounded-xl border border-amber-200 dark:border-amber-800/40">
+      <div className="flex items-center gap-3 px-4 py-3 bg-gray-50 dark:bg-gray-700 rounded border border-amber-200 dark:border-amber-800/40">
         <CreditCard className="w-5 h-5 text-amber-600 flex-shrink-0" />
         <p className="text-sm text-amber-800 dark:text-amber-200">
           Quản lý thanh toán: kiểm tra KPI đã đạt chưa, quyết định thanh toán đầy đủ, một phần hoặc giữ tạm.
@@ -4141,32 +4141,29 @@ function PayoutPanel({ selectedProject, paymentAction, setPaymentAction }: {
 
       {/* ── Financial Summary: big money numbers ── */}
       <div className="grid grid-cols-3 gap-3">
-        <div className="col-span-1 bg-gradient-to-br from-amber-50 to-amber-100 dark:from-amber-900/30 dark:to-amber-800/20 rounded-2xl p-5 border border-amber-200 dark:border-amber-800/40">
+        <div className="col-span-1 bg-gray-50 dark:bg-gray-800 rounded p-5 border border-gray-200 dark:border-gray-700">
           <div className="flex items-center justify-between mb-3">
-            <span className="text-xs font-semibold text-amber-700 dark:text-amber-300 uppercase tracking-wide">Cần thanh toán</span>
-            <DollarSign className="w-4 h-4 text-amber-500" />
+            <span className="text-xs font-semibold text-gray-700 dark:text-gray-300 uppercase tracking-wide">Cần thanh toán</span>
+            <DollarSign className="w-4 h-4 text-gray-400" />
           </div>
-          <p className="text-2xl font-bold text-amber-900 dark:text-amber-100">{(pendingTotal / 1000000).toFixed(1)}M</p>
-          <p className="text-xs text-amber-600 dark:text-amber-400 mt-0.5">VND</p>
-          <div className="mt-3 h-1.5 bg-amber-200 dark:bg-amber-700/40 rounded-full overflow-hidden">
-            <div className="h-full bg-amber-500 rounded-full" style={{ width: '35%' }} />
-          </div>
+          <p className="text-2xl font-bold text-gray-900 dark:text-white">{(pendingTotal / 1000000).toFixed(1)}M</p>
+          <p className="text-xs text-gray-500 mt-0.5">VND</p>
         </div>
-        <div className="col-span-1 bg-gradient-to-br from-emerald-50 to-emerald-100 dark:from-emerald-900/30 dark:to-emerald-800/20 rounded-2xl p-5 border border-emerald-200 dark:border-emerald-800/40">
+        <div className="col-span-1 bg-gray-50 dark:bg-gray-800 rounded p-5 border border-gray-200 dark:border-gray-700">
           <div className="flex items-center justify-between mb-3">
-            <span className="text-xs font-semibold text-emerald-700 dark:text-emerald-300 uppercase tracking-wide">Đã thanh toán</span>
-            <CheckCircle2 className="w-4 h-4 text-emerald-500" />
+            <span className="text-xs font-semibold text-gray-700 dark:text-gray-300 uppercase tracking-wide">Đã thanh toán</span>
+            <CheckCircle2 className="w-4 h-4 text-gray-400" />
           </div>
-          <p className="text-2xl font-bold text-emerald-900 dark:text-emerald-100">{(paidTotal / 1000000).toFixed(1)}M</p>
-          <p className="text-xs text-emerald-600 dark:text-emerald-400 mt-0.5">VND</p>
+          <p className="text-2xl font-bold text-gray-900 dark:text-white">{(paidTotal / 1000000).toFixed(1)}M</p>
+          <p className="text-xs text-gray-500 mt-0.5">VND</p>
         </div>
-        <div className="col-span-1 bg-gradient-to-br from-slate-50 to-slate-100 dark:from-slate-800 dark:to-slate-900 rounded-2xl p-5 border border-slate-200 dark:border-slate-700">
+        <div className="col-span-1 bg-gray-50 dark:bg-gray-800 rounded p-5 border border-gray-200 dark:border-gray-700">
           <div className="flex items-center justify-between mb-3">
-            <span className="text-xs font-semibold text-slate-600 dark:text-slate-300 uppercase tracking-wide">Tổng chiến dịch</span>
-            <CreditCard className="w-4 h-4 text-slate-400" />
+            <span className="text-xs font-semibold text-gray-700 dark:text-gray-300 uppercase tracking-wide">Tổng chiến dịch</span>
+            <CreditCard className="w-4 h-4 text-gray-400" />
           </div>
-          <p className="text-2xl font-bold text-slate-900 dark:text-slate-100">{brandPayments.length}</p>
-          <p className="text-xs text-slate-500 mt-0.5">KOL/KOC</p>
+          <p className="text-2xl font-bold text-gray-900 dark:text-gray-100">{brandPayments.length}</p>
+          <p className="text-xs text-gray-500 mt-0.5">KOL/KOC</p>
         </div>
       </div>
 
@@ -4180,7 +4177,7 @@ function PayoutPanel({ selectedProject, paymentAction, setPaymentAction }: {
               <span className="px-2.5 py-1 bg-amber-100 dark:bg-amber-900/40 text-amber-700 dark:text-amber-300 rounded-full text-xs font-bold">{pending.length}</span>
             </div>
             {pending.length === 0 ? (
-              <div className="bg-white dark:bg-slate-800 rounded-2xl border border-gray-200/60 dark:border-slate-700/60 p-8 text-center">
+              <div className="bg-white dark:bg-gray-800 rounded border border-gray-200 dark:border-gray-700 p-8 text-center">
                 <CheckCircle2 className="w-8 h-8 text-emerald-400 mx-auto mb-2" />
                 <p className="text-sm text-gray-500">Tất cả thanh toán đã được xử lý.</p>
               </div>
@@ -4192,7 +4189,7 @@ function PayoutPanel({ selectedProject, paymentAction, setPaymentAction }: {
                 const erOk = m ? m.engagementRate >= (task?.kpiTarget?.engagementRate || 0) : null;
                 const remaining = payment.totalAmount - payment.paidAmount;
                 return (
-                  <div key={payment.id} className="bg-white dark:bg-slate-800 rounded-2xl border border-amber-200/60 dark:border-amber-800/40 p-5">
+                  <div key={payment.id} className="bg-white dark:bg-gray-800 rounded border border-amber-200 dark:border-amber-800/40 p-5">
                     <div className="flex items-start justify-between gap-4">
                       {/* Left: KOL + campaign info */}
                       <div className="flex items-start gap-4">
@@ -4231,7 +4228,7 @@ function PayoutPanel({ selectedProject, paymentAction, setPaymentAction }: {
                           <Button size="sm" variant="ghost" onClick={() => setPaymentAction({ paymentId: payment.id, action: 'partial' })} className="!text-xs !px-2 !py-1 text-blue-600">
                             Một phần
                           </Button>
-                          <Button size="sm" variant="ghost" onClick={() => setPaymentAction({ paymentId: payment.id, action: 'hold' })} className="!text-xs !px-2 !py-1 text-slate-500">
+                          <Button size="sm" variant="ghost" onClick={() => setPaymentAction({ paymentId: payment.id, action: 'hold' })} className="!text-xs !px-2 !py-1 text-gray-500">
                             Giữ
                           </Button>
                         </div>
@@ -4247,10 +4244,10 @@ function PayoutPanel({ selectedProject, paymentAction, setPaymentAction }: {
 
       {/* ── Payment History Timeline ── */}
       {brandPayments.filter(p => p.status === 'paid').length > 0 && (
-        <div className="bg-slate-900 rounded-2xl border border-slate-700/60 p-5">
+        <div className="bg-gray-900 rounded border border-gray-700 p-5">
           <div className="flex items-center gap-2 mb-4">
-            <div className="p-2 bg-teal-500/20 rounded-xl">
-              <History className="w-4 h-4 text-teal-400" />
+            <div className="p-2 bg-gray-500/20 rounded">
+              <History className="w-4 h-4 text-gray-400" />
             </div>
             <h3 className="text-sm font-semibold text-white">Lịch sử thanh toán</h3>
           </div>
@@ -4259,19 +4256,19 @@ function PayoutPanel({ selectedProject, paymentAction, setPaymentAction }: {
               .filter(p => p.status === 'paid')
               .sort((a, b) => new Date(b.paidDate || 0).getTime() - new Date(a.paidDate || 0).getTime())
               .map(p => (
-                <div key={p.id} className="flex items-center justify-between p-3 bg-slate-800/60 rounded-xl">
+                <div key={p.id} className="flex items-center justify-between p-3 bg-gray-50 dark:bg-gray-700 rounded">
                   <div className="flex items-center gap-3">
-                    <div className="w-8 h-8 bg-emerald-500/20 rounded-full flex items-center justify-center">
+                    <div className="w-8 h-8 bg-gray-500/20 rounded-full flex items-center justify-center">
                       <CheckCircle2 className="w-4 h-4 text-emerald-400" />
                     </div>
                     <div>
                       <p className="text-sm font-medium text-white">{p.kolName}</p>
-                      <p className="text-[11px] text-slate-400">{p.kolPlatform} · {p.campaignName}</p>
+                      <p className="text-[11px] text-gray-400">{p.kolPlatform} · {p.campaignName}</p>
                     </div>
                   </div>
                   <div className="text-right">
                     <p className="text-sm font-bold text-emerald-400">{p.paidAmount.toLocaleString()} VND</p>
-                    <p className="text-[10px] text-slate-500">{p.paidDate ? new Date(p.paidDate).toLocaleDateString('vi-VN') : '-'}</p>
+                    <p className="text-[10px] text-gray-500">{p.paidDate ? new Date(p.paidDate).toLocaleDateString('vi-VN') : '-'}</p>
                   </div>
                 </div>
               ))}
@@ -4304,13 +4301,13 @@ function PaymentsView({ selectedProject }: { selectedProject: string }) {
       <SectionHeader title="Quản lý thanh toán" subtitle="Xem, phê duyệt và xử lý thanh toán cho KOL/KOC" />
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
         <KPIWidget label="Tổng cần thanh toán" value={(brandPayments.reduce((s, p) => s + (p.totalAmount - p.paidAmount), 0) / 1000000).toFixed(1) + 'M VND'} icon={<DollarSign className="w-5 h-5" />} />
-        <KPIWidget label="Đã thanh toán" value={(brandPayments.filter(p => p.status === 'paid').reduce((s, p) => s + p.paidAmount, 0) / 1000000).toFixed(1) + 'M VND'} icon={<CheckCircle2 className="w-5 h-5" />} accent="from-emerald-500/10 to-emerald-600/5" />
-        <KPIWidget label="Đang chờ" value={brandPayments.filter(p => p.status === 'pending').length.toString()} icon={<Clock className="w-5 h-5" />} accent="from-amber-500/10 to-amber-600/5" />
-        <KPIWidget label="Thanh toán một phần" value={brandPayments.filter(p => p.status === 'partial_paid').length.toString()} icon={<CreditCard className="w-5 h-5" />} accent="from-blue-500/10 to-blue-600/5" />
+        <KPIWidget label="Đã thanh toán" value={(brandPayments.filter(p => p.status === 'paid').reduce((s, p) => s + p.paidAmount, 0) / 1000000).toFixed(1) + 'M VND'} icon={<CheckCircle2 className="w-5 h-5" />} />
+        <KPIWidget label="Đang chờ" value={brandPayments.filter(p => p.status === 'pending').length.toString()} icon={<Clock className="w-5 h-5" />} />
+        <KPIWidget label="Thanh toán một phần" value={brandPayments.filter(p => p.status === 'partial_paid').length.toString()} icon={<CreditCard className="w-5 h-5" />} />
       </div>
       <div className="flex items-center gap-3 flex-wrap">
         <select value={filterStatus} onChange={e => setFilterStatus(e.target.value)}
-          className="px-4 py-2 rounded-xl border border-gray-200 dark:border-slate-600 bg-white dark:bg-slate-800 text-gray-900 dark:text-white text-sm">
+          className="px-4 py-2 rounded border border-gray-200 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-white text-sm">
           <option value="all">Tất cả trạng thái</option>
           <option value="pending">Đang chờ</option>
           <option value="paid">Đã thanh toán</option>
@@ -4319,11 +4316,11 @@ function PaymentsView({ selectedProject }: { selectedProject: string }) {
         </select>
         <p className="text-sm text-gray-500 dark:text-gray-400">Dùng bảng này để xử lý hóa đơn sau khi metrics đã được xác nhận.</p>
       </div>
-      <div className="bg-white dark:bg-slate-800 rounded-2xl border border-gray-200/60 dark:border-slate-700/60 overflow-hidden">
+      <div className="bg-white dark:bg-gray-800 rounded border border-gray-200 dark:border-gray-700 overflow-hidden">
         <div className="overflow-x-auto">
           <table className="w-full min-w-[1000px]">
             <thead>
-              <tr className="border-b border-gray-100 dark:border-slate-700">
+              <tr className="border-b border-gray-100 dark:border-gray-700">
                 <th className="text-left px-6 py-3 text-xs font-semibold text-gray-500 uppercase">KOL/KOC</th>
                 <th className="text-left px-6 py-3 text-xs font-semibold text-gray-500 uppercase">Chiến dịch</th>
                 <th className="text-left px-6 py-3 text-xs font-semibold text-gray-500 uppercase">Nhiệm vụ</th>
@@ -4335,7 +4332,7 @@ function PaymentsView({ selectedProject }: { selectedProject: string }) {
             </thead>
             <tbody>
               {filtered.map(payment => (
-                <tr key={payment.id} className="border-b border-gray-50 dark:border-slate-700/50 hover:bg-gray-50/50">
+                <tr key={payment.id} className="border-b border-gray-50 dark:border-gray-700 hover:bg-gray-50/50">
                   <td className="px-6 py-4"><div className="flex items-center gap-3"><Avatar initials={payment.kolAvatar} size="sm" /><div><p className="text-sm font-medium text-gray-900 dark:text-white">{payment.kolName}</p><p className="text-xs text-gray-500">{payment.kolPlatform}</p></div></div></td>
                   <td className="px-6 py-4 text-sm text-gray-700 dark:text-gray-300">{payment.campaignName}</td>
                   <td className="px-6 py-4 text-sm text-gray-500">{payment.taskId ? `Task #${payment.taskId.replace('t', '')}` : '-'}</td>
@@ -4345,7 +4342,7 @@ function PaymentsView({ selectedProject }: { selectedProject: string }) {
                     payment.status === 'paid' ? 'bg-emerald-100 text-emerald-800 dark:bg-emerald-900/40 dark:text-emerald-300' :
                     payment.status === 'pending' ? 'bg-amber-100 text-amber-800 dark:bg-amber-900/40 dark:text-amber-300' :
                     payment.status === 'partial_paid' ? 'bg-blue-100 text-blue-800 dark:bg-blue-900/40 dark:text-blue-300' :
-                    'bg-gray-100 text-gray-700 dark:bg-slate-700 dark:text-gray-300'
+                    'bg-gray-100 text-gray-700 dark:bg-gray-700 dark:text-gray-300'
                   } /></td>
                   <td className="px-6 py-4">
                     {payment.status !== 'paid' ? (
@@ -4369,7 +4366,7 @@ function PaymentsView({ selectedProject }: { selectedProject: string }) {
       {/* QR Payment Demo Modal */}
       <Modal isOpen={!!qrModalPayment} onClose={() => setQrModalPayment(null)} title="QR Thanh toán" width="max-w-sm">
         <div className="space-y-4">
-          <div className="flex items-center gap-3 p-3 bg-gray-50 dark:bg-slate-700/40 rounded-xl">
+          <div className="flex items-center gap-3 p-3 bg-gray-50 dark:bg-gray-800 rounded">
             <Avatar initials={qrModalPayment?.kolAvatar} size="md" />
             <div>
               <p className="text-sm font-semibold text-gray-900 dark:text-white">{qrModalPayment?.kolName}</p>
@@ -4377,7 +4374,7 @@ function PaymentsView({ selectedProject }: { selectedProject: string }) {
             </div>
           </div>
           <div className="flex items-center justify-center">
-            <div className="p-3 bg-white rounded-2xl border-4 border-gray-900 dark:border-white shadow-lg">
+            <div className="p-3 bg-white rounded border-4 border-gray-900 dark:border-white ">
               <svg width="180" height="180" viewBox="0 0 180 180">
                 <rect width="180" height="180" fill="white" />
                 <rect x="10" y="10" width="40" height="40" fill="black" />
@@ -4417,7 +4414,7 @@ function PaymentsView({ selectedProject }: { selectedProject: string }) {
             <p className="text-2xl font-bold text-gray-900 dark:text-white">{qrModalPayment?.totalAmount.toLocaleString()} VND</p>
             <p className="text-xs text-gray-500">{qrModalPayment?.invoiceNumber}</p>
           </div>
-          <div className="p-3 bg-amber-50 dark:bg-amber-900/20 rounded-xl border border-amber-200 dark:border-amber-800/40 text-xs text-amber-700 dark:text-amber-300">
+          <div className="p-3 bg-gray-50 dark:bg-gray-700 rounded border border-amber-200 dark:border-amber-800/40 text-xs text-amber-700 dark:text-amber-300">
             ⚠️ Đây là QR thanh toán demo ảo. Không quét thực.
           </div>
           <div className="flex gap-3">
@@ -4439,22 +4436,22 @@ function PaymentsView({ selectedProject }: { selectedProject: string }) {
             return (
               <>
                 {p && (
-                  <div className="p-4 bg-gray-50 dark:bg-slate-700/40 rounded-xl">
+                  <div className="p-4 bg-gray-50 dark:bg-gray-800 rounded">
                     <div className="flex items-center gap-3 mb-3">
                       <Avatar initials={p.kolAvatar} size="sm" />
                       <div><p className="text-sm font-medium text-gray-900 dark:text-white">{p.kolName}</p><p className="text-xs text-gray-500">{p.campaignName}</p></div>
                     </div>
                     {task && (
                       <div className="grid grid-cols-2 gap-3 text-xs">
-                        <div className="p-2 bg-white dark:bg-slate-600 rounded-lg"><p className="text-gray-500">KPI Views</p><p className="font-medium text-gray-900 dark:text-white">{task.kpiTarget.views.toLocaleString()}</p></div>
-                        <div className="p-2 bg-white dark:bg-slate-600 rounded-lg"><p className="text-gray-500">KPI ER</p><p className="font-medium text-gray-900 dark:text-white">{task.kpiTarget.engagementRate}%</p></div>
-                        <div className="p-2 bg-white dark:bg-slate-600 rounded-lg"><p className="text-gray-500">Metrics Approved</p><p className="font-medium text-teal-600">{task.metrics ? '✓ Đã xác nhận' : '—'}</p></div>
-                        <div className="p-2 bg-white dark:bg-slate-600 rounded-lg"><p className="text-gray-500">Conversion</p><p className="font-medium text-gray-900 dark:text-white">{task.conversion ? `Đơn: ${task.conversion.orders}` : '—'}</p></div>
+                        <div className="p-2 bg-white dark:bg-gray-600 rounded"><p className="text-gray-500">KPI Views</p><p className="font-medium text-gray-900 dark:text-white">{task.kpiTarget.views.toLocaleString()}</p></div>
+                        <div className="p-2 bg-white dark:bg-gray-600 rounded"><p className="text-gray-500">KPI ER</p><p className="font-medium text-gray-900 dark:text-white">{task.kpiTarget.engagementRate}%</p></div>
+                        <div className="p-2 bg-white dark:bg-gray-600 rounded"><p className="text-gray-500">Metrics Approved</p><p className="font-medium text-gray-600">{task.metrics ? '✓ Đã xác nhận' : '—'}</p></div>
+                        <div className="p-2 bg-white dark:bg-gray-600 rounded"><p className="text-gray-500">Conversion</p><p className="font-medium text-gray-900 dark:text-white">{task.conversion ? `Đơn: ${task.conversion.orders}` : '—'}</p></div>
                       </div>
                     )}
                   </div>
                 )}
-                <div className="p-4 bg-gray-50 dark:bg-slate-700/40 rounded-xl">
+                <div className="p-4 bg-gray-50 dark:bg-gray-800 rounded">
                   <p className="text-sm text-gray-600 dark:text-gray-300">
                     {paymentAction.action === 'approve' ? 'Xác nhận thanh toán đầy đủ?' :
                      paymentAction.action === 'partial' ? 'Nhập số tiền thanh toán một phần:' :
@@ -4464,13 +4461,13 @@ function PaymentsView({ selectedProject }: { selectedProject: string }) {
                 </div>
                 {paymentAction.action === 'partial' && (
                   <div><label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Số tiền (VND)</label>
-                    <input type="number" placeholder="VD: 5000000" className="w-full px-4 py-2.5 rounded-xl border border-gray-200 dark:border-slate-600 bg-white dark:bg-slate-700 text-gray-900 dark:text-white text-sm" />
+                    <input type="number" placeholder="VD: 5000000" className="w-full px-4 py-2.5 rounded border border-gray-200 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white text-sm" />
                   </div>
                 )}
                 {paymentAction.action === 'hold' && (
                   <div><label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Lý do giữ tạm</label>
                     <textarea rows={2} placeholder="VD: Số liệu metrics chưa được xác nhận..."
-                      className="w-full px-4 py-2.5 rounded-xl border border-gray-200 dark:border-slate-600 bg-white dark:bg-slate-700 text-gray-900 dark:text-white text-sm resize-none" />
+                      className="w-full px-4 py-2.5 rounded border border-gray-200 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white text-sm resize-none" />
                   </div>
                 )}
                 <div className="flex justify-end gap-3">
@@ -4508,7 +4505,7 @@ function RankingsView({ selectedProject }: { selectedProject: string }) {
   return (
     <div className="space-y-6">
       {/* ── Header bar: ranking context ── */}
-      <div className="flex items-center gap-3 px-4 py-3 bg-violet-50 dark:bg-violet-900/20 rounded-xl border border-violet-200 dark:border-violet-800/40">
+      <div className="flex items-center gap-3 px-4 py-3 bg-violet-50 dark:bg-violet-900/20 rounded border border-violet-200 dark:border-violet-800/40">
         <Award className="w-5 h-5 text-violet-600 flex-shrink-0" />
         <p className="text-sm text-violet-800 dark:text-violet-200">
           Báo cáo & Xếp hạng: tổng hợp hiệu suất toàn bộ chiến dịch và xếp hạng KOL/KOC dựa trên điểm số.
@@ -4516,17 +4513,17 @@ function RankingsView({ selectedProject }: { selectedProject: string }) {
       </div>
 
       {/* ── Aggregate Stats: horizontal bar strip ── */}
-      <div className="bg-slate-900 rounded-2xl border border-slate-700/60 p-5">
-        <div className="grid grid-cols-2 md:grid-cols-4 divide-x divide-slate-700">
+      <div className="bg-gray-900 rounded border border-gray-700 p-5">
+        <div className="grid grid-cols-2 md:grid-cols-4 divide-x divide-gray-700">
           {[
             { label: 'Total Views', value: totalViews >= 1000000 ? `${(totalViews/1000000).toFixed(1)}M` : `${Math.round(totalViews/1000)}K`, color: 'text-violet-400' },
-            { label: 'Engagement', value: totalEngagement >= 1000000 ? `${(totalEngagement/1000000).toFixed(1)}M` : `${Math.round(totalEngagement/1000)}K`, color: 'text-teal-400' },
+            { label: 'Engagement', value: totalEngagement >= 1000000 ? `${(totalEngagement/1000000).toFixed(1)}M` : `${Math.round(totalEngagement/1000)}K`, color: 'text-gray-400' },
             { label: 'ER', value: `${engagementRate}%`, color: 'text-amber-400' },
             { label: 'Conversion Rate', value: `${conversionRate}%`, color: 'text-emerald-400' },
           ].map(item => (
             <div key={item.label} className="px-6 first:pl-0 text-center">
               <p className={`text-2xl font-bold ${item.color}`}>{item.value}</p>
-              <p className="text-xs text-slate-500 mt-1">{item.label}</p>
+              <p className="text-xs text-gray-500 mt-1">{item.label}</p>
             </div>
           ))}
         </div>
@@ -4539,7 +4536,7 @@ function RankingsView({ selectedProject }: { selectedProject: string }) {
           <h2 className="text-base font-bold text-gray-900 dark:text-white">Top KOL/KOC</h2>
         </div>
         {brandKOLRankings.length === 0 ? (
-          <div className="bg-white dark:bg-slate-800 rounded-2xl border border-gray-200/60 dark:border-slate-700/60 p-8 text-center">
+          <div className="bg-white dark:bg-gray-800 rounded border border-gray-200 dark:border-gray-700 p-8 text-center">
             <p className="text-sm text-gray-500">Chưa có dữ liệu xếp hạng.</p>
           </div>
         ) : (
@@ -4547,11 +4544,11 @@ function RankingsView({ selectedProject }: { selectedProject: string }) {
             {/* Top 3 podium */}
             {brandKOLRankings.slice(0, 3).map((r, i) => {
               const kol = kols.find(k => k.id === r.kolId);
-              const podiumColors = ['from-amber-400 to-yellow-500', 'from-slate-300 to-gray-400', 'from-amber-600 to-orange-700'];
+              const podiumColors = ['bg-gray-400', 'bg-gray-400', 'bg-gray-400'];
               return (
                 <div key={r.kolId} className="flex items-center gap-4">
                   {/* Podium rank */}
-                  <div className={`w-16 h-32 rounded-t-2xl bg-gradient-to-b ${podiumColors[i]} flex flex-col items-center justify-end pb-4 flex-shrink-0`}>
+                  <div className={`w-16 h-32 rounded bg-gray-400 dark:bg-gray-700 flex flex-col items-center justify-end pb-4 flex-shrink-0`}>
                     <span className="text-2xl font-black text-white/90 drop-shadow">{i + 1}</span>
                     <span className="text-[10px] font-bold text-white/70 uppercase">Top</span>
                   </div>
@@ -4570,7 +4567,7 @@ function RankingsView({ selectedProject }: { selectedProject: string }) {
                     </div>
                     <div className="flex gap-4">
                       <span className="text-xs text-gray-500">{r.totalViews >= 1000000 ? `${(r.totalViews/1000000).toFixed(1)}M` : `${Math.round(r.totalViews/1000)}K`} views</span>
-                      <span className="text-xs text-teal-600 dark:text-teal-400">ER {r.avgEngagementRate}%</span>
+                      <span className="text-xs text-gray-600 dark:text-gray-400">ER {r.avgEngagementRate}%</span>
                     </div>
                   </div>
                 </div>
@@ -4579,13 +4576,13 @@ function RankingsView({ selectedProject }: { selectedProject: string }) {
 
             {/* Rest of rankings: compact list */}
             {brandKOLRankings.length > 3 && (
-              <div className="bg-white dark:bg-slate-800 rounded-2xl border border-gray-200/60 dark:border-slate-700/60 overflow-hidden divide-y divide-gray-100 dark:divide-slate-700/50">
+              <div className="bg-white dark:bg-gray-800 rounded border border-gray-200 dark:border-gray-700 overflow-hidden divide-y divide-gray-100 dark:divide-gray-700">
                 {brandKOLRankings.slice(3).map((r, i) => {
                   const kol = kols.find(k => k.id === r.kolId);
                   const rank = i + 4;
                   return (
-                    <div key={r.kolId} className="flex items-center gap-4 px-5 py-3 hover:bg-gray-50/50 dark:hover:bg-slate-700/20">
-                      <div className="w-8 h-8 rounded-full bg-gray-100 dark:bg-slate-700 flex items-center justify-center text-xs font-bold text-gray-500 flex-shrink-0">
+                    <div key={r.kolId} className="flex items-center gap-4 px-5 py-3 hover:bg-gray-50/50 dark:hover:bg-gray-700/20">
+                      <div className="w-8 h-8 rounded-full bg-gray-100 dark:bg-gray-700 flex items-center justify-center text-xs font-bold text-gray-500 flex-shrink-0">
                         {rank}
                       </div>
                       <Avatar initials={kol?.avatar || 'K'} size="sm" />
@@ -4595,7 +4592,7 @@ function RankingsView({ selectedProject }: { selectedProject: string }) {
                       </div>
                       <div className="flex items-center gap-6 flex-shrink-0">
                         <span className="text-xs text-gray-500">{r.totalViews >= 1000000 ? `${(r.totalViews/1000000).toFixed(1)}M` : `${Math.round(r.totalViews/1000)}K`}</span>
-                        <span className="text-xs text-teal-600 dark:text-teal-400">{r.avgEngagementRate}%</span>
+                        <span className="text-xs text-gray-600 dark:text-gray-400">{r.avgEngagementRate}%</span>
                         <span className="text-sm font-bold text-gray-900 dark:text-white w-8 text-right">{r.score}</span>
                       </div>
                     </div>
@@ -4610,11 +4607,11 @@ function RankingsView({ selectedProject }: { selectedProject: string }) {
       {/* ── Campaign Leaderboard ── */}
       <div>
         <div className="flex items-center gap-3 mb-3">
-          <TrendingUp className="w-5 h-5 text-teal-500" />
+          <TrendingUp className="w-5 h-5 text-gray-400" />
           <h2 className="text-base font-bold text-gray-900 dark:text-white">Top Chiến dịch</h2>
         </div>
         {brandCampaignRankings.length === 0 ? (
-          <div className="bg-white dark:bg-slate-800 rounded-2xl border border-gray-200/60 dark:border-slate-700/60 p-8 text-center">
+          <div className="bg-white dark:bg-gray-800 rounded border border-gray-200 dark:border-gray-700 p-8 text-center">
             <p className="text-sm text-gray-500">Chưa có dữ liệu xếp hạng chiến dịch.</p>
           </div>
         ) : (
@@ -4623,7 +4620,7 @@ function RankingsView({ selectedProject }: { selectedProject: string }) {
               const campaign = campaigns.find(c => c.id === r.campaignId);
               const medals = ['🥇', '🥈', '🥉'];
               return (
-                <div key={r.campaignId} className="flex items-center gap-4 bg-white dark:bg-slate-800 rounded-2xl border border-gray-200/60 dark:border-slate-700/60 p-4">
+                <div key={r.campaignId} className="flex items-center gap-4 bg-white dark:bg-gray-800 rounded border border-gray-200 dark:border-gray-700 p-4">
                   <span className="text-2xl w-8 text-center flex-shrink-0">{medals[i]}</span>
                   <div className="flex-1 min-w-0">
                     <p className="text-sm font-semibold text-gray-900 dark:text-white truncate">{campaign?.name}</p>
@@ -4634,7 +4631,7 @@ function RankingsView({ selectedProject }: { selectedProject: string }) {
                       <p className="text-xs font-bold text-violet-600 dark:text-violet-400">{r.totalViews >= 1000000 ? `${(r.totalViews/1000000).toFixed(1)}M` : `${Math.round(r.totalViews/1000)}K`} views</p>
                     </div>
                     <div className="text-right">
-                      <p className="text-xs font-bold text-teal-600 dark:text-teal-400">{r.avgEngagementRate}% ER</p>
+                      <p className="text-xs font-bold text-gray-600 dark:text-gray-400">{r.avgEngagementRate}% ER</p>
                     </div>
                     <div className="text-right">
                       <p className="text-xs font-bold text-amber-600 dark:text-amber-400">{r.score} điểm</p>
@@ -4645,7 +4642,7 @@ function RankingsView({ selectedProject }: { selectedProject: string }) {
             })}
             {/* Rest */}
             {brandCampaignRankings.length > 3 && (
-              <div className="bg-white dark:bg-slate-800 rounded-2xl border border-gray-200/60 dark:border-slate-700/60 overflow-hidden divide-y divide-gray-100 dark:divide-slate-700/50">
+              <div className="bg-white dark:bg-gray-800 rounded border border-gray-200 dark:border-gray-700 overflow-hidden divide-y divide-gray-100 dark:divide-gray-700">
                 {brandCampaignRankings.slice(3).map((r, i) => {
                   const campaign = campaigns.find(c => c.id === r.campaignId);
                   return (
@@ -4657,7 +4654,7 @@ function RankingsView({ selectedProject }: { selectedProject: string }) {
                       </div>
                       <div className="flex items-center gap-4 flex-shrink-0">
                         <span className="text-xs text-gray-500">{r.totalViews >= 1000000 ? `${(r.totalViews/1000000).toFixed(1)}M` : `${Math.round(r.totalViews/1000)}K`}</span>
-                        <span className="text-xs text-teal-600">{r.avgEngagementRate}%</span>
+                        <span className="text-xs text-gray-600">{r.avgEngagementRate}%</span>
                         <span className="text-sm font-bold text-gray-900 dark:text-white w-8 text-right">{r.score}</span>
                       </div>
                     </div>
