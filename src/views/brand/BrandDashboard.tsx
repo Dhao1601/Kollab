@@ -15,6 +15,31 @@ import {
   KPIWidget, Modal, Button, Badge, Avatar, CredentialDisplay, SectionHeader
 } from '../../components/SharedUI';
 
+const KOL_AVATAR_IMAGES: Record<string, string> = {
+  LB: 'https://i.pravatar.cc/150?img=47',
+  MF: 'https://i.pravatar.cc/150?img=11',
+  TT: 'https://i.pravatar.cc/150?img=12',
+  HF: 'https://i.pravatar.cc/150?img=53',
+  PM: 'https://i.pravatar.cc/150?img=44',
+  AK: 'https://i.pravatar.cc/150?img=15',
+  MH: 'https://i.pravatar.cc/150?img=49',
+  LT: 'https://i.pravatar.cc/150?img=48',
+  HC: 'https://i.pravatar.cc/150?img=51',
+  NM: 'https://i.pravatar.cc/150?img=14',
+};
+
+const PRODUCT_IMAGES: Record<string, string> = {
+  serum: 'https://images.unsplash.com/photo-1620916566398-39f1143ab7be?w=400&h=400&fit=crop',
+  cleanser: 'https://images.unsplash.com/photo-1556228720-195a672e8a03?w=400&h=400&fit=crop',
+  sunscreen: 'https://images.unsplash.com/photo-1556227834-09f1de7a7d14?w=400&h=400&fit=crop',
+  vitaminc: 'https://images.unsplash.com/photo-1618354691373-d851c5c3a990?w=400&h=400&fit=crop',
+  rosewater: 'https://images.unsplash.com/photo-1608248543803-ba4f8c70ae0b?w=400&h=400&fit=crop',
+  moisturizer: 'https://images.unsplash.com/photo-1617897903246-719242758050?w=400&h=400&fit=crop',
+  detox: 'https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=400&h=400&fit=crop',
+};
+
+function getKolImage(initials: string) { return KOL_AVATAR_IMAGES[initials]; }
+
 // ═══════════════════════════════════════════════════════════════════════
 // COMPREHENSIVE MOCK DATASET
 // All data is deeply interconnected: brands → products → campaigns → tasks → KOLs → payments
@@ -139,17 +164,16 @@ export const BRAND_DATA = {
     },
   ],
   kols: [
-    { id: 'k1', brandId: 'b1', name: 'Linh Beauty', email: 'linhbeauty@gmail.com', handle: '@linhbeauty.official', platform: 'TikTok', role: 'KOL' as const, followers: 1200000, followersDisplay: '1.2M', engagementRate: 6.8, niche: 'Skincare', contentCategory: 'Chăm sóc da', bookingPrice: 8500000, status: 'active' as const, avatar: 'LB', bio: 'Beauty Blogger | Skincare Enthusiast | 1.2M followers on TikTok', currentRank: 1, totalEarned: 127500000, pendingPayment: 17000000 },
-    { id: 'k2', brandId: 'b1', name: 'Minh Food Review', email: 'minhfoodreview@gmail.com', handle: '@minhfoodreview.vn', platform: 'Facebook', role: 'KOC' as const, followers: 35000, followersDisplay: '35K', engagementRate: 8.2, niche: 'Food & Lifestyle', contentCategory: 'Review đồ ăn', bookingPrice: 2500000, status: 'active' as const, avatar: 'MF', bio: 'Food Reviewer | Đi Ăn Là Chạy', currentRank: 3, totalEarned: 32500000, pendingPayment: 5000000 },
-    { id: 'k3', brandId: 'b1', name: 'Tuấn Tech Review', email: 'tuantech@gmail.com', handle: '@tuantechreview', platform: 'YouTube', role: 'KOL' as const, followers: 850000, followersDisplay: '850K', engagementRate: 5.4, niche: 'Tech', contentCategory: 'Review công nghệ', bookingPrice: 12000000, status: 'active' as const, avatar: 'TT', bio: 'Tech Reviewer | Unboxing & Review', currentRank: 2, totalEarned: 96000000, pendingPayment: 12000000 },
-    { id: 'k4', brandId: 'b1', name: 'Hà Fitness', email: 'hafitness@gmail.com', handle: '@hafitness.life', platform: 'TikTok', role: 'KOL' as const, followers: 680000, followersDisplay: '680K', engagementRate: 7.5, niche: 'Fitness', contentCategory: 'Thể hình & Sức khỏe', bookingPrice: 6500000, status: 'active' as const, avatar: 'HF', bio: 'Fitness Coach | Home Workout | Protein Lover', currentRank: 4, totalEarned: 71500000, pendingPayment: 6500000 },
-    { id: 'k5', brandId: 'b1', name: 'Phương Makeup', email: 'phuongmakeup@gmail.com', handle: '@phuongmakeup.studio', platform: 'Instagram', role: 'KOC' as const, followers: 45000, followersDisplay: '45K', engagementRate: 9.1, niche: 'Beauty', contentCategory: 'Trang điểm', bookingPrice: 3500000, status: 'active' as const, avatar: 'PM', bio: 'Makeup Artist | Tutorial & Review', currentRank: 5, totalEarned: 42000000, pendingPayment: 7000000 },
-    { id: 'k6', brandId: 'b1', name: 'Anh Khoa Fitness', email: 'anhkhoafit@gmail.com', handle: '@anhkhoafit_official', platform: 'YouTube', role: 'KOL' as const, followers: 420000, followersDisplay: '420K', engagementRate: 6.2, niche: 'Fitness', contentCategory: 'Thể hình', bookingPrice: 5500000, status: 'active' as const, avatar: 'AK', bio: 'Bodybuilding Coach | YouTube Fitness Partner', currentRank: 6, totalEarned: 55000000, pendingPayment: 11000000 },
-    // Additional KOLs for other brands
-    { id: 'k7', brandId: 'b2', name: 'Mỹ Hà Beauty', email: 'myha@gmail.com', handle: '@myhabu', platform: 'TikTok', role: 'KOL' as const, followers: 920000, followersDisplay: '920K', engagementRate: 7.1, niche: 'Skincare', contentCategory: 'Chăm sóc da', bookingPrice: 7500000, status: 'active' as const, avatar: 'MH', bio: 'Skincare Expert | Beauty Guru', currentRank: 1, totalEarned: 215000000, pendingPayment: 22000000 },
-    { id: 'k8', brandId: 'b2', name: 'Lan Trần Lifestyle', email: 'lantran@gmail.com', handle: '@lantranlifestyle', platform: 'Instagram', role: 'KOL' as const, followers: 380000, followersDisplay: '380K', engagementRate: 8.3, niche: 'Lifestyle', contentCategory: 'Lifestyle', bookingPrice: 5000000, status: 'active' as const, avatar: 'LT', bio: 'Lifestyle Influencer | Home Decor | Beauty', currentRank: 2, totalEarned: 145000000, pendingPayment: 15000000 },
-    { id: 'k9', brandId: 'b1', name: 'Huyền Chi Skincare', email: 'huyenchiskincare@gmail.com', handle: '@huyenchiskincare', platform: 'TikTok', role: 'KOC' as const, followers: 28000, followersDisplay: '28K', engagementRate: 9.4, niche: 'Skincare', contentCategory: 'Chăm sóc da', bookingPrice: 1500000, status: 'active' as const, avatar: 'HC', bio: 'Skincare Enthusiast | Budget Beauty Tips', currentRank: 7, totalEarned: 18500000, pendingPayment: 3000000 },
-    { id: 'k10', brandId: 'b3', name: 'Ngọc Minh Health', email: 'ngocminhhealth@gmail.com', handle: '@ngocminhhealth', platform: 'YouTube', role: 'KOL' as const, followers: 150000, followersDisplay: '150K', engagementRate: 6.8, niche: 'Health', contentCategory: 'Sức khỏe', bookingPrice: 4000000, status: 'active' as const, avatar: 'NM', bio: 'Health & Wellness Coach', currentRank: 1, totalEarned: 48000000, pendingPayment: 8000000 },
+    { id: 'k1', brandId: 'b1', name: 'Linh Beauty', email: 'linhbeauty@gmail.com', handle: '@linhbeauty.official', platform: 'TikTok', role: 'KOL' as const, followers: 1200000, followersDisplay: '1.2M', engagementRate: 6.8, niche: 'Skincare', contentCategory: 'Chăm sóc da', bookingPrice: 8500000, status: 'active' as const, avatar: 'LB', avatarImage: 'https://api.dicebear.com/7.x/avataaars/svg?seed=LinhBeauty&backgroundColor=b6e3f4', bio: 'Beauty Blogger | Skincare Enthusiast | 1.2M followers on TikTok', currentRank: 1, totalEarned: 127500000, pendingPayment: 17000000 },
+    { id: 'k2', brandId: 'b1', name: 'Minh Food Review', email: 'minhfoodreview@gmail.com', handle: '@minhfoodreview.vn', platform: 'Facebook', role: 'KOC' as const, followers: 35000, followersDisplay: '35K', engagementRate: 8.2, niche: 'Food & Lifestyle', contentCategory: 'Review đồ ăn', bookingPrice: 2500000, status: 'active' as const, avatar: 'MF', avatarImage: 'https://api.dicebear.com/7.x/avataaars/svg?seed=MinhFood&backgroundColor=ffd5dc', bio: 'Food Reviewer | Đi Ăn Là Chạy', currentRank: 3, totalEarned: 32500000, pendingPayment: 5000000 },
+    { id: 'k3', brandId: 'b1', name: 'Tuấn Tech Review', email: 'tuantech@gmail.com', handle: '@tuantechreview', platform: 'YouTube', role: 'KOL' as const, followers: 850000, followersDisplay: '850K', engagementRate: 5.4, niche: 'Tech', contentCategory: 'Review công nghệ', bookingPrice: 12000000, status: 'active' as const, avatar: 'TT', avatarImage: 'https://api.dicebear.com/7.x/avataaars/svg?seed=TuanTech&backgroundColor=c0aede', bio: 'Tech Reviewer | Unboxing & Review', currentRank: 2, totalEarned: 96000000, pendingPayment: 12000000 },
+    { id: 'k4', brandId: 'b1', name: 'Hà Fitness', email: 'hafitness@gmail.com', handle: '@hafitness.life', platform: 'TikTok', role: 'KOL' as const, followers: 680000, followersDisplay: '680K', engagementRate: 7.5, niche: 'Fitness', contentCategory: 'Thể hình & Sức khỏe', bookingPrice: 6500000, status: 'active' as const, avatar: 'HF', avatarImage: 'https://api.dicebear.com/7.x/avataaars/svg?seed=HaFitness&backgroundColor=d1d4f9', bio: 'Fitness Coach | Home Workout | Protein Lover', currentRank: 4, totalEarned: 71500000, pendingPayment: 6500000 },
+    { id: 'k5', brandId: 'b1', name: 'Phương Makeup', email: 'phuongmakeup@gmail.com', handle: '@phuongmakeup.studio', platform: 'Instagram', role: 'KOC' as const, followers: 45000, followersDisplay: '45K', engagementRate: 9.1, niche: 'Beauty', contentCategory: 'Trang điểm', bookingPrice: 3500000, status: 'active' as const, avatar: 'PM', avatarImage: 'https://api.dicebear.com/7.x/avataaars/svg?seed=PhuongMakeup&backgroundColor=ffdfbf', bio: 'Makeup Artist | Tutorial & Review', currentRank: 5, totalEarned: 42000000, pendingPayment: 7000000 },
+    { id: 'k6', brandId: 'b1', name: 'Anh Khoa Fitness', email: 'anhkhoafit@gmail.com', handle: '@anhkhoafit_official', platform: 'YouTube', role: 'KOL' as const, followers: 420000, followersDisplay: '420K', engagementRate: 6.2, niche: 'Fitness', contentCategory: 'Thể hình', bookingPrice: 5500000, status: 'active' as const, avatar: 'AK', avatarImage: 'https://api.dicebear.com/7.x/avataaars/svg?seed=AnhKhoa&backgroundColor=ffedef', bio: 'Bodybuilding Coach | YouTube Fitness Partner', currentRank: 6, totalEarned: 55000000, pendingPayment: 11000000 },
+    { id: 'k7', brandId: 'b2', name: 'Mỹ Hà Beauty', email: 'myha@gmail.com', handle: '@myhabu', platform: 'TikTok', role: 'KOL' as const, followers: 920000, followersDisplay: '920K', engagementRate: 7.1, niche: 'Skincare', contentCategory: 'Chăm sóc da', bookingPrice: 7500000, status: 'active' as const, avatar: 'MH', avatarImage: 'https://api.dicebear.com/7.x/avataaars/svg?seed=MyHa&backgroundColor=b6e3f4', bio: 'Skincare Expert | Beauty Guru', currentRank: 1, totalEarned: 215000000, pendingPayment: 22000000 },
+    { id: 'k8', brandId: 'b2', name: 'Lan Trần Lifestyle', email: 'lantran@gmail.com', handle: '@lantranlifestyle', platform: 'Instagram', role: 'KOL' as const, followers: 380000, followersDisplay: '380K', engagementRate: 8.3, niche: 'Lifestyle', contentCategory: 'Lifestyle', bookingPrice: 5000000, status: 'active' as const, avatar: 'LT', avatarImage: 'https://api.dicebear.com/7.x/avataaars/svg?seed=LanTran&backgroundColor=ffd5dc', bio: 'Lifestyle Influencer | Home Decor | Beauty', currentRank: 2, totalEarned: 145000000, pendingPayment: 15000000 },
+    { id: 'k9', brandId: 'b1', name: 'Huyền Chi Skincare', email: 'huyenchiskincare@gmail.com', handle: '@huyenchiskincare', platform: 'TikTok', role: 'KOC' as const, followers: 28000, followersDisplay: '28K', engagementRate: 9.4, niche: 'Skincare', contentCategory: 'Chăm sóc da', bookingPrice: 1500000, status: 'active' as const, avatar: 'HC', avatarImage: 'https://api.dicebear.com/7.x/avataaars/svg?seed=HuyenChi&backgroundColor=c0aede', bio: 'Skincare Enthusiast | Budget Beauty Tips', currentRank: 7, totalEarned: 18500000, pendingPayment: 3000000 },
+    { id: 'k10', brandId: 'b3', name: 'Ngọc Minh Health', email: 'ngocminhhealth@gmail.com', handle: '@ngocminhhealth', platform: 'YouTube', role: 'KOL' as const, followers: 150000, followersDisplay: '150K', engagementRate: 6.8, niche: 'Health', contentCategory: 'Sức khỏe', bookingPrice: 4000000, status: 'active' as const, avatar: 'NM', avatarImage: 'https://api.dicebear.com/7.x/avataaars/svg?seed=NgocMinh&backgroundColor=d1d4f9', bio: 'Health & Wellness Coach', currentRank: 1, totalEarned: 48000000, pendingPayment: 8000000 },
   ],
   tasks: [
     // Glow Serum Launch tasks
@@ -210,16 +234,16 @@ export const taskStatusColors: Record<TaskStatus, string> = {
   assigned: 'bg-blue-100 text-blue-800 dark:bg-blue-900/40 dark:text-blue-300',
   draft_submitted: 'bg-purple-100 text-purple-800 dark:bg-purple-900/40 dark:text-purple-300',
   revision_required: 'bg-red-100 text-red-800 dark:bg-red-900/40 dark:text-red-300',
-  approved_to_publish: 'bg-gray-100 text-gray-800 dark:bg-gray-700 dark:text-gray-300',
+  approved_to_publish: 'bg-brand-100 text-brand-800 dark:bg-brand-900/40 dark:text-brand-300',
   published: 'bg-cyan-100 text-cyan-800 dark:bg-cyan-900/40 dark:text-cyan-300',
   tracking: 'bg-amber-100 text-amber-800 dark:bg-amber-900/40 dark:text-amber-300',
   metrics_submitted: 'bg-indigo-100 text-indigo-800 dark:bg-indigo-900/40 dark:text-indigo-300',
-  metrics_approved: 'bg-emerald-100 text-emerald-800 dark:bg-emerald-900/40 dark:text-emerald-300',
+  metrics_approved: 'bg-emerald-100 dark:bg-emerald-900/40 dark:text-emerald-300',
   completed: 'bg-green-100 text-green-800 dark:bg-green-900/40 dark:text-green-300',
   payment_pending: 'bg-orange-100 text-orange-800 dark:bg-orange-900/40 dark:text-orange-300',
-  paid: 'bg-emerald-100 text-emerald-800 dark:bg-emerald-900/40 dark:text-emerald-300',
+  paid: 'bg-emerald-100 dark:bg-emerald-900/40 dark:text-emerald-300',
   hold: 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900/40 dark:text-yellow-300',
-  rejected: 'bg-gray-200 text-gray-700 dark:bg-gray-700 dark:text-gray-300',
+  rejected: 'bg-slate-200 text-slate-300 dark:bg-slate-700 dark:text-slate-300',
 };
 
 export const campaignStatusLabels: Record<CampaignStatus, string> = {
@@ -314,22 +338,10 @@ export function BrandDashboard({ initialView = 'overview' }: { initialView?: str
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-2">
           {activeView !== 'overview' && (
-            <button onClick={goBack} className="flex items-center gap-1 px-3 py-2 rounded text-sm font-medium text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors border border-gray-200 dark:border-gray-600">
+            <button onClick={goBack} className="flex items-center gap-1 px-3 py-2 rounded-xl text-sm font-medium text-slate-600 dark:text-slate-300 hover:bg-slate-100/60 dark:hover:bg-slate-700/50 transition-colors border border-slate-200 dark:border-slate-700">
               <ChevronLeft className="w-4 h-4" />Quay lại
             </button>
           )}
-        </div>
-        <div className="flex items-center gap-2">
-          <select value={selectedProject} onChange={e => setSelectedProject(e.target.value)}
-            className="min-w-[220px] px-4 py-2 rounded border border-gray-200 dark:border-gray-600 bg-white dark:bg-gray-800 text-sm text-gray-900 dark:text-white focus:ring-2 focus:ring-gray-500 outline-none">
-            {projectOptions.map(p => <option key={p.value} value={p.value}>{p.label}</option>)}
-          </select>
-          <Button variant="secondary" size="sm" onClick={() => setActiveView('products')}>
-            <Package className="w-4 h-4 mr-1.5" />Sản phẩm
-          </Button>
-          <Button size="sm" onClick={() => setActiveView('performance')}>
-            <TrendingUp className="w-4 h-4 mr-1.5" />Hiệu suất
-          </Button>
         </div>
       </div>
       {renderView()}
@@ -424,30 +436,30 @@ function OverviewView({ selectedProject, onNavigate, onOpenPopup, onOpenItem }: 
   return (
     <div className="space-y-6">
       {/* Filter Bar */}
-      <div className="flex items-center gap-3 bg-white dark:bg-gray-800 rounded border border-gray-200 dark:border-gray-700 p-4">
-        <div className="flex items-center gap-2 text-gray-500">
+      <div className="flex items-center gap-3 flex-wrap bg-white dark:bg-slate-800 rounded-2xl border border-slate-200/80 dark:border-slate-700/60 shadow-soft p-4">
+        <div className="flex items-center gap-2 text-slate-500">
           <Filter className="w-4 h-4" />
-          <span className="text-sm font-medium text-gray-700 dark:text-gray-300">Bộ lọc:</span>
+          <span className="text-sm font-medium text-slate-300 dark:text-slate-300">Bộ lọc:</span>
         </div>
         <select value={filterKOL} onChange={e => setFilterKOL(e.target.value)}
-          className="px-3 py-2 rounded border border-gray-200 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white text-sm focus:ring-2 focus:ring-gray-500 outline-none">
+          className="px-3 py-2 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-700 text-slate-900 dark:text-white text-sm focus:ring-2 focus:ring-brand-500 outline-none">
           <option value="all">Tất cả KOL/KOC</option>
           {brandKOLs.map(k => <option key={k.id} value={k.id}>{k.name}</option>)}
         </select>
         <select value={filterTimeRange} onChange={e => setFilterTimeRange(e.target.value)}
-          className="px-3 py-2 rounded border border-gray-200 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white text-sm focus:ring-2 focus:ring-gray-500 outline-none">
+          className="px-3 py-2 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-700 text-slate-900 dark:text-white text-sm focus:ring-2 focus:ring-brand-500 outline-none">
           <option value="all">Tất cả thời gian</option>
           <option value="7d">7 ngày gần đây</option>
           <option value="30d">30 ngày gần đây</option>
           <option value="90d">90 ngày gần đây</option>
         </select>
         <select value={filterProduct} onChange={e => setFilterProduct(e.target.value)}
-          className="px-3 py-2 rounded border border-gray-200 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white text-sm focus:ring-2 focus:ring-gray-500 outline-none">
+          className="px-3 py-2 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-700 text-slate-900 dark:text-white text-sm focus:ring-2 focus:ring-brand-500 outline-none">
           <option value="all">Tất cả sản phẩm</option>
           {productList.map(p => <option key={p} value={p}>{p}</option>)}
         </select>
         <select value={filterCampaign} onChange={e => setFilterCampaign(e.target.value)}
-          className="px-3 py-2 rounded border border-gray-200 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white text-sm focus:ring-2 focus:ring-gray-500 outline-none">
+          className="px-3 py-2 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-700 text-slate-900 dark:text-white text-sm focus:ring-2 focus:ring-brand-500 outline-none">
           <option value="all">Tất cả chiến dịch</option>
           {campaignList.map(c => <option key={c.id} value={c.id}>{c.name}</option>)}
         </select>
@@ -467,8 +479,8 @@ function OverviewView({ selectedProject, onNavigate, onOpenPopup, onOpenItem }: 
 
       {/* Charts */}
       <div className="grid grid-cols-1 xl:grid-cols-3 gap-4">
-        <div className="bg-white dark:bg-gray-800 rounded border border-gray-200 dark:border-gray-700 p-6">
-          <h3 className="text-sm font-semibold text-gray-900 dark:text-white mb-4">Campaign Status</h3>
+        <div className="card-base p-6">
+          <h3 className="text-sm font-semibold text-slate-900 dark:text-white mb-4">Campaign Status</h3>
           <div className="h-56">
             <ResponsiveContainer width="100%" height="100%">
               <PieChart><Pie data={campaignStatusData} dataKey="value" nameKey="name" cx="50%" cy="50%" innerRadius={48} outerRadius={72} paddingAngle={3}>
@@ -481,16 +493,16 @@ function OverviewView({ selectedProject, onNavigate, onOpenPopup, onOpenItem }: 
             {campaignStatusData.map(e => (
               <div key={e.name} className="flex items-center gap-2">
                 <div className="w-3 h-3 rounded-full" style={{ backgroundColor: e.color }} />
-                <span className="text-xs text-gray-600 dark:text-gray-400">{e.name}</span>
-                <span className="text-xs font-semibold text-gray-900 dark:text-white ml-auto">{e.value}</span>
+                <span className="text-xs text-slate-600 dark:text-slate-400">{e.name}</span>
+                <span className="text-xs font-semibold text-slate-900 dark:text-white ml-auto">{e.value}</span>
               </div>
             ))}
           </div>
         </div>
-        <div className="bg-white dark:bg-gray-800 rounded border border-gray-200 dark:border-gray-700 p-6 xl:col-span-2">
+        <div className="card-base p-6 xl:col-span-2">
           <div className="flex items-center justify-between mb-4">
-            <h3 className="text-sm font-semibold text-gray-900 dark:text-white">Performance Trend</h3>
-            <span className="text-xs text-gray-500">Views & Conversions</span>
+            <h3 className="text-sm font-semibold text-slate-900 dark:text-white">Performance Trend</h3>
+            <span className="text-xs text-slate-500">Views & Conversions</span>
           </div>
           <div className="h-56">
             <ResponsiveContainer width="100%" height="100%">
@@ -509,30 +521,30 @@ function OverviewView({ selectedProject, onNavigate, onOpenPopup, onOpenItem }: 
       {/* Rankings */}
       <div className="grid grid-cols-1 xl:grid-cols-2 gap-4">
         {/* Campaign Ranking */}
-        <div className="bg-white dark:bg-gray-800 rounded border border-gray-200 dark:border-gray-700 p-6">
+        <div className="card-base p-6">
           <div className="flex items-center justify-between mb-4">
-            <h3 className="text-sm font-semibold text-gray-900 dark:text-white flex items-center gap-2">
+            <h3 className="text-sm font-semibold text-slate-900 dark:text-white flex items-center gap-2">
               <Award className="w-4 h-4 text-amber-500" />Campaign Rankings
             </h3>
-            <button onClick={() => onOpenPopup('campaigns', 'Tất cả chiến dịch')} className="text-xs text-gray-600 dark:text-gray-400 hover:underline font-medium">Xem tất cả →</button>
+            <button onClick={() => onOpenPopup('campaigns', 'Tất cả chiến dịch')} className="text-xs text-brand-500 dark:text-brand-400 hover:underline font-medium">Xem tất cả →</button>
           </div>
           <div className="space-y-2">
             {campaignRankings.slice(0, 5).map((r, i) => (
               <div key={r.campaignId} onClick={() => onOpenItem('campaign', r.campaignId)}
-                className="flex items-center gap-3 p-3 rounded bg-gray-50 dark:bg-gray-700 hover:bg-gray-100 dark:hover:bg-gray-700 cursor-pointer transition-colors">
+                className="flex items-center gap-3 p-3 rounded-xl bg-slate-50/50 dark:bg-slate-700/50 hover:bg-slate-100/60 dark:hover:bg-slate-700/50 cursor-pointer transition-colors">
                 <div className={`w-7 h-7 rounded-full flex items-center justify-center text-xs font-bold ${
-                  i === 0 ? 'bg-gray-500 text-white' :
-                  i === 1 ? 'bg-gray-400 text-white' :
+                  i === 0 ? 'bg-amber-500 text-white' :
+                  i === 1 ? 'bg-slate-400 text-white' :
                   i === 2 ? 'bg-amber-700 text-white' :
-                  'bg-gray-200 dark:bg-gray-600 text-gray-600 dark:text-gray-300'
+                  'bg-slate-200 dark:bg-slate-600 text-slate-600 dark:text-slate-300'
                 }`}>{i + 1}</div>
                 <div className="flex-1 min-w-0">
-                  <p className="text-sm font-medium text-gray-900 dark:text-white truncate">{r.campaignName}</p>
-                  <p className="text-xs text-gray-500">{r.productName}</p>
+                  <p className="text-sm font-medium text-slate-900 dark:text-white truncate">{r.campaignName}</p>
+                  <p className="text-xs text-slate-500">{r.productName}</p>
                 </div>
                 <div className="text-right">
-                  <p className="text-sm font-bold text-gray-900 dark:text-white">{r.score}</p>
-                  <p className="text-xs text-gray-500">Điểm</p>
+                  <p className="text-sm font-bold text-slate-900 dark:text-white">{r.score}</p>
+                  <p className="text-xs text-slate-500">Điểm</p>
                 </div>
               </div>
             ))}
@@ -540,30 +552,30 @@ function OverviewView({ selectedProject, onNavigate, onOpenPopup, onOpenItem }: 
         </div>
 
         {/* KOL/KOC Ranking */}
-        <div className="bg-white dark:bg-gray-800 rounded border border-gray-200 dark:border-gray-700 p-6">
+        <div className="card-base p-6">
           <div className="flex items-center justify-between mb-4">
-            <h3 className="text-sm font-semibold text-gray-900 dark:text-white flex items-center gap-2">
-              <Users className="w-4 h-4 text-gray-400" />KOL/KOC Rankings
+            <h3 className="text-sm font-semibold text-slate-900 dark:text-white flex items-center gap-2">
+              <Users className="w-4 h-4 text-brand-400" />KOL/KOC Rankings
             </h3>
-            <button onClick={() => onOpenPopup('kol', 'Tất cả KOL/KOC')} className="text-xs text-gray-600 dark:text-gray-400 hover:underline font-medium">Xem tất cả →</button>
+            <button onClick={() => onOpenPopup('kol', 'Tất cả KOL/KOC')} className="text-xs text-brand-500 dark:text-brand-400 hover:underline font-medium">Xem tất cả →</button>
           </div>
           <div className="space-y-2">
             {kolRankings.slice(0, 5).map((r, i) => (
               <div key={r.kolId} onClick={() => onOpenItem('kol', r.kolId)}
-                className="flex items-center gap-3 p-3 rounded bg-gray-50 dark:bg-gray-700 hover:bg-gray-100 dark:hover:bg-gray-700 cursor-pointer transition-colors">
+                className="flex items-center gap-3 p-3 rounded-xl bg-slate-50/50 dark:bg-slate-700/50 hover:bg-slate-100/60 dark:hover:bg-slate-700/50 cursor-pointer transition-colors">
                 <div className={`w-7 h-7 rounded-full flex items-center justify-center text-xs font-bold ${
-                  i === 0 ? 'bg-gray-500 text-white' :
-                  i === 1 ? 'bg-gray-400 text-white' :
+                  i === 0 ? 'bg-amber-500 text-white' :
+                  i === 1 ? 'bg-slate-400 text-white' :
                   i === 2 ? 'bg-amber-700 text-white' :
-                  'bg-gray-200 dark:bg-gray-600 text-gray-600 dark:text-gray-300'
+                  'bg-slate-200 dark:bg-slate-600 text-slate-600 dark:text-slate-300'
                 }`}>{i + 1}</div>
                 <div className="flex-1 min-w-0">
-                  <p className="text-sm font-medium text-gray-900 dark:text-white truncate">{r.kolName}</p>
-                  <p className="text-xs text-gray-500">{brandKOLs.find(k => k.id === r.kolId)?.platform || '-'}</p>
+                  <p className="text-sm font-medium text-slate-900 dark:text-white truncate">{r.kolName}</p>
+                  <p className="text-xs text-slate-500">{brandKOLs.find(k => k.id === r.kolId)?.platform || '-'}</p>
                 </div>
                 <div className="text-right">
-                  <p className="text-sm font-bold text-gray-900 dark:text-white">{r.score}</p>
-                  <p className="text-xs text-gray-500">Điểm</p>
+                  <p className="text-sm font-bold text-slate-900 dark:text-white">{r.score}</p>
+                  <p className="text-xs text-slate-500">Điểm</p>
                 </div>
               </div>
             ))}
@@ -574,24 +586,24 @@ function OverviewView({ selectedProject, onNavigate, onOpenPopup, onOpenItem }: 
       {/* Activity Grid */}
       <div className="grid grid-cols-1 xl:grid-cols-2 gap-4">
         {/* Recent Campaigns */}
-        <div className="bg-white dark:bg-gray-800 rounded border border-gray-200 dark:border-gray-700 p-6">
+        <div className="card-base p-6">
           <div className="flex items-center justify-between mb-4">
-            <h3 className="text-sm font-semibold text-gray-900 dark:text-white">Recent Campaigns</h3>
-            <button onClick={() => onOpenPopup('campaigns', 'Tất cả chiến dịch')} className="text-xs text-gray-600 dark:text-gray-400 hover:underline font-medium">Xem tất cả →</button>
+            <h3 className="text-sm font-semibold text-slate-900 dark:text-white">Recent Campaigns</h3>
+            <button onClick={() => onOpenPopup('campaigns', 'Tất cả chiến dịch')} className="text-xs text-brand-500 dark:text-brand-400 hover:underline font-medium">Xem tất cả →</button>
           </div>
           <div className="space-y-3">
             {brandCampaigns.slice(0, 5).map(c => (
               <div key={c.id} onClick={() => onOpenItem('campaign', c.id)}
-                className="flex items-center justify-between rounded bg-gray-50 dark:bg-gray-700 hover:bg-gray-100 dark:hover:bg-gray-700 cursor-pointer transition-colors px-4 py-3">
+                className="flex items-center justify-between rounded-xl bg-slate-50/50 dark:bg-slate-700/50 hover:bg-slate-100/60 dark:hover:bg-slate-700/50 cursor-pointer transition-colors px-4 py-3">
                 <div>
-                  <p className="text-sm font-medium text-gray-900 dark:text-white">{c.name}</p>
-                  <p className="text-xs text-gray-500">{c.productName}</p>
+                  <p className="text-sm font-medium text-slate-900 dark:text-white">{c.name}</p>
+                  <p className="text-xs text-slate-500">{c.productName}</p>
                 </div>
                 <Badge label={campaignStatusLabels[c.status]} colorClass={
-                  c.status === 'completed' ? 'bg-emerald-100 text-emerald-800 dark:bg-emerald-900/40 dark:text-emerald-300' :
+                  c.status === 'completed' ? 'bg-emerald-100 dark:bg-emerald-900/40 dark:text-emerald-300' :
                   c.status === 'tracking' ? 'bg-amber-100 text-amber-800 dark:bg-amber-900/40 dark:text-amber-300' :
                   c.status === 'active' ? 'bg-blue-100 text-blue-800 dark:bg-blue-900/40 dark:text-blue-300' :
-                  'bg-gray-100 text-gray-700 dark:bg-gray-700 dark:text-gray-300'
+                  'bg-slate-100/60 text-slate-300 dark:bg-slate-700 dark:text-slate-300'
                 } />
               </div>
             ))}
@@ -599,18 +611,18 @@ function OverviewView({ selectedProject, onNavigate, onOpenPopup, onOpenItem }: 
         </div>
 
         {/* Recent Activities */}
-        <div className="bg-white dark:bg-gray-800 rounded border border-gray-200 dark:border-gray-700 p-6">
+        <div className="card-base p-6">
           <div className="flex items-center justify-between mb-4">
-            <h3 className="text-sm font-semibold text-gray-900 dark:text-white">Recent Activities</h3>
-            <button onClick={() => onOpenPopup('activities', 'Tất cả hoạt động')} className="text-xs text-gray-600 dark:text-gray-400 hover:underline font-medium">Xem tất cả →</button>
+            <h3 className="text-sm font-semibold text-slate-900 dark:text-white">Recent Activities</h3>
+            <button onClick={() => onOpenPopup('activities', 'Tất cả hoạt động')} className="text-xs text-brand-500 dark:text-brand-400 hover:underline font-medium">Xem tất cả →</button>
           </div>
           <div className="space-y-3">
             {recentTasks.map(t => (
               <div key={t.id} onClick={() => onOpenItem('kol', t.kolId)}
-                className="flex items-center justify-between rounded bg-gray-50 dark:bg-gray-700 hover:bg-gray-100 dark:hover:bg-gray-700 cursor-pointer transition-colors px-4 py-3">
+                className="flex items-center justify-between rounded-xl bg-slate-50/50 dark:bg-slate-700/50 hover:bg-slate-100/60 dark:hover:bg-slate-700/50 cursor-pointer transition-colors px-4 py-3">
                 <div>
-                  <p className="text-sm font-medium text-gray-900 dark:text-white">{t.kolName}</p>
-                  <p className="text-xs text-gray-500">{t.campaignName}</p>
+                  <p className="text-sm font-medium text-slate-900 dark:text-white">{t.kolName}</p>
+                  <p className="text-xs text-slate-500">{t.campaignName}</p>
                 </div>
                 <Badge label={taskStatusLabels[t.status as TaskStatus]} colorClass={taskStatusColors[t.status as TaskStatus]} />
               </div>
@@ -619,46 +631,46 @@ function OverviewView({ selectedProject, onNavigate, onOpenPopup, onOpenItem }: 
         </div>
 
         {/* Pending Reviews */}
-        <div className="bg-white dark:bg-gray-800 rounded border border-gray-200 dark:border-gray-700 p-6">
+        <div className="card-base p-6">
           <div className="flex items-center justify-between mb-4">
-            <h3 className="text-sm font-semibold text-gray-900 dark:text-white">Pending Reviews</h3>
-            <button onClick={() => onOpenPopup('reviews', 'Bài chờ duyệt')} className="text-xs text-gray-600 dark:text-gray-400 hover:underline font-medium">Xem tất cả →</button>
+            <h3 className="text-sm font-semibold text-slate-900 dark:text-white">Pending Reviews</h3>
+            <button onClick={() => onOpenPopup('reviews', 'Bài chờ duyệt')} className="text-xs text-brand-500 dark:text-brand-400 hover:underline font-medium">Xem tất cả →</button>
           </div>
           <div className="space-y-3">
             {pendingReviews.length > 0 ? pendingReviews.map(t => (
               <div key={t.id} onClick={() => onOpenItem('kol', t.kolId)}
-                className="flex items-center justify-between rounded bg-gray-50 dark:bg-gray-700 hover:bg-gray-100 dark:hover:bg-gray-700 cursor-pointer transition-colors px-4 py-3">
+                className="flex items-center justify-between rounded-xl bg-slate-50/50 dark:bg-slate-700/50 hover:bg-slate-100/60 dark:hover:bg-slate-700/50 cursor-pointer transition-colors px-4 py-3">
                 <div>
-                  <p className="text-sm font-medium text-gray-900 dark:text-white">{t.kolName}</p>
-                  <p className="text-xs text-gray-500">{t.campaignName}</p>
+                  <p className="text-sm font-medium text-slate-900 dark:text-white">{t.kolName}</p>
+                  <p className="text-xs text-slate-500">{t.campaignName}</p>
                 </div>
                 <Badge label={taskStatusLabels[t.status as TaskStatus]} colorClass={taskStatusColors[t.status as TaskStatus]} />
               </div>
-            )) : <p className="text-sm text-gray-500">Không có bài chờ duyệt.</p>}
+            )) : <p className="text-sm text-slate-500">Không có bài chờ duyệt.</p>}
           </div>
         </div>
 
         {/* Pending Payments */}
-        <div className="bg-white dark:bg-gray-800 rounded border border-gray-200 dark:border-gray-700 p-6">
+        <div className="card-base p-6">
           <div className="flex items-center justify-between mb-4">
-            <h3 className="text-sm font-semibold text-gray-900 dark:text-white">Pending Payments</h3>
-            <button onClick={() => onOpenPopup('payments', 'Thanh toán chờ')} className="text-xs text-gray-600 dark:text-gray-400 hover:underline font-medium">Xem tất cả →</button>
+            <h3 className="text-sm font-semibold text-slate-900 dark:text-white">Pending Payments</h3>
+            <button onClick={() => onOpenPopup('payments', 'Thanh toán chờ')} className="text-xs text-brand-500 dark:text-brand-400 hover:underline font-medium">Xem tất cả →</button>
           </div>
           <div className="space-y-3">
             {pendingPayments.length > 0 ? pendingPayments.map(p => (
               <div key={p.id} onClick={() => onOpenItem('kol', p.kolId)}
-                className="flex items-center justify-between rounded bg-gray-50 dark:bg-gray-700 hover:bg-gray-100 dark:hover:bg-gray-700 cursor-pointer transition-colors px-4 py-3">
+                className="flex items-center justify-between rounded-xl bg-slate-50/50 dark:bg-slate-700/50 hover:bg-slate-100/60 dark:hover:bg-slate-700/50 cursor-pointer transition-colors px-4 py-3">
                 <div>
-                  <p className="text-sm font-medium text-gray-900 dark:text-white">{p.kolName}</p>
-                  <p className="text-xs text-gray-500">{p.campaignName}</p>
+                  <p className="text-sm font-medium text-slate-900 dark:text-white">{p.kolName}</p>
+                  <p className="text-xs text-slate-500">{p.campaignName}</p>
                 </div>
                 <Badge label={paymentStatusLabels[p.status]} colorClass={
-                  p.status === 'paid' ? 'bg-emerald-100 text-emerald-800 dark:bg-emerald-900/40 dark:text-emerald-300' :
-                  p.status === 'hold' ? 'bg-gray-50 dark:bg-gray-700' :
+                  p.status === 'paid' ? 'bg-emerald-100 dark:bg-emerald-900/40 dark:text-emerald-300' :
+                  p.status === 'hold' ? 'bg-slate-100 text-slate-700 dark:bg-slate-700 dark:text-slate-300' :
                   'bg-amber-100 text-amber-800 dark:bg-amber-900/40 dark:text-amber-300'
                 } />
               </div>
-            )) : <p className="text-sm text-gray-500">Không có thanh toán chờ.</p>}
+            )) : <p className="text-sm text-slate-500">Không có thanh toán chờ.</p>}
           </div>
         </div>
       </div>
@@ -678,32 +690,32 @@ function OverviewPopupTable({ type }: { type: 'campaigns' | 'kol' | 'tasks' | 'p
     return (
       <div className="overflow-x-auto max-h-[60vh] overflow-y-auto">
         <table className="w-full text-sm">
-          <thead className="sticky top-0 bg-gray-50 dark:bg-gray-700/80">
-            <tr className="border-b border-gray-200 dark:border-gray-600">
-              <th className="text-left px-4 py-3 text-xs font-semibold text-gray-500 uppercase">Chiến dịch</th>
-              <th className="text-left px-4 py-3 text-xs font-semibold text-gray-500 uppercase">Sản phẩm</th>
-              <th className="text-left px-4 py-3 text-xs font-semibold text-gray-500 uppercase">Mục tiêu</th>
-              <th className="text-left px-4 py-3 text-xs font-semibold text-gray-500 uppercase">Trạng thái</th>
-              <th className="text-left px-4 py-3 text-xs font-semibold text-gray-500 uppercase">Hạn chót</th>
-              <th className="text-left px-4 py-3 text-xs font-semibold text-gray-500 uppercase">KOL</th>
+          <thead className="sticky top-0 bg-slate-50/80">
+            <tr className="border-b border-slate-200 dark:border-slate-700">
+              <th className="text-left px-4 py-3 text-xs font-semibold text-slate-500 uppercase">Chiến dịch</th>
+              <th className="text-left px-4 py-3 text-xs font-semibold text-slate-500 uppercase">Sản phẩm</th>
+              <th className="text-left px-4 py-3 text-xs font-semibold text-slate-500 uppercase">Mục tiêu</th>
+              <th className="text-left px-4 py-3 text-xs font-semibold text-slate-500 uppercase">Trạng thái</th>
+              <th className="text-left px-4 py-3 text-xs font-semibold text-slate-500 uppercase">Hạn chót</th>
+              <th className="text-left px-4 py-3 text-xs font-semibold text-slate-500 uppercase">KOL</th>
             </tr>
           </thead>
           <tbody>
             {campaigns.filter(c => c.brandId === currentBrandId).map(c => (
-              <tr key={c.id} className="border-b border-gray-50 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700/20">
-                <td className="px-4 py-3 font-medium text-gray-900 dark:text-white">{c.name}</td>
-                <td className="px-4 py-3 text-gray-600 dark:text-gray-300">{c.productName}</td>
-                <td className="px-4 py-3 text-gray-500 text-xs">{c.objective}</td>
+              <tr key={c.id} className="border-b border-slate-100/60 hover:bg-slate-50/60 dark:hover:bg-slate-700/20">
+                <td className="px-4 py-3 font-medium text-slate-900 dark:text-white">{c.name}</td>
+                <td className="px-4 py-3 text-slate-600 dark:text-slate-300">{c.productName}</td>
+                <td className="px-4 py-3 text-slate-500 text-xs">{c.objective}</td>
                 <td className="px-4 py-3">
                   <Badge label={campaignStatusLabels[c.status]} colorClass={
-                    c.status === 'completed' ? 'bg-emerald-100 text-emerald-800 dark:bg-emerald-900/40 dark:text-emerald-300' :
+                    c.status === 'completed' ? 'bg-emerald-100 dark:bg-emerald-900/40 dark:text-emerald-300' :
                     c.status === 'tracking' ? 'bg-amber-100 text-amber-800 dark:bg-amber-900/40 dark:text-amber-300' :
                     c.status === 'active' ? 'bg-blue-100 text-blue-800 dark:bg-blue-900/40 dark:text-blue-300' :
-                    'bg-gray-100 text-gray-700 dark:bg-gray-700 dark:text-gray-300'
+                    'bg-slate-100/60 text-slate-300 dark:bg-slate-700 dark:text-slate-300'
                   } />
                 </td>
-                <td className="px-4 py-3 text-gray-500">{c.deadline}</td>
-                <td className="px-4 py-3 font-medium text-gray-900 dark:text-white">{c.assignedKOLs.length}</td>
+                <td className="px-4 py-3 text-slate-500">{c.deadline}</td>
+                <td className="px-4 py-3 font-medium text-slate-900 dark:text-white">{c.assignedKOLs.length}</td>
               </tr>
             ))}
           </tbody>
@@ -716,14 +728,14 @@ function OverviewPopupTable({ type }: { type: 'campaigns' | 'kol' | 'tasks' | 'p
     return (
       <div className="overflow-x-auto max-h-[60vh] overflow-y-auto">
         <table className="w-full text-sm">
-          <thead className="sticky top-0 bg-gray-50 dark:bg-gray-700/80">
-            <tr className="border-b border-gray-200 dark:border-gray-600">
-              <th className="text-left px-4 py-3 text-xs font-semibold text-gray-500 uppercase">KOL/KOC</th>
-              <th className="text-left px-4 py-3 text-xs font-semibold text-gray-500 uppercase">Nền tảng</th>
-              <th className="text-left px-4 py-3 text-xs font-semibold text-gray-500 uppercase">Lĩnh vực</th>
-              <th className="text-left px-4 py-3 text-xs font-semibold text-gray-500 uppercase">Followers</th>
-              <th className="text-left px-4 py-3 text-xs font-semibold text-gray-500 uppercase">Nhiệm vụ</th>
-              <th className="text-left px-4 py-3 text-xs font-semibold text-gray-500 uppercase">Điểm</th>
+          <thead className="sticky top-0 bg-slate-50/80">
+            <tr className="border-b border-slate-200 dark:border-slate-700">
+              <th className="text-left px-4 py-3 text-xs font-semibold text-slate-500 uppercase">KOL/KOC</th>
+              <th className="text-left px-4 py-3 text-xs font-semibold text-slate-500 uppercase">Nền tảng</th>
+              <th className="text-left px-4 py-3 text-xs font-semibold text-slate-500 uppercase">Lĩnh vực</th>
+              <th className="text-left px-4 py-3 text-xs font-semibold text-slate-500 uppercase">Followers</th>
+              <th className="text-left px-4 py-3 text-xs font-semibold text-slate-500 uppercase">Nhiệm vụ</th>
+              <th className="text-left px-4 py-3 text-xs font-semibold text-slate-500 uppercase">Điểm</th>
             </tr>
           </thead>
           <tbody>
@@ -731,18 +743,18 @@ function OverviewPopupTable({ type }: { type: 'campaigns' | 'kol' | 'tasks' | 'p
               const taskCount = brandTasks.filter(t => t.kolId === k.id).length;
               const rank = kolRankings.find(r => r.kolId === k.id);
               return (
-                <tr key={k.id} className="border-b border-gray-50 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700/20">
+                <tr key={k.id} className="border-b border-slate-100/60 hover:bg-slate-50/60 dark:hover:bg-slate-700/20">
                   <td className="px-4 py-3">
                     <div className="flex items-center gap-2">
-                      <Avatar initials={k.avatar} size="sm" />
-                      <span className="font-medium text-gray-900 dark:text-white">{k.name}</span>
+                      <Avatar initials={k.avatar} size="sm" image={getKolImage(k.avatar)} />
+                      <span className="font-medium text-slate-900 dark:text-white">{k.name}</span>
                     </div>
                   </td>
-                  <td className="px-4 py-3 text-gray-600 dark:text-gray-300">{k.platform}</td>
-                  <td className="px-4 py-3"><Badge label={k.niche} colorClass="bg-gray-50 text-blue-700 dark:bg-blue-900/30 dark:text-blue-300" /></td>
-                  <td className="px-4 py-3 text-gray-600 dark:text-gray-300">{k.followersDisplay}</td>
-                  <td className="px-4 py-3 text-gray-600 dark:text-gray-300">{taskCount}</td>
-                  <td className="px-4 py-3 font-bold text-gray-900 dark:text-white">{rank?.score || '-'}</td>
+                  <td className="px-4 py-3 text-slate-600 dark:text-slate-300">{k.platform}</td>
+                  <td className="px-4 py-3"><Badge label={k.niche} colorClass="bg-blue-50 text-blue-700 dark:bg-blue-900/30 dark:text-blue-300" /></td>
+                  <td className="px-4 py-3 text-slate-600 dark:text-slate-300">{k.followersDisplay}</td>
+                  <td className="px-4 py-3 text-slate-600 dark:text-slate-300">{taskCount}</td>
+                  <td className="px-4 py-3 font-bold text-slate-900 dark:text-white">{rank?.score || '-'}</td>
                 </tr>
               );
             })}
@@ -756,27 +768,27 @@ function OverviewPopupTable({ type }: { type: 'campaigns' | 'kol' | 'tasks' | 'p
     return (
       <div className="overflow-x-auto max-h-[60vh] overflow-y-auto">
         <table className="w-full text-sm">
-          <thead className="sticky top-0 bg-gray-50 dark:bg-gray-700/80">
-            <tr className="border-b border-gray-200 dark:border-gray-600">
-              <th className="text-left px-4 py-3 text-xs font-semibold text-gray-500 uppercase">KOL/KOC</th>
-              <th className="text-left px-4 py-3 text-xs font-semibold text-gray-500 uppercase">Chiến dịch</th>
-              <th className="text-left px-4 py-3 text-xs font-semibold text-gray-500 uppercase">Mô tả</th>
-              <th className="text-left px-4 py-3 text-xs font-semibold text-gray-500 uppercase">Trạng thái</th>
-              <th className="text-left px-4 py-3 text-xs font-semibold text-gray-500 uppercase">Hạn nộp</th>
-              <th className="text-left px-4 py-3 text-xs font-semibold text-gray-500 uppercase">Thù lao</th>
+          <thead className="sticky top-0 bg-slate-50/80">
+            <tr className="border-b border-slate-200 dark:border-slate-700">
+              <th className="text-left px-4 py-3 text-xs font-semibold text-slate-500 uppercase">KOL/KOC</th>
+              <th className="text-left px-4 py-3 text-xs font-semibold text-slate-500 uppercase">Chiến dịch</th>
+              <th className="text-left px-4 py-3 text-xs font-semibold text-slate-500 uppercase">Mô tả</th>
+              <th className="text-left px-4 py-3 text-xs font-semibold text-slate-500 uppercase">Trạng thái</th>
+              <th className="text-left px-4 py-3 text-xs font-semibold text-slate-500 uppercase">Hạn nộp</th>
+              <th className="text-left px-4 py-3 text-xs font-semibold text-slate-500 uppercase">Thù lao</th>
             </tr>
           </thead>
           <tbody>
             {brandTasks.map(t => (
-              <tr key={t.id} className="border-b border-gray-50 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700/20">
-                <td className="px-4 py-3 font-medium text-gray-900 dark:text-white">{t.kolName}</td>
-                <td className="px-4 py-3 text-gray-600 dark:text-gray-300">{t.campaignName}</td>
-                <td className="px-4 py-3 text-gray-500 text-xs max-w-[200px] truncate">{t.brief}</td>
+              <tr key={t.id} className="border-b border-slate-100/60 hover:bg-slate-50/60 dark:hover:bg-slate-700/20">
+                <td className="px-4 py-3 font-medium text-slate-900 dark:text-white">{t.kolName}</td>
+                <td className="px-4 py-3 text-slate-600 dark:text-slate-300">{t.campaignName}</td>
+                <td className="px-4 py-3 text-slate-500 text-xs max-w-[200px] truncate">{t.brief}</td>
                 <td className="px-4 py-3">
                   <Badge label={taskStatusLabels[t.status as TaskStatus]} colorClass={taskStatusColors[t.status as TaskStatus]} />
                 </td>
-                <td className="px-4 py-3 text-gray-500">{t.deadline}</td>
-                <td className="px-4 py-3 font-medium text-gray-900 dark:text-white">{(Number((t as any).payment) || 0).toLocaleString()}₫</td>
+                <td className="px-4 py-3 text-slate-500">{t.deadline}</td>
+                <td className="px-4 py-3 font-medium text-slate-900 dark:text-white">{(Number((t as any).payment) || 0).toLocaleString()}₫</td>
               </tr>
             ))}
           </tbody>
@@ -790,28 +802,28 @@ function OverviewPopupTable({ type }: { type: 'campaigns' | 'kol' | 'tasks' | 'p
     return (
       <div className="overflow-x-auto max-h-[60vh] overflow-y-auto">
         <table className="w-full text-sm">
-          <thead className="sticky top-0 bg-gray-50 dark:bg-gray-700/80">
-            <tr className="border-b border-gray-200 dark:border-gray-600">
-              <th className="text-left px-4 py-3 text-xs font-semibold text-gray-500 uppercase">KOL/KOC</th>
-              <th className="text-left px-4 py-3 text-xs font-semibold text-gray-500 uppercase">Chiến dịch</th>
-              <th className="text-left px-4 py-3 text-xs font-semibold text-gray-500 uppercase">Nội dung</th>
-              <th className="text-left px-4 py-3 text-xs font-semibold text-gray-500 uppercase">Trạng thái</th>
-              <th className="text-left px-4 py-3 text-xs font-semibold text-gray-500 uppercase">Nộp lúc</th>
+          <thead className="sticky top-0 bg-slate-50/80">
+            <tr className="border-b border-slate-200 dark:border-slate-700">
+              <th className="text-left px-4 py-3 text-xs font-semibold text-slate-500 uppercase">KOL/KOC</th>
+              <th className="text-left px-4 py-3 text-xs font-semibold text-slate-500 uppercase">Chiến dịch</th>
+              <th className="text-left px-4 py-3 text-xs font-semibold text-slate-500 uppercase">Nội dung</th>
+              <th className="text-left px-4 py-3 text-xs font-semibold text-slate-500 uppercase">Trạng thái</th>
+              <th className="text-left px-4 py-3 text-xs font-semibold text-slate-500 uppercase">Nộp lúc</th>
             </tr>
           </thead>
           <tbody>
             {reviewTasks.length > 0 ? reviewTasks.map(t => (
-              <tr key={t.id} className="border-b border-gray-50 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700/20">
-                <td className="px-4 py-3 font-medium text-gray-900 dark:text-white">{t.kolName}</td>
-                <td className="px-4 py-3 text-gray-600 dark:text-gray-300">{t.campaignName}</td>
-                <td className="px-4 py-3 text-gray-500 text-xs max-w-[200px] truncate">{t.brief}</td>
+              <tr key={t.id} className="border-b border-slate-100/60 hover:bg-slate-50/60 dark:hover:bg-slate-700/20">
+                <td className="px-4 py-3 font-medium text-slate-900 dark:text-white">{t.kolName}</td>
+                <td className="px-4 py-3 text-slate-600 dark:text-slate-300">{t.campaignName}</td>
+                <td className="px-4 py-3 text-slate-500 text-xs max-w-[200px] truncate">{t.brief}</td>
                 <td className="px-4 py-3">
                   <Badge label={taskStatusLabels[t.status as TaskStatus]} colorClass={taskStatusColors[t.status as TaskStatus]} />
                 </td>
-                <td className="px-4 py-3 text-gray-500">{(t as any).updatedAt || '-'}</td>
+                <td className="px-4 py-3 text-slate-500">{(t as any).updatedAt || '-'}</td>
               </tr>
             )) : (
-              <tr><td colSpan={5} className="px-4 py-8 text-center text-gray-500">Không có bài chờ duyệt.</td></tr>
+              <tr><td colSpan={5} className="px-4 py-8 text-center text-slate-500">Không có bài chờ duyệt.</td></tr>
             )}
           </tbody>
         </table>
@@ -823,29 +835,29 @@ function OverviewPopupTable({ type }: { type: 'campaigns' | 'kol' | 'tasks' | 'p
     return (
       <div className="overflow-x-auto max-h-[60vh] overflow-y-auto">
         <table className="w-full text-sm">
-          <thead className="sticky top-0 bg-gray-50 dark:bg-gray-700/80">
-            <tr className="border-b border-gray-200 dark:border-gray-600">
-              <th className="text-left px-4 py-3 text-xs font-semibold text-gray-500 uppercase">KOL/KOC</th>
-              <th className="text-left px-4 py-3 text-xs font-semibold text-gray-500 uppercase">Chiến dịch</th>
-              <th className="text-left px-4 py-3 text-xs font-semibold text-gray-500 uppercase">Số tiền</th>
-              <th className="text-left px-4 py-3 text-xs font-semibold text-gray-500 uppercase">Trạng thái</th>
-              <th className="text-left px-4 py-3 text-xs font-semibold text-gray-500 uppercase">Ngày</th>
+          <thead className="sticky top-0 bg-slate-50/80">
+            <tr className="border-b border-slate-200 dark:border-slate-700">
+              <th className="text-left px-4 py-3 text-xs font-semibold text-slate-500 uppercase">KOL/KOC</th>
+              <th className="text-left px-4 py-3 text-xs font-semibold text-slate-500 uppercase">Chiến dịch</th>
+              <th className="text-left px-4 py-3 text-xs font-semibold text-slate-500 uppercase">Số tiền</th>
+              <th className="text-left px-4 py-3 text-xs font-semibold text-slate-500 uppercase">Trạng thái</th>
+              <th className="text-left px-4 py-3 text-xs font-semibold text-slate-500 uppercase">Ngày</th>
             </tr>
           </thead>
           <tbody>
             {brandPayments.map(p => (
-              <tr key={p.id} className="border-b border-gray-50 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700/20">
-                <td className="px-4 py-3 font-medium text-gray-900 dark:text-white">{p.kolName}</td>
-                <td className="px-4 py-3 text-gray-600 dark:text-gray-300">{p.campaignName}</td>
-                <td className="px-4 py-3 font-bold text-gray-900 dark:text-white">{(Number(p.amount) || 0).toLocaleString()}₫</td>
+              <tr key={p.id} className="border-b border-slate-100/60 hover:bg-slate-50/60 dark:hover:bg-slate-700/20">
+                <td className="px-4 py-3 font-medium text-slate-900 dark:text-white">{p.kolName}</td>
+                <td className="px-4 py-3 text-slate-600 dark:text-slate-300">{p.campaignName}</td>
+                <td className="px-4 py-3 font-bold text-slate-900 dark:text-white">{(Number(p.amount) || 0).toLocaleString()}₫</td>
                 <td className="px-4 py-3">
                   <Badge label={paymentStatusLabels[p.status]} colorClass={
-                    p.status === 'paid' ? 'bg-emerald-100 text-emerald-800 dark:bg-emerald-900/40 dark:text-emerald-300' :
-                    p.status === 'hold' ? 'bg-gray-50 dark:bg-gray-700' :
+                    p.status === 'paid' ? 'bg-emerald-100 dark:bg-emerald-900/40 dark:text-emerald-300' :
+                    p.status === 'hold' ? 'bg-slate-100 text-slate-700 dark:bg-slate-700 dark:text-slate-300' :
                     'bg-amber-100 text-amber-800 dark:bg-amber-900/40 dark:text-amber-300'
                   } />
                 </td>
-                <td className="px-4 py-3 text-gray-500">{(p as any).date || '-'}</td>
+                <td className="px-4 py-3 text-slate-500">{(p as any).date || '-'}</td>
               </tr>
             ))}
           </tbody>
@@ -864,7 +876,7 @@ function OverviewPopupTable({ type }: { type: 'campaigns' | 'kol' | 'tasks' | 'p
 function ItemDetailPopup({ type, id }: { type: 'campaign' | 'kol'; id: string }) {
   if (type === 'campaign') {
     const c = campaigns.find(camp => camp.id === id);
-    if (!c) return <p className="p-4 text-sm text-gray-500">Không tìm thấy chiến dịch.</p>;
+    if (!c) return <p className="p-4 text-sm text-slate-500">Không tìm thấy chiến dịch.</p>;
     const kolList = kols.filter(k => c.assignedKOLs.includes(k.id));
     const kolTaskData = kolList.map(k => {
       const t = tasks.find(task => task.campaignId === id && task.kolId === k.id);
@@ -876,18 +888,18 @@ function ItemDetailPopup({ type, id }: { type: 'campaign' | 'kol'; id: string })
     return (
       <div className="space-y-4">
         {/* Header */}
-        <div className="p-4 bg-gray-50 dark:bg-gray-800 rounded border border-gray-200 dark:border-gray-700">
+        <div className="p-4 bg-gradient-to-r from-blue-50 to-brand-50 dark:from-blue-900/20 dark:to-brand-900/20 rounded-xl border border-blue-200 dark:border-blue-800/40">
           <div className="flex items-start justify-between">
             <div>
-              <h2 className="text-lg font-bold text-gray-900 dark:text-white">{c.name}</h2>
-              <p className="text-sm text-gray-500 mt-0.5">Sản phẩm: {c.productName}</p>
-              <p className="text-xs text-gray-400 mt-0.5">Mục tiêu: {c.objective}</p>
+              <h2 className="text-lg font-bold text-slate-900 dark:text-white">{c.name}</h2>
+              <p className="text-sm text-slate-500 mt-0.5">Sản phẩm: {c.productName}</p>
+              <p className="text-xs text-slate-400 mt-0.5">Mục tiêu: {c.objective}</p>
             </div>
             <Badge label={campaignStatusLabels[c.status]} colorClass={
-              c.status === 'completed' ? 'bg-emerald-100 text-emerald-800 dark:bg-emerald-900/40 dark:text-emerald-300' :
+              c.status === 'completed' ? 'bg-emerald-100 dark:bg-emerald-900/40 dark:text-emerald-300' :
               c.status === 'tracking' ? 'bg-amber-100 text-amber-800 dark:bg-amber-900/40 dark:text-amber-300' :
               c.status === 'active' ? 'bg-blue-100 text-blue-800 dark:bg-blue-900/40 dark:text-blue-300' :
-              'bg-gray-100 text-gray-700 dark:bg-gray-700 dark:text-gray-300'
+              'bg-slate-100/60 text-slate-300 dark:bg-slate-700 dark:text-slate-300'
             } />
           </div>
         </div>
@@ -900,27 +912,27 @@ function ItemDetailPopup({ type, id }: { type: 'campaign' | 'kol'; id: string })
             { label: 'Tỷ lệ ER', value: `${c.avgEngagementRate}%`, icon: <TrendingUp className="w-4 h-4" /> },
             { label: 'Chuyển đổi', value: (c.totalConversions || 0).toLocaleString(), icon: <Target className="w-4 h-4" /> },
           ].map(s => (
-            <div key={s.label} className="bg-gray-50 dark:bg-gray-700 rounded p-3 text-center">
-              <div className="flex justify-center mb-1 text-gray-400">{s.icon}</div>
-              <p className="text-base font-bold text-gray-900 dark:text-white">{s.value}</p>
-              <p className="text-xs text-gray-500">{s.label}</p>
+            <div key={s.label} className="surface-subtle p-3 text-center">
+              <div className="flex justify-center mb-1 text-slate-400">{s.icon}</div>
+              <p className="text-base font-bold text-slate-900 dark:text-white">{s.value}</p>
+              <p className="text-xs text-slate-500">{s.label}</p>
             </div>
           ))}
         </div>
 
         {/* Timeline */}
         <div className="flex items-center gap-3 text-sm">
-          <div className="flex items-center gap-1.5 text-gray-500">
+          <div className="flex items-center gap-1.5 text-slate-500">
             <Clock className="w-3.5 h-3.5" />
-            <span>Bắt đầu: <span className="font-medium text-gray-700 dark:text-gray-200">{(c as any).startDate || '-'}</span></span>
+            <span>Bắt đầu: <span className="font-medium text-slate-700 dark:text-slate-200">{(c as any).startDate || '-'}</span></span>
           </div>
-          <div className="w-px h-4 bg-gray-300 dark:bg-gray-600" />
-          <div className="flex items-center gap-1.5 text-gray-500">
+          <div className="w-px h-4 bg-slate-300 dark:bg-slate-600" />
+          <div className="flex items-center gap-1.5 text-slate-500">
             <Calendar className="w-3.5 h-3.5" />
-            <span>Hạn chót: <span className="font-medium text-gray-700 dark:text-gray-200">{c.deadline}</span></span>
+            <span>Hạn chót: <span className="font-medium text-slate-700 dark:text-slate-200">{c.deadline}</span></span>
           </div>
-          <div className="w-px h-4 bg-gray-300 dark:bg-gray-600" />
-          <div className="flex items-center gap-1.5 text-gray-500">
+          <div className="w-px h-4 bg-slate-300 dark:bg-slate-600" />
+          <div className="flex items-center gap-1.5 text-slate-500">
             <Users className="w-3.5 h-3.5" />
             <span>{kolList.length} KOL/KOC</span>
           </div>
@@ -929,21 +941,21 @@ function ItemDetailPopup({ type, id }: { type: 'campaign' | 'kol'; id: string })
         {/* KOL List */}
         {kolTaskData.length > 0 && (
           <div>
-            <h4 className="text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2 flex items-center gap-1.5">
+            <h4 className="text-sm font-semibold text-slate-300 dark:text-slate-300 mb-2 flex items-center gap-1.5">
               <Users className="w-4 h-4" />Danh sách KOL/KOC tham gia
             </h4>
             <div className="space-y-2 max-h-[250px] overflow-y-auto">
               {kolTaskData.map(({ kol, task }) => (
-                <div key={kol.id} className="flex items-center gap-3 p-3 bg-gray-50 dark:bg-gray-700 rounded">
-                  <Avatar initials={kol.avatar} size="sm" />
+                <div key={kol.id} className="flex items-center gap-3 p-3 surface-subtle">
+                  <Avatar initials={kol.avatar} size="sm" image={getKolImage(kol.avatar)} />
                   <div className="flex-1 min-w-0">
-                    <p className="text-sm font-medium text-gray-900 dark:text-white">{kol.name}</p>
-                    <p className="text-xs text-gray-500">{kol.platform} / {kol.followersDisplay}</p>
+                    <p className="text-sm font-medium text-slate-900 dark:text-white">{kol.name}</p>
+                    <p className="text-xs text-slate-500">{kol.platform} / {kol.followersDisplay}</p>
                   </div>
                   {task ? (
                     <Badge label={taskStatusLabels[task.status as TaskStatus]} colorClass={taskStatusColors[task.status as TaskStatus]} />
                   ) : (
-                    <Badge label="Chưa giao" colorClass="bg-gray-100 text-gray-600 dark:bg-gray-700 dark:text-gray-400" />
+                    <Badge label="Chưa giao" colorClass="bg-slate-100/60 dark:bg-slate-700" />
                   )}
                 </div>
               ))}
@@ -956,7 +968,7 @@ function ItemDetailPopup({ type, id }: { type: 'campaign' | 'kol'; id: string })
 
   // KOL detail
   const k = kols.find(kol => kol.id === id);
-  if (!k) return <p className="p-4 text-sm text-gray-500">Không tìm thấy KOL/KOC.</p>;
+  if (!k) return <p className="p-4 text-sm text-slate-500">Không tìm thấy KOL/KOC.</p>;
   const kTasks = tasks.filter(t => t.kolId === id);
   const kPayments = payments.filter(p => p.kolId === id);
   const kRank = kolRankings.find(r => r.kolId === id);
@@ -973,17 +985,17 @@ function ItemDetailPopup({ type, id }: { type: 'campaign' | 'kol'; id: string })
   return (
     <div className="space-y-4">
       {/* Header */}
-      <div className="flex items-start gap-4 p-4 bg-gray-50 dark:bg-gray-800 rounded border border-gray-200 dark:border-gray-700">
-        <Avatar initials={k.avatar} size="lg" />
+      <div className="flex items-start gap-4 p-4 bg-gradient-to-r from-brand-50 to-cyan-50 dark:from-brand-900/20 dark:to-cyan-900/20 rounded-xl border border-teal-200 dark:border-brand-800/40">
+        <Avatar initials={k.avatar} size="lg" image={getKolImage(k.avatar)} />
         <div className="flex-1">
           <div className="flex items-center gap-2">
-            <h2 className="text-lg font-bold text-gray-900 dark:text-white">{k.name}</h2>
-            <Badge label={k.niche} colorClass="bg-gray-50 text-blue-700 dark:bg-blue-900/30 dark:text-blue-300" />
+            <h2 className="text-lg font-bold text-slate-900 dark:text-white">{k.name}</h2>
+            <Badge label={k.niche} colorClass="bg-blue-50 text-blue-700 dark:bg-blue-900/30 dark:text-blue-300" />
           </div>
-          <p className="text-sm text-gray-500 mt-0.5">{k.platform} / {k.followersDisplay} followers</p>
-          <div className="flex items-center gap-4 mt-2 text-xs text-gray-400">
+          <p className="text-sm text-slate-500 mt-0.5">{k.platform} / {k.followersDisplay} followers</p>
+          <div className="flex items-center gap-4 mt-2 text-xs text-slate-400">
             <span>Điểm: <span className="font-bold text-amber-500">{kRank?.score || '-'}</span></span>
-            <span>Task: <span className="font-bold text-gray-600">{kTasks.length}</span></span>
+            <span>Task: <span className="font-bold text-brand-600">{kTasks.length}</span></span>
             <span>Thanh toán: <span className="font-bold text-emerald-600">{(kPayments.reduce((s, p) => s + Number(p.amount), 0)).toLocaleString()}₫</span></span>
           </div>
         </div>
@@ -991,40 +1003,40 @@ function ItemDetailPopup({ type, id }: { type: 'campaign' | 'kol'; id: string })
 
       {/* Stats */}
       <div className="grid grid-cols-3 gap-3">
-        <div className="bg-gray-50 dark:bg-gray-700 rounded p-3 text-center">
-          <p className="text-lg font-bold text-gray-600">{kTasks.filter(t => ['completed', 'paid', 'metrics_approved'].includes(t.status as string)).length}</p>
-          <p className="text-xs text-gray-500">Hoàn thành</p>
+        <div className="bg-brand-50 dark:bg-brand-900/20 rounded-xl p-3 text-center">
+          <p className="text-lg font-bold text-brand-600">{kTasks.filter(t => ['completed', 'paid', 'metrics_approved'].includes(t.status as string)).length}</p>
+          <p className="text-xs text-slate-500">Hoàn thành</p>
         </div>
-        <div className="bg-gray-50 dark:bg-gray-700 rounded p-3 text-center">
+        <div className="bg-amber-50/80 dark:bg-amber-900/20 rounded-xl p-3 text-center">
           <p className="text-lg font-bold text-amber-600">{pendingDrafts.length}</p>
-          <p className="text-xs text-gray-500">Chờ duyệt</p>
+          <p className="text-xs text-slate-500">Chờ duyệt</p>
         </div>
-        <div className="bg-gray-50 dark:bg-gray-700 rounded p-3 text-center">
+        <div className="bg-blue-50/80 dark:bg-blue-900/20 rounded-xl p-3 text-center">
           <p className="text-lg font-bold text-blue-600">{kTasks.filter(t => t.status === 'in_progress').length}</p>
-          <p className="text-xs text-gray-500">Đang làm</p>
+          <p className="text-xs text-slate-500">Đang làm</p>
         </div>
       </div>
 
       {/* Bản nháp nội dung đã nạp */}
       {pendingDrafts.length > 0 && (
         <div>
-          <h4 className="text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2 flex items-center gap-1.5">
+          <h4 className="text-sm font-semibold text-slate-300 dark:text-slate-300 mb-2 flex items-center gap-1.5">
             <FileText className="w-4 h-4" />Bản nháp đã nạp ({pendingDrafts.length})
           </h4>
           <div className="space-y-3 max-h-[300px] overflow-y-auto">
             {pendingDrafts.map((d, i) => (
-              <div key={i} className="rounded border border-gray-200 dark:border-gray-600 overflow-hidden">
+              <div key={i} className="rounded-xl border border-slate-200 dark:border-slate-700 overflow-hidden">
                 <img src={d.contentUrl} alt={`Draft ${i+1}`} className="w-full h-40 object-cover" />
                 <div className="p-3 bg-white dark:bg-gray-800">
                   <div className="flex items-center justify-between mb-1.5">
-                    <p className="text-xs text-gray-500">{d.campaignName}</p>
+                    <p className="text-xs text-slate-500">{d.campaignName}</p>
                     <Badge label={d.status === 'draft_submitted' ? 'Chờ duyệt' : 'Cần sửa'} colorClass={
                       d.status === 'draft_submitted' ? 'bg-amber-100 text-amber-800 dark:bg-amber-900/40 dark:text-amber-300' :
                       'bg-red-100 text-red-800 dark:bg-red-900/40 dark:text-red-300'
                     } />
                   </div>
-                  <p className="text-sm text-gray-700 dark:text-gray-200 line-clamp-2">{d.caption}</p>
-                  <p className="text-xs text-gray-400 mt-1.5">Nộp lúc {d.submittedAt} / Version {d.version}</p>
+                  <p className="text-sm text-slate-700 dark:text-slate-200 line-clamp-2">{d.caption}</p>
+                  <p className="text-xs text-slate-400 mt-1.5">Nộp lúc {d.submittedAt} / Version {d.version}</p>
                 </div>
               </div>
             ))}
@@ -1035,15 +1047,15 @@ function ItemDetailPopup({ type, id }: { type: 'campaign' | 'kol'; id: string })
       {/* Recent tasks */}
       {kTasks.length > 0 && (
         <div>
-          <h4 className="text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2 flex items-center gap-1.5">
+          <h4 className="text-sm font-semibold text-slate-300 dark:text-slate-300 mb-2 flex items-center gap-1.5">
             <CheckCircle2 className="w-4 h-4" />Nhiệm vụ gần đây
           </h4>
           <div className="space-y-2">
             {kTasks.slice(0, 4).map(t => (
-              <div key={t.id} className="flex items-center justify-between p-2.5 bg-gray-50 dark:bg-gray-700 rounded">
+              <div key={t.id} className="flex items-center justify-between p-2.5 surface-subtle">
                 <div>
-                  <p className="text-sm font-medium text-gray-900 dark:text-white">{t.campaignName}</p>
-                  <p className="text-xs text-gray-500">{t.brief}</p>
+                  <p className="text-sm font-medium text-slate-900 dark:text-white">{t.campaignName}</p>
+                  <p className="text-xs text-slate-500">{t.brief}</p>
                 </div>
                 <Badge label={taskStatusLabels[t.status as TaskStatus]} colorClass={taskStatusColors[t.status as TaskStatus]} />
               </div>
@@ -1076,30 +1088,32 @@ function ProductsView({ selectedProject }: { selectedProject: string }) {
         action={<Button onClick={() => setShowCreate(true)}><Plus className="w-4 h-4 mr-2" />Tạo sản phẩm mới</Button>}
       />
       <div className="relative">
-        <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
+        <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
         <input type="text" placeholder="Tìm sản phẩm..." value={search} onChange={e => setSearch(e.target.value)}
-          className="w-full max-w-sm pl-10 pr-4 py-2 rounded border border-gray-200 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-white text-sm focus:ring-2 focus:ring-gray-500 outline-none" />
+          className="w-full max-w-sm pl-10 pr-4 py-2 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white text-sm focus:ring-2 focus:ring-brand-500 outline-none" />
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
         {filtered.map(p => {
           const productCampaigns = campaigns.filter(c => c.productId === p.id);
           return (
-          <div key={p.id}
-            className="bg-white dark:bg-gray-800 rounded border border-gray-200 dark:border-gray-700 p-5">
+          <motion.div key={p.id} whileHover={{ y: -2 }}
+            className="card-base p-5">
             <div className="flex items-start justify-between mb-3">
-              <div className="w-12 h-12 rounded bg-gray-200 dark:bg-gray-700 flex items-center justify-center text-gray-600 dark:text-gray-300 text-lg font-bold">{p.name.charAt(0)}</div>
-              <Badge label={p.status === 'active' ? 'Active' : 'Inactive'} colorClass={p.status === 'active' ? 'bg-emerald-100 text-emerald-800 dark:bg-emerald-900/40 dark:text-emerald-300' : 'bg-gray-100 text-gray-700 dark:bg-gray-700 dark:text-gray-300'} />
+              <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-teal-400 to-teal-600 flex items-center justify-center text-white text-lg font-bold overflow-hidden">
+                <img src={PRODUCT_IMAGES[p.image]} alt={p.name} className="w-full h-full object-cover" />
+              </div>
+              <Badge label={p.status === 'active' ? 'Active' : 'Inactive'} colorClass={p.status === 'active' ? 'bg-emerald-100 dark:bg-emerald-900/40 dark:text-emerald-300' : 'bg-slate-100/60 text-slate-300 dark:bg-slate-700 dark:text-slate-300'} />
             </div>
-            <h3 className="text-base font-semibold text-gray-900 dark:text-white mb-1">{p.name}</h3>
-            <p className="text-sm text-gray-500 mb-1">{p.category}</p>
-            <p className="text-lg font-bold text-gray-600 dark:text-gray-400 mb-1">{p.price}</p>
+            <h3 className="text-base font-semibold text-slate-900 dark:text-white mb-1">{p.name}</h3>
+            <p className="text-sm text-slate-500 mb-1">{p.category}</p>
+            <p className="text-lg font-bold text-brand-500 dark:text-brand-400 mb-1">{p.price}</p>
             <div className="flex flex-wrap gap-1 mb-3">
               {productCampaigns.length > 0 ? productCampaigns.map(c => (
                 <span key={c.id} className="inline-flex items-center gap-0.5 px-2 py-0.5 bg-gray-50 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 text-xs rounded-full font-medium">
                   {c.name.length > 20 ? c.name.slice(0, 20) + '…' : c.name}
                 </span>
               )) : (
-                <span className="text-xs text-gray-400 italic">Chưa có chiến dịch</span>
+                <span className="text-xs text-slate-400 italic">Chưa có chiến dịch</span>
               )}
             </div>
             <div className="flex gap-2">
@@ -1153,35 +1167,35 @@ function ProductForm({ onClose, mode, productId }: { onClose: () => void; mode: 
   const p = productId ? products.find(pr => pr.id === productId) : null;
   return (
     <div className="space-y-4">
-      <div><label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Tên sản phẩm</label>
+      <div><label className="block text-sm font-medium text-slate-300 dark:text-slate-300 mb-1">Tên sản phẩm</label>
         <input type="text" defaultValue={p?.name} placeholder="VD: Glow Serum Cấp Ẩm"
-          className="w-full px-4 py-2.5 rounded border border-gray-200 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white text-sm focus:ring-2 focus:ring-gray-500 outline-none" />
+          className="w-full px-4 py-2.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-700 text-slate-900 dark:text-white text-sm focus:ring-2 focus:ring-brand-500 outline-none" />
       </div>
       <div>
-        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1.5">Hình ảnh sản phẩm</label>
-        <div className="border-2 border-dashed border-gray-300 dark:border-gray-600 rounded p-4 text-center hover:border-gray-400 transition-colors cursor-pointer">
-          <p className="text-sm text-gray-500">Tải lên hình ảnh sản phẩm</p>
-          <p className="text-xs text-gray-400 mt-1">JPG, PNG tối đa 5MB</p>
+        <label className="block text-sm font-medium text-slate-300 dark:text-slate-300 mb-1.5">Hình ảnh sản phẩm</label>
+        <div className="border-2 border-dashed bg-slate-200 dark:border-slate-600 rounded-xl p-4 text-center hover:border-brand-400 transition-colors cursor-pointer">
+          <p className="text-sm text-slate-500">Tải lên hình ảnh sản phẩm</p>
+          <p className="text-xs text-slate-400 mt-1">JPG, PNG tối đa 5MB</p>
         </div>
       </div>
       <div className="grid grid-cols-2 gap-4">
-        <div><label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Danh mục</label>
-          <select defaultValue={p?.category} className="w-full px-4 py-2.5 rounded border border-gray-200 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white text-sm">
+        <div><label className="block text-sm font-medium text-slate-300 dark:text-slate-300 mb-1">Danh mục</label>
+          <select defaultValue={p?.category} className="w-full px-4 py-2.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-700 text-slate-900 dark:text-white text-sm">
             {productCategories.map(c => <option key={c}>{c}</option>)}
           </select>
         </div>
-        <div><label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Giá</label>
+        <div><label className="block text-sm font-medium text-slate-300 dark:text-slate-300 mb-1">Giá</label>
           <input type="text" defaultValue={p?.price} placeholder="VD: 299.000 VND"
-            className="w-full px-4 py-2.5 rounded border border-gray-200 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white text-sm" />
+            className="w-full px-4 py-2.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-700 text-slate-900 dark:text-white text-sm" />
         </div>
       </div>
-      <div><label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Link sản phẩm</label>
+      <div><label className="block text-sm font-medium text-slate-300 dark:text-slate-300 mb-1">Link sản phẩm</label>
         <input type="url" defaultValue={p?.productLink} placeholder="https://..."
-          className="w-full px-4 py-2.5 rounded border border-gray-200 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white text-sm" />
+          className="w-full px-4 py-2.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-700 text-slate-900 dark:text-white text-sm" />
       </div>
-      <div><label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Mô tả</label>
+      <div><label className="block text-sm font-medium text-slate-300 dark:text-slate-300 mb-1">Mô tả</label>
         <textarea rows={3} defaultValue={p?.description} placeholder="Mô tả sản phẩm..."
-          className="w-full px-4 py-2.5 rounded border border-gray-200 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white text-sm resize-none focus:ring-2 focus:ring-gray-500 outline-none" />
+          className="w-full px-4 py-2.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-700 text-slate-900 dark:text-white text-sm resize-none focus:ring-2 focus:ring-brand-500 outline-none" />
       </div>
       <div className="flex justify-end gap-3 pt-2">
         <Button variant="secondary" onClick={onClose}>Hủy</Button>
@@ -1197,26 +1211,28 @@ function ProductDetail({ productId, onClose }: { productId: string; onClose: () 
   const related = campaigns.filter(c => c.productId === p.id);
   return (
     <div className="space-y-4">
-      <div className="flex items-center gap-4 p-4 bg-gray-50 dark:bg-gray-700 rounded">
-        <div className="w-16 h-16 rounded bg-gray-200 dark:bg-gray-700 flex items-center justify-center text-gray-600 dark:text-gray-300 text-2xl font-bold">{p.name.charAt(0)}</div>
+      <div className="flex items-center gap-4 p-4 surface-subtle">
+        <div className="w-16 h-16 rounded-xl bg-gradient-to-br from-teal-400 to-teal-600 flex items-center justify-center text-white text-2xl font-bold overflow-hidden">
+          <img src={PRODUCT_IMAGES[p.image]} alt={p.name} className="w-full h-full object-cover" />
+        </div>
         <div>
-          <h3 className="text-lg font-bold text-gray-900 dark:text-white">{p.name}</h3>
-          <p className="text-sm text-gray-500">{p.category} • {p.price}</p>
-          <Badge label={p.status === 'active' ? 'Active' : 'Inactive'} colorClass={p.status === 'active' ? 'bg-emerald-100 text-emerald-800' : 'bg-gray-100 text-gray-700'} />
+          <h3 className="text-lg font-bold text-slate-900 dark:text-white">{p.name}</h3>
+          <p className="text-sm text-slate-500">{p.category} • {p.price}</p>
+          <Badge label={p.status === 'active' ? 'Active' : 'Inactive'} colorClass={p.status === 'active' ? 'bg-emerald-100' : 'bg-slate-100'} />
         </div>
       </div>
-      <p className="text-sm text-gray-600 dark:text-gray-300">{p.description}</p>
-      <div><a href={p.productLink} className="text-sm text-gray-600 hover:underline flex items-center gap-1"><ExternalLink className="w-3 h-3" />{p.productLink}</a></div>
+      <p className="text-sm text-slate-600 dark:text-slate-300">{p.description}</p>
+      <div><a href={p.productLink} className="text-sm text-brand-600 hover:underline flex items-center gap-1"><ExternalLink className="w-3 h-3" />{p.productLink}</a></div>
       <div>
-        <h4 className="text-sm font-semibold text-gray-900 dark:text-white mb-2">Chiến dịch liên quan ({related.length})</h4>
+        <h4 className="text-sm font-semibold text-slate-900 dark:text-white mb-2">Chiến dịch liên quan ({related.length})</h4>
         <div className="space-y-2">
           {related.map(c => (
-            <div key={c.id} className="p-3 bg-gray-50 dark:bg-gray-700 rounded">
-              <p className="text-sm font-medium text-gray-900 dark:text-white">{c.name}</p>
-              <p className="text-xs text-gray-500">{campaignStatusLabels[c.status]}</p>
+            <div key={c.id} className="p-3 surface-subtle">
+              <p className="text-sm font-medium text-slate-900 dark:text-white">{c.name}</p>
+              <p className="text-xs text-slate-500">{campaignStatusLabels[c.status]}</p>
             </div>
           ))}
-          {related.length === 0 && <p className="text-sm text-gray-500">Chưa có chiến dịch nào.</p>}
+          {related.length === 0 && <p className="text-sm text-slate-500">Chưa có chiến dịch nào.</p>}
         </div>
       </div>
       <div className="flex justify-end"><Button onClick={onClose}>Đóng</Button></div>
@@ -1256,7 +1272,7 @@ function CampaignsView({ selectedProject }: { selectedProject: string }) {
   };
 
   const SortHeader = ({ field, label }: { field: typeof sortField; label: string }) => (
-    <th className="text-left px-6 py-3 text-xs font-semibold text-gray-500 uppercase cursor-pointer hover:text-gray-700 dark:hover:text-gray-300"
+    <th className="text-left px-6 py-3 text-xs font-semibold text-slate-500 uppercase cursor-pointer hover:text-slate-300 dark:hover:text-slate-300"
       onClick={() => toggleSort(field)}>
       <span className="flex items-center gap-1">{label}<ArrowUpDown className="w-3 h-3" /></span>
     </th>
@@ -1269,12 +1285,12 @@ function CampaignsView({ selectedProject }: { selectedProject: string }) {
       />
       <div className="flex items-center gap-3">
         <div className="relative flex-1 max-w-sm">
-          <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
+          <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
           <input type="text" placeholder="Tìm chiến dịch..." value={search} onChange={e => setSearch(e.target.value)}
-            className="w-full pl-10 pr-4 py-2 rounded border border-gray-200 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-white text-sm focus:ring-2 focus:ring-gray-500 outline-none" />
+            className="w-full pl-10 pr-4 py-2 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white text-sm focus:ring-2 focus:ring-brand-500 outline-none" />
         </div>
         <select value={filterStatus} onChange={e => setFilterStatus(e.target.value)}
-          className="px-4 py-2 rounded border border-gray-200 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-white text-sm">
+          className="px-4 py-2 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white text-sm">
           <option value="all">Tất cả trạng thái</option>
           <option value="draft">Bản nháp</option>
           <option value="active">Đang chạy</option>
@@ -1283,40 +1299,40 @@ function CampaignsView({ selectedProject }: { selectedProject: string }) {
           <option value="cancelled">Đã hủy</option>
         </select>
       </div>
-      <div className="bg-white dark:bg-gray-800 rounded border border-gray-200 dark:border-gray-700 overflow-hidden">
+      <div className="bg-white dark:bg-slate-800 rounded-2xl border border-slate-200/80 dark:border-slate-700/60 shadow-soft overflow-hidden">
         <div className="overflow-x-auto">
           <table className="w-full min-w-[900px]">
             <thead>
-              <tr className="border-b border-gray-100 dark:border-gray-700">
+              <tr className="border-b border-slate-100/60">
                 <SortHeader field="name" label="Chiến dịch" />
-                <th className="text-left px-6 py-3 text-xs font-semibold text-gray-500 uppercase">Sản phẩm</th>
+                <th className="text-left px-6 py-3 text-xs font-semibold text-slate-500 uppercase">Sản phẩm</th>
                 <SortHeader field="totalViews" label="Lượt xem" />
                 <SortHeader field="status" label="Trạng thái" />
                 <SortHeader field="deadline" label="Hạn chót" />
-                <th className="text-left px-6 py-3 text-xs font-semibold text-gray-500 uppercase">KOL</th>
-                <th className="text-left px-6 py-3 text-xs font-semibold text-gray-500 uppercase">Hành động</th>
+                <th className="text-left px-6 py-3 text-xs font-semibold text-slate-500 uppercase">KOL</th>
+                <th className="text-left px-6 py-3 text-xs font-semibold text-slate-500 uppercase">Hành động</th>
               </tr>
             </thead>
             <tbody>
               {filtered.map(c => (
-                <tr key={c.id} className="border-b border-gray-50 dark:border-gray-700 hover:bg-gray-50/50 dark:hover:bg-gray-700/20">
+                <tr key={c.id} className="border-b border-slate-100/60 hover:bg-slate-50/50 dark:hover:bg-slate-700/20">
                   <td className="px-6 py-4">
-                    <p className="font-medium text-gray-900 dark:text-white text-sm">{c.name}</p>
-                    <p className="text-xs text-gray-500">{c.objective}</p>
+                    <p className="font-medium text-slate-900 dark:text-white text-sm">{c.name}</p>
+                    <p className="text-xs text-slate-500">{c.objective}</p>
                   </td>
-                  <td className="px-6 py-4 text-sm text-gray-700 dark:text-gray-300">{c.productName}</td>
-                  <td className="px-6 py-4 text-sm font-medium text-gray-900 dark:text-white">{c.totalViews >= 1000000 ? `${(c.totalViews/1000000).toFixed(1)}M` : `${Math.round(c.totalViews/1000)}K`}</td>
+                  <td className="px-6 py-4 text-sm text-slate-300 dark:text-slate-300">{c.productName}</td>
+                  <td className="px-6 py-4 text-sm font-medium text-slate-900 dark:text-white">{c.totalViews >= 1000000 ? `${(c.totalViews/1000000).toFixed(1)}M` : `${Math.round(c.totalViews/1000)}K`}</td>
                   <td className="px-6 py-4">
                     <Badge label={campaignStatusLabels[c.status]} colorClass={
                       c.status === 'active' ? 'bg-blue-100 text-blue-800 dark:bg-blue-900/40 dark:text-blue-300' :
                       c.status === 'tracking' ? 'bg-amber-100 text-amber-800 dark:bg-amber-900/40 dark:text-amber-300' :
-                      c.status === 'completed' ? 'bg-emerald-100 text-emerald-800 dark:bg-emerald-900/40 dark:text-emerald-300' :
-                      c.status === 'draft' ? 'bg-gray-100 text-gray-700 dark:bg-gray-700 dark:text-gray-300' :
+                      c.status === 'completed' ? 'bg-emerald-100 dark:bg-emerald-900/40 dark:text-emerald-300' :
+                      c.status === 'draft' ? 'bg-slate-100/60 text-slate-300 dark:bg-slate-700 dark:text-slate-300' :
                       'bg-red-100 text-red-800 dark:bg-red-900/40 dark:text-red-300'
                     } />
                   </td>
-                  <td className="px-6 py-4 text-sm text-gray-500">{c.deadline}</td>
-                  <td className="px-6 py-4 text-sm font-medium text-gray-900 dark:text-white">{c.assignedKOLs.length}</td>
+                  <td className="px-6 py-4 text-sm text-slate-500">{c.deadline}</td>
+                  <td className="px-6 py-4 text-sm font-medium text-slate-900 dark:text-white">{c.assignedKOLs.length}</td>
                   <td className="px-6 py-4">
                     <div className="flex gap-1">
                       <Button size="sm" variant="ghost" onClick={() => setShowDetail(c.id)}><Eye className="w-3.5 h-3.5" /></Button>
@@ -1367,22 +1383,22 @@ function CampaignsView({ selectedProject }: { selectedProject: string }) {
           const c = campaigns.find(camp => camp.id === editCampaign);
           return c ? (
             <div className="space-y-4">
-              <div><label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Tên chiến dịch</label>
+              <div><label className="block text-sm font-medium text-slate-300 dark:text-slate-300 mb-1">Tên chiến dịch</label>
                 <input type="text" defaultValue={c.name}
-                  className="w-full px-4 py-2.5 rounded border border-gray-200 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white text-sm" />
+                  className="w-full px-4 py-2.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-700 text-slate-900 dark:text-white text-sm" />
               </div>
-              <div><label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Mục tiêu</label>
+              <div><label className="block text-sm font-medium text-slate-300 dark:text-slate-300 mb-1">Mục tiêu</label>
                 <input type="text" defaultValue={c.objective}
-                  className="w-full px-4 py-2.5 rounded border border-gray-200 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white text-sm" />
+                  className="w-full px-4 py-2.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-700 text-slate-900 dark:text-white text-sm" />
               </div>
               <div className="grid grid-cols-2 gap-4">
-                <div><label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Ngày bắt đầu</label>
+                <div><label className="block text-sm font-medium text-slate-300 dark:text-slate-300 mb-1">Ngày bắt đầu</label>
                   <input type="date" defaultValue={(c as any).startDate || ''}
-                    className="w-full px-4 py-2.5 rounded border border-gray-200 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white text-sm" />
+                    className="w-full px-4 py-2.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-700 text-slate-900 dark:text-white text-sm" />
                 </div>
-                <div><label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Ngày kết thúc</label>
+                <div><label className="block text-sm font-medium text-slate-300 dark:text-slate-300 mb-1">Ngày kết thúc</label>
                   <input type="date" defaultValue={c.deadline}
-                    className="w-full px-4 py-2.5 rounded border border-gray-200 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white text-sm" />
+                    className="w-full px-4 py-2.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-700 text-slate-900 dark:text-white text-sm" />
                 </div>
               </div>
               <div className="flex justify-end gap-3 pt-2">
@@ -1420,11 +1436,11 @@ function CampaignsView({ selectedProject }: { selectedProject: string }) {
           const isResume = campaignStatusAction.action === 'resume';
           return (
             <div className="space-y-4">
-              <div className={`p-4 rounded border ${isPause ? 'bg-gray-50 dark:bg-gray-700 border-amber-200 dark:border-amber-800/40' : isComplete ? 'bg-gray-50 dark:bg-gray-700 border-emerald-200 dark:border-emerald-800/40' : 'bg-gray-50 dark:bg-gray-700 border-blue-200 dark:border-blue-800/40'}`}>
-                <p className="text-sm font-semibold text-gray-900 dark:text-white">{c.name}</p>
-                <p className="text-xs text-gray-500 mt-1">Sản phẩm: {c.productName}</p>
+              <div className={`p-4 rounded-xl border ${isPause ? 'bg-amber-50/80 dark:bg-amber-900/20 border-amber-200 dark:border-amber-800/40' : isComplete ? 'bg-emerald-50/80 dark:bg-emerald-900/20 border-emerald-200 dark:border-emerald-800/40' : 'bg-blue-50/80 dark:bg-blue-900/20 border-blue-200 dark:border-blue-800/40'}`}>
+                <p className="text-sm font-semibold text-slate-900 dark:text-white">{c.name}</p>
+                <p className="text-xs text-slate-500 mt-1">Sản phẩm: {c.productName}</p>
               </div>
-              <p className="text-sm text-gray-600 dark:text-gray-300">
+              <p className="text-sm text-slate-600 dark:text-slate-300">
                 {isPause && 'Chiến dịch sẽ bị tạm dừng. Bạn có thể tiếp tục chạy lại sau.'}
                 {isComplete && 'Chiến dịch sẽ được đánh dấu hoàn thành. Không thể giao nhiệm vụ mới.'}
                 {isResume && 'Chiến dịch sẽ tiếp tục chạy. Nhiệm vụ đang chờ sẽ được tiếp tục.'}
@@ -1478,26 +1494,26 @@ function TaskCreationFormLite({ campaignId, campaignName, productName, onClose }
 
   return (
     <div className="space-y-4">
-      <div className="p-3 bg-gray-50 dark:bg-gray-700 rounded border border-blue-200 dark:border-blue-800/40 text-sm text-blue-700 dark:text-blue-300">
+      <div className="p-3 bg-blue-50/80 dark:bg-blue-900/20 rounded-xl border border-blue-200 dark:border-blue-800/40 text-sm text-blue-700 dark:text-blue-300">
         <p className="font-semibold mb-0.5">{campaignName}</p>
         <p className="text-xs opacity-80">Sản phẩm: {productName}</p>
       </div>
 
       {/* Chọn nhiều KOL */}
       <div>
-        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">KOL/KOC * <span className="text-xs text-gray-400">(chọn nhiều)</span></label>
-        <div className={`border rounded p-3 max-h-48 overflow-y-auto space-y-1.5 ${errors.kolId ? 'border-red-400' : 'border-gray-200 dark:border-gray-600'} bg-white dark:bg-gray-700`}>
+        <label className="block text-sm font-medium text-slate-300 dark:text-slate-300 mb-2">KOL/KOC * <span className="text-xs text-slate-400">(chọn nhiều)</span></label>
+        <div className={`border rounded-xl p-3 max-h-48 overflow-y-auto space-y-1.5 ${errors.kolId ? 'border-red-400' : 'border-slate-200 dark:border-slate-700'} bg-white dark:bg-slate-700`}>
           {brandKOLs.map(k => {
             const checked = selectedKOLs.includes(k.id);
             return (
-              <label key={k.id} className={`flex items-center gap-3 p-2 rounded cursor-pointer transition-colors ${checked ? 'bg-gray-50 dark:bg-gray-700' : 'hover:bg-gray-50 dark:hover:bg-gray-600/50'}`}>
+              <label key={k.id} className={`flex items-center gap-3 p-2 rounded-lg cursor-pointer transition-colors ${checked ? 'bg-brand-50 dark:bg-brand-900/30' : 'hover:bg-slate-50/50 dark:hover:bg-slate-600/50'}`}>
                 <input type="checkbox" checked={checked} onChange={() => toggleKOL(k.id)}
-                  className="w-4 h-4 text-gray-600 rounded border-gray-300 dark:border-gray-500 focus:ring-gray-500" />
+                  className="w-4 h-4 text-brand-600 rounded border-slate-300 dark:border-slate-500 focus:ring-brand-500" />
                 <div className="flex items-center gap-2 flex-1 min-w-0">
-                  <Avatar initials={k.avatar} size="sm" />
+                  <Avatar initials={k.avatar} size="sm" image={getKolImage(k.avatar)} />
                   <div className="min-w-0">
-                    <p className="text-sm font-medium text-gray-900 dark:text-white truncate">{k.name}</p>
-                    <p className="text-xs text-gray-500">{k.platform} / {k.followersDisplay}</p>
+                    <p className="text-sm font-medium text-slate-900 dark:text-white truncate">{k.name}</p>
+                    <p className="text-xs text-slate-500">{k.platform} / {k.followersDisplay}</p>
                   </div>
                 </div>
                 <Badge label={k.niche} colorClass="bg-gray-50 text-blue-700 dark:bg-blue-900/30 dark:text-blue-300" />
@@ -1506,7 +1522,7 @@ function TaskCreationFormLite({ campaignId, campaignName, productName, onClose }
           })}
         </div>
         {selectedKOLs.length > 0 && (
-          <p className="text-xs text-gray-600 dark:text-gray-400 mt-1.5 font-medium">
+          <p className="text-xs text-brand-500 dark:text-brand-400 mt-1.5 font-medium">
             Đã chọn {selectedKOLs.length} KOL/KOC
           </p>
         )}
@@ -1514,34 +1530,34 @@ function TaskCreationFormLite({ campaignId, campaignName, productName, onClose }
       </div>
 
       <div>
-        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Mô tả nhiệm vụ *</label>
+        <label className="block text-sm font-medium text-slate-300 dark:text-slate-300 mb-1">Mô tả nhiệm vụ *</label>
         <textarea rows={3} value={brief} onChange={e => setBrief(e.target.value)} placeholder="VD: Quay video review sản phẩm, đăng Reels kèm CTA mua hàng..."
-          className={`w-full px-4 py-2.5 rounded border text-sm focus:ring-2 focus:ring-gray-500 outline-none bg-white dark:bg-gray-700 text-gray-900 dark:text-white resize-none ${errors.brief ? 'border-red-400' : 'border-gray-200 dark:border-gray-600'}`} />
+          className={`w-full px-4 py-2.5 rounded-xl border text-sm focus:ring-2 focus:ring-brand-500 outline-none bg-white dark:bg-slate-700 text-slate-900 dark:text-white resize-none ${errors.brief ? 'border-red-400' : 'border-slate-200 dark:border-slate-700'}`} />
         {errors.brief && <p className="text-xs text-red-500 mt-1">{errors.brief}</p>}
       </div>
 
       <div className="grid grid-cols-2 gap-4">
         <div>
-          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Hạn nộp *</label>
+          <label className="block text-sm font-medium text-slate-300 dark:text-slate-300 mb-1">Hạn nộp *</label>
           <input type="date" value={deadline} onChange={e => setDeadline(e.target.value)}
-            className={`w-full px-4 py-2.5 rounded border text-sm focus:ring-2 focus:ring-gray-500 outline-none bg-white dark:bg-gray-700 text-gray-900 dark:text-white ${errors.deadline ? 'border-red-400' : 'border-gray-200 dark:border-gray-600'}`} />
+            className={`w-full px-4 py-2.5 rounded-xl border text-sm focus:ring-2 focus:ring-brand-500 outline-none bg-white dark:bg-slate-700 text-slate-900 dark:text-white ${errors.deadline ? 'border-red-400' : 'border-slate-200 dark:border-slate-700'}`} />
           {errors.deadline && <p className="text-xs text-red-500 mt-1">{errors.deadline}</p>}
         </div>
         <div>
-          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Thù lao / KOL (VND) *</label>
+          <label className="block text-sm font-medium text-slate-300 dark:text-slate-300 mb-1">Thù lao / KOL (VND) *</label>
           <input type="number" value={payment} onChange={e => setPayment(e.target.value)} placeholder="VD: 5000000"
-            className={`w-full px-4 py-2.5 rounded border text-sm focus:ring-2 focus:ring-gray-500 outline-none bg-white dark:bg-gray-700 text-gray-900 dark:text-white ${errors.payment ? 'border-red-400' : 'border-gray-200 dark:border-gray-600'}`} />
+            className={`w-full px-4 py-2.5 rounded-xl border text-sm focus:ring-2 focus:ring-brand-500 outline-none bg-white dark:bg-slate-700 text-slate-900 dark:text-white ${errors.payment ? 'border-red-400' : 'border-slate-200 dark:border-slate-700'}`} />
           {errors.payment && <p className="text-xs text-red-500 mt-1">{errors.payment}</p>}
         </div>
       </div>
 
       {selectedKOLs.length > 0 && payment && (
-        <div className="p-3 bg-gray-50 dark:bg-gray-700 rounded border border-gray-200 dark:border-gray-700">
+        <div className="p-3 bg-brand-50 dark:bg-brand-900/20 rounded-xl border border-teal-200 dark:border-brand-800/40">
           <div className="flex justify-between items-center text-sm">
-            <span className="text-gray-700 dark:text-gray-300">
+            <span className="text-teal-700 dark:text-brand-300">
               Tổng chi phí ({selectedKOLs.length} KOL × {Number(payment).toLocaleString()}₫)
             </span>
-            <span className="font-bold text-gray-600 dark:text-gray-400">
+            <span className="font-bold text-brand-500 dark:text-brand-400">
               {totalAmount.toLocaleString()}₫
             </span>
           </div>
@@ -1612,17 +1628,17 @@ function CampaignForm({ onClose }: { onClose: () => void }) {
         {STEPS.map((s, i) => (
           <div key={s.n} className="flex items-center flex-1">
             <div className="flex flex-col items-center">
-              <div className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold transition-colors ${
-                step > s.n ? 'bg-gray-600 text-white' :
-                step === s.n ? 'bg-gray-600 text-white ring-4 ring-gray-100 dark:ring-gray-900/40' :
-                'bg-gray-200 dark:bg-gray-600 text-gray-400'
+              <div className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold transition-all ${
+                step > s.n ? 'bg-brand-600 text-white' :
+                step === s.n ? 'bg-brand-600 text-white ring-4 ring-brand-100 dark:ring-brand-900' :
+                'bg-slate-200 dark:bg-slate-600 text-slate-400'
               }`}>
                 {step > s.n ? <Check className="w-4 h-4" /> : s.n}
               </div>
-              <p className={`text-[10px] mt-1 text-center ${step === s.n ? 'text-gray-600 font-semibold' : 'text-gray-400'}`}>{s.label}</p>
+              <p className={`text-[10px] mt-1 text-center ${step === s.n ? 'text-brand-600 font-semibold' : 'text-slate-400'}`}>{s.label}</p>
             </div>
             {i < STEPS.length - 1 && (
-              <div className={`flex-1 h-0.5 mx-1 mb-4 ${step > s.n ? 'bg-gray-500' : 'bg-gray-200 dark:bg-gray-600'}`} />
+              <div className={`flex-1 h-0.5 mx-1 mb-4 ${step > s.n ? 'bg-brand-500' : 'bg-slate-200 dark:bg-slate-600'}`} />
             )}
           </div>
         ))}
@@ -1631,15 +1647,15 @@ function CampaignForm({ onClose }: { onClose: () => void }) {
       {/* ── Step 1: Basic Info ── */}
       {step === 1 && (
         <div className="space-y-4">
-          <div className="p-3 bg-gray-50 dark:bg-gray-700 rounded border border-blue-200 dark:border-blue-800/40 text-sm text-blue-700 dark:text-blue-300">
+          <div className="p-3 bg-blue-50/80 dark:bg-blue-900/20 rounded-xl border border-blue-200 dark:border-blue-800/40 text-sm text-blue-700 dark:text-blue-300">
             Chọn sản phẩm gắn với chiến dịch này trước khi bắt đầu.
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Sản phẩm *</label>
+            <label className="block text-sm font-medium text-slate-300 dark:text-slate-300 mb-1">Sản phẩm *</label>
             <select value={form.productId} onChange={e => set('productId', e.target.value)}
-              className={`w-full px-4 py-2.5 rounded border text-sm focus:ring-2 focus:ring-gray-500 outline-none bg-white dark:bg-gray-700 text-gray-900 dark:text-white ${
-                errors.productId ? 'border-red-400' : 'border-gray-200 dark:border-gray-600'
+              className={`w-full px-4 py-2.5 rounded-xl border text-sm focus:ring-2 focus:ring-brand-500 outline-none bg-white dark:bg-slate-700 text-slate-900 dark:text-white ${
+                errors.productId ? 'border-red-400' : 'border-slate-200 dark:border-slate-700'
               }`}>
               <option value="">-- Chọn sản phẩm --</option>
               {brandProducts.map(p => <option key={p.id} value={p.id}>{p.name}</option>)}
@@ -1648,37 +1664,37 @@ function CampaignForm({ onClose }: { onClose: () => void }) {
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Tên chiến dịch *</label>
+            <label className="block text-sm font-medium text-slate-300 dark:text-slate-300 mb-1">Tên chiến dịch *</label>
             <input type="text" value={form.campaignName} onChange={e => set('campaignName', e.target.value)} placeholder="VD: Glow Serum Summer Launch 2026"
-              className={`w-full px-4 py-2.5 rounded border text-sm focus:ring-2 focus:ring-gray-500 outline-none bg-white dark:bg-gray-700 text-gray-900 dark:text-white ${
-                errors.campaignName ? 'border-red-400' : 'border-gray-200 dark:border-gray-600'
+              className={`w-full px-4 py-2.5 rounded-xl border text-sm focus:ring-2 focus:ring-brand-500 outline-none bg-white dark:bg-slate-700 text-slate-900 dark:text-white ${
+                errors.campaignName ? 'border-red-400' : 'border-slate-200 dark:border-slate-700'
               }`} />
             {errors.campaignName && <p className="text-xs text-red-500 mt-1">{errors.campaignName}</p>}
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Mục tiêu chiến dịch *</label>
+            <label className="block text-sm font-medium text-slate-300 dark:text-slate-300 mb-1">Mục tiêu chiến dịch *</label>
             <input type="text" value={form.objective} onChange={e => set('objective', e.target.value)} placeholder="VD: Tăng nhận diện thương hiệu, tăng doanh số..."
-              className={`w-full px-4 py-2.5 rounded border text-sm focus:ring-2 focus:ring-gray-500 outline-none bg-white dark:bg-gray-700 text-gray-900 dark:text-white ${
-                errors.objective ? 'border-red-400' : 'border-gray-200 dark:border-gray-600'
+              className={`w-full px-4 py-2.5 rounded-xl border text-sm focus:ring-2 focus:ring-brand-500 outline-none bg-white dark:bg-slate-700 text-slate-900 dark:text-white ${
+                errors.objective ? 'border-red-400' : 'border-slate-200 dark:border-slate-700'
               }`} />
             {errors.objective && <p className="text-xs text-red-500 mt-1">{errors.objective}</p>}
           </div>
 
           <div className="grid grid-cols-2 gap-4">
             <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Ngày bắt đầu *</label>
+              <label className="block text-sm font-medium text-slate-300 dark:text-slate-300 mb-1">Ngày bắt đầu *</label>
               <input type="date" value={form.startDate} onChange={e => set('startDate', e.target.value)}
-                className={`w-full px-4 py-2.5 rounded border text-sm focus:ring-2 focus:ring-gray-500 outline-none bg-white dark:bg-gray-700 text-gray-900 dark:text-white ${
-                  errors.startDate ? 'border-red-400' : 'border-gray-200 dark:border-gray-600'
+                className={`w-full px-4 py-2.5 rounded-xl border text-sm focus:ring-2 focus:ring-brand-500 outline-none bg-white dark:bg-slate-700 text-slate-900 dark:text-white ${
+                  errors.startDate ? 'border-red-400' : 'border-slate-200 dark:border-slate-700'
                 }`} />
               {errors.startDate && <p className="text-xs text-red-500 mt-1">{errors.startDate}</p>}
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Ngày kết thúc *</label>
+              <label className="block text-sm font-medium text-slate-300 dark:text-slate-300 mb-1">Ngày kết thúc *</label>
               <input type="date" value={form.endDate} onChange={e => set('endDate', e.target.value)}
-                className={`w-full px-4 py-2.5 rounded border text-sm focus:ring-2 focus:ring-gray-500 outline-none bg-white dark:bg-gray-700 text-gray-900 dark:text-white ${
-                  errors.endDate ? 'border-red-400' : 'border-gray-200 dark:border-gray-600'
+                className={`w-full px-4 py-2.5 rounded-xl border text-sm focus:ring-2 focus:ring-brand-500 outline-none bg-white dark:bg-slate-700 text-slate-900 dark:text-white ${
+                  errors.endDate ? 'border-red-400' : 'border-slate-200 dark:border-slate-700'
                 }`} />
               {errors.endDate && <p className="text-xs text-red-500 mt-1">{errors.endDate}</p>}
             </div>
@@ -1695,48 +1711,48 @@ function CampaignForm({ onClose }: { onClose: () => void }) {
         <div className="space-y-4">
           <div className="grid grid-cols-3 gap-3">
             <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Target Views *</label>
+              <label className="block text-sm font-medium text-slate-300 dark:text-slate-300 mb-1">Target Views *</label>
               <input type="number" value={form.targetViews} onChange={e => set('targetViews', e.target.value)} placeholder="VD: 100000"
-                className={`w-full px-3 py-2.5 rounded border text-sm focus:ring-2 focus:ring-gray-500 outline-none bg-white dark:bg-gray-700 text-gray-900 dark:text-white ${
-                  errors.targetViews ? 'border-red-400' : 'border-gray-200 dark:border-gray-600'
+                className={`w-full px-3 py-2.5 rounded-xl border text-sm focus:ring-2 focus:ring-brand-500 outline-none bg-white dark:bg-slate-700 text-slate-900 dark:text-white ${
+                  errors.targetViews ? 'border-red-400' : 'border-slate-200 dark:border-slate-700'
                 }`} />
               {errors.targetViews && <p className="text-xs text-red-500 mt-1">{errors.targetViews}</p>}
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Target ER (%) *</label>
+              <label className="block text-sm font-medium text-slate-300 dark:text-slate-300 mb-1">Target ER (%) *</label>
               <input type="number" value={form.targetER} onChange={e => set('targetER', e.target.value)} placeholder="VD: 5"
-                className={`w-full px-3 py-2.5 rounded border text-sm focus:ring-2 focus:ring-gray-500 outline-none bg-white dark:bg-gray-700 text-gray-900 dark:text-white ${
-                  errors.targetER ? 'border-red-400' : 'border-gray-200 dark:border-gray-600'
+                className={`w-full px-3 py-2.5 rounded-xl border text-sm focus:ring-2 focus:ring-brand-500 outline-none bg-white dark:bg-slate-700 text-slate-900 dark:text-white ${
+                  errors.targetER ? 'border-red-400' : 'border-slate-200 dark:border-slate-700'
                 }`} />
               {errors.targetER && <p className="text-xs text-red-500 mt-1">{errors.targetER}</p>}
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Target Conversion</label>
+              <label className="block text-sm font-medium text-slate-300 dark:text-slate-300 mb-1">Target Conversion</label>
               <input type="number" value={form.targetConversion} onChange={e => set('targetConversion', e.target.value)} placeholder="VD: 500"
-                className="w-full px-3 py-2.5 rounded border border-gray-200 dark:border-gray-600 text-sm focus:ring-2 focus:ring-gray-500 outline-none bg-white dark:bg-gray-700 text-gray-900 dark:text-white" />
+                className="w-full px-3 py-2.5 rounded-xl border border-slate-200 dark:border-slate-700 text-sm focus:ring-2 focus:ring-brand-500 outline-none bg-white dark:bg-slate-700 text-slate-900 dark:text-white" />
             </div>
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Ngân sách (VND) *</label>
+            <label className="block text-sm font-medium text-slate-300 dark:text-slate-300 mb-1">Ngân sách (VND) *</label>
             <input type="number" value={form.budget} onChange={e => set('budget', e.target.value)} placeholder="VD: 50000000"
-              className={`w-full px-4 py-2.5 rounded border text-sm focus:ring-2 focus:ring-gray-500 outline-none bg-white dark:bg-gray-700 text-gray-900 dark:text-white ${
-                errors.budget ? 'border-red-400' : 'border-gray-200 dark:border-gray-600'
+              className={`w-full px-4 py-2.5 rounded-xl border text-sm focus:ring-2 focus:ring-brand-500 outline-none bg-white dark:bg-slate-700 text-slate-900 dark:text-white ${
+                errors.budget ? 'border-red-400' : 'border-slate-200 dark:border-slate-700'
               }`} />
             {errors.budget && <p className="text-xs text-red-500 mt-1">{errors.budget}</p>}
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Hạn chót</label>
+            <label className="block text-sm font-medium text-slate-300 dark:text-slate-300 mb-1">Hạn chót</label>
             <input type="date" value={form.deadline} onChange={e => set('deadline', e.target.value)}
-              className="w-full px-4 py-2.5 rounded border border-gray-200 dark:border-gray-600 text-sm focus:ring-2 focus:ring-gray-500 outline-none bg-white dark:bg-gray-700 text-gray-900 dark:text-white" />
+              className="w-full px-4 py-2.5 rounded-xl border border-slate-200 dark:border-slate-700 text-sm focus:ring-2 focus:ring-brand-500 outline-none bg-white dark:bg-slate-700 text-slate-900 dark:text-white" />
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Quy tắc thanh toán</label>
+            <label className="block text-sm font-medium text-slate-300 dark:text-slate-300 mb-1">Quy tắc thanh toán</label>
             <textarea rows={2} value={form.paymentRule} onChange={e => set('paymentRule', e.target.value)}
               placeholder="VD: Base 5M + bonus 500K cho mỗi 10K views vượt target..."
-              className="w-full px-4 py-2.5 rounded border border-gray-200 dark:border-gray-600 text-sm resize-none focus:ring-2 focus:ring-gray-500 outline-none bg-white dark:bg-gray-700 text-gray-900 dark:text-white" />
+              className="w-full px-4 py-2.5 rounded-xl border border-slate-200 dark:border-slate-700 text-sm resize-none focus:ring-2 focus:ring-brand-500 outline-none bg-white dark:bg-slate-700 text-slate-900 dark:text-white" />
           </div>
 
           <div className="flex justify-between pt-2">
@@ -1750,15 +1766,15 @@ function CampaignForm({ onClose }: { onClose: () => void }) {
       {step === 3 && (
         <div className="space-y-4">
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Brief chiến dịch</label>
+            <label className="block text-sm font-medium text-slate-300 dark:text-slate-300 mb-1">Brief chiến dịch</label>
             <textarea rows={4} value={form.brief} onChange={e => set('brief', e.target.value)}
               placeholder="Mô tả yêu cầu nội dung, key message, USP sản phẩm, đối tượng khách hàng mục tiêu..."
-              className="w-full px-4 py-2.5 rounded border border-gray-200 dark:border-gray-600 text-sm resize-none focus:ring-2 focus:ring-gray-500 outline-none bg-white dark:bg-gray-700 text-gray-900 dark:text-white" />
+              className="w-full px-4 py-2.5 rounded-xl border border-slate-200 dark:border-slate-700 text-sm resize-none focus:ring-2 focus:ring-brand-500 outline-none bg-white dark:bg-slate-700 text-slate-900 dark:text-white" />
           </div>
 
           {/* Review summary */}
-          <div className="p-4 bg-gray-50 dark:bg-gray-700 rounded space-y-2">
-            <p className="text-sm font-semibold text-gray-900 dark:text-white mb-3">Xem lại thông tin</p>
+          <div className="p-4 surface-subtle space-y-2">
+            <p className="text-sm font-semibold text-slate-900 dark:text-white mb-3">Xem lại thông tin</p>
             {[
               { label: 'Sản phẩm', value: selectedProduct?.name || '-' },
               { label: 'Chiến dịch', value: form.campaignName || '-' },
@@ -1769,8 +1785,8 @@ function CampaignForm({ onClose }: { onClose: () => void }) {
               { label: 'Ngân sách', value: form.budget ? `${Number(form.budget).toLocaleString()} VND` : '-' },
             ].map(row => (
               <div key={row.label} className="flex justify-between text-sm">
-                <span className="text-gray-500">{row.label}</span>
-                <span className="font-medium text-gray-900 dark:text-white">{row.value}</span>
+                <span className="text-slate-500">{row.label}</span>
+                <span className="font-medium text-slate-900 dark:text-white">{row.value}</span>
               </div>
             ))}
           </div>
@@ -1792,57 +1808,57 @@ function CampaignDetail({ campaignId, onClose }: { campaignId: string; onClose: 
   return (
     <div className="space-y-4">
       <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
-        <div className="p-3 bg-gray-50 dark:bg-gray-700 rounded text-center">
-          <p className="text-xl font-bold text-gray-900 dark:text-white">{c.totalViews >= 1000000 ? `${(c.totalViews/1000000).toFixed(1)}M` : `${Math.round(c.totalViews/1000)}K`}</p>
-          <p className="text-xs text-gray-500">Lượt xem</p>
+        <div className="p-3 surface-subtle text-center">
+          <p className="text-xl font-bold text-slate-900 dark:text-white">{c.totalViews >= 1000000 ? `${(c.totalViews/1000000).toFixed(1)}M` : `${Math.round(c.totalViews/1000)}K`}</p>
+          <p className="text-xs text-slate-500">Lượt xem</p>
         </div>
-        <div className="p-3 bg-gray-50 dark:bg-gray-700 rounded text-center">
-          <p className="text-xl font-bold text-gray-600">{c.avgEngagementRate}%</p>
-          <p className="text-xs text-gray-500">TL tương tác</p>
+        <div className="p-3 surface-subtle text-center">
+          <p className="text-xl font-bold text-brand-600">{c.avgEngagementRate}%</p>
+          <p className="text-xs text-slate-500">TL tương tác</p>
         </div>
-        <div className="p-3 bg-gray-50 dark:bg-gray-700 rounded text-center">
+        <div className="p-3 surface-subtle text-center">
           <p className="text-xl font-bold text-blue-600">{c.totalConversions}</p>
-          <p className="text-xs text-gray-500">Chuyển đổi</p>
+          <p className="text-xs text-slate-500">Chuyển đổi</p>
         </div>
-        <div className="p-3 bg-gray-50 dark:bg-gray-700 rounded text-center">
-          <p className="text-xl font-bold text-gray-900 dark:text-white">{c.assignedKOLs.length}</p>
-          <p className="text-xs text-gray-500">KOL/KOC</p>
+        <div className="p-3 surface-subtle text-center">
+          <p className="text-xl font-bold text-slate-900 dark:text-white">{c.assignedKOLs.length}</p>
+          <p className="text-xs text-slate-500">KOL/KOC</p>
         </div>
       </div>
-      <div className="p-4 bg-gray-50 dark:bg-gray-700 rounded">
-        <p className="text-sm font-medium text-gray-900 dark:text-white mb-1">Mục tiêu</p>
-        <p className="text-sm text-gray-600 dark:text-gray-300 mb-3">{c.objective}</p>
-        <p className="text-sm font-medium text-gray-900 dark:text-white mb-1">Brief</p>
-        <p className="text-sm text-gray-600 dark:text-gray-300 mb-3">{c.brief}</p>
-        <p className="text-sm font-medium text-gray-900 dark:text-white mb-1">Quy tắc thanh toán</p>
-        <p className="text-sm text-gray-600 dark:text-gray-300">{c.paymentRule}</p>
+      <div className="p-4 surface-subtle">
+        <p className="text-sm font-medium text-slate-900 dark:text-white mb-1">Mục tiêu</p>
+        <p className="text-sm text-slate-600 dark:text-slate-300 mb-3">{c.objective}</p>
+        <p className="text-sm font-medium text-slate-900 dark:text-white mb-1">Brief</p>
+        <p className="text-sm text-slate-600 dark:text-slate-300 mb-3">{c.brief}</p>
+        <p className="text-sm font-medium text-slate-900 dark:text-white mb-1">Quy tắc thanh toán</p>
+        <p className="text-sm text-slate-600 dark:text-slate-300">{c.paymentRule}</p>
       </div>
       <div>
-        <h4 className="text-sm font-semibold text-gray-900 dark:text-white mb-2">KPI Target</h4>
+        <h4 className="text-sm font-semibold text-slate-900 dark:text-white mb-2">KPI Target</h4>
         <div className="grid grid-cols-3 gap-3">
-          <div className="p-3 bg-gray-50 dark:bg-gray-700 rounded"><p className="text-lg font-bold text-gray-900 dark:text-white">{c.kpiTarget.views.toLocaleString()}</p><p className="text-xs text-gray-500">Views</p></div>
-          <div className="p-3 bg-gray-50 dark:bg-gray-700 rounded"><p className="text-lg font-bold text-gray-900 dark:text-white">{c.kpiTarget.engagementRate}%</p><p className="text-xs text-gray-500">ER Target</p></div>
-          <div className="p-3 bg-gray-50 dark:bg-gray-700 rounded"><p className="text-lg font-bold text-gray-900 dark:text-white">{c.kpiTarget.conversions}</p><p className="text-xs text-gray-500">Conversions</p></div>
+          <div className="p-3 surface-subtle"><p className="text-lg font-bold text-slate-900 dark:text-white">{c.kpiTarget.views.toLocaleString()}</p><p className="text-xs text-slate-500">Views</p></div>
+          <div className="p-3 surface-subtle"><p className="text-lg font-bold text-slate-900 dark:text-white">{c.kpiTarget.engagementRate}%</p><p className="text-xs text-slate-500">ER Target</p></div>
+          <div className="p-3 surface-subtle"><p className="text-lg font-bold text-slate-900 dark:text-white">{c.kpiTarget.conversions}</p><p className="text-xs text-slate-500">Conversions</p></div>
         </div>
       </div>
 
       {/* Timeline */}
       <div>
-        <h4 className="text-sm font-semibold text-gray-900 dark:text-white mb-3">Timeline</h4>
+        <h4 className="text-sm font-semibold text-slate-900 dark:text-white mb-3">Timeline</h4>
         <div className="flex items-center gap-2">
           {['draft', 'active', 'tracking', 'completed'].map((step, i) => (
             <div key={step} className="flex-1 flex items-center">
               <div className="flex flex-col items-center">
                 <div className={`w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold ${
                   ['draft', 'active', 'tracking', 'completed'].indexOf(c.status) >= i
-                    ? 'bg-gray-600 text-white'
-                    : 'bg-gray-200 dark:bg-gray-600 text-gray-400'
+                    ? 'bg-brand-600 text-white'
+                    : 'bg-slate-200 dark:bg-slate-600 text-slate-400'
                 }`}>
                   {i + 1}
                 </div>
-                <span className="text-xs mt-1 text-center text-gray-500">{step === 'draft' ? 'Bản nháp' : step === 'active' ? 'Đang chạy' : step === 'tracking' ? 'Theo dõi' : 'Hoàn thành'}</span>
+                <span className="text-xs mt-1 text-center text-slate-500">{step === 'draft' ? 'Bản nháp' : step === 'active' ? 'Đang chạy' : step === 'tracking' ? 'Theo dõi' : 'Hoàn thành'}</span>
               </div>
-              {i < 3 && <div className={`flex-1 h-0.5 mx-2 ${['draft', 'active', 'tracking', 'completed'].indexOf(c.status) > i ? 'bg-gray-500' : 'bg-gray-200 dark:bg-gray-600'}`} />}
+              {i < 3 && <div className={`flex-1 h-0.5 mx-2 ${['draft', 'active', 'tracking', 'completed'].indexOf(c.status) > i ? 'bg-brand-500' : 'bg-slate-200 dark:bg-slate-600'}`} />}
             </div>
           ))}
         </div>
@@ -1850,36 +1866,36 @@ function CampaignDetail({ campaignId, onClose }: { campaignId: string; onClose: 
 
       {/* Task Progress */}
       <div>
-        <h4 className="text-sm font-semibold text-gray-900 dark:text-white mb-3">Task Progress</h4>
+        <h4 className="text-sm font-semibold text-slate-900 dark:text-white mb-3">Task Progress</h4>
         <div className="grid grid-cols-3 gap-3 mb-3">
           {[
             { label: 'Đã phân công', count: campaignTasks.filter(t => t.status === 'assigned').length, color: 'bg-blue-100 text-blue-800 dark:bg-blue-900/40 dark:text-blue-300' },
             { label: 'Đã nộp bản nháp', count: campaignTasks.filter(t => t.status === 'draft_submitted').length, color: 'bg-amber-100 text-amber-800 dark:bg-amber-900/40 dark:text-amber-300' },
-            { label: 'Đã đăng bài', count: campaignTasks.filter(t => ['published', 'tracking'].includes(t.status)).length, color: 'bg-gray-100 text-gray-800 dark:bg-gray-700 dark:text-gray-300' },
-            { label: 'Hoàn thành', count: campaignTasks.filter(t => ['completed', 'paid'].includes(t.status)).length, color: 'bg-emerald-100 text-emerald-800 dark:bg-emerald-900/40 dark:text-emerald-300' },
+            { label: 'Đã đăng bài', count: campaignTasks.filter(t => ['published', 'tracking'].includes(t.status)).length, color: 'bg-brand-100 text-brand-800 dark:bg-brand-900/40 dark:text-brand-300' },
+            { label: 'Hoàn thành', count: campaignTasks.filter(t => ['completed', 'paid'].includes(t.status)).length, color: 'bg-emerald-100 dark:bg-emerald-900/40 dark:text-emerald-300' },
             { label: 'Chờ sửa lại', count: campaignTasks.filter(t => t.status === 'revision_required').length, color: 'bg-orange-100 text-orange-800 dark:bg-orange-900/40 dark:text-orange-300' },
-            { label: 'Tổng nhiệm vụ', count: campaignTasks.length, color: 'bg-gray-100 text-gray-700 dark:bg-gray-700 dark:text-gray-300' },
+            { label: 'Tổng nhiệm vụ', count: campaignTasks.length, color: 'bg-slate-100/60 text-slate-300 dark:bg-slate-700 dark:text-slate-300' },
           ].map(item => (
-            <div key={item.label} className="p-3 bg-gray-50 dark:bg-gray-700 rounded flex items-center justify-between">
-              <span className="text-xs text-gray-500">{item.label}</span>
+            <div key={item.label} className="p-3 surface-subtle flex items-center justify-between">
+              <span className="text-xs text-slate-500">{item.label}</span>
               <span className={`px-2 py-0.5 rounded-full text-xs font-semibold ${item.color}`}>{item.count}</span>
             </div>
           ))}
         </div>
       </div>
       <div>
-        <h4 className="text-sm font-semibold text-gray-900 dark:text-white mb-2">Nhiệm vụ KOL/KOC ({campaignTasks.length})</h4>
+        <h4 className="text-sm font-semibold text-slate-900 dark:text-white mb-2">Nhiệm vụ KOL/KOC ({campaignTasks.length})</h4>
         <div className="space-y-2">
           {campaignTasks.map(t => (
-            <div key={t.id} className="flex items-center justify-between p-3 bg-gray-50 dark:bg-gray-700 rounded">
+            <div key={t.id} className="flex items-center justify-between p-3 surface-subtle">
               <div className="flex items-center gap-2">
-                <Avatar initials={t.kolAvatar} size="sm" />
-                <div><p className="text-sm font-medium text-gray-900 dark:text-white">{t.kolName}</p><p className="text-xs text-gray-500">{t.kolPlatform}</p></div>
+                <Avatar initials={t.kolAvatar} size="sm" image={getKolImage(t.kolAvatar)} />
+                <div><p className="text-sm font-medium text-slate-900 dark:text-white">{t.kolName}</p><p className="text-xs text-slate-500">{t.kolPlatform}</p></div>
               </div>
               <Badge label={taskStatusLabels[t.status as TaskStatus]} colorClass={taskStatusColors[t.status as TaskStatus]} />
             </div>
           ))}
-          {campaignTasks.length === 0 && <p className="text-sm text-gray-500">Chưa có nhiệm vụ.</p>}
+          {campaignTasks.length === 0 && <p className="text-sm text-slate-500">Chưa có nhiệm vụ.</p>}
         </div>
       </div>
       <div className="flex justify-end"><Button onClick={onClose}>Đóng</Button></div>
@@ -1914,50 +1930,50 @@ function KOLView({ selectedProject }: { selectedProject: string }) {
         action={<Button onClick={() => { setShowCreate(true); setCreatedCreds(null); }}><Plus className="w-4 h-4 mr-2" />Tạo tài khoản KOL/KOC</Button>}
       />
       <div className="relative">
-        <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
+        <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
         <input type="text" placeholder="Tìm KOL/KOC..." value={search} onChange={e => setSearch(e.target.value)}
-          className="w-full max-w-sm pl-10 pr-4 py-2 rounded border border-gray-200 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-white text-sm focus:ring-2 focus:ring-gray-500 outline-none" />
+          className="w-full max-w-sm pl-10 pr-4 py-2 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white text-sm focus:ring-2 focus:ring-brand-500 outline-none" />
       </div>
-      <div className="bg-white dark:bg-gray-800 rounded border border-gray-200 dark:border-gray-700 overflow-hidden">
+      <div className="bg-white dark:bg-slate-800 rounded-2xl border border-slate-200/80 dark:border-slate-700/60 shadow-soft overflow-hidden">
         <div className="overflow-x-auto">
           <table className="w-full min-w-[900px]">
             <thead>
-              <tr className="border-b border-gray-100 dark:border-gray-700">
-                <th className="text-left px-6 py-3 text-xs font-semibold text-gray-500 uppercase">KOL/KOC</th>
-                <th className="text-left px-6 py-3 text-xs font-semibold text-gray-500 uppercase">Nền tảng</th>
-                <th className="text-left px-6 py-3 text-xs font-semibold text-gray-500 uppercase">Theo dõi</th>
-                <th className="text-left px-6 py-3 text-xs font-semibold text-gray-500 uppercase">Lĩnh vực</th>
-                <th className="text-left px-6 py-3 text-xs font-semibold text-gray-500 uppercase">TL tương tác</th>
-                <th className="text-left px-6 py-3 text-xs font-semibold text-gray-500 uppercase">Thứ hạng</th>
-                <th className="text-left px-6 py-3 text-xs font-semibold text-gray-500 uppercase">Trạng thái</th>
-                <th className="text-left px-6 py-3 text-xs font-semibold text-gray-500 uppercase">Hành động</th>
+              <tr className="border-b border-slate-100/60">
+                <th className="text-left px-6 py-3 text-xs font-semibold text-slate-500 uppercase">KOL/KOC</th>
+                <th className="text-left px-6 py-3 text-xs font-semibold text-slate-500 uppercase">Nền tảng</th>
+                <th className="text-left px-6 py-3 text-xs font-semibold text-slate-500 uppercase">Theo dõi</th>
+                <th className="text-left px-6 py-3 text-xs font-semibold text-slate-500 uppercase">Lĩnh vực</th>
+                <th className="text-left px-6 py-3 text-xs font-semibold text-slate-500 uppercase">TL tương tác</th>
+                <th className="text-left px-6 py-3 text-xs font-semibold text-slate-500 uppercase">Thứ hạng</th>
+                <th className="text-left px-6 py-3 text-xs font-semibold text-slate-500 uppercase">Trạng thái</th>
+                <th className="text-left px-6 py-3 text-xs font-semibold text-slate-500 uppercase">Hành động</th>
               </tr>
             </thead>
             <tbody>
               {filtered.map(kol => {
                 const ranking = kolRankings.find(r => r.kolId === kol.id);
                 return (
-                  <tr key={kol.id} className="border-b border-gray-50 dark:border-gray-700 hover:bg-gray-50/50">
+                  <tr key={kol.id} className="border-b border-slate-100/60 hover:bg-slate-50/50">
                     <td className="px-6 py-4">
                       <div className="flex items-center gap-3">
-                        <Avatar initials={kol.avatar} size="sm" />
+                        <Avatar initials={kol.avatar} size="sm" image={getKolImage(kol.avatar)} />
                         <div>
-                          <p className="font-medium text-gray-900 dark:text-white text-sm">{kol.name}</p>
-                          <p className="text-xs text-gray-500">{kol.handle}</p>
+                          <p className="font-medium text-slate-900 dark:text-white text-sm">{kol.name}</p>
+                          <p className="text-xs text-slate-500">{kol.handle}</p>
                         </div>
                       </div>
                     </td>
-                    <td className="px-6 py-4"><Badge label={kol.platform} colorClass="bg-gray-100 text-gray-700 dark:bg-gray-700 dark:text-gray-300" /></td>
-                    <td className="px-6 py-4 text-sm font-medium text-gray-900 dark:text-white">{kol.followersDisplay}</td>
-                    <td className="px-6 py-4"><Badge label={kol.niche} colorClass="bg-gray-50 text-blue-700 dark:bg-blue-900/30 dark:text-blue-300" /></td>
-                    <td className="px-6 py-4 text-sm font-medium text-gray-600 dark:text-gray-400">{kol.engagementRate}%</td>
+                    <td className="px-6 py-4"><Badge label={kol.platform} colorClass="bg-slate-100/60 text-slate-300 dark:bg-slate-700 dark:text-slate-300" /></td>
+                    <td className="px-6 py-4 text-sm font-medium text-slate-900 dark:text-white">{kol.followersDisplay}</td>
+                    <td className="px-6 py-4"><Badge label={kol.niche} colorClass="bg-blue-50 text-blue-700 dark:bg-blue-900/30 dark:text-blue-300" /></td>
+                    <td className="px-6 py-4 text-sm font-medium text-brand-500 dark:text-brand-400">{kol.engagementRate}%</td>
                     <td className="px-6 py-4">
                       {ranking ? (
-                        <div className={`w-6 h-6 rounded-full flex items-center justify-center text-xs font-bold ${ranking.rank === 1 ? 'bg-gray-500 text-white' : ranking.rank === 2 ? 'bg-gray-400 text-white' : 'bg-gray-100 dark:bg-gray-600 text-gray-600 dark:text-gray-300'}`}>{ranking.rank}</div>
+                        <div className={`w-6 h-6 rounded-full flex items-center justify-center text-xs font-bold ${ranking.rank === 1 ? 'bg-amber-500 text-white' : ranking.rank === 2 ? 'bg-slate-400 text-white' : 'bg-slate-100 dark:bg-slate-600 text-slate-600 dark:text-slate-300'}`}>{ranking.rank}</div>
                       ) : '-'}
                     </td>
                     <td className="px-6 py-4">
-                      <Badge label={kol.status === 'active' ? 'Hoạt động' : 'Tạm khóa'} colorClass={kol.status === 'active' ? 'bg-emerald-100 text-emerald-800 dark:bg-emerald-900/40 dark:text-emerald-300' : 'bg-gray-100 text-gray-700 dark:bg-gray-700 dark:text-gray-300'} />
+                      <Badge label={kol.status === 'active' ? 'Hoạt động' : 'Tạm khóa'} colorClass={kol.status === 'active' ? 'bg-emerald-100 dark:bg-emerald-900/40 dark:text-emerald-300' : 'bg-slate-100/60 text-slate-300 dark:bg-slate-700 dark:text-slate-300'} />
                     </td>
                     <td className="px-6 py-4">
                       <div className="flex gap-1">
@@ -1984,37 +2000,37 @@ function KOLView({ selectedProject }: { selectedProject: string }) {
           {!createdCreds ? (
             <>
               <div className="grid grid-cols-2 gap-4">
-                <div><label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Họ và tên</label>
-                  <input type="text" placeholder="VD: Linh Beauty" className="w-full px-4 py-2.5 rounded border border-gray-200 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white text-sm" />
+                <div><label className="block text-sm font-medium text-slate-300 dark:text-slate-300 mb-1">Họ và tên</label>
+                  <input type="text" placeholder="VD: Linh Beauty" className="w-full px-4 py-2.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-700 text-slate-900 dark:text-white text-sm" />
                 </div>
-                <div><label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Email</label>
-                  <input type="email" placeholder="email@example.com" className="w-full px-4 py-2.5 rounded border border-gray-200 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white text-sm" />
+                <div><label className="block text-sm font-medium text-slate-300 dark:text-slate-300 mb-1">Email</label>
+                  <input type="email" placeholder="email@example.com" className="w-full px-4 py-2.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-700 text-slate-900 dark:text-white text-sm" />
                 </div>
               </div>
               <div className="grid grid-cols-2 gap-4">
-                <div><label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Nền tảng</label>
-                  <select className="w-full px-4 py-2.5 rounded border border-gray-200 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white text-sm">
+                <div><label className="block text-sm font-medium text-slate-300 dark:text-slate-300 mb-1">Nền tảng</label>
+                  <select className="w-full px-4 py-2.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-700 text-slate-900 dark:text-white text-sm">
                     {['TikTok', 'Instagram', 'YouTube', 'Facebook'].map(p => <option key={p}>{p}</option>)}
                   </select>
                 </div>
-                <div><label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Vai trò</label>
-                  <select className="w-full px-4 py-2.5 rounded border border-gray-200 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white text-sm">
+                <div><label className="block text-sm font-medium text-slate-300 dark:text-slate-300 mb-1">Vai trò</label>
+                  <select className="w-full px-4 py-2.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-700 text-slate-900 dark:text-white text-sm">
                     <option>KOL</option><option>KOC</option>
                   </select>
                 </div>
               </div>
-              <div><label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Lĩnh vực</label>
-                <select className="w-full px-4 py-2.5 rounded border border-gray-200 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white text-sm">
+              <div><label className="block text-sm font-medium text-slate-300 dark:text-slate-300 mb-1">Lĩnh vực</label>
+                <select className="w-full px-4 py-2.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-700 text-slate-900 dark:text-white text-sm">
                   {productCategories.slice(0, 6).map(c => <option key={c}>{c}</option>)}
                 </select>
               </div>
-              <div><label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Mật khẩu</label>
+              <div><label className="block text-sm font-medium text-slate-300 dark:text-slate-300 mb-1">Mật khẩu</label>
                 <input type="text" placeholder="Mật khẩu cho tài khoản"
-                  className="w-full px-4 py-2.5 rounded border border-gray-200 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white text-sm" />
+                  className="w-full px-4 py-2.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-700 text-slate-900 dark:text-white text-sm" />
               </div>
-              <div><label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Link mạng xã hội</label>
+              <div><label className="block text-sm font-medium text-slate-300 dark:text-slate-300 mb-1">Link mạng xã hội</label>
                 <input type="url" placeholder="VD: https://tiktok.com/@username"
-                  className="w-full px-4 py-2.5 rounded border border-gray-200 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white text-sm" />
+                  className="w-full px-4 py-2.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-700 text-slate-900 dark:text-white text-sm" />
               </div>
               <div className="flex justify-end gap-3 pt-2">
                 <Button variant="secondary" onClick={() => setShowCreate(false)}>Hủy</Button>
@@ -2024,7 +2040,7 @@ function KOLView({ selectedProject }: { selectedProject: string }) {
           ) : (
             <>
               <div className="flex items-center gap-2 mb-2"><CheckCircle2 className="w-5 h-5 text-emerald-500" /><p className="text-sm font-semibold text-emerald-600">Tài khoản KOL/KOC đã được tạo thành công!</p></div>
-              <p className="text-xs text-gray-500 mb-4">Cung cấp thông tin đăng nhập cho KOL/KOC. Thông tin chỉ hiển thị một lần.</p>
+              <p className="text-xs text-slate-500 mb-4">Cung cấp thông tin đăng nhập cho KOL/KOC. Thông tin chỉ hiển thị một lần.</p>
               <CredentialDisplay username={createdCreds.username} password={createdCreds.password} />
               <div className="flex justify-end pt-4"><Button onClick={() => { setShowCreate(false); setCreatedCreds(null); }}>Hoàn tất</Button></div>
             </>
@@ -2041,25 +2057,25 @@ function KOLView({ selectedProject }: { selectedProject: string }) {
       <Modal isOpen={!!changePassword} onClose={() => setChangePassword(null)} title="Đổi mật khẩu KOL/KOC" width="max-w-md">
         {changePassword && (
           <div className="space-y-4">
-            <div className="flex items-center gap-3 p-4 bg-gray-50 dark:bg-gray-700 rounded">
-              <Avatar initials={changePassword.kolName.charAt(0)} size="md" />
+            <div className="flex items-center gap-3 p-4 surface-subtle">
+              <Avatar initials={changePassword.kolName.charAt(0)} size="md" image={getKolImage(changePassword.kolName.charAt(0))} />
               <div>
-                <p className="font-semibold text-gray-900 dark:text-white">{changePassword.kolName}</p>
-                <p className="text-xs text-gray-500">Đặt lại mật khẩu mới cho tài khoản</p>
+                <p className="font-semibold text-slate-900 dark:text-white">{changePassword.kolName}</p>
+                <p className="text-xs text-slate-500">Đặt lại mật khẩu mới cho tài khoản</p>
               </div>
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1.5">Mật khẩu mới</label>
+              <label className="block text-sm font-medium text-slate-300 dark:text-slate-300 mb-1.5">Mật khẩu mới</label>
               <input
                 type="text"
                 value={changePassword.newPassword}
                 onChange={e => setChangePassword(p => p ? { ...p, newPassword: e.target.value } : null)}
                 placeholder="VD: Koi@2026! — tối thiểu 8 ký tự"
-                className="w-full px-4 py-2.5 rounded border border-gray-200 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white text-sm"
+                className="w-full px-4 py-2.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-700 text-slate-900 dark:text-white text-sm"
               />
-              <p className="text-xs text-gray-400 mt-1">Mật khẩu phải có tối thiểu 8 ký tự, bao gồm chữ hoa, chữ thường và số.</p>
+              <p className="text-xs text-slate-400 mt-1">Mật khẩu phải có tối thiểu 8 ký tự, bao gồm chữ hoa, chữ thường và số.</p>
             </div>
-            <div className="bg-gray-50 dark:bg-gray-700 rounded p-3 border border-amber-200 dark:border-amber-800/40">
+            <div className="bg-amber-50/80 dark:bg-amber-900/20 rounded-xl p-3 border border-amber-200 dark:border-amber-800/40">
               <p className="text-xs text-amber-700 dark:text-amber-300">
                 KOL/KOC sẽ phải đăng nhập lại bằng mật khẩu mới. Hãy thông báo cho họ sau khi cập nhật.
               </p>
@@ -2084,7 +2100,7 @@ function KOLView({ selectedProject }: { selectedProject: string }) {
       <Modal isOpen={!!resetCreds} onClose={() => setResetCreds(null)} title="Cấp lại tài khoản KOL/KOC" width="max-w-md">
         {resetCreds && (
           <div className="space-y-4">
-            <div className="flex items-center gap-3 p-4 bg-gray-50 dark:bg-gray-700 rounded border border-blue-200 dark:border-blue-800/40">
+            <div className="flex items-center gap-3 p-4 bg-blue-50/80 dark:bg-blue-900/20 rounded-xl border border-blue-200 dark:border-blue-800/40">
               <Key className="w-5 h-5 text-blue-600" />
               <div>
                 <p className="text-sm font-semibold text-blue-800 dark:text-blue-200">Cấp lại tài khoản cho <strong>{resetCreds.kolName}</strong></p>
@@ -2095,7 +2111,7 @@ function KOLView({ selectedProject }: { selectedProject: string }) {
               username={resetCreds.username}
               password={resetCreds.password}
             />
-            <div className="bg-gray-50 dark:bg-gray-700 rounded p-3 border border-amber-200 dark:border-amber-800/40">
+            <div className="bg-amber-50/80 dark:bg-amber-900/20 rounded-xl p-3 border border-amber-200 dark:border-amber-800/40">
               <p className="text-xs text-amber-700 dark:text-amber-300">
                 Thông tin đăng nhập chỉ hiển thị <strong>một lần duy nhất</strong>. Hãy gửi cho KOL/KOC ngay sau khi cấp lại.
               </p>
@@ -2125,33 +2141,33 @@ function KOLDetail({ kolId, onClose }: { kolId: string; onClose: () => void }) {
   return (
     <div className="space-y-6">
       <div className="flex items-center gap-4">
-        <Avatar initials={kol.avatar} size="lg" />
+        <Avatar initials={kol.avatar} size="lg" image={getKolImage(kol.avatar)} />
         <div className="flex-1">
-          <h3 className="text-lg font-bold text-gray-900 dark:text-white">{kol.name}</h3>
-          <p className="text-sm text-gray-500">{kol.handle} / {kol.platform} / {kol.role}</p>
+          <h3 className="text-lg font-bold text-slate-900 dark:text-white">{kol.name}</h3>
+          <p className="text-sm text-slate-500">{kol.handle} / {kol.platform} / {kol.role}</p>
           <div className="flex flex-wrap gap-2 mt-2">
             <Badge label={nicheLabels[kol.niche] || kol.niche} colorClass={nicheColors[kol.niche]} />
-            <Badge label={`${kol.followersDisplay} followers`} colorClass="bg-gray-100 text-gray-700 dark:bg-gray-700 dark:text-gray-300" />
+            <Badge label={`${kol.followersDisplay} followers`} colorClass="bg-slate-100/60 text-slate-300 dark:bg-slate-700 dark:text-slate-300" />
           </div>
         </div>
       </div>
       <div className="grid grid-cols-4 gap-3">
-        <div className="p-3 bg-gray-50 dark:bg-gray-700 rounded text-center"><p className="text-xl font-bold text-gray-600">{kol.engagementRate}%</p><p className="text-xs text-gray-500">TL tương tác</p></div>
-        <div className="p-3 bg-gray-50 dark:bg-gray-700 rounded text-center"><p className="text-xl font-bold text-gray-900 dark:text-white">{ranking?.rank || '-'}</p><p className="text-xs text-gray-500">Thứ hạng</p></div>
-        <div className="p-3 bg-gray-50 dark:bg-gray-700 rounded text-center"><p className="text-xl font-bold text-emerald-600">{(kol.totalEarned / 1000000).toFixed(1)}M</p><p className="text-xs text-gray-500">Đã kiếm (VND)</p></div>
-        <div className="p-3 bg-gray-50 dark:bg-gray-700 rounded text-center"><p className="text-xl font-bold text-amber-600">{(kol.pendingPayment / 1000000).toFixed(1)}M</p><p className="text-xs text-gray-500">Chờ thanh toán</p></div>
+        <div className="p-3 surface-subtle text-center"><p className="text-xl font-bold text-brand-600">{kol.engagementRate}%</p><p className="text-xs text-slate-500">TL tương tác</p></div>
+        <div className="p-3 surface-subtle text-center"><p className="text-xl font-bold text-slate-900 dark:text-white">{ranking?.rank || '-'}</p><p className="text-xs text-slate-500">Thứ hạng</p></div>
+        <div className="p-3 surface-subtle text-center"><p className="text-xl font-bold text-emerald-600">{(kol.totalEarned / 1000000).toFixed(1)}M</p><p className="text-xs text-slate-500">Đã kiếm (VND)</p></div>
+        <div className="p-3 surface-subtle text-center"><p className="text-xl font-bold text-amber-600">{(kol.pendingPayment / 1000000).toFixed(1)}M</p><p className="text-xs text-slate-500">Chờ thanh toán</p></div>
       </div>
-      {kol.bio && <p className="text-sm text-gray-600 dark:text-gray-300">{kol.bio}</p>}
+      {kol.bio && <p className="text-sm text-slate-600 dark:text-slate-300">{kol.bio}</p>}
       <div>
-        <h4 className="text-sm font-semibold text-gray-900 dark:text-white mb-2">Nhiệm vụ ({kolTasks.length})</h4>
+        <h4 className="text-sm font-semibold text-slate-900 dark:text-white mb-2">Nhiệm vụ ({kolTasks.length})</h4>
         <div className="space-y-2">
           {kolTasks.map(t => (
-            <div key={t.id} className="flex items-center justify-between p-3 bg-gray-50 dark:bg-gray-700 rounded">
-              <div><p className="text-sm font-medium text-gray-900 dark:text-white">{t.campaignName}</p><p className="text-xs text-gray-500">{t.productName}</p></div>
+            <div key={t.id} className="flex items-center justify-between p-3 surface-subtle">
+              <div><p className="text-sm font-medium text-slate-900 dark:text-white">{t.campaignName}</p><p className="text-xs text-slate-500">{t.productName}</p></div>
               <Badge label={taskStatusLabels[t.status as TaskStatus]} colorClass={taskStatusColors[t.status as TaskStatus]} />
             </div>
           ))}
-          {kolTasks.length === 0 && <p className="text-sm text-gray-500">Chưa có nhiệm vụ.</p>}
+          {kolTasks.length === 0 && <p className="text-sm text-slate-500">Chưa có nhiệm vụ.</p>}
         </div>
       </div>
       <div className="flex justify-end"><Button onClick={onClose}>Đóng</Button></div>
@@ -2186,7 +2202,7 @@ function TasksView({ selectedProject }: { selectedProject: string }) {
   };
 
   const SortTh = ({ field, label }: { field: 'kolName' | 'campaignName' | 'status' | 'deadline' | 'paymentAmount'; label: string }) => (
-    <th className="text-left px-5 py-3 text-xs font-semibold text-gray-500 uppercase cursor-pointer hover:text-gray-700 dark:hover:text-gray-300"
+    <th className="text-left px-5 py-3 text-xs font-semibold text-slate-500 uppercase cursor-pointer hover:text-slate-300 dark:hover:text-slate-300"
       onClick={() => toggleSort(field)}>
       <span className="flex items-center gap-1">{label}<ArrowUpDown className="w-3 h-3" /></span>
     </th>
@@ -2196,48 +2212,48 @@ function TasksView({ selectedProject }: { selectedProject: string }) {
     <div className="space-y-4">
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-2xl font-bold text-gray-900 dark:text-white">Nhiệm vụ</h1>
-          <p className="text-sm text-gray-500 mt-0.5">Theo dõi và quản lý nhiệm vụ cho KOL/KOC</p>
+          <h1 className="text-2xl font-bold text-slate-900 dark:text-white">Nhiệm vụ</h1>
+          <p className="text-sm text-slate-500 mt-0.5">Theo dõi và quản lý nhiệm vụ cho KOL/KOC</p>
         </div>
       </div>
       <div className="flex items-center gap-3 flex-wrap">
         <select value={filterStatus} onChange={e => setFilterStatus(e.target.value)}
-          className="px-4 py-2 rounded border border-gray-200 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-white text-sm">
+          className="px-4 py-2 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white text-sm">
           <option value="all">Tất cả trạng thái</option>
           {(Object.keys(taskStatusLabels) as TaskStatus[]).map(s => <option key={s} value={s}>{taskStatusLabels[s]}</option>)}
         </select>
-        <span className="text-sm text-gray-500">{sorted.length} nhiệm vụ</span>
+        <span className="text-sm text-slate-500">{sorted.length} nhiệm vụ</span>
       </div>
-      <div className="bg-white dark:bg-gray-800 rounded border border-gray-200 dark:border-gray-700 overflow-hidden">
+      <div className="bg-white dark:bg-slate-800 rounded-2xl border border-slate-200/80 dark:border-slate-700/60 shadow-soft overflow-hidden">
         <div className="overflow-x-auto">
           <table className="w-full min-w-[900px]">
             <thead>
-              <tr className="border-b border-gray-100 dark:border-gray-700">
+              <tr className="border-b border-slate-100/60">
                 <SortTh field="kolName" label="KOL/KOC" />
-                <th className="text-left px-5 py-3 text-xs font-semibold text-gray-500 uppercase">Nền tảng</th>
+                <th className="text-left px-5 py-3 text-xs font-semibold text-slate-500 uppercase">Nền tảng</th>
                 <SortTh field="campaignName" label="Chiến dịch" />
                 <SortTh field="status" label="Trạng thái" />
-                <th className="text-left px-5 py-3 text-xs font-semibold text-gray-500 uppercase">Sản phẩm</th>
+                <th className="text-left px-5 py-3 text-xs font-semibold text-slate-500 uppercase">Sản phẩm</th>
                 <SortTh field="deadline" label="Hạn" />
                 <SortTh field="paymentAmount" label="Thù lao" />
-                <th className="text-left px-5 py-3 text-xs font-semibold text-gray-500 uppercase">Hành động</th>
+                <th className="text-left px-5 py-3 text-xs font-semibold text-slate-500 uppercase">Hành động</th>
               </tr>
             </thead>
             <tbody>
               {sorted.map(task => (
-                <tr key={task.id} className="border-b border-gray-50 dark:border-gray-700 hover:bg-gray-50/50 dark:hover:bg-gray-700/20">
+                <tr key={task.id} className="border-b border-slate-100/60 hover:bg-slate-50/50 dark:hover:bg-slate-700/20">
                   <td className="px-5 py-4">
                     <div className="flex items-center gap-3">
-                      <Avatar initials={task.kolAvatar} size="sm" />
-                      <p className="font-medium text-gray-900 dark:text-white text-sm">{task.kolName}</p>
+                      <Avatar initials={task.kolAvatar} size="sm" image={getKolImage(task.kolAvatar)} />
+                      <p className="font-medium text-slate-900 dark:text-white text-sm">{task.kolName}</p>
                     </div>
                   </td>
-                  <td className="px-5 py-4"><Badge label={task.kolPlatform} colorClass="bg-gray-100 text-gray-700 dark:bg-gray-700 dark:text-gray-300" /></td>
-                  <td className="px-5 py-4 text-sm text-gray-600 dark:text-gray-300">{task.campaignName}</td>
+                  <td className="px-5 py-4"><Badge label={task.kolPlatform} colorClass="bg-slate-100/60 text-slate-300 dark:bg-slate-700 dark:text-slate-300" /></td>
+                  <td className="px-5 py-4 text-sm text-slate-600 dark:text-slate-300">{task.campaignName}</td>
                   <td className="px-5 py-4"><Badge label={taskStatusLabels[task.status as TaskStatus]} colorClass={taskStatusColors[task.status as TaskStatus]} /></td>
-                  <td className="px-5 py-4 text-sm text-gray-600 dark:text-gray-300">{task.productName}</td>
-                  <td className="px-5 py-4 text-sm text-gray-500">{task.deadline}</td>
-                  <td className="px-5 py-4 text-sm font-medium text-gray-900 dark:text-white">{task.paymentAmount.toLocaleString()} VND</td>
+                  <td className="px-5 py-4 text-sm text-slate-600 dark:text-slate-300">{task.productName}</td>
+                  <td className="px-5 py-4 text-sm text-slate-500">{task.deadline}</td>
+                  <td className="px-5 py-4 text-sm font-medium text-slate-900 dark:text-white">{task.paymentAmount.toLocaleString()} VND</td>
                   <td className="px-5 py-4">
                     <div className="flex gap-1">
                       <Button size="sm" variant="secondary" onClick={() => setSelectedTask(task.id)}>
@@ -2249,7 +2265,7 @@ function TasksView({ selectedProject }: { selectedProject: string }) {
               ))}
               {sorted.length === 0 && (
                 <tr>
-                  <td colSpan={8} className="px-5 py-12 text-center text-gray-400">
+                  <td colSpan={8} className="px-5 py-12 text-center text-slate-400">
                     <CheckCircle2 className="w-8 h-8 mx-auto mb-2 opacity-40" />
                     <p className="text-sm">Không có nhiệm vụ nào phù hợp.</p>
                   </td>
@@ -2272,30 +2288,30 @@ function TaskDetail({ taskId, onClose }: { taskId: string; onClose: () => void }
   const latestDraft = task.draftContent?.[task.draftContent.length - 1];
   return (
     <div className="space-y-4">
-      <div className="flex items-center gap-3 p-4 bg-gray-50 dark:bg-gray-700 rounded">
-        <Avatar initials={task.kolAvatar} size="lg" />
+      <div className="flex items-center gap-3 p-4 surface-subtle">
+        <Avatar initials={task.kolAvatar} size="lg" image={getKolImage(task.kolAvatar)} />
         <div className="flex-1">
-          <p className="text-lg font-bold text-gray-900 dark:text-white">{task.kolName}</p>
-          <p className="text-sm text-gray-500">{task.campaignName} • {task.productName}</p>
+          <p className="text-lg font-bold text-slate-900 dark:text-white">{task.kolName}</p>
+          <p className="text-sm text-slate-500">{task.campaignName} • {task.productName}</p>
         </div>
         <Badge label={taskStatusLabels[task.status as TaskStatus]} colorClass={taskStatusColors[task.status as TaskStatus]} />
       </div>
       <div className="grid grid-cols-2 gap-4">
-        <div className="p-4 bg-gray-50 dark:bg-gray-700 rounded"><p className="text-xs text-gray-500 mb-1">KPI Target Views</p><p className="text-lg font-bold">{task.kpiTarget.views.toLocaleString()}</p></div>
-        <div className="p-4 bg-gray-50 dark:bg-gray-700 rounded"><p className="text-xs text-gray-500 mb-1">KPI Target ER</p><p className="text-lg font-bold">{task.kpiTarget.engagementRate}%</p></div>
+        <div className="p-4 surface-subtle"><p className="text-xs text-slate-500 mb-1">KPI Target Views</p><p className="text-lg font-bold">{task.kpiTarget.views.toLocaleString()}</p></div>
+        <div className="p-4 surface-subtle"><p className="text-xs text-slate-500 mb-1">KPI Target ER</p><p className="text-lg font-bold">{task.kpiTarget.engagementRate}%</p></div>
       </div>
       <div>
-        <h4 className="text-sm font-semibold text-gray-900 dark:text-white mb-2">Brief nhiệm vụ</h4>
-        <p className="text-sm text-gray-600 dark:text-gray-300 p-3 bg-gray-50 dark:bg-gray-700 rounded">{task.brief}</p>
+        <h4 className="text-sm font-semibold text-slate-900 dark:text-white mb-2">Brief nhiệm vụ</h4>
+        <p className="text-sm text-slate-600 dark:text-slate-300 p-3 surface-subtle">{task.brief}</p>
       </div>
       {task.draftContent && task.draftContent.length > 0 && (
         <div>
-          <h4 className="text-sm font-semibold text-gray-900 dark:text-white mb-2">Bản nháp ({task.draftContent.length})</h4>
+          <h4 className="text-sm font-semibold text-slate-900 dark:text-white mb-2">Bản nháp ({task.draftContent.length})</h4>
           {task.draftContent.map((draft, i) => (
-            <div key={i} className={`p-3 rounded ${i === task.draftContent!.length - 1 ? 'bg-gray-50 dark:bg-gray-700 border border-gray-200' : 'bg-gray-50 dark:bg-gray-700'} mb-2`}>
+            <div key={i} className={`p-3 rounded-xl ${i === task.draftContent!.length - 1 ? 'bg-brand-50 dark:bg-brand-900/20 border border-teal-200' : 'bg-slate-50/50 dark:bg-slate-700/50'} mb-2`}>
               <div className="flex items-center justify-between mb-1">
-                <p className="text-sm font-medium text-gray-900 dark:text-white">Phiên bản {draft.version}</p>
-                <span className="text-xs text-gray-500">{draft.submittedAt}</span>
+                <p className="text-sm font-medium text-slate-900 dark:text-white">Phiên bản {draft.version}</p>
+                <span className="text-xs text-slate-500">{draft.submittedAt}</span>
               </div>
               {draft.feedback && <p className="text-xs text-red-600 dark:text-red-400 flex items-center gap-1"><MessageCircle className="w-3 h-3" />{draft.feedback}</p>}
             </div>
@@ -2304,44 +2320,44 @@ function TaskDetail({ taskId, onClose }: { taskId: string; onClose: () => void }
       )}
       {task.publishedContent && (
         <div>
-          <h4 className="text-sm font-semibold text-gray-900 dark:text-white mb-2">Bài đăng</h4>
-          <div className="p-3 bg-gray-50 dark:bg-gray-700 rounded space-y-2">
+          <h4 className="text-sm font-semibold text-slate-900 dark:text-white mb-2">Bài đăng</h4>
+          <div className="p-3 bg-emerald-50/80 dark:bg-emerald-900/20 rounded-xl space-y-2">
             <div className="flex items-center gap-2">
-              <a href={task.publishedContent.postUrl} className="text-sm text-gray-600 hover:underline flex items-center gap-1"><ExternalLink className="w-3 h-3" />{task.publishedContent.postUrl}</a>
+              <a href={task.publishedContent.postUrl} className="text-sm text-brand-600 hover:underline flex items-center gap-1"><ExternalLink className="w-3 h-3" />{task.publishedContent.postUrl}</a>
             </div>
-            <p className="text-xs text-gray-500">Đăng lúc: {task.publishedContent.publishedAt}</p>
-            <div className="border-2 border-dashed border-gray-300 dark:border-gray-600 rounded p-3 text-center cursor-pointer hover:border-gray-400 transition-colors">
-              <p className="text-xs text-gray-400">Tải lên screenshot bài đăng (JPG, PNG tối đa 5MB)</p>
+            <p className="text-xs text-slate-500">Đăng lúc: {task.publishedContent.publishedAt}</p>
+            <div className="border-2 border-dashed bg-slate-200 dark:border-slate-600 rounded-xl p-3 text-center cursor-pointer hover:border-brand-400 transition-colors">
+              <p className="text-xs text-slate-400">Tải lên screenshot bài đăng (JPG, PNG tối đa 5MB)</p>
             </div>
           </div>
         </div>
       )}
       {task.metrics && (
         <div>
-          <h4 className="text-sm font-semibold text-gray-900 dark:text-white mb-2">Metrics</h4>
-          <div className="p-3 bg-gray-50 dark:bg-gray-700 rounded">
+          <h4 className="text-sm font-semibold text-slate-900 dark:text-white mb-2">Metrics</h4>
+          <div className="p-3 surface-subtle">
             <div className="grid grid-cols-5 gap-2 mb-2">
               {([['Views', task.metrics.views], ['Likes', task.metrics.likes], ['Comments', task.metrics.comments], ['Shares', task.metrics.shares], ['Saves', task.metrics.saves]] as [string, number][]).map(([k, v]) => (
-                <div key={k} className="text-center"><p className="text-lg font-bold">{v.toLocaleString()}</p><p className="text-xs text-gray-500">{k}</p></div>
+                <div key={k} className="text-center"><p className="text-lg font-bold">{v.toLocaleString()}</p><p className="text-xs text-slate-500">{k}</p></div>
               ))}
             </div>
-            <p className="text-sm text-center text-gray-600 font-medium">Engagement Rate: {task.metrics.engagementRate}%</p>
-            <p className="text-xs text-center text-gray-500 mt-1">
+            <p className="text-sm text-center text-brand-600 font-medium">Engagement Rate: {task.metrics.engagementRate}%</p>
+            <p className="text-xs text-center text-slate-500 mt-1">
               {task.metrics.brandConfirmed ? <span className="text-emerald-600">✓ Đã xác nhận</span> : <span className="text-amber-600">Chờ xác nhận</span>}
             </p>
-            <div className="border-2 border-dashed border-gray-300 dark:border-gray-600 rounded p-2 text-center cursor-pointer hover:border-gray-400 transition-colors mt-2">
-              <p className="text-xs text-gray-400">Tải lên insight screenshot</p>
+            <div className="border-2 border-dashed bg-slate-200 dark:border-slate-600 rounded-xl p-2 text-center cursor-pointer hover:border-brand-400 transition-colors mt-2">
+              <p className="text-xs text-slate-400">Tải lên insight screenshot</p>
             </div>
           </div>
         </div>
       )}
       {task.conversion && (
         <div>
-          <h4 className="text-sm font-semibold text-gray-900 dark:text-white mb-2">Conversion Data</h4>
-          <div className="p-3 bg-gray-50 dark:bg-gray-700 rounded">
+          <h4 className="text-sm font-semibold text-slate-900 dark:text-white mb-2">Conversion Data</h4>
+          <div className="p-3 bg-emerald-50/80 dark:bg-emerald-900/20 rounded-xl">
             <div className="grid grid-cols-4 gap-2">
               {([['Orders', task.conversion.orders], ['Leads', task.conversion.leads], ['Coupon usage', task.conversion.couponUsage], ['Revenue', `${(task.conversion.revenue / 1000000).toFixed(1)}M`]] as [string, string | number][]).map(([k, v]) => (
-                <div key={k}><p className="text-lg font-bold text-gray-900 dark:text-white">{v}</p><p className="text-xs text-gray-500">{k}</p></div>
+                <div key={k}><p className="text-lg font-bold text-slate-900 dark:text-white">{v}</p><p className="text-xs text-slate-500">{k}</p></div>
               ))}
             </div>
           </div>
@@ -2398,7 +2414,7 @@ function WorkflowView({ selectedProject, initialNode }: { selectedProject: strin
   return (
     <div className="space-y-4">
       {/* Step Indicator */}
-      <div className="bg-white dark:bg-gray-800 rounded border border-gray-200 dark:border-gray-700 p-5">
+      <div className="card-base p-5">
         <div className="flex items-center justify-between">
           {STEP_ORDER.map((step, i) => {
             const isActive = node === step;
@@ -2406,16 +2422,16 @@ function WorkflowView({ selectedProject, initialNode }: { selectedProject: strin
             return (
               <div key={step} className="flex items-center flex-1">
                 <div className="flex flex-col items-center">
-                  <div className={`w-9 h-9 rounded-full flex items-center justify-center font-bold text-sm transition-colors
-                    ${isActive ? 'bg-gray-500 text-white ring-4 ring-gray-100 dark:ring-gray-900/40/40' : isPast ? 'bg-gray-500 text-white' : 'bg-gray-100 dark:bg-gray-700 text-gray-400'}`}>
+                  <div className={`w-9 h-9 rounded-full flex items-center justify-center font-bold text-sm transition-all
+                    ${isActive ? 'bg-brand-500 text-white ring-4 ring-brand-100 dark:ring-brand-900/40' : isPast ? 'bg-brand-500 text-white' : 'bg-slate-100/60 dark:bg-slate-700 text-slate-400'}`}>
                     {isPast ? <Check className="w-4 h-4" /> : i + 1}
                   </div>
-                  <p className={`text-[11px] font-medium mt-2 text-center whitespace-pre-line ${isActive ? 'text-gray-600 dark:text-gray-400 font-bold' : isPast ? 'text-gray-400' : 'text-gray-400'}`}>
+                  <p className={`text-[11px] font-medium mt-2 text-center whitespace-pre-line ${isActive ? 'text-brand-500 dark:text-brand-400 font-bold' : isPast ? 'text-brand-400' : 'text-slate-400'}`}>
                     {STEP_LABELS[step]}
                   </p>
                 </div>
                 {i < STEP_ORDER.length - 1 && (
-                  <div className={`flex-1 h-0.5 mx-2 mb-5 transition-colors ${currentStepIdx > i ? 'bg-gray-400' : 'bg-gray-200 dark:bg-gray-700'}`} />
+                  <div className={`flex-1 h-0.5 mx-2 mb-5 transition-all ${currentStepIdx > i ? 'bg-brand-500' : 'bg-slate-200 dark:bg-slate-700'}`} />
                 )}
               </div>
             );
@@ -2424,12 +2440,12 @@ function WorkflowView({ selectedProject, initialNode }: { selectedProject: strin
       </div>
 
       {/* Workflow tabs */}
-      <div className="flex gap-1 p-1 bg-gray-100 dark:bg-gray-700 rounded w-fit">
+      <div className="flex gap-1 p-1 bg-slate-100/60 dark:bg-slate-700/50 rounded-xl w-fit">
         {WORKFLOW_NODES.map(n => (
           <button key={n.id} onClick={() => goTo(n.id)}
-            className={`px-4 py-2 rounded text-sm font-medium transition-colors ${node === n.id
-              ? 'bg-white dark:bg-gray-700 text-gray-600 '
-              : 'text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200'}`}>
+            className={`px-4 py-2 rounded-lg text-sm font-medium transition-all ${node === n.id
+              ? 'bg-white dark:bg-slate-700 text-brand-600 shadow-sm'
+              : 'text-slate-500 hover:text-slate-300 dark:text-slate-400 dark:hover:text-slate-200'}`}>
             {n.label}
           </button>
         ))}
@@ -2440,8 +2456,8 @@ function WorkflowView({ selectedProject, initialNode }: { selectedProject: strin
         <div className="space-y-4">
           <div className="flex items-center justify-between">
             <div>
-              <h1 className="text-2xl font-bold text-gray-900 dark:text-white">Phê duyệt nội dung</h1>
-              <p className="text-sm text-gray-500 mt-0.5">Xem draft từ KOL/KOC — Phê duyệt để KOL đăng bài, Từ chối để KOL chỉnh sửa</p>
+              <h1 className="text-2xl font-bold text-slate-900 dark:text-white">Phê duyệt nội dung</h1>
+              <p className="text-sm text-slate-500 mt-0.5">Xem draft từ KOL/KOC — Phê duyệt để KOL đăng bài, Từ chối để KOL chỉnh sửa</p>
             </div>
           </div>
           <ContentReviewPanel
@@ -2459,8 +2475,8 @@ function WorkflowView({ selectedProject, initialNode }: { selectedProject: strin
         <div className="space-y-4">
           <div className="flex items-center justify-between">
             <div>
-              <h1 className="text-2xl font-bold text-gray-900 dark:text-white">Xác nhận Metrics</h1>
-              <p className="text-sm text-gray-500 mt-0.5">Xem post URL, screenshot, số liệu KOL nhập, và conversion data</p>
+              <h1 className="text-2xl font-bold text-slate-900 dark:text-white">Xác nhận Metrics</h1>
+              <p className="text-sm text-slate-500 mt-0.5">Xem post URL, screenshot, số liệu KOL nhập, và conversion data</p>
             </div>
           </div>
           <MetricsReviewPanel
@@ -2476,8 +2492,8 @@ function WorkflowView({ selectedProject, initialNode }: { selectedProject: strin
         <div className="space-y-4">
           <div className="flex items-center justify-between">
             <div>
-              <h1 className="text-2xl font-bold text-gray-900 dark:text-white">Thanh toán</h1>
-              <p className="text-sm text-gray-500 mt-0.5">Duyệt thanh toán đầy đủ, một phần, giữ tạm hoặc từ chối</p>
+              <h1 className="text-2xl font-bold text-slate-900 dark:text-white">Thanh toán</h1>
+              <p className="text-sm text-slate-500 mt-0.5">Duyệt thanh toán đầy đủ, một phần, giữ tạm hoặc từ chối</p>
             </div>
           </div>
           <PayoutPanel selectedProject={selectedProject} paymentAction={paymentAction} setPaymentAction={setPaymentAction} />
@@ -2591,7 +2607,7 @@ function ActionDashboardModal({ selectedProject }: { selectedProject: string }) 
     published: { label: 'Đã đăng bài', color: 'bg-cyan-100 text-cyan-800 dark:bg-cyan-900/40 dark:text-cyan-300' },
     tracking: { label: 'Đang theo dõi', color: 'bg-blue-100 text-blue-800 dark:bg-blue-900/40 dark:text-blue-300' },
     metrics_submitted: { label: 'Đã gửi metrics', color: 'bg-indigo-100 text-indigo-800 dark:bg-indigo-900/40 dark:text-indigo-300' },
-    metrics_approved: { label: 'Metrics OK', color: 'bg-gray-100 text-gray-800 dark:bg-gray-700 dark:text-gray-300' },
+    metrics_approved: { label: 'Metrics OK', color: 'bg-brand-100 text-brand-800 dark:bg-brand-900/40 dark:text-brand-300' },
     payment_pending: { label: 'Chờ thanh toán', color: 'bg-amber-100 text-amber-800 dark:bg-amber-900/40 dark:text-amber-300' },
   };
 
@@ -2607,8 +2623,8 @@ function ActionDashboardModal({ selectedProject }: { selectedProject: string }) 
           <div key={item.label} className={`${item.color} rounded p-4 text-center cursor-pointer border border-gray-200 dark:border-gray-700`}
             onClick={() => setTab(item.tabKey as typeof tab)}>
             <div className={`${item.accent} flex justify-center mb-1`}>{item.icon}</div>
-            <p className="text-2xl font-bold text-gray-900 dark:text-white">{item.count}</p>
-            <p className="text-xs text-gray-500">{item.label}</p>
+            <p className="text-2xl font-bold text-slate-900 dark:text-white">{item.count}</p>
+            <p className="text-xs text-slate-500">{item.label}</p>
           </div>
         ))}
       </div>
@@ -2619,13 +2635,13 @@ function ActionDashboardModal({ selectedProject }: { selectedProject: string }) 
           <button key={t.id} onClick={() => setTab(t.id)}
             className={`px-4 py-2 rounded text-sm font-medium transition-colors flex items-center gap-2 ${
               tab === t.id
-                ? 'bg-gray-600 text-white '
-                : 'bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600'
+                ? 'bg-brand-600 text-white shadow-sm'
+                : 'bg-slate-100/60 dark:bg-slate-700 text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-600'
             }`}>
             {t.label}
             {t.count > 0 && (
               <span className={`px-1.5 py-0.5 rounded-full text-[10px] font-bold ${
-                tab === t.id ? 'bg-white/20 text-white' : 'bg-gray-200 dark:bg-gray-600 text-gray-600 dark:text-gray-300'
+                tab === t.id ? 'bg-white/20 text-white' : 'bg-slate-200 dark:bg-slate-600 text-slate-600 dark:text-slate-300'
               }`}>{t.count}</span>
             )}
           </button>
@@ -2635,14 +2651,14 @@ function ActionDashboardModal({ selectedProject }: { selectedProject: string }) 
       {/* Task list */}
       <div className="space-y-3">
         {pendingByType[tab].length === 0 ? (
-          <div className="text-center py-12 text-gray-400">
+          <div className="text-center py-12 text-slate-400">
             <CheckCircle2 className="w-8 h-8 mx-auto mb-2 opacity-50" />
             <p className="text-sm">Không có tác vụ nào ở trạng thái này.</p>
           </div>
         ) : (
           pendingByType[tab].map(t => {
             const state = getState(t.id, t);
-            const badge = badgeMap[state] || { label: state, color: 'bg-gray-100 text-gray-700 dark:bg-gray-700 dark:text-gray-300' };
+            const badge = badgeMap[state] || { label: state, color: 'bg-slate-100/60 text-slate-300 dark:bg-slate-700 dark:text-slate-300' };
             const metricsData = t.metrics;
             const views = metricsData ? Number(metricsData.views) : 0;
             const er = metricsData ? metricsData.engagementRate : 0;
@@ -2650,57 +2666,57 @@ function ActionDashboardModal({ selectedProject }: { selectedProject: string }) 
 
             return (
               <div key={t.id}
-                className={`bg-white dark:bg-gray-800 rounded border transition-colors ${
-                  openTask === t.id ? 'border-gray-400 ' : 'border-gray-200 dark:border-gray-700'
-                } hover: cursor-pointer`}
+                className={`bg-white dark:bg-slate-800 rounded-2xl border transition-all ${
+                  openTask === t.id ? 'border-brand-400 shadow-md' : 'border-slate-200/80 dark:border-slate-700/60'
+                } hover:shadow-md cursor-pointer`}
                 onClick={() => setOpenTask(openTask === t.id ? null : t.id)}>
 
                 {/* Header */}
                 <div className="flex items-start justify-between p-4">
                   <div className="flex items-center gap-3">
-                    <Avatar initials={t.kolAvatar} size="sm" />
+                    <Avatar initials={t.kolAvatar} size="sm" image={getKolImage(t.kolAvatar)} />
                     <div>
-                      <p className="text-sm font-medium text-gray-900 dark:text-white">{t.kolName}</p>
-                      <p className="text-xs text-gray-500">{t.kolPlatform} · {t.productName}</p>
+                      <p className="text-sm font-medium text-slate-900 dark:text-white">{t.kolName}</p>
+                      <p className="text-xs text-slate-500">{t.kolPlatform} · {t.productName}</p>
                     </div>
                   </div>
                   <div className="flex flex-col items-end gap-1">
                     <span className={`px-2 py-0.5 rounded-full text-xs font-medium ${badge.color}`}>{badge.label}</span>
-                    <span className="text-xs text-gray-400">{t.deadline}</span>
+                    <span className="text-xs text-slate-400">{t.deadline}</span>
                   </div>
                 </div>
 
                 {/* Expanded */}
                 {openTask === t.id && (
-                  <div className="px-4 pb-4 space-y-3 border-t border-gray-100 dark:border-gray-700 pt-3">
+                  <div className="px-4 pb-4 space-y-3 border-t border-slate-100/80 pt-3">
                     {/* KPIs */}
                     <div className="grid grid-cols-3 gap-2">
                       {metricsData ? (
                         <>
-                          <div className="p-2 bg-gray-50 dark:bg-gray-800 rounded text-center">
+                          <div className="p-2 bg-slate-50/50 dark:bg-slate-700/40 rounded-lg text-center">
                             <p className="text-sm font-bold">{views.toLocaleString()}</p>
-                            <p className="text-[10px] text-gray-500">Views</p>
+                            <p className="text-[10px] text-slate-500">Views</p>
                           </div>
-                          <div className="p-2 bg-gray-50 dark:bg-gray-800 rounded text-center">
+                          <div className="p-2 bg-slate-50/50 dark:bg-slate-700/40 rounded-lg text-center">
                             <p className="text-sm font-bold">{er}%</p>
-                            <p className="text-[10px] text-gray-500">ER</p>
+                            <p className="text-[10px] text-slate-500">ER</p>
                           </div>
-                          <div className="p-2 bg-gray-50 dark:bg-gray-800 rounded text-center">
+                          <div className="p-2 bg-slate-50/50 dark:bg-slate-700/40 rounded-lg text-center">
                             <p className="text-sm font-bold">{conv.toLocaleString()}</p>
-                            <p className="text-[10px] text-gray-500">Conversions</p>
+                            <p className="text-[10px] text-slate-500">Conversions</p>
                           </div>
                         </>
                       ) : (
-                        <div className="col-span-3 p-2 bg-gray-50 dark:bg-gray-800 rounded text-center text-xs text-gray-500">
+                        <div className="col-span-3 p-2 bg-slate-50/50 dark:bg-slate-700/40 rounded-lg text-center text-xs text-slate-500">
                           Chưa có metrics — KOL chưa nộp số liệu
                         </div>
                       )}
                     </div>
 
                     {/* Payment info */}
-                    <div className="flex justify-between text-xs text-gray-500">
+                    <div className="flex justify-between text-xs text-slate-500">
                       <span>Thù lao</span>
-                      <span className="font-medium text-gray-900 dark:text-white">{t.paymentAmount.toLocaleString()} VND</span>
+                      <span className="font-medium text-slate-900 dark:text-white">{t.paymentAmount.toLocaleString()} VND</span>
                     </div>
 
                     {/* Actions */}
@@ -2758,7 +2774,7 @@ function ActionDashboardModal({ selectedProject }: { selectedProject: string }) 
           </div>
           <div>
             <label className="block text-sm font-medium mb-1">Feedback cho KOL *</label>
-            <textarea rows={3} className="w-full px-4 py-2.5 rounded border border-gray-200 dark:border-gray-600 bg-white dark:bg-gray-700 text-sm resize-none focus:ring-2 focus:ring-gray-500 outline-none"
+            <textarea rows={3} className="w-full px-4 py-2.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-700 text-sm resize-none focus:ring-2 focus:ring-brand-500 outline-none"
               placeholder="VD: Video quá ngắn, cần thêm phần giới thiệu sản phẩm và CTA rõ ràng hơn..."
               value={rejectFb} onChange={e => setRejectFb(e.target.value)} />
           </div>
@@ -2788,7 +2804,7 @@ function ActionDashboardModal({ selectedProject }: { selectedProject: string }) 
             {paymentDecision.action === 'partial' && (
               <div>
                 <label className="block text-sm font-medium mb-1">Số tiền thanh toán (VND)</label>
-                <input type="number" className="w-full px-4 py-2.5 rounded border border-gray-200 dark:border-gray-600 bg-white dark:bg-gray-700 text-sm focus:ring-2 focus:ring-gray-500 outline-none"
+                <input type="number" className="w-full px-4 py-2.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-700 text-sm focus:ring-2 focus:ring-brand-500 outline-none"
                   placeholder="VD: 2500000"
                   onChange={e => setPaymentDecision(p => p ? { ...p, amount: Number(e.target.value) } : null)} />
               </div>
@@ -2797,7 +2813,7 @@ function ActionDashboardModal({ selectedProject }: { selectedProject: string }) 
               <label className="block text-sm font-medium mb-1">
                 Ghi chú / Lý do {paymentDecision.action === 'hold' ? '*' : '(tùy chọn)'}
               </label>
-              <textarea rows={2} className="w-full px-4 py-2.5 rounded border border-gray-200 dark:border-gray-600 bg-white dark:bg-gray-700 text-sm resize-none focus:ring-2 focus:ring-gray-500 outline-none"
+              <textarea rows={2} className="w-full px-4 py-2.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-700 text-sm resize-none focus:ring-2 focus:ring-brand-500 outline-none"
                 placeholder={paymentDecision.action === 'hold' ? 'Lý do giữ tạm (bắt buộc)...' : 'Ghi chú thêm...'}
                 onChange={e => setPaymentDecision(p => p ? { ...p, reason: e.target.value } : null)} />
             </div>
@@ -2929,15 +2945,15 @@ function SmartActionHub({ selectedProject }: { selectedProject: string }) {
   const STATUS_COLORS: Record<string, string> = {
     draft_submitted: 'bg-purple-100 text-purple-800 dark:bg-purple-900/40 dark:text-purple-300',
     revision_required: 'bg-red-100 text-red-800 dark:bg-red-900/40 dark:text-red-300',
-    approved_to_publish: 'bg-gray-100 text-gray-800 dark:bg-gray-700 dark:text-gray-300',
+    approved_to_publish: 'bg-brand-100 text-brand-800 dark:bg-brand-900/40 dark:text-brand-300',
     published: 'bg-cyan-100 text-cyan-800 dark:bg-cyan-900/40 dark:text-cyan-300',
     tracking: 'bg-amber-100 text-amber-800 dark:bg-amber-900/40 dark:text-amber-300',
     metrics_submitted: 'bg-indigo-100 text-indigo-800 dark:bg-indigo-900/40 dark:text-indigo-300',
-    metrics_approved: 'bg-emerald-100 text-emerald-800 dark:bg-emerald-900/40 dark:text-emerald-300',
+    metrics_approved: 'bg-emerald-100 dark:bg-emerald-900/40 dark:text-emerald-300',
     payment_pending: 'bg-orange-100 text-orange-800 dark:bg-orange-900/40 dark:text-orange-300',
     paid: 'bg-green-100 text-green-800 dark:bg-green-900/40 dark:text-green-300',
     hold: 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900/40 dark:text-yellow-300',
-    rejected: 'bg-gray-200 text-gray-700 dark:bg-gray-700 dark:text-gray-300',
+    rejected: 'bg-slate-200 text-slate-300 dark:bg-slate-700 dark:text-slate-300',
     assigned: 'bg-blue-100 text-blue-800 dark:bg-blue-900/40 dark:text-blue-300',
   };
 
@@ -2947,9 +2963,9 @@ function SmartActionHub({ selectedProject }: { selectedProject: string }) {
         {/* ── Section 1: Charts + KPI Row ── */}
         <div className="grid grid-cols-12 gap-4 mb-5">
           {/* Donut chart */}
-          <div className="col-span-12 lg:col-span-4 bg-white dark:bg-gray-800 rounded border border-gray-200 dark:border-gray-700 p-4">
-            <p className="text-sm font-semibold text-gray-900 dark:text-white mb-1">Phân bổ trạng thái</p>
-            <p className="text-xs text-gray-500 mb-3">Click vào phần để lọc danh sách</p>
+          <div className="col-span-12 lg:col-span-4 bg-white dark:bg-slate-800 rounded-2xl border border-slate-200/80 dark:border-slate-700/60 shadow-soft p-4">
+            <p className="text-sm font-semibold text-slate-900 dark:text-white mb-1">Phân bổ trạng thái</p>
+            <p className="text-xs text-slate-500 mb-3">Click vào phần để lọc danh sách</p>
             {chartData.length > 0 ? (
               <div className="flex items-center gap-4">
                 {/* Donut SVG */}
@@ -2976,8 +2992,8 @@ function SmartActionHub({ selectedProject }: { selectedProject: string }) {
                     <circle cx="18" cy="18" r="10" fill="white" className="dark:fill-gray-800" />
                   </svg>
                   <div className="absolute inset-0 flex flex-col items-center justify-center">
-                    <p className="text-xl font-bold text-gray-900 dark:text-white">{totalChart}</p>
-                    <p className="text-[10px] text-gray-500">tổng</p>
+                    <p className="text-xl font-bold text-slate-900 dark:text-white">{totalChart}</p>
+                    <p className="text-[10px] text-slate-500">tổng</p>
                   </div>
                 </div>
                 {/* Legend */}
@@ -2993,19 +3009,19 @@ function SmartActionHub({ selectedProject }: { selectedProject: string }) {
                     );
                     return (
                       <button key={seg.name} onClick={() => handleChartClick(seg.name)}
-                        className={`flex items-center gap-2 w-full text-left px-2 py-1 rounded transition-colors text-xs group ${
-                          isActive ? 'bg-gray-100 dark:bg-gray-700 font-semibold' : 'hover:bg-gray-50 dark:hover:bg-gray-700'
+                        className={`flex items-center gap-2 w-full text-left px-2 py-1 rounded-lg transition-all text-xs group ${
+                          isActive ? 'bg-slate-100/60 dark:bg-slate-700 font-semibold' : 'hover:bg-slate-50/60 dark:hover:bg-slate-700/50'
                         }`}>
                         <span className="w-2.5 h-2.5 rounded-full flex-shrink-0" style={{ backgroundColor: seg.color }} />
-                        <span className="text-gray-700 dark:text-gray-300 flex-1">{seg.name}</span>
-                        <span className={`font-bold ${isActive ? 'text-gray-900 dark:text-white' : 'text-gray-500'}`}>{seg.value}</span>
+                        <span className="text-slate-300 dark:text-slate-300 flex-1">{seg.name}</span>
+                        <span className={`font-bold ${isActive ? 'text-slate-900 dark:text-white' : 'text-slate-500'}`}>{seg.value}</span>
                       </button>
                     );
                   })}
                 </div>
               </div>
             ) : (
-              <div className="text-center py-8 text-gray-400 text-sm">Không có dữ liệu</div>
+              <div className="text-center py-8 text-slate-400 text-sm">Không có dữ liệu</div>
             )}
           </div>
 
@@ -3022,11 +3038,11 @@ function SmartActionHub({ selectedProject }: { selectedProject: string }) {
                   filter === card.key || (card.key === 'metrics' && filter === 'metrics') ? 'ring-2 ring-gray-400' : ''
                 }`}>
                 <div className="flex items-start justify-between mb-2">
-                  <span className="text-2xl font-bold text-gray-900 dark:text-white">{card.count}</span>
+                  <span className="text-2xl font-bold text-slate-900 dark:text-white">{card.count}</span>
                   {card.icon}
                 </div>
-                <p className="text-sm font-semibold text-gray-900 dark:text-white">{card.label}</p>
-                <p className="text-xs text-gray-500 mt-0.5">{card.sub}</p>
+                <p className="text-sm font-semibold text-slate-900 dark:text-white">{card.label}</p>
+                <p className="text-xs text-slate-500 mt-0.5">{card.sub}</p>
               </button>
             ))}
           </div>
@@ -3045,13 +3061,13 @@ function SmartActionHub({ selectedProject }: { selectedProject: string }) {
               <button key={chip.id} onClick={() => setFilter(chip.id)}
                 className={`px-4 py-2 rounded text-sm font-medium transition-colors ${
                   filter === chip.id
-                    ? 'bg-gray-600 text-white '
-                    : 'bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600'
+                    ? 'bg-brand-600 text-white shadow-sm'
+                    : 'bg-slate-100/60 dark:bg-slate-700 text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-600'
                 }`}>
                 {chip.label}
                 {counts[chip.id] > 0 && (
                   <span className={`ml-1.5 px-1.5 py-0.5 rounded-full text-[10px] font-bold ${
-                    filter === chip.id ? 'bg-white/20 text-white' : 'bg-gray-200 dark:bg-gray-600'
+                    filter === chip.id ? 'bg-white/20 text-white' : 'bg-slate-200 dark:bg-slate-600'
                   }`}>{counts[chip.id]}</span>
                 )}
               </button>
@@ -3060,34 +3076,34 @@ function SmartActionHub({ selectedProject }: { selectedProject: string }) {
 
           {/* Search */}
           <div className="relative flex-1 min-w-[200px]">
-            <Search className="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
+            <Search className="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" />
             <input type="text" value={searchTerm} onChange={e => setSearchTerm(e.target.value)} placeholder="Tìm KOL, sản phẩm..."
-              className="w-full pl-9 pr-4 py-2.5 rounded border border-gray-200 dark:border-gray-600 bg-white dark:bg-gray-700 text-sm focus:ring-2 focus:ring-gray-500 outline-none text-gray-900 dark:text-white" />
+              className="w-full pl-9 pr-4 py-2.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-700 text-sm focus:ring-2 focus:ring-brand-500 outline-none text-slate-900 dark:text-white" />
           </div>
 
           {/* Result count */}
-          <span className="text-sm text-gray-500">{filtered.length} nhiệm vụ</span>
+          <span className="text-sm text-slate-500">{filtered.length} nhiệm vụ</span>
         </div>
 
         {/* ── Section 3: Task Table ── */}
-        <div className="bg-white dark:bg-gray-800 rounded border border-gray-200 dark:border-gray-700 overflow-hidden">
+        <div className="bg-white dark:bg-slate-800 rounded-2xl border border-slate-200/80 dark:border-slate-700/60 shadow-soft overflow-hidden">
           <div className="overflow-x-auto">
             <table className="w-full min-w-[900px]">
               <thead>
-                <tr className="border-b border-gray-100 dark:border-gray-700">
-                  <th className="text-left px-5 py-3 text-xs font-semibold text-gray-500 uppercase">KOL/KOC</th>
-                  <th className="text-left px-5 py-3 text-xs font-semibold text-gray-500 uppercase">Sản phẩm</th>
-                  <th className="text-left px-5 py-3 text-xs font-semibold text-gray-500 uppercase">Trạng thái</th>
-                  <th className="text-left px-5 py-3 text-xs font-semibold text-gray-500 uppercase">KPI</th>
-                  <th className="text-left px-5 py-3 text-xs font-semibold text-gray-500 uppercase">Thù lao</th>
-                  <th className="text-left px-5 py-3 text-xs font-semibold text-gray-500 uppercase">Hạn</th>
-                  <th className="text-left px-5 py-3 text-xs font-semibold text-gray-500 uppercase">Hành động</th>
+                <tr className="border-b border-slate-100/60">
+                  <th className="text-left px-5 py-3 text-xs font-semibold text-slate-500 uppercase">KOL/KOC</th>
+                  <th className="text-left px-5 py-3 text-xs font-semibold text-slate-500 uppercase">Sản phẩm</th>
+                  <th className="text-left px-5 py-3 text-xs font-semibold text-slate-500 uppercase">Trạng thái</th>
+                  <th className="text-left px-5 py-3 text-xs font-semibold text-slate-500 uppercase">KPI</th>
+                  <th className="text-left px-5 py-3 text-xs font-semibold text-slate-500 uppercase">Thù lao</th>
+                  <th className="text-left px-5 py-3 text-xs font-semibold text-slate-500 uppercase">Hạn</th>
+                  <th className="text-left px-5 py-3 text-xs font-semibold text-slate-500 uppercase">Hành động</th>
                 </tr>
               </thead>
               <tbody>
                 {filtered.length === 0 ? (
                   <tr>
-                    <td colSpan={7} className="px-5 py-16 text-center text-gray-400">
+                    <td colSpan={7} className="px-5 py-16 text-center text-slate-400">
                       <CheckCircle2 className="w-8 h-8 mx-auto mb-2 opacity-40" />
                       <p className="text-sm">Không có nhiệm vụ nào phù hợp bộ lọc.</p>
                     </td>
@@ -3098,27 +3114,27 @@ function SmartActionHub({ selectedProject }: { selectedProject: string }) {
                     const isActionable = ['draft_submitted', 'revision_required', 'published', 'tracking', 'metrics_submitted', 'metrics_approved', 'payment_pending'].includes(state);
                     return (
                       <tr key={t.id}
-                        className={`border-b border-gray-50 dark:border-gray-700 transition-colors cursor-pointer ${
-                          drawerTask?.id === t.id ? 'bg-gray-50 dark:bg-gray-800' : 'hover:bg-gray-50/50 dark:hover:bg-gray-700'
+                        className={`border-b border-slate-100/60 transition-colors cursor-pointer ${
+                          drawerTask?.id === t.id ? 'bg-brand-50 dark:bg-brand-900/20' : 'hover:bg-slate-50/70 dark:hover:bg-slate-700/30'
                         }`}
                         onClick={() => setDrawerTask(drawerTask?.id === t.id ? null : t)}>
                         {/* KOL */}
                         <td className="px-5 py-3.5">
                           <div className="flex items-center gap-2.5">
-                            <Avatar initials={t.kolAvatar} size="sm" />
+                            <Avatar initials={t.kolAvatar} size="sm" image={getKolImage(t.kolAvatar)} />
                             <div>
-                              <p className="text-sm font-medium text-gray-900 dark:text-white">{t.kolName}</p>
-                              <p className="text-xs text-gray-500">{t.kolPlatform}</p>
+                              <p className="text-sm font-medium text-slate-900 dark:text-white">{t.kolName}</p>
+                              <p className="text-xs text-slate-500">{t.kolPlatform}</p>
                             </div>
                           </div>
                         </td>
                         {/* Product */}
                         <td className="px-5 py-3.5">
-                          <p className="text-sm text-gray-700 dark:text-gray-300">{t.productName}</p>
+                          <p className="text-sm text-slate-300 dark:text-slate-300">{t.productName}</p>
                         </td>
                         {/* Status */}
                         <td className="px-5 py-3.5">
-                          <span className={`px-2 py-0.5 rounded-full text-xs font-medium ${STATUS_COLORS[state] || 'bg-gray-100 text-gray-700'}`}>
+                          <span className={`px-2 py-0.5 rounded-full text-xs font-medium ${STATUS_COLORS[state] || 'bg-slate-100'}`}>
                             {taskStatusLabels[state] || state}
                           </span>
                         </td>
@@ -3126,21 +3142,21 @@ function SmartActionHub({ selectedProject }: { selectedProject: string }) {
                         <td className="px-5 py-3.5">
                           {t.metrics ? (
                             <div className="text-xs space-y-0.5">
-                              <p className="font-medium text-gray-900 dark:text-white">{Number(t.metrics.views).toLocaleString()} views</p>
-                              <p className="text-gray-500">ER {t.metrics.engagementRate}%</p>
+                              <p className="font-medium text-slate-900 dark:text-white">{Number(t.metrics.views).toLocaleString()} views</p>
+                              <p className="text-slate-500">ER {t.metrics.engagementRate}%</p>
                             </div>
                           ) : (
-                            <span className="text-xs text-gray-400 italic">—</span>
+                            <span className="text-xs text-slate-400 italic">—</span>
                           )}
                         </td>
                         {/* Payment */}
                         <td className="px-5 py-3.5">
-                          <p className="text-sm font-medium text-gray-900 dark:text-white">{t.paymentAmount.toLocaleString()}</p>
-                          <p className="text-xs text-gray-500">VND</p>
+                          <p className="text-sm font-medium text-slate-900 dark:text-white">{t.paymentAmount.toLocaleString()}</p>
+                          <p className="text-xs text-slate-500">VND</p>
                         </td>
                         {/* Deadline */}
                         <td className="px-5 py-3.5">
-                          <p className="text-sm text-gray-700 dark:text-gray-300">{t.deadline}</p>
+                          <p className="text-sm text-slate-300 dark:text-slate-300">{t.deadline}</p>
                         </td>
                         {/* Inline CTA */}
                         <td className="px-5 py-3.5" onClick={e => e.stopPropagation()}>
@@ -3180,7 +3196,7 @@ function SmartActionHub({ selectedProject }: { selectedProject: string }) {
       </div>
 
       {/* ── Section 4: Sliding Drawer (Progressive Disclosure) ── */}
-      <div className={`fixed top-0 right-0 h-full w-80 bg-white dark:bg-gray-800 border-l border-gray-200 dark:border-gray-700  z-50 transition-transform duration-300 overflow-y-auto ${
+      <div className={`fixed top-0 right-0 h-full w-80 bg-white dark:bg-slate-800 border-l border-slate-200/60 dark:border-slate-700 shadow-2xl z-50 transition-transform duration-300 overflow-y-auto ${
         drawerTask ? 'translate-x-0' : 'translate-x-full'
       }`}>
         {drawerTask && (
@@ -3188,11 +3204,11 @@ function SmartActionHub({ selectedProject }: { selectedProject: string }) {
             {/* Header */}
             <div className="flex items-start justify-between">
               <div>
-                <h3 className="text-base font-bold text-gray-900 dark:text-white">{drawerTask.kolName}</h3>
-                <p className="text-sm text-gray-500">{drawerTask.productName}</p>
+                <h3 className="text-base font-bold text-slate-900 dark:text-white">{drawerTask.kolName}</h3>
+                <p className="text-sm text-slate-500">{drawerTask.productName}</p>
               </div>
-              <button onClick={() => setDrawerTask(null)} className="p-1 rounded hover:bg-gray-100 dark:hover:bg-gray-700">
-                <XCircle className="w-5 h-5 text-gray-400" />
+              <button onClick={() => setDrawerTask(null)} className="p-1 rounded-lg hover:bg-slate-100/60 dark:hover:bg-slate-700/50">
+                <XCircle className="w-5 h-5 text-slate-400" />
               </button>
             </div>
 
@@ -3201,7 +3217,7 @@ function SmartActionHub({ selectedProject }: { selectedProject: string }) {
               <span className={`px-2.5 py-1 rounded-full text-xs font-semibold ${STATUS_COLORS[drawerState!] || ''}`}>
                 {taskStatusLabels[drawerState!] || drawerState}
               </span>
-              <span className="text-xs text-gray-400">{drawerTask.kolPlatform}</span>
+              <span className="text-xs text-slate-400">{drawerTask.kolPlatform}</span>
             </div>
 
             {/* KPI Detail */}
@@ -3212,9 +3228,9 @@ function SmartActionHub({ selectedProject }: { selectedProject: string }) {
                   { label: 'ER', value: drawerTask.metrics.engagementRate + '%' },
                   { label: 'Comments', value: Number((drawerTask.metrics as { comments?: number }).comments || 0).toLocaleString() },
                 ].map(k => (
-                  <div key={k.label} className="bg-gray-50 dark:bg-gray-700 rounded p-2.5 text-center">
-                    <p className="text-sm font-bold text-gray-900 dark:text-white">{k.value}</p>
-                    <p className="text-[10px] text-gray-500">{k.label}</p>
+                  <div key={k.label} className="bg-slate-50/50 dark:bg-slate-700/50 rounded-lg p-2.5 text-center">
+                    <p className="text-sm font-bold text-slate-900 dark:text-white">{k.value}</p>
+                    <p className="text-[10px] text-slate-500">{k.label}</p>
                   </div>
                 ))}
               </div>
@@ -3223,23 +3239,23 @@ function SmartActionHub({ selectedProject }: { selectedProject: string }) {
             {/* Content links */}
             {(drawerTask.publishedContent?.postUrl) && (
               <div>
-                <p className="text-xs font-semibold text-gray-500 uppercase mb-1.5">Link bài đăng</p>
+                <p className="text-xs font-semibold text-slate-500 uppercase mb-1.5">Link bài đăng</p>
                 <a href={drawerTask.publishedContent?.postUrl} target="_blank" rel="noopener noreferrer"
-                  className="flex items-center gap-1.5 text-sm text-gray-600 hover:text-gray-700 underline truncate">
+                  className="flex items-center gap-1.5 text-sm text-brand-600 hover:text-teal-700 underline truncate">
                   <ExternalLink className="w-3.5 h-3.5 flex-shrink-0" />{drawerTask.publishedContent?.postUrl}
                 </a>
               </div>
             )}
 
             {/* Payment info */}
-            <div className="p-3 bg-gray-50 dark:bg-gray-700 rounded">
+            <div className="p-3 surface-subtle">
               <div className="flex justify-between mb-1">
-                <span className="text-xs text-gray-500">Thù lao</span>
-                <span className="text-sm font-bold text-gray-900 dark:text-white">{drawerTask.paymentAmount.toLocaleString()} VND</span>
+                <span className="text-xs text-slate-500">Thù lao</span>
+                <span className="text-sm font-bold text-slate-900 dark:text-white">{drawerTask.paymentAmount.toLocaleString()} VND</span>
               </div>
               <div className="flex justify-between">
-                <span className="text-xs text-gray-500">Hạn</span>
-                <span className="text-xs font-medium text-gray-700 dark:text-gray-300">{drawerTask.deadline}</span>
+                <span className="text-xs text-slate-500">Hạn</span>
+                <span className="text-xs font-medium text-slate-300 dark:text-slate-300">{drawerTask.deadline}</span>
               </div>
             </div>
 
@@ -3307,7 +3323,7 @@ function SmartActionHub({ selectedProject }: { selectedProject: string }) {
             {paymentDecision.action === 'partial' && (
               <div>
                 <label className="block text-sm font-medium mb-1">Số tiền thanh toán (VND)</label>
-                <input type="number" className="w-full px-4 py-2.5 rounded border border-gray-200 dark:border-gray-600 bg-white dark:bg-gray-700 text-sm focus:ring-2 focus:ring-gray-500 outline-none"
+                <input type="number" className="w-full px-4 py-2.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-700 text-sm focus:ring-2 focus:ring-brand-500 outline-none"
                   placeholder="VD: 2500000"
                   onChange={e => setPaymentDecision(p => p ? { ...p, amount: Number(e.target.value) } : null)} />
               </div>
@@ -3316,7 +3332,7 @@ function SmartActionHub({ selectedProject }: { selectedProject: string }) {
               <label className="block text-sm font-medium mb-1">
                 Ghi chú {paymentDecision.action === 'hold' ? '*' : '(tùy chọn)'}
               </label>
-              <textarea rows={2} className="w-full px-4 py-2.5 rounded border border-gray-200 dark:border-gray-600 bg-white dark:bg-gray-700 text-sm resize-none focus:ring-2 focus:ring-gray-500 outline-none"
+              <textarea rows={2} className="w-full px-4 py-2.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-700 text-sm resize-none focus:ring-2 focus:ring-brand-500 outline-none"
                 placeholder="Ghi chú thanh toán..."
                 onChange={e => setPaymentDecision(p => p ? { ...p, reason: e.target.value } : null)} />
             </div>
@@ -3362,15 +3378,15 @@ function TaskCreationForm({ campaign, onClose }: { campaign: Campaign; onClose: 
 
   return (
     <div className="space-y-4">
-      <div className="p-3 bg-gray-50 dark:bg-gray-700 rounded border border-blue-200 dark:border-blue-800/40 text-sm text-blue-700 dark:text-blue-300">
+      <div className="p-3 bg-blue-50/80 dark:bg-blue-900/20 rounded-xl border border-blue-200 dark:border-blue-800/40 text-sm text-blue-700 dark:text-blue-300">
         Tạo nhiệm vụ cho KOL/KOC tham gia chiến dịch <strong>{campaign.name}</strong>.
       </div>
 
       <div>
-        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">KOL/KOC *</label>
+        <label className="block text-sm font-medium text-slate-300 dark:text-slate-300 mb-1">KOL/KOC *</label>
         <select value={form.kolId} onChange={e => set('kolId', e.target.value)}
-          className={`w-full px-4 py-2.5 rounded border text-sm focus:ring-2 focus:ring-gray-500 outline-none bg-white dark:bg-gray-700 text-gray-900 dark:text-white ${
-            errors.kolId ? 'border-red-400' : 'border-gray-200 dark:border-gray-600'
+          className={`w-full px-4 py-2.5 rounded-xl border text-sm focus:ring-2 focus:ring-brand-500 outline-none bg-white dark:bg-slate-700 text-slate-900 dark:text-white ${
+            errors.kolId ? 'border-red-400' : 'border-slate-200 dark:border-slate-700'
           }`}>
           <option value="">-- Chọn KOL/KOC --</option>
           {brandKOLs.map(k => <option key={k.id} value={k.id}>{k.name} (@{k.handle}) — {k.platform}</option>)}
@@ -3379,10 +3395,10 @@ function TaskCreationForm({ campaign, onClose }: { campaign: Campaign; onClose: 
       </div>
 
       <div>
-        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Loại nội dung *</label>
+        <label className="block text-sm font-medium text-slate-300 dark:text-slate-300 mb-1">Loại nội dung *</label>
         <select value={form.contentType} onChange={e => set('contentType', e.target.value)}
-          className={`w-full px-4 py-2.5 rounded border text-sm focus:ring-2 focus:ring-gray-500 outline-none bg-white dark:bg-gray-700 text-gray-900 dark:text-white ${
-            errors.contentType ? 'border-red-400' : 'border-gray-200 dark:border-gray-600'
+          className={`w-full px-4 py-2.5 rounded-xl border text-sm focus:ring-2 focus:ring-brand-500 outline-none bg-white dark:bg-slate-700 text-slate-900 dark:text-white ${
+            errors.contentType ? 'border-red-400' : 'border-slate-200 dark:border-slate-700'
           }`}>
           <option>Video ngắn (TikTok/Reels)</option>
           <option>Video dài (YouTube)</option>
@@ -3395,39 +3411,39 @@ function TaskCreationForm({ campaign, onClose }: { campaign: Campaign; onClose: 
       </div>
 
       <div>
-        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Yêu cầu chi tiết *</label>
+        <label className="block text-sm font-medium text-slate-300 dark:text-slate-300 mb-1">Yêu cầu chi tiết *</label>
         <textarea rows={4} value={form.requirement} onChange={e => set('requirement', e.target.value)}
           placeholder="VD: Video review sản phẩm Glow Serum 30–60s, nhấn mạnh công dụng cấp ẩm, có CTA 'Mua ngay' ở cuối video..."
-          className={`w-full px-4 py-2.5 rounded border text-sm resize-none focus:ring-2 focus:ring-gray-500 outline-none bg-white dark:bg-gray-700 text-gray-900 dark:text-white ${
-            errors.requirement ? 'border-red-400' : 'border-gray-200 dark:border-gray-600'
+          className={`w-full px-4 py-2.5 rounded-xl border text-sm resize-none focus:ring-2 focus:ring-brand-500 outline-none bg-white dark:bg-slate-700 text-slate-900 dark:text-white ${
+            errors.requirement ? 'border-red-400' : 'border-slate-200 dark:border-slate-700'
           }`} />
         {errors.requirement && <p className="text-xs text-red-500 mt-1">{errors.requirement}</p>}
       </div>
 
       <div className="grid grid-cols-2 gap-4">
         <div>
-          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Hạn nộp bản nháp *</label>
+          <label className="block text-sm font-medium text-slate-300 dark:text-slate-300 mb-1">Hạn nộp bản nháp *</label>
           <input type="date" value={form.draftDeadline} onChange={e => set('draftDeadline', e.target.value)}
-            className={`w-full px-4 py-2.5 rounded border text-sm focus:ring-2 focus:ring-gray-500 outline-none bg-white dark:bg-gray-700 text-gray-900 dark:text-white ${
-              errors.draftDeadline ? 'border-red-400' : 'border-gray-200 dark:border-gray-600'
+            className={`w-full px-4 py-2.5 rounded-xl border text-sm focus:ring-2 focus:ring-brand-500 outline-none bg-white dark:bg-slate-700 text-slate-900 dark:text-white ${
+              errors.draftDeadline ? 'border-red-400' : 'border-slate-200 dark:border-slate-700'
             }`} />
           {errors.draftDeadline && <p className="text-xs text-red-500 mt-1">{errors.draftDeadline}</p>}
         </div>
         <div>
-          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Hạn đăng bài *</label>
+          <label className="block text-sm font-medium text-slate-300 dark:text-slate-300 mb-1">Hạn đăng bài *</label>
           <input type="date" value={form.publishDeadline} onChange={e => set('publishDeadline', e.target.value)}
-            className={`w-full px-4 py-2.5 rounded border text-sm focus:ring-2 focus:ring-gray-500 outline-none bg-white dark:bg-gray-700 text-gray-900 dark:text-white ${
-              errors.publishDeadline ? 'border-red-400' : 'border-gray-200 dark:border-gray-600'
+            className={`w-full px-4 py-2.5 rounded-xl border text-sm focus:ring-2 focus:ring-brand-500 outline-none bg-white dark:bg-slate-700 text-slate-900 dark:text-white ${
+              errors.publishDeadline ? 'border-red-400' : 'border-slate-200 dark:border-slate-700'
             }`} />
           {errors.publishDeadline && <p className="text-xs text-red-500 mt-1">{errors.publishDeadline}</p>}
         </div>
       </div>
 
       <div>
-        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Thù lao (VND) *</label>
+        <label className="block text-sm font-medium text-slate-300 dark:text-slate-300 mb-1">Thù lao (VND) *</label>
         <input type="number" value={form.reward} onChange={e => set('reward', e.target.value)} placeholder="VD: 5000000"
-          className={`w-full px-4 py-2.5 rounded border text-sm focus:ring-2 focus:ring-gray-500 outline-none bg-white dark:bg-gray-700 text-gray-900 dark:text-white ${
-            errors.reward ? 'border-red-400' : 'border-gray-200 dark:border-gray-600'
+          className={`w-full px-4 py-2.5 rounded-xl border text-sm focus:ring-2 focus:ring-brand-500 outline-none bg-white dark:bg-slate-700 text-slate-900 dark:text-white ${
+            errors.reward ? 'border-red-400' : 'border-slate-200 dark:border-slate-700'
           }`} />
         {errors.reward && <p className="text-xs text-red-500 mt-1">{errors.reward}</p>}
       </div>
@@ -3467,9 +3483,9 @@ function KOLAccountManagementPanel({ selectedProject }: { selectedProject: strin
           { label: 'Tổng Followers', value: brandKOLs.reduce((s, k) => s + (k.followers || 0), 0) >= 1000000 ? `${(brandKOLs.reduce((s, k) => s + (k.followers || 0), 0) / 1000000).toFixed(1)}M` : `${Math.round(brandKOLs.reduce((s, k) => s + (k.followers || 0), 0) / 1000)}K`, icon: <Eye className="w-4 h-4" /> },
           { label: 'Avg ER', value: `${(brandKOLs.reduce((s, k) => s + (k.engagementRate || 0), 0) / Math.max(brandKOLs.length, 1)).toFixed(1)}%`, icon: <TrendingUp className="w-4 h-4" /> },
         ].map(item => (
-          <div key={item.label} className="bg-gray-50 dark:bg-gray-800 rounded p-4 text-center border border-gray-200 dark:border-gray-700">
-            <p className="text-2xl font-bold text-gray-900 dark:text-white">{item.value}</p>
-            <p className="text-xs text-gray-500 mt-0.5">{item.label}</p>
+          <div key={item.label} className={`bg-gradient-to-br ${item.accent || 'from-slate-100/60 to-slate-200/40 dark:from-slate-800 dark:to-slate-700'} rounded-xl p-4 text-center`}>
+            <p className="text-2xl font-bold text-slate-900 dark:text-white">{item.value}</p>
+            <p className="text-xs text-slate-500 mt-0.5">{item.label}</p>
           </div>
         ))}
       </div>
@@ -3477,53 +3493,53 @@ function KOLAccountManagementPanel({ selectedProject }: { selectedProject: strin
       {/* Header + Search */}
       <div className="flex items-center justify-between gap-3 flex-wrap">
         <div className="relative flex-1 max-w-sm">
-          <Search className="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
+          <Search className="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" />
           <input type="text" placeholder="Tìm kiếm tên hoặc handle..." value={searchTerm}
             onChange={e => setSearchTerm(e.target.value)}
-            className="w-full pl-9 pr-4 py-2.5 rounded border border-gray-200 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white text-sm focus:ring-2 focus:ring-gray-500 outline-none" />
+            className="w-full pl-9 pr-4 py-2.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-700 text-slate-900 dark:text-white text-sm focus:ring-2 focus:ring-brand-500 outline-none" />
         </div>
         <Button onClick={() => setShowCreateModal(true)}><Plus className="w-4 h-4 mr-2" />Tạo tài khoản KOL/KOC</Button>
       </div>
 
       {/* KOL Account List */}
-      <div className="bg-white dark:bg-gray-800 rounded border border-gray-200 dark:border-gray-700 overflow-hidden">
+      <div className="bg-white dark:bg-slate-800 rounded-2xl border border-slate-200/80 dark:border-slate-700/60 shadow-soft overflow-hidden">
         <div className="overflow-x-auto">
           <table className="w-full min-w-[900px]">
             <thead>
-              <tr className="border-b border-gray-100 dark:border-gray-700">
-                <th className="text-left px-6 py-3 text-xs font-semibold text-gray-500 uppercase">KOL/KOC</th>
-                <th className="text-left px-6 py-3 text-xs font-semibold text-gray-500 uppercase">Nền tảng</th>
-                <th className="text-left px-6 py-3 text-xs font-semibold text-gray-500 uppercase">Vai trò</th>
-                <th className="text-left px-6 py-3 text-xs font-semibold text-gray-500 uppercase">Followers</th>
-                <th className="text-left px-6 py-3 text-xs font-semibold text-gray-500 uppercase">ER</th>
-                <th className="text-left px-6 py-3 text-xs font-semibold text-gray-500 uppercase">Trạng thái</th>
-                <th className="text-left px-6 py-3 text-xs font-semibold text-gray-500 uppercase">Hành động</th>
+              <tr className="border-b border-slate-100/60">
+                <th className="text-left px-6 py-3 text-xs font-semibold text-slate-500 uppercase">KOL/KOC</th>
+                <th className="text-left px-6 py-3 text-xs font-semibold text-slate-500 uppercase">Nền tảng</th>
+                <th className="text-left px-6 py-3 text-xs font-semibold text-slate-500 uppercase">Vai trò</th>
+                <th className="text-left px-6 py-3 text-xs font-semibold text-slate-500 uppercase">Followers</th>
+                <th className="text-left px-6 py-3 text-xs font-semibold text-slate-500 uppercase">ER</th>
+                <th className="text-left px-6 py-3 text-xs font-semibold text-slate-500 uppercase">Trạng thái</th>
+                <th className="text-left px-6 py-3 text-xs font-semibold text-slate-500 uppercase">Hành động</th>
               </tr>
             </thead>
             <tbody>
               {filtered.map(kol => (
-                <tr key={kol.id} className="border-b border-gray-50 dark:border-gray-700 hover:bg-gray-50/50">
+                <tr key={kol.id} className="border-b border-slate-100/60 hover:bg-slate-50/50">
                   <td className="px-6 py-4">
                     <div className="flex items-center gap-3">
-                      <Avatar initials={kol.avatar} size="sm" />
+                      <Avatar initials={kol.avatar} size="sm" image={getKolImage(kol.avatar)} />
                       <div>
-                        <p className="text-sm font-medium text-gray-900 dark:text-white">{kol.name}</p>
-                        <p className="text-xs text-gray-500">@{kol.handle}</p>
+                        <p className="text-sm font-medium text-slate-900 dark:text-white">{kol.name}</p>
+                        <p className="text-xs text-slate-500">@{kol.handle}</p>
                       </div>
                     </div>
                   </td>
-                  <td className="px-6 py-4 text-sm text-gray-700 dark:text-gray-300">{kol.platform}</td>
+                  <td className="px-6 py-4 text-sm text-slate-300 dark:text-slate-300">{kol.platform}</td>
                   <td className="px-6 py-4 text-sm">
                     <span className="px-2 py-0.5 rounded-full text-xs font-medium bg-violet-100 text-violet-800 dark:bg-violet-900/40 dark:text-violet-300">
                       {String(kol.role)}
                     </span>
                   </td>
-                  <td className="px-6 py-4 text-sm font-medium text-gray-900 dark:text-white">{kol.followersDisplay}</td>
-                  <td className="px-6 py-4 text-sm font-medium text-gray-600 dark:text-gray-400">{kol.engagementRate}%</td>
+                  <td className="px-6 py-4 text-sm font-medium text-slate-900 dark:text-white">{kol.followersDisplay}</td>
+                  <td className="px-6 py-4 text-sm font-medium text-brand-500 dark:text-brand-400">{kol.engagementRate}%</td>
                   <td className="px-6 py-4">
                     <Badge label={kol.status === 'active' ? 'Hoạt động' : 'Tạm ngưng'} colorClass={
-                      kol.status === 'active' ? 'bg-emerald-100 text-emerald-800 dark:bg-emerald-900/40 dark:text-emerald-300' :
-                      'bg-gray-100 text-gray-700 dark:bg-gray-700 dark:text-gray-300'
+                      kol.status === 'active' ? 'bg-emerald-100 dark:bg-emerald-900/40 dark:text-emerald-300' :
+                      'bg-slate-100/60 text-slate-300 dark:bg-slate-700 dark:text-slate-300'
                     } />
                   </td>
                   <td className="px-6 py-4">
@@ -3537,7 +3553,7 @@ function KOLAccountManagementPanel({ selectedProject }: { selectedProject: strin
             </tbody>
           </table>
           {filtered.length === 0 && (
-            <div className="px-6 py-12 text-center text-sm text-gray-500">
+            <div className="px-6 py-12 text-center text-sm text-slate-500">
               {searchTerm ? 'Không tìm thấy KOL/KOC nào.' : 'Chưa có tài khoản KOL/KOC nào.'}
             </div>
           )}
@@ -3590,24 +3606,24 @@ function KOLAccountForm({ onClose }: { onClose: () => void }) {
 
   return (
     <div className="space-y-4">
-      <div className="p-3 bg-gray-50 dark:bg-gray-700 rounded border border-blue-200 dark:border-blue-800/40 text-sm text-blue-700 dark:text-blue-300">
+      <div className="p-3 bg-blue-50/80 dark:bg-blue-900/20 rounded-xl border border-blue-200 dark:border-blue-800/40 text-sm text-blue-700 dark:text-blue-300">
         Điền thông tin để tạo tài khoản và cấp quyền truy cập cho KOL/KOC.
       </div>
 
       <div className="grid grid-cols-2 gap-4">
         <div>
-          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Tên KOL/KOC *</label>
+          <label className="block text-sm font-medium text-slate-300 dark:text-slate-300 mb-1">Tên KOL/KOC *</label>
           <input type="text" value={form.name} onChange={e => set('name', e.target.value)} placeholder="VD: Nguyễn Thu Hà"
-            className={`w-full px-3 py-2.5 rounded border text-sm focus:ring-2 focus:ring-gray-500 outline-none bg-white dark:bg-gray-700 text-gray-900 dark:text-white ${
-              errors.name ? 'border-red-400' : 'border-gray-200 dark:border-gray-600'
+            className={`w-full px-3 py-2.5 rounded-xl border text-sm focus:ring-2 focus:ring-brand-500 outline-none bg-white dark:bg-slate-700 text-slate-900 dark:text-white ${
+              errors.name ? 'border-red-400' : 'border-slate-200 dark:border-slate-700'
             }`} />
           {errors.name && <p className="text-xs text-red-500 mt-1">{errors.name}</p>}
         </div>
         <div>
-          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Vai trò *</label>
+          <label className="block text-sm font-medium text-slate-300 dark:text-slate-300 mb-1">Vai trò *</label>
           <select value={form.role} onChange={e => set('role', e.target.value)}
-            className={`w-full px-3 py-2.5 rounded border text-sm focus:ring-2 focus:ring-gray-500 outline-none bg-white dark:bg-gray-700 text-gray-900 dark:text-white ${
-              errors.role ? 'border-red-400' : 'border-gray-200 dark:border-gray-600'
+            className={`w-full px-3 py-2.5 rounded-xl border text-sm focus:ring-2 focus:ring-brand-500 outline-none bg-white dark:bg-slate-700 text-slate-900 dark:text-white ${
+              errors.role ? 'border-red-400' : 'border-slate-200 dark:border-slate-700'
             }`}>
             <option value="KOC">KOC (Key Opinion Consumer)</option>
             <option value="KOL">KOL (Key Opinion Leader)</option>
@@ -3618,29 +3634,29 @@ function KOLAccountForm({ onClose }: { onClose: () => void }) {
       </div>
 
       <div>
-        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Email *</label>
+        <label className="block text-sm font-medium text-slate-300 dark:text-slate-300 mb-1">Email *</label>
         <input type="email" value={form.email} onChange={e => set('email', e.target.value)} placeholder="VD: thuha.kol@gmail.com"
-          className={`w-full px-4 py-2.5 rounded border text-sm focus:ring-2 focus:ring-gray-500 outline-none bg-white dark:bg-gray-700 text-gray-900 dark:text-white ${
-            errors.email ? 'border-red-400' : 'border-gray-200 dark:border-gray-600'
+          className={`w-full px-4 py-2.5 rounded-xl border text-sm focus:ring-2 focus:ring-brand-500 outline-none bg-white dark:bg-slate-700 text-slate-900 dark:text-white ${
+            errors.email ? 'border-red-400' : 'border-slate-200 dark:border-slate-700'
           }`} />
         {errors.email && <p className="text-xs text-red-500 mt-1">{errors.email}</p>}
       </div>
 
       <div>
-        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Mật khẩu *</label>
+        <label className="block text-sm font-medium text-slate-300 dark:text-slate-300 mb-1">Mật khẩu *</label>
         <input type="password" value={form.password} onChange={e => set('password', e.target.value)} placeholder="Nhập mật khẩu tạm thời..."
-          className={`w-full px-4 py-2.5 rounded border text-sm focus:ring-2 focus:ring-gray-500 outline-none bg-white dark:bg-gray-700 text-gray-900 dark:text-white ${
-            errors.password ? 'border-red-400' : 'border-gray-200 dark:border-gray-600'
+          className={`w-full px-4 py-2.5 rounded-xl border text-sm focus:ring-2 focus:ring-brand-500 outline-none bg-white dark:bg-slate-700 text-slate-900 dark:text-white ${
+            errors.password ? 'border-red-400' : 'border-slate-200 dark:border-slate-700'
           }`} />
         {errors.password && <p className="text-xs text-red-500 mt-1">{errors.password}</p>}
       </div>
 
       <div className="grid grid-cols-2 gap-4">
         <div>
-          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Nền tảng *</label>
+          <label className="block text-sm font-medium text-slate-300 dark:text-slate-300 mb-1">Nền tảng *</label>
           <select value={form.platform} onChange={e => set('platform', e.target.value)}
-            className={`w-full px-3 py-2.5 rounded border text-sm focus:ring-2 focus:ring-gray-500 outline-none bg-white dark:bg-gray-700 text-gray-900 dark:text-white ${
-              errors.platform ? 'border-red-400' : 'border-gray-200 dark:border-gray-600'
+            className={`w-full px-3 py-2.5 rounded-xl border text-sm focus:ring-2 focus:ring-brand-500 outline-none bg-white dark:bg-slate-700 text-slate-900 dark:text-white ${
+              errors.platform ? 'border-red-400' : 'border-slate-200 dark:border-slate-700'
             }`}>
             <option value="TikTok">TikTok</option>
             <option value="YouTube">YouTube</option>
@@ -3650,19 +3666,19 @@ function KOLAccountForm({ onClose }: { onClose: () => void }) {
           {errors.platform && <p className="text-xs text-red-500 mt-1">{errors.platform}</p>}
         </div>
         <div>
-          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Handle *</label>
+          <label className="block text-sm font-medium text-slate-300 dark:text-slate-300 mb-1">Handle *</label>
           <input type="text" value={form.handle} onChange={e => set('handle', e.target.value)} placeholder="VD: @thuha.beauty"
-            className={`w-full px-3 py-2.5 rounded border text-sm focus:ring-2 focus:ring-gray-500 outline-none bg-white dark:bg-gray-700 text-gray-900 dark:text-white ${
-              errors.handle ? 'border-red-400' : 'border-gray-200 dark:border-gray-600'
+            className={`w-full px-3 py-2.5 rounded-xl border text-sm focus:ring-2 focus:ring-brand-500 outline-none bg-white dark:bg-slate-700 text-slate-900 dark:text-white ${
+              errors.handle ? 'border-red-400' : 'border-slate-200 dark:border-slate-700'
             }`} />
           {errors.handle && <p className="text-xs text-red-500 mt-1">{errors.handle}</p>}
         </div>
       </div>
 
       <div>
-        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Link mạng xã hội</label>
+        <label className="block text-sm font-medium text-slate-300 dark:text-slate-300 mb-1">Link mạng xã hội</label>
         <input type="url" value={form.socialLink} onChange={e => set('socialLink', e.target.value)} placeholder="VD: https://tiktok.com/@thuha.beauty"
-          className="w-full px-4 py-2.5 rounded border border-gray-200 dark:border-gray-600 text-sm focus:ring-2 focus:ring-gray-500 outline-none bg-white dark:bg-gray-700 text-gray-900 dark:text-white" />
+          className="w-full px-4 py-2.5 rounded-xl border border-slate-200 dark:border-slate-700 text-sm focus:ring-2 focus:ring-brand-500 outline-none bg-white dark:bg-slate-700 text-slate-900 dark:text-white" />
       </div>
 
       <div className="flex justify-end gap-3 pt-2">
@@ -3715,9 +3731,9 @@ function ContentReviewPanel({ selectedProject, selectedTaskId, setSelectedTaskId
       </div>
 
       {reviewTasks.length === 0 ? (
-        <div className="bg-white dark:bg-gray-800 rounded border-dashed border border-gray-200 dark:border-gray-700 p-10 text-center">
-          <MessageSquare className="w-12 h-12 text-gray-300 dark:text-gray-600 mx-auto mb-3" />
-          <p className="text-sm font-medium text-gray-700 dark:text-gray-300">Không có nội dung cần duyệt</p>
+        <div className="bg-white dark:bg-slate-800 rounded-2xl border-dashed border border-slate-200/60 dark:border-slate-700 p-10 text-center">
+          <MessageSquare className="w-12 h-12 text-slate-300 dark:text-slate-600 mx-auto mb-3" />
+          <p className="text-sm font-medium text-slate-300 dark:text-slate-300">Không có nội dung cần duyệt</p>
         </div>
       ) : (
         <div className="grid grid-cols-1 xl:grid-cols-3 gap-4">
@@ -3727,28 +3743,28 @@ function ContentReviewPanel({ selectedProject, selectedTaskId, setSelectedTaskId
               const draft = task.draftContent?.[task.draftContent.length - 1];
               const s = getTaskState(task.id);
               return (
-                <button key={task.id} onClick={() => { setSelectedTaskId(task.id); setFeedback(('feedback' in (draft || {})) ? (draft as { feedback?: string }).feedback || '' : ''); }}
-                  className={`w-full text-left p-4 rounded border transition-colors ${selectedTask?.id === task.id ? 'border-gray-400 bg-gray-50 dark:bg-gray-800' : 'border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 hover:border-gray-300 dark:hover:border-gray-600'}`}>
+                <motion.button key={task.id} layout onClick={() => { setSelectedTaskId(task.id); setFeedback(('feedback' in (draft || {})) ? (draft as { feedback?: string }).feedback || '' : ''); }}
+                  className={`w-full text-left p-4 rounded-2xl border transition-all ${selectedTask?.id === task.id ? 'border-brand-400 bg-brand-50/60 dark:bg-brand-900/20' : 'border-slate-200/80 dark:border-slate-700/60 bg-white dark:bg-slate-800 hover:border-slate-300 dark:hover:border-slate-600'}`}>
                   <div className="flex items-center gap-3 mb-3">
-                    <Avatar initials={task.kolAvatar} size="sm" />
+                    <Avatar initials={task.kolAvatar} size="sm" image={getKolImage(task.kolAvatar)} />
                     <div className="flex-1 min-w-0">
-                      <p className="text-sm font-semibold text-gray-900 dark:text-white truncate">{task.kolName}</p>
-                      <p className="text-[10px] text-gray-500 truncate">{task.campaignName}</p>
+                      <p className="text-sm font-semibold text-slate-900 dark:text-white truncate">{task.kolName}</p>
+                      <p className="text-[10px] text-slate-500 truncate">{task.campaignName}</p>
                     </div>
                     <Badge label={taskStatusLabels[s]} colorClass={taskStatusColors[s]} />
                   </div>
-                  <div className="grid grid-cols-3 gap-2 text-[10px] text-gray-500 dark:text-gray-400">
-                    <div className="rounded bg-gray-50 dark:bg-gray-800 px-2 py-1.5 text-center">
+                  <div className="grid grid-cols-3 gap-2 text-[10px] text-slate-500 dark:text-slate-400">
+                    <div className="rounded-xl bg-slate-50/50 dark:bg-slate-700/40 px-2 py-1.5 text-center">
                       <p className="uppercase tracking-wide text-[9px] mb-0.5">Phiên bản</p>
-                      <p className="font-medium text-gray-700 dark:text-gray-200">v{draft?.version || 0}</p>
+                      <p className="font-medium text-slate-700 dark:text-slate-200">v{draft?.version || 0}</p>
                     </div>
-                    <div className="rounded bg-gray-50 dark:bg-gray-800 px-2 py-1.5 text-center">
+                    <div className="rounded-xl bg-slate-50/50 dark:bg-slate-700/40 px-2 py-1.5 text-center">
                       <p className="uppercase tracking-wide text-[9px] mb-0.5">Trạng thái</p>
-                      <p className="font-medium text-gray-700 dark:text-gray-200">{s === 'revision_required' ? 'Có góp ý' : 'Mới nộp'}</p>
+                      <p className="font-medium text-slate-700 dark:text-slate-200">{s === 'revision_required' ? 'Có góp ý' : 'Mới nộp'}</p>
                     </div>
-                    <div className="rounded bg-gray-50 dark:bg-gray-800 px-2 py-1.5 text-center">
+                    <div className="rounded-xl bg-slate-50/50 dark:bg-slate-700/40 px-2 py-1.5 text-center">
                       <p className="uppercase tracking-wide text-[9px] mb-0.5">Thời gian</p>
-                      <p className="font-medium text-gray-700 dark:text-gray-200">{draft?.submittedAt?.split(' ')[0] || '-'}</p>
+                      <p className="font-medium text-slate-700 dark:text-slate-200">{draft?.submittedAt?.split(' ')[0] || '-'}</p>
                     </div>
                   </div>
                 </button>
@@ -3759,12 +3775,12 @@ function ContentReviewPanel({ selectedProject, selectedTaskId, setSelectedTaskId
           {/* Right: Draft Detail */}
           <div className="xl:col-span-2">
             {selectedTask && state ? (
-              <div className="bg-white dark:bg-gray-800 rounded border border-gray-200 dark:border-gray-700 p-6 space-y-5">
+              <div className="card-base p-6 space-y-5">
                 {/* Header */}
                 <div className="flex items-start justify-between gap-4">
                   <div>
-                    <h3 className="text-lg font-semibold text-gray-900 dark:text-white">{selectedTask.campaignName}</h3>
-                    <p className="text-sm text-gray-500 dark:text-gray-400">{selectedTask.kolName} • {selectedTask.kolPlatform} • {latestDraft ? `Bản nháp v${latestDraft.version}` : 'Chưa có bản nháp'}</p>
+                    <h3 className="text-lg font-semibold text-slate-900 dark:text-white">{selectedTask.campaignName}</h3>
+                    <p className="text-sm text-slate-500 dark:text-slate-400">{selectedTask.kolName} • {selectedTask.kolPlatform} • {latestDraft ? `Bản nháp v${latestDraft.version}` : 'Chưa có bản nháp'}</p>
                   </div>
                   <Badge label={taskStatusLabels[state]} colorClass={taskStatusColors[state]} />
                 </div>
@@ -3773,36 +3789,36 @@ function ContentReviewPanel({ selectedProject, selectedTaskId, setSelectedTaskId
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   {submittedCampaign ? (
                     <div className="space-y-2">
-                      <h4 className="text-sm font-semibold text-gray-900 dark:text-white">Thông tin Campaign</h4>
-                      <div className="p-3 bg-gray-50 dark:bg-gray-700 rounded space-y-1.5">
-                        <div className="flex justify-between"><span className="text-xs text-gray-500">Campaign</span><span className="text-xs font-medium text-gray-900 dark:text-white">{submittedCampaign.name}</span></div>
-                        <div className="flex justify-between"><span className="text-xs text-gray-500">Product</span><span className="text-xs font-medium text-gray-900 dark:text-white">{selectedTask.productName}</span></div>
-                        <div className="flex justify-between"><span className="text-xs text-gray-500">Brief</span><span className="text-xs text-gray-700 dark:text-gray-300 text-right line-clamp-2">{selectedTask.brief}</span></div>
+                      <h4 className="text-sm font-semibold text-slate-900 dark:text-white">Thông tin Campaign</h4>
+                      <div className="p-3 surface-subtle space-y-1.5">
+                        <div className="flex justify-between"><span className="text-xs text-slate-500">Campaign</span><span className="text-xs font-medium text-slate-900 dark:text-white">{submittedCampaign.name}</span></div>
+                        <div className="flex justify-between"><span className="text-xs text-slate-500">Product</span><span className="text-xs font-medium text-slate-900 dark:text-white">{selectedTask.productName}</span></div>
+                        <div className="flex justify-between"><span className="text-xs text-slate-500">Brief</span><span className="text-xs text-slate-300 dark:text-slate-300 text-right line-clamp-2">{selectedTask.brief}</span></div>
                       </div>
                     </div>
                   ) : (
                     <div className="space-y-2">
-                      <h4 className="text-sm font-semibold text-gray-900 dark:text-white">Thông tin Campaign</h4>
-                      <div className="p-3 bg-gray-50 dark:bg-gray-700 rounded">
-                        <p className="text-xs text-gray-500">{selectedTask.productName}</p>
-                        <p className="text-xs text-gray-700 dark:text-gray-300 mt-1">{selectedTask.brief}</p>
+                      <h4 className="text-sm font-semibold text-slate-900 dark:text-white">Thông tin Campaign</h4>
+                      <div className="p-3 surface-subtle">
+                        <p className="text-xs text-slate-500">{selectedTask.productName}</p>
+                        <p className="text-xs text-slate-300 dark:text-slate-300 mt-1">{selectedTask.brief}</p>
                       </div>
                     </div>
                   )}
                   <div className="space-y-2">
-                    <h4 className="text-sm font-semibold text-gray-900 dark:text-white">Yêu cầu nội dung</h4>
-                    <div className="p-3 bg-gray-50 dark:bg-gray-700 rounded space-y-1.5">
-                      <div className="flex justify-between"><span className="text-xs text-gray-500">Content Type</span><span className="text-xs font-medium text-gray-900 dark:text-white">{selectedTask.contentRequirements ? 'Video ngắn' : '-'}</span></div>
-                      <div className="flex justify-between"><span className="text-xs text-gray-500">Draft Deadline</span><span className="text-xs font-medium text-gray-900 dark:text-white">{selectedTask.deadline}</span></div>
-                      <div className="flex justify-between"><span className="text-xs text-gray-500">Publish Deadline</span><span className="text-xs font-medium text-gray-900 dark:text-white">{selectedTask.deadline}</span></div>
-                      <div className="flex justify-between"><span className="text-xs text-gray-500">KPI Views</span><span className="text-xs font-medium text-gray-900 dark:text-white">{selectedTask.kpiTarget.views.toLocaleString()}</span></div>
-                      <div className="flex justify-between"><span className="text-xs text-gray-500">KPI ER</span><span className="text-xs font-medium text-gray-900 dark:text-white">{selectedTask.kpiTarget.engagementRate}%</span></div>
+                    <h4 className="text-sm font-semibold text-slate-900 dark:text-white">Yêu cầu nội dung</h4>
+                    <div className="p-3 surface-subtle space-y-1.5">
+                      <div className="flex justify-between"><span className="text-xs text-slate-500">Content Type</span><span className="text-xs font-medium text-slate-900 dark:text-white">{selectedTask.contentRequirements ? 'Video ngắn' : '-'}</span></div>
+                      <div className="flex justify-between"><span className="text-xs text-slate-500">Draft Deadline</span><span className="text-xs font-medium text-slate-900 dark:text-white">{selectedTask.deadline}</span></div>
+                      <div className="flex justify-between"><span className="text-xs text-slate-500">Publish Deadline</span><span className="text-xs font-medium text-slate-900 dark:text-white">{selectedTask.deadline}</span></div>
+                      <div className="flex justify-between"><span className="text-xs text-slate-500">KPI Views</span><span className="text-xs font-medium text-slate-900 dark:text-white">{selectedTask.kpiTarget.views.toLocaleString()}</span></div>
+                      <div className="flex justify-between"><span className="text-xs text-slate-500">KPI ER</span><span className="text-xs font-medium text-slate-900 dark:text-white">{selectedTask.kpiTarget.engagementRate}%</span></div>
                     </div>
                   </div>
                 </div>
 
                 {/* Video Preview */}
-                <div className="aspect-video bg-gray-900 dark:bg-gray-800 rounded flex items-center justify-center overflow-hidden">
+                <div className="aspect-video bg-gradient-to-br from-slate-900 to-slate-700 rounded-2xl flex items-center justify-center overflow-hidden">
                   <div className="text-center px-4">
                     <Play className="w-12 h-12 text-white/60 mx-auto mb-2" />
                     <p className="text-sm text-white/70">Xem trước video duyệt nội dung</p>
@@ -3813,33 +3829,33 @@ function ContentReviewPanel({ selectedProject, selectedTaskId, setSelectedTaskId
                 {/* Caption */}
                 {latestDraft?.caption && (
                   <div className="space-y-2">
-                    <h4 className="text-sm font-semibold text-gray-900 dark:text-white">Caption</h4>
-                    <p className="text-sm text-gray-600 dark:text-gray-300 p-3 bg-gray-50 dark:bg-gray-700 rounded">{latestDraft.caption}</p>
+                    <h4 className="text-sm font-semibold text-slate-900 dark:text-white">Caption</h4>
+                    <p className="text-sm text-slate-600 dark:text-slate-300 p-3 surface-subtle">{latestDraft.caption}</p>
                   </div>
                 )}
 
                 {/* Version History Timeline */}
                 {selectedTask.draftContent && selectedTask.draftContent.length > 0 && (
                   <div className="space-y-2">
-                    <h4 className="text-sm font-semibold text-gray-900 dark:text-white">Lịch sử các phiên bản</h4>
+                    <h4 className="text-sm font-semibold text-slate-900 dark:text-white">Lịch sử các phiên bản</h4>
                     <div className="space-y-2 max-h-48 overflow-y-auto">
                       {[...selectedTask.draftContent].reverse().map((draft, idx) => {
                         const isCurrent = idx === 0;
                         return (
-                          <div key={draft.submittedAt} className={`flex items-start gap-3 p-3 rounded ${
-                            isCurrent ? 'bg-gray-50 dark:bg-gray-700 border border-gray-200 dark:border-gray-700' : 'bg-gray-50 dark:bg-gray-700'
+                          <div key={draft.submittedAt} className={`flex items-start gap-3 p-3 rounded-xl ${
+                            isCurrent ? 'bg-brand-50 dark:bg-brand-900/20 border border-teal-200 dark:border-brand-800/40' : 'bg-slate-50/50 dark:bg-slate-700/30'
                           }`}>
                             <div className={`w-7 h-7 rounded-full flex items-center justify-center flex-shrink-0 text-xs font-bold ${
-                              isCurrent ? 'bg-gray-500 text-white' : 'bg-gray-300 dark:bg-gray-600 text-gray-600 dark:text-gray-300'
+                              isCurrent ? 'bg-brand-500 text-white' : 'bg-slate-300 dark:bg-slate-600 text-slate-600 dark:text-slate-300'
                             }`}>
                               v{draft.version}
                             </div>
                             <div className="flex-1 min-w-0">
                               <div className="flex items-center justify-between mb-0.5">
-                                <p className="text-xs font-medium text-gray-900 dark:text-white">
+                                <p className="text-xs font-medium text-slate-900 dark:text-white">
                                   {isCurrent ? 'Phiên bản hiện tại' : `Phiên bản trước`}
                                 </p>
-                                <p className="text-[10px] text-gray-400">{draft.submittedAt}</p>
+                                <p className="text-[10px] text-slate-400">{draft.submittedAt}</p>
                               </div>
                               {('feedback' in draft) && draft.feedback && (
                                 <div className="mt-1.5 p-2 bg-red-50 dark:bg-red-900/20 rounded border border-red-100 dark:border-red-800/30">
@@ -3850,7 +3866,7 @@ function ContentReviewPanel({ selectedProject, selectedTaskId, setSelectedTaskId
                                 </div>
                               )}
                               {(!('feedback' in draft) || !(draft as { feedback?: string }).feedback) && !isCurrent && (
-                                <p className="text-[11px] text-gray-400 italic">Không có feedback</p>
+                                <p className="text-[11px] text-slate-400 italic">Không có feedback</p>
                               )}
                             </div>
                           </div>
@@ -3862,12 +3878,12 @@ function ContentReviewPanel({ selectedProject, selectedTaskId, setSelectedTaskId
 
                 {/* Feedback */}
                 <div className="space-y-2">
-                  <h4 className="text-sm font-semibold text-gray-900 dark:text-white">Feedback</h4>
+                  <h4 className="text-sm font-semibold text-slate-900 dark:text-white">Feedback</h4>
                   <textarea
                     rows={3}
                     value={feedback}
                     onChange={e => setFeedback(e.target.value)}
-                    className="w-full px-4 py-2.5 rounded border border-gray-200 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white text-sm resize-none focus:ring-2 focus:ring-gray-500 outline-none"
+                    className="w-full px-4 py-2.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-700 text-slate-900 dark:text-white text-sm resize-none focus:ring-2 focus:ring-brand-500 outline-none"
                     placeholder="Nhập comment/feedback cho video..."
                   />
                 </div>
@@ -3884,24 +3900,24 @@ function ContentReviewPanel({ selectedProject, selectedTaskId, setSelectedTaskId
                       </Button>
                     </div>
                     {state === 'draft_submitted' && (
-                      <p className="text-xs text-gray-400 text-center">Phê duyệt → KOL được phép đăng bài • Từ chối → KOL chỉnh sửa và submit lại</p>
+                      <p className="text-xs text-slate-400 text-center">Phê duyệt → KOL được phép đăng bài • Từ chối → KOL chỉnh sửa và submit lại</p>
                     )}
                     {state === 'revision_required' && (
                       <p className="text-xs text-amber-500 text-center">KOL đã nhận feedback và đang chỉnh sửa nội dung</p>
                     )}
                   </div>
                 ) : state === 'approved_to_publish' ? (
-                  <div className="flex items-center gap-2 p-4 bg-gray-50 dark:bg-gray-700 rounded border border-emerald-200 dark:border-emerald-800/40">
+                  <div className="flex items-center gap-2 p-4 bg-emerald-50/80 dark:bg-emerald-900/20 rounded-xl border border-emerald-200 dark:border-emerald-800/40">
                     <CheckCircle2 className="w-5 h-5 text-emerald-500" />
                     <p className="text-sm text-emerald-700 dark:text-emerald-300">Đã phê duyệt — KOL có thể đăng bài ngay.</p>
                   </div>
                 ) : null}
               </div>
             ) : (
-              <div className="h-full min-h-[400px] flex items-center justify-center bg-white dark:bg-gray-800 rounded border border-gray-200 dark:border-gray-700 p-12 text-center">
+              <div className="h-full min-h-[400px] flex items-center justify-center bg-white dark:bg-slate-800 rounded-2xl border border-slate-200/80 dark:border-slate-700/60 shadow-soft p-12 text-center">
                 <div>
-                  <MessageSquare className="w-12 h-12 text-gray-300 dark:text-gray-600 mx-auto mb-3" />
-                  <p className="text-sm font-medium text-gray-700 dark:text-gray-300">Chọn một bản nháp để xem chi tiết</p>
+                  <MessageSquare className="w-12 h-12 text-slate-300 dark:text-slate-600 mx-auto mb-3" />
+                  <p className="text-sm font-medium text-slate-300 dark:text-slate-300">Chọn một bản nháp để xem chi tiết</p>
                 </div>
               </div>
             )}
@@ -3916,13 +3932,13 @@ function ContentReviewPanel({ selectedProject, selectedTaskId, setSelectedTaskId
             <p className="text-sm text-red-700 dark:text-red-300">Nếu từ chối, KOL sẽ nhận được feedback và phải chỉnh sửa rồi submit lại bản nháp mới.</p>
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1.5">Nhập feedback cho KOL/KOC *</label>
+            <label className="block text-sm font-medium text-slate-300 dark:text-slate-300 mb-1.5">Nhập feedback cho KOL/KOC *</label>
             <textarea
               rows={4}
               value={rejectComment}
               onChange={e => setRejectComment(e.target.value)}
               placeholder="Ví dụ: Cần cắt ngắn phần intro, thêm logo ở đầu video, chỉnh màu sắc rõ hơn..."
-              className="w-full px-4 py-2.5 rounded border border-gray-200 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white text-sm resize-none focus:ring-2 focus:ring-gray-500 outline-none"
+              className="w-full px-4 py-2.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-700 text-slate-900 dark:text-white text-sm resize-none focus:ring-2 focus:ring-brand-500 outline-none"
             />
           </div>
           <div className="flex justify-end gap-3">
@@ -3960,9 +3976,9 @@ function MetricsReviewPanel({ selectedProject, getTaskState, setMetricsConfirmed
       {/* ── Task list with horizontal step indicator ── */}
       <div className="space-y-3">
         {metricsTasks.length === 0 ? (
-          <div className="bg-white dark:bg-gray-800 rounded border-dashed border border-gray-200 dark:border-gray-700 p-12 text-center">
-            <BarChart3 className="w-10 h-10 text-gray-300 dark:text-gray-600 mx-auto mb-2" />
-            <p className="text-sm font-medium text-gray-500">Chưa có nhiệm vụ nào được đăng bài.</p>
+          <div className="bg-white dark:bg-slate-800 rounded-2xl border-dashed border border-slate-200/60 dark:border-slate-700 p-12 text-center">
+            <BarChart3 className="w-10 h-10 text-slate-300 dark:text-slate-600 mx-auto mb-2" />
+            <p className="text-sm font-medium text-slate-500">Chưa có nhiệm vụ nào được đăng bài.</p>
           </div>
         ) : metricsTasks.map(task => {
           const m = task.metrics;
@@ -3972,24 +3988,24 @@ function MetricsReviewPanel({ selectedProject, getTaskState, setMetricsConfirmed
           const allOk = viewsOk && erOk;
 
           return (
-            <div key={task.id} className="bg-white dark:bg-gray-800 rounded border border-gray-200 dark:border-gray-700 overflow-hidden">
+            <div key={task.id} className="bg-white dark:bg-slate-800 rounded-2xl border border-slate-200/80 dark:border-slate-700/60 shadow-soft overflow-hidden">
               {/* ── Task header ── */}
-              <div className="flex items-center justify-between px-5 py-4 border-b border-gray-100 dark:border-gray-700">
+              <div className="flex items-center justify-between px-5 py-4 border-b border-slate-100 dark:border-slate-700/50">
                 <div className="flex items-center gap-3">
-                  <Avatar initials={task.kolAvatar} size="md" />
+                  <Avatar initials={task.kolAvatar} size="md" image={getKolImage(task.kolAvatar)} />
                   <div>
-                    <p className="text-sm font-semibold text-gray-900 dark:text-white">{task.kolName}</p>
-                    <p className="text-xs text-gray-500">{task.campaignName} · {task.kolPlatform}</p>
+                    <p className="text-sm font-semibold text-slate-900 dark:text-white">{task.kolName}</p>
+                    <p className="text-xs text-slate-500">{task.campaignName} · {task.kolPlatform}</p>
                   </div>
                 </div>
                 <Badge
                   label={confirmed ? 'Đã xác nhận' : 'Chờ duyệt'}
-                  colorClass={confirmed ? 'bg-emerald-100 text-emerald-800 dark:bg-emerald-900/40 dark:text-emerald-300' : 'bg-amber-100 text-amber-800 dark:bg-amber-900/40 dark:text-amber-300'}
+                  colorClass={confirmed ? 'bg-emerald-100 dark:bg-emerald-900/40 dark:text-emerald-300' : 'bg-amber-100 text-amber-800 dark:bg-amber-900/40 dark:text-amber-300'}
                 />
               </div>
 
               {/* ── Step indicator: 3 horizontal steps ── */}
-              <div className="px-5 py-4 bg-gray-50/50 dark:bg-gray-800/50">
+              <div className="px-5 py-4 bg-slate-50/50 dark:bg-slate-800/50">
                 <div className="flex items-center gap-0">
                   {[
                     { num: 1, label: 'Link bài đăng', done: !!task.publishedContent?.postUrl, active: !!task.publishedContent?.postUrl && !m },
@@ -4002,18 +4018,18 @@ function MetricsReviewPanel({ selectedProject, getTaskState, setMetricsConfirmed
                           step.done
                             ? 'bg-gray-500 text-white'
                             : step.active
-                            ? 'bg-gray-500 text-white ring-4 ring-gray-200 dark:ring-gray-800/40'
-                            : 'bg-gray-200 dark:bg-gray-600 text-gray-400'
+                            ? 'bg-brand-500 text-white ring-4 ring-brand-200 dark:ring-brand-800/40'
+                            : 'bg-slate-200 dark:bg-slate-600 text-slate-400'
                         }`}>
                           {step.done ? <Check className="w-4 h-4" /> : step.num}
                         </div>
                         <p className={`text-[11px] mt-1.5 font-medium text-center ${
-                          step.done ? 'text-emerald-600 dark:text-emerald-400' : step.active ? 'text-gray-600 dark:text-gray-400' : 'text-gray-400'
+                          step.done ? 'text-emerald-600 dark:text-emerald-400' : step.active ? 'text-brand-500 dark:text-brand-400' : 'text-slate-400'
                         }`}>{step.label}</p>
                       </div>
                       {idx < 2 && (
                         <div className={`flex-1 h-0.5 mx-2 mb-5 rounded ${
-                          step.done ? 'bg-emerald-400' : 'bg-gray-200 dark:bg-gray-600'
+                          step.done ? 'bg-emerald-400' : 'bg-slate-200 dark:bg-slate-600'
                         }`} />
                       )}
                     </div>
@@ -4022,22 +4038,22 @@ function MetricsReviewPanel({ selectedProject, getTaskState, setMetricsConfirmed
               </div>
 
               {/* ── Step 1: Link bài đăng ── */}
-              <div className="px-5 py-4 border-t border-gray-100 dark:border-gray-700">
+              <div className="px-5 py-4 border-t border-slate-100 dark:border-slate-700/50">
                 <div className="flex items-start gap-3">
-                  <span className="w-5 h-5 rounded-full bg-gray-100 dark:bg-gray-700 flex items-center justify-center text-[10px] font-bold text-gray-500 flex-shrink-0 mt-0.5">1</span>
+                  <span className="w-5 h-5 rounded-full bg-slate-100/60 dark:bg-slate-700 flex items-center justify-center text-[10px] font-bold text-slate-500 flex-shrink-0 mt-0.5">1</span>
                   <div className="flex-1 min-w-0">
-                    <p className="text-xs font-semibold text-gray-700 dark:text-gray-300 mb-1.5">Link bài đăng & Screenshot</p>
+                    <p className="text-xs font-semibold text-slate-300 dark:text-slate-300 mb-1.5">Link bài đăng & Screenshot</p>
                     {task.publishedContent?.postUrl ? (
                       <div className="flex flex-col sm:flex-row gap-2">
                         <a href={task.publishedContent.postUrl} target="_blank" rel="noopener noreferrer"
-                          className="flex items-center gap-1.5 text-sm text-gray-600 hover:text-gray-700 underline truncate">
+                          className="flex items-center gap-1.5 text-sm text-brand-600 hover:text-teal-700 underline truncate">
                           <ExternalLink className="w-3.5 h-3.5 flex-shrink-0" />
                           <span className="truncate">{task.publishedContent.postUrl}</span>
                         </a>
-                        <span className="text-[11px] text-gray-400 whitespace-nowrap">{task.publishedContent.publishedAt}</span>
+                        <span className="text-[11px] text-slate-400 whitespace-nowrap">{task.publishedContent.publishedAt}</span>
                       </div>
                     ) : (
-                      <p className="text-xs text-gray-400 italic">Chưa có link bài đăng.</p>
+                      <p className="text-xs text-slate-400 italic">Chưa có link bài đăng.</p>
                     )}
                   </div>
                 </div>
@@ -4045,30 +4061,30 @@ function MetricsReviewPanel({ selectedProject, getTaskState, setMetricsConfirmed
 
               {/* ── Step 2: Số liệu ── */}
               {m && (
-                <div className="px-5 py-4 border-t border-gray-100 dark:border-gray-700">
+                <div className="px-5 py-4 border-t border-slate-100 dark:border-slate-700/50">
                   <div className="flex items-start gap-3">
-                    <span className="w-5 h-5 rounded-full bg-gray-100 dark:bg-gray-700 flex items-center justify-center text-[10px] font-bold text-gray-500 flex-shrink-0 mt-0.5">2</span>
+                    <span className="w-5 h-5 rounded-full bg-slate-100/60 dark:bg-slate-700 flex items-center justify-center text-[10px] font-bold text-slate-500 flex-shrink-0 mt-0.5">2</span>
                     <div className="flex-1 min-w-0 space-y-3">
-                      <p className="text-xs font-semibold text-gray-700 dark:text-gray-300 mb-1.5">Số liệu KOL nhập vs KPI mục tiêu</p>
+                      <p className="text-xs font-semibold text-slate-300 dark:text-slate-300 mb-1.5">Số liệu KOL nhập vs KPI mục tiêu</p>
                       <div className="grid grid-cols-3 gap-2">
                         {[
                           { label: 'Views', actual: m.views.toLocaleString(), target: task.kpiTarget.views.toLocaleString(), pct: Math.min(100, Math.round((m.views / task.kpiTarget.views) * 100)), ok: viewsOk },
                           { label: 'ER', actual: `${m.engagementRate}%`, target: `${task.kpiTarget.engagementRate}%`, pct: Math.min(100, Math.round((m.engagementRate / task.kpiTarget.engagementRate) * 100)), ok: erOk },
                           { label: 'Likes', actual: (m.likes || 0).toLocaleString(), target: '—', pct: null, ok: null },
                         ].map(item => (
-                          <div key={item.label} className="text-center p-2 bg-gray-50 dark:bg-gray-800 rounded">
-                            <p className="text-sm font-bold text-gray-900 dark:text-white">{item.actual}</p>
-                            <p className="text-[10px] text-gray-500">{item.label}{item.target !== '—' ? ` / ${item.target}` : ''}</p>
+                          <div key={item.label} className="text-center p-2 bg-slate-50/50 dark:bg-slate-700/40 rounded-xl">
+                            <p className="text-sm font-bold text-slate-900 dark:text-white">{item.actual}</p>
+                            <p className="text-[10px] text-slate-500">{item.label}{item.target !== '—' ? ` / ${item.target}` : ''}</p>
                             {item.pct !== null && (
-                              <div className="mt-1.5 h-1.5 bg-gray-200 dark:bg-gray-600 rounded-full overflow-hidden">
-                                <div className={`h-full rounded-full ${item.ok ? 'bg-gray-500' : 'bg-amber-400'}`} style={{ width: `${item.pct}%` }} />
+                              <div className="mt-1.5 h-1.5 bg-slate-200 dark:bg-slate-600 rounded-full overflow-hidden">
+                                <div className={`h-full rounded-full ${item.ok ? 'bg-emerald-500' : 'bg-amber-400'}`} style={{ width: `${item.pct}%` }} />
                               </div>
                             )}
                           </div>
                         ))}
                       </div>
-                      <div className={`flex items-center gap-2 px-3 py-2 rounded text-xs font-medium ${
-                        allOk ? 'bg-gray-50 dark:bg-gray-700 text-emerald-700 dark:text-emerald-300' : 'bg-gray-50 dark:bg-gray-700 text-amber-700 dark:text-amber-300'
+                      <div className={`flex items-center gap-2 px-3 py-2 rounded-lg text-xs font-medium ${
+                        allOk ? 'bg-emerald-50/80 dark:bg-emerald-900/20 text-emerald-700 dark:text-emerald-300' : 'bg-amber-50/80 dark:bg-amber-900/20 text-amber-700 dark:text-amber-300'
                       }`}>
                         {allOk ? <CheckCircle2 className="w-3.5 h-3.5" /> : <Clock className="w-3.5 h-3.5" />}
                         {allOk ? 'Đạt KPI — sẵn sàng xác nhận' : 'Chưa đạt KPI — xem lại trước khi xác nhận'}
@@ -4079,11 +4095,11 @@ function MetricsReviewPanel({ selectedProject, getTaskState, setMetricsConfirmed
               )}
 
               {/* ── Step 3: Xác nhận ── */}
-              <div className="px-5 py-4 border-t border-gray-100 dark:border-gray-700">
+              <div className="px-5 py-4 border-t border-slate-100 dark:border-slate-700/50">
                 <div className="flex items-start gap-3">
-                  <span className="w-5 h-5 rounded-full bg-gray-100 dark:bg-gray-700 flex items-center justify-center text-[10px] font-bold text-gray-500 flex-shrink-0 mt-0.5">3</span>
+                  <span className="w-5 h-5 rounded-full bg-slate-100/60 dark:bg-slate-700 flex items-center justify-center text-[10px] font-bold text-slate-500 flex-shrink-0 mt-0.5">3</span>
                   <div className="flex-1 min-w-0">
-                    <p className="text-xs font-semibold text-gray-700 dark:text-gray-300 mb-2">Xác nhận hoặc yêu cầu cập nhật</p>
+                    <p className="text-xs font-semibold text-slate-300 dark:text-slate-300 mb-2">Xác nhận hoặc yêu cầu cập nhật</p>
                     <div className="flex gap-2 flex-wrap">
                       {!confirmed && m ? (
                         <>
@@ -4099,7 +4115,7 @@ function MetricsReviewPanel({ selectedProject, getTaskState, setMetricsConfirmed
                           <CheckCircle2 className="w-4 h-4" />Số liệu đã được xác nhận
                         </span>
                       ) : (
-                        <span className="text-xs text-gray-400 italic">Chờ KOL nhập số liệu.</span>
+                        <span className="text-xs text-slate-400 italic">Chờ KOL nhập số liệu.</span>
                       )}
                     </div>
                   </div>
@@ -4119,20 +4135,23 @@ function PayoutPanel({ selectedProject, paymentAction, setPaymentAction }: {
   setPaymentAction: (a: typeof paymentAction) => void;
 }) {
   const { brandPayments } = useBrandData(selectedProject);
-  const paidTotal = brandPayments.filter(p => p.status === 'paid').reduce((s, p) => s + p.paidAmount, 0);
-  const pendingTotal = brandPayments.reduce((s, p) => s + (p.totalAmount - p.paidAmount), 0);
+  const [localStatuses, setLocalStatuses] = useState<Record<string, string>>({});
+  const getStatus = (p: typeof brandPayments[0]) => localStatuses[p.id] || p.status;
+  const processedPayments = brandPayments.map(p => ({ ...p, _status: getStatus(p) as typeof p.status }));
+  const paidTotal = processedPayments.filter(p => p._status === 'paid').reduce((s, p) => s + p.paidAmount, 0);
+  const pendingTotal = processedPayments.reduce((s, p) => s + (p.totalAmount - p.paidAmount), 0);
   const [qrModalPayment, setQrModalPayment] = useState<typeof brandPayments[0] | null>(null);
 
   const qrPayment = () => {
     if (!qrModalPayment) return;
-    setPaymentAction({ paymentId: qrModalPayment.id, action: 'approve' });
+    setLocalStatuses(prev => ({ ...prev, [qrModalPayment.id]: 'paid' }));
     setQrModalPayment(null);
   };
 
   return (
     <div className="space-y-4">
       {/* ── Header bar: financial context ── */}
-      <div className="flex items-center gap-3 px-4 py-3 bg-gray-50 dark:bg-gray-700 rounded border border-amber-200 dark:border-amber-800/40">
+      <div className="flex items-center gap-3 px-4 py-3 bg-amber-50/80 dark:bg-amber-900/20 rounded-xl border border-amber-200 dark:border-amber-800/40">
         <CreditCard className="w-5 h-5 text-amber-600 flex-shrink-0" />
         <p className="text-sm text-amber-800 dark:text-amber-200">
           Quản lý thanh toán: kiểm tra KPI đã đạt chưa, quyết định thanh toán đầy đủ, một phần hoặc giữ tạm.
@@ -4169,17 +4188,17 @@ function PayoutPanel({ selectedProject, paymentAction, setPaymentAction }: {
 
       {/* ── Pending payments: actionable cards, NOT a table ── */}
       {(() => {
-        const pending = brandPayments.filter(p => p.status !== 'paid');
+        const pending = processedPayments.filter(p => p._status !== 'paid');
         return (
           <div className="space-y-3">
             <div className="flex items-center justify-between">
-              <h3 className="text-sm font-semibold text-gray-900 dark:text-white">Cần xử lý thanh toán</h3>
+              <h3 className="text-sm font-semibold text-slate-900 dark:text-white">Cần xử lý thanh toán</h3>
               <span className="px-2.5 py-1 bg-amber-100 dark:bg-amber-900/40 text-amber-700 dark:text-amber-300 rounded-full text-xs font-bold">{pending.length}</span>
             </div>
             {pending.length === 0 ? (
-              <div className="bg-white dark:bg-gray-800 rounded border border-gray-200 dark:border-gray-700 p-8 text-center">
+              <div className="bg-white dark:bg-slate-800 rounded-2xl border border-slate-200/80 dark:border-slate-700/60 shadow-soft p-8 text-center">
                 <CheckCircle2 className="w-8 h-8 text-emerald-400 mx-auto mb-2" />
-                <p className="text-sm text-gray-500">Tất cả thanh toán đã được xử lý.</p>
+                <p className="text-sm text-slate-500">Tất cả thanh toán đã được xử lý.</p>
               </div>
             ) : (
               pending.map(payment => {
@@ -4193,13 +4212,13 @@ function PayoutPanel({ selectedProject, paymentAction, setPaymentAction }: {
                     <div className="flex items-start justify-between gap-4">
                       {/* Left: KOL + campaign info */}
                       <div className="flex items-start gap-4">
-                        <Avatar initials={payment.kolAvatar} size="lg" />
+                        <Avatar initials={payment.kolAvatar} size="lg" image={getKolImage(payment.kolAvatar)} />
                         <div>
-                          <p className="text-sm font-semibold text-gray-900 dark:text-white">{payment.kolName}</p>
-                          <p className="text-xs text-gray-500 mt-0.5">{payment.campaignName} · {payment.kolPlatform}</p>
+                          <p className="text-sm font-semibold text-slate-900 dark:text-white">{payment.kolName}</p>
+                          <p className="text-xs text-slate-500 mt-0.5">{payment.campaignName} · {payment.kolPlatform}</p>
                           <div className="flex items-center gap-3 mt-2">
-                            <span className="text-sm font-bold text-gray-900 dark:text-white">{remaining.toLocaleString()} VND</span>
-                            <span className="text-xs text-gray-400">cần trả</span>
+                            <span className="text-sm font-bold text-slate-900 dark:text-white">{remaining.toLocaleString()} VND</span>
+                            <span className="text-xs text-slate-400">cần trả</span>
                           </div>
                           {/* KPI check */}
                           {m && viewsOk !== null ? (
@@ -4246,8 +4265,8 @@ function PayoutPanel({ selectedProject, paymentAction, setPaymentAction }: {
       {brandPayments.filter(p => p.status === 'paid').length > 0 && (
         <div className="bg-gray-900 rounded border border-gray-700 p-5">
           <div className="flex items-center gap-2 mb-4">
-            <div className="p-2 bg-gray-500/20 rounded">
-              <History className="w-4 h-4 text-gray-400" />
+            <div className="p-2 bg-brand-500/20 rounded-xl">
+              <History className="w-4 h-4 text-teal-400" />
             </div>
             <h3 className="text-sm font-semibold text-white">Lịch sử thanh toán</h3>
           </div>
@@ -4287,65 +4306,76 @@ function PaymentsView({ selectedProject }: { selectedProject: string }) {
   const [filterStatus, setFilterStatus] = useState('all');
   const [paymentAction, setPaymentAction] = useState<{ paymentId: string; action: 'approve' | 'partial' | 'hold' | 'reject' } | null>(null);
   const { brandPayments } = useBrandData(selectedProject);
-  const filtered = filterStatus === 'all' ? brandPayments : brandPayments.filter(p => p.status === filterStatus);
+  const [localStatuses, setLocalStatuses] = useState<Record<string, string>>({});
+
+  const getStatus = (p: typeof brandPayments[0]) => localStatuses[p.id] || p.status;
+  const processedPayments = brandPayments.map(p => ({ ...p, _status: getStatus(p) as typeof p.status }));
+  const filtered = filterStatus === 'all' ? processedPayments : processedPayments.filter(p => p._status === filterStatus);
   const [qrModalPayment, setQrModalPayment] = useState<typeof brandPayments[0] | null>(null);
 
   const qrPayment = () => {
     if (!qrModalPayment) return;
-    setPaymentAction({ paymentId: qrModalPayment.id, action: 'approve' });
+    setLocalStatuses(prev => ({ ...prev, [qrModalPayment.id]: 'paid' }));
     setQrModalPayment(null);
+  };
+
+  const handleApprove = () => {
+    if (!paymentAction) return;
+    setLocalStatuses(prev => ({ ...prev, [paymentAction.paymentId]: paymentAction.action === 'hold' ? 'hold' : 'paid' }));
+    setPaymentAction(null);
   };
 
   return (
     <div className="space-y-4">
       <SectionHeader title="Quản lý thanh toán" subtitle="Xem, phê duyệt và xử lý thanh toán cho KOL/KOC" />
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-        <KPIWidget label="Tổng cần thanh toán" value={(brandPayments.reduce((s, p) => s + (p.totalAmount - p.paidAmount), 0) / 1000000).toFixed(1) + 'M VND'} icon={<DollarSign className="w-5 h-5" />} />
-        <KPIWidget label="Đã thanh toán" value={(brandPayments.filter(p => p.status === 'paid').reduce((s, p) => s + p.paidAmount, 0) / 1000000).toFixed(1) + 'M VND'} icon={<CheckCircle2 className="w-5 h-5" />} />
-        <KPIWidget label="Đang chờ" value={brandPayments.filter(p => p.status === 'pending').length.toString()} icon={<Clock className="w-5 h-5" />} />
-        <KPIWidget label="Thanh toán một phần" value={brandPayments.filter(p => p.status === 'partial_paid').length.toString()} icon={<CreditCard className="w-5 h-5" />} />
+        <KPIWidget label="Tổng cần thanh toán" value={(processedPayments.reduce((s, p) => s + (p.totalAmount - p.paidAmount), 0) / 1000000).toFixed(1) + 'M VND'} icon={<DollarSign className="w-5 h-5" />} />
+        <KPIWidget label="Đã thanh toán" value={(processedPayments.filter(p => p._status === 'paid').reduce((s, p) => s + p.paidAmount, 0) / 1000000).toFixed(1) + 'M VND'} icon={<CheckCircle2 className="w-5 h-5" />} accent="from-emerald-500/10 to-emerald-600/5" />
+        <KPIWidget label="Đang chờ" value={processedPayments.filter(p => p._status === 'pending').length.toString()} icon={<Clock className="w-5 h-5" />} accent="from-amber-500/10 to-amber-600/5" />
+        <KPIWidget label="Thanh toán một phần" value={processedPayments.filter(p => p._status === 'partial_paid').length.toString()} icon={<CreditCard className="w-5 h-5" />} accent="from-blue-500/10 to-blue-600/5" />
       </div>
       <div className="flex items-center gap-3 flex-wrap">
         <select value={filterStatus} onChange={e => setFilterStatus(e.target.value)}
-          className="px-4 py-2 rounded border border-gray-200 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-white text-sm">
+          className="px-4 py-2 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white text-sm">
           <option value="all">Tất cả trạng thái</option>
           <option value="pending">Đang chờ</option>
           <option value="paid">Đã thanh toán</option>
           <option value="partial_paid">Thanh toán một phần</option>
           <option value="hold">Tạm giữ</option>
         </select>
-        <p className="text-sm text-gray-500 dark:text-gray-400">Dùng bảng này để xử lý hóa đơn sau khi metrics đã được xác nhận.</p>
+        <p className="text-sm text-slate-500 dark:text-slate-400">Dùng bảng này để xử lý hóa đơn sau khi metrics đã được xác nhận.</p>
       </div>
-      <div className="bg-white dark:bg-gray-800 rounded border border-gray-200 dark:border-gray-700 overflow-hidden">
+      <div className="bg-white dark:bg-slate-800 rounded-2xl border border-slate-200/80 dark:border-slate-700/60 shadow-soft overflow-hidden">
         <div className="overflow-x-auto">
           <table className="w-full min-w-[1000px]">
             <thead>
-              <tr className="border-b border-gray-100 dark:border-gray-700">
-                <th className="text-left px-6 py-3 text-xs font-semibold text-gray-500 uppercase">KOL/KOC</th>
-                <th className="text-left px-6 py-3 text-xs font-semibold text-gray-500 uppercase">Chiến dịch</th>
-                <th className="text-left px-6 py-3 text-xs font-semibold text-gray-500 uppercase">Nhiệm vụ</th>
-                <th className="text-left px-6 py-3 text-xs font-semibold text-gray-500 uppercase">Tổng tiền</th>
-                <th className="text-left px-6 py-3 text-xs font-semibold text-gray-500 uppercase">Đã trả</th>
-                <th className="text-left px-6 py-3 text-xs font-semibold text-gray-500 uppercase">Trạng thái</th>
-                <th className="text-left px-6 py-3 text-xs font-semibold text-gray-500 uppercase">Hành động</th>
+              <tr className="border-b border-slate-100/60">
+                <th className="text-left px-6 py-3 text-xs font-semibold text-slate-500 uppercase">KOL/KOC</th>
+                <th className="text-left px-6 py-3 text-xs font-semibold text-slate-500 uppercase">Chiến dịch</th>
+                <th className="text-left px-6 py-3 text-xs font-semibold text-slate-500 uppercase">Nhiệm vụ</th>
+                <th className="text-left px-6 py-3 text-xs font-semibold text-slate-500 uppercase">Tổng tiền</th>
+                <th className="text-left px-6 py-3 text-xs font-semibold text-slate-500 uppercase">Đã trả</th>
+                <th className="text-left px-6 py-3 text-xs font-semibold text-slate-500 uppercase">Trạng thái</th>
+                <th className="text-left px-6 py-3 text-xs font-semibold text-slate-500 uppercase">Hành động</th>
               </tr>
             </thead>
             <tbody>
               {filtered.map(payment => (
-                <tr key={payment.id} className="border-b border-gray-50 dark:border-gray-700 hover:bg-gray-50/50">
-                  <td className="px-6 py-4"><div className="flex items-center gap-3"><Avatar initials={payment.kolAvatar} size="sm" /><div><p className="text-sm font-medium text-gray-900 dark:text-white">{payment.kolName}</p><p className="text-xs text-gray-500">{payment.kolPlatform}</p></div></div></td>
-                  <td className="px-6 py-4 text-sm text-gray-700 dark:text-gray-300">{payment.campaignName}</td>
-                  <td className="px-6 py-4 text-sm text-gray-500">{payment.taskId ? `Task #${payment.taskId.replace('t', '')}` : '-'}</td>
-                  <td className="px-6 py-4 text-sm font-medium text-gray-900 dark:text-white">{payment.totalAmount.toLocaleString()} VND</td>
+                <tr key={payment.id} className="border-b border-slate-100/60 hover:bg-slate-50/50">
+                  <td className="px-6 py-4"><div className="flex items-center gap-3"><Avatar initials={payment.kolAvatar} size="sm" image={getKolImage(payment.kolAvatar)} /><div><p className="text-sm font-medium text-slate-900 dark:text-white">{payment.kolName}</p><p className="text-xs text-slate-500">{payment.kolPlatform}</p></div></div></td>
+                  <td className="px-6 py-4 text-sm text-slate-300 dark:text-slate-300">{payment.campaignName}</td>
+                  <td className="px-6 py-4 text-sm text-slate-500">{payment.taskId ? `Task #${payment.taskId.replace('t', '')}` : '-'}</td>
+                  <td className="px-6 py-4 text-sm font-medium text-slate-900 dark:text-white">{payment.totalAmount.toLocaleString()} VND</td>
                   <td className="px-6 py-4 text-sm font-medium text-emerald-600 dark:text-emerald-400">{payment.paidAmount.toLocaleString()} VND</td>
-                  <td className="px-6 py-4"><Badge label={paymentStatusLabels[payment.status]} colorClass={
-                    payment.status === 'paid' ? 'bg-emerald-100 text-emerald-800 dark:bg-emerald-900/40 dark:text-emerald-300' :
-                    payment.status === 'pending' ? 'bg-amber-100 text-amber-800 dark:bg-amber-900/40 dark:text-amber-300' :
-                    payment.status === 'partial_paid' ? 'bg-blue-100 text-blue-800 dark:bg-blue-900/40 dark:text-blue-300' :
-                    'bg-gray-100 text-gray-700 dark:bg-gray-700 dark:text-gray-300'
+                  <td className="px-6 py-4"><Badge label={paymentStatusLabels[payment._status]} colorClass={
+                    payment._status === 'paid' ? 'bg-emerald-100 dark:bg-emerald-900/40 dark:text-emerald-300' :
+                    payment._status === 'pending' ? 'bg-amber-100 text-amber-800 dark:bg-amber-900/40 dark:text-amber-300' :
+                    payment._status === 'partial_paid' ? 'bg-blue-100 text-blue-800 dark:bg-blue-900/40 dark:text-blue-300' :
+                    payment._status === 'hold' ? 'bg-slate-100/60 text-slate-700 dark:bg-slate-700 dark:text-slate-300' :
+                    'bg-slate-100/60 text-slate-300 dark:bg-slate-700 dark:text-slate-300'
                   } /></td>
                   <td className="px-6 py-4">
-                    {payment.status !== 'paid' ? (
+                    {payment._status !== 'paid' ? (
                       <div className="flex gap-1 flex-wrap">
                         <Button size="sm" variant="secondary" onClick={() => setQrModalPayment(payment)} className="!px-2 !py-1 !text-xs"><CreditCard className="w-3 h-3 mr-1" />QR</Button>
                         <Button size="sm" variant="secondary" onClick={() => setPaymentAction({ paymentId: payment.id, action: 'approve' })} className="!text-xs">Duyệt</Button>
@@ -4366,15 +4396,15 @@ function PaymentsView({ selectedProject }: { selectedProject: string }) {
       {/* QR Payment Demo Modal */}
       <Modal isOpen={!!qrModalPayment} onClose={() => setQrModalPayment(null)} title="QR Thanh toán" width="max-w-sm">
         <div className="space-y-4">
-          <div className="flex items-center gap-3 p-3 bg-gray-50 dark:bg-gray-800 rounded">
-            <Avatar initials={qrModalPayment?.kolAvatar} size="md" />
+          <div className="flex items-center gap-3 p-3 bg-slate-50/50 dark:bg-slate-700/40 rounded-xl">
+            <Avatar initials={qrModalPayment?.kolAvatar} size="md" image={getKolImage(qrModalPayment?.kolAvatar || '')} />
             <div>
-              <p className="text-sm font-semibold text-gray-900 dark:text-white">{qrModalPayment?.kolName}</p>
-              <p className="text-xs text-gray-500">{qrModalPayment?.kolPlatform}</p>
+              <p className="text-sm font-semibold text-slate-900 dark:text-white">{qrModalPayment?.kolName}</p>
+              <p className="text-xs text-slate-500">{qrModalPayment?.kolPlatform}</p>
             </div>
           </div>
           <div className="flex items-center justify-center">
-            <div className="p-3 bg-white rounded border-4 border-gray-900 dark:border-white ">
+            <div className="p-3 bg-white rounded-2xl border-4 border-slate-900 dark:border-white shadow-lg">
               <svg width="180" height="180" viewBox="0 0 180 180">
                 <rect width="180" height="180" fill="white" />
                 <rect x="10" y="10" width="40" height="40" fill="black" />
@@ -4410,11 +4440,11 @@ function PaymentsView({ selectedProject }: { selectedProject: string }) {
             </div>
           </div>
           <div className="space-y-2 text-center">
-            <p className="text-xs text-gray-500">Số tiền thanh toán</p>
-            <p className="text-2xl font-bold text-gray-900 dark:text-white">{qrModalPayment?.totalAmount.toLocaleString()} VND</p>
-            <p className="text-xs text-gray-500">{qrModalPayment?.invoiceNumber}</p>
+            <p className="text-xs text-slate-500">Số tiền thanh toán</p>
+            <p className="text-2xl font-bold text-slate-900 dark:text-white">{qrModalPayment?.totalAmount.toLocaleString()} VND</p>
+            <p className="text-xs text-slate-500">{qrModalPayment?.invoiceNumber}</p>
           </div>
-          <div className="p-3 bg-gray-50 dark:bg-gray-700 rounded border border-amber-200 dark:border-amber-800/40 text-xs text-amber-700 dark:text-amber-300">
+          <div className="p-3 bg-amber-50/80 dark:bg-amber-900/20 rounded-xl border border-amber-200 dark:border-amber-800/40 text-xs text-amber-700 dark:text-amber-300">
             ⚠️ Đây là QR thanh toán demo ảo. Không quét thực.
           </div>
           <div className="flex gap-3">
@@ -4436,23 +4466,23 @@ function PaymentsView({ selectedProject }: { selectedProject: string }) {
             return (
               <>
                 {p && (
-                  <div className="p-4 bg-gray-50 dark:bg-gray-800 rounded">
+                  <div className="p-4 bg-slate-50/50 dark:bg-slate-700/40 rounded-xl">
                     <div className="flex items-center gap-3 mb-3">
-                      <Avatar initials={p.kolAvatar} size="sm" />
-                      <div><p className="text-sm font-medium text-gray-900 dark:text-white">{p.kolName}</p><p className="text-xs text-gray-500">{p.campaignName}</p></div>
+                      <Avatar initials={p.kolAvatar} size="sm" image={getKolImage(p.kolAvatar)} />
+                      <div><p className="text-sm font-medium text-slate-900 dark:text-white">{p.kolName}</p><p className="text-xs text-slate-500">{p.campaignName}</p></div>
                     </div>
                     {task && (
                       <div className="grid grid-cols-2 gap-3 text-xs">
-                        <div className="p-2 bg-white dark:bg-gray-600 rounded"><p className="text-gray-500">KPI Views</p><p className="font-medium text-gray-900 dark:text-white">{task.kpiTarget.views.toLocaleString()}</p></div>
-                        <div className="p-2 bg-white dark:bg-gray-600 rounded"><p className="text-gray-500">KPI ER</p><p className="font-medium text-gray-900 dark:text-white">{task.kpiTarget.engagementRate}%</p></div>
-                        <div className="p-2 bg-white dark:bg-gray-600 rounded"><p className="text-gray-500">Metrics Approved</p><p className="font-medium text-gray-600">{task.metrics ? '✓ Đã xác nhận' : '—'}</p></div>
-                        <div className="p-2 bg-white dark:bg-gray-600 rounded"><p className="text-gray-500">Conversion</p><p className="font-medium text-gray-900 dark:text-white">{task.conversion ? `Đơn: ${task.conversion.orders}` : '—'}</p></div>
+                        <div className="p-2 bg-white dark:bg-slate-600 rounded-lg"><p className="text-slate-500">KPI Views</p><p className="font-medium text-slate-900 dark:text-white">{task.kpiTarget.views.toLocaleString()}</p></div>
+                        <div className="p-2 bg-white dark:bg-slate-600 rounded-lg"><p className="text-slate-500">KPI ER</p><p className="font-medium text-slate-900 dark:text-white">{task.kpiTarget.engagementRate}%</p></div>
+                        <div className="p-2 bg-white dark:bg-slate-600 rounded-lg"><p className="text-slate-500">Metrics Approved</p><p className="font-medium text-brand-600">{task.metrics ? '✓ Đã xác nhận' : '—'}</p></div>
+                        <div className="p-2 bg-white dark:bg-slate-600 rounded-lg"><p className="text-slate-500">Conversion</p><p className="font-medium text-slate-900 dark:text-white">{task.conversion ? `Đơn: ${task.conversion.orders}` : '—'}</p></div>
                       </div>
                     )}
                   </div>
                 )}
-                <div className="p-4 bg-gray-50 dark:bg-gray-800 rounded">
-                  <p className="text-sm text-gray-600 dark:text-gray-300">
+                <div className="p-4 bg-slate-50/50 dark:bg-slate-700/40 rounded-xl">
+                  <p className="text-sm text-slate-600 dark:text-slate-300">
                     {paymentAction.action === 'approve' ? 'Xác nhận thanh toán đầy đủ?' :
                      paymentAction.action === 'partial' ? 'Nhập số tiền thanh toán một phần:' :
                      paymentAction.action === 'hold' ? 'Nhập lý do giữ tạm thanh toán:' :
@@ -4460,19 +4490,19 @@ function PaymentsView({ selectedProject }: { selectedProject: string }) {
                   </p>
                 </div>
                 {paymentAction.action === 'partial' && (
-                  <div><label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Số tiền (VND)</label>
-                    <input type="number" placeholder="VD: 5000000" className="w-full px-4 py-2.5 rounded border border-gray-200 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white text-sm" />
+                  <div><label className="block text-sm font-medium text-slate-300 dark:text-slate-300 mb-1">Số tiền (VND)</label>
+                    <input type="number" placeholder="VD: 5000000" className="w-full px-4 py-2.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-700 text-slate-900 dark:text-white text-sm" />
                   </div>
                 )}
                 {paymentAction.action === 'hold' && (
-                  <div><label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Lý do giữ tạm</label>
+                  <div><label className="block text-sm font-medium text-slate-300 dark:text-slate-300 mb-1">Lý do giữ tạm</label>
                     <textarea rows={2} placeholder="VD: Số liệu metrics chưa được xác nhận..."
-                      className="w-full px-4 py-2.5 rounded border border-gray-200 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white text-sm resize-none" />
+                      className="w-full px-4 py-2.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-700 text-slate-900 dark:text-white text-sm resize-none" />
                   </div>
                 )}
                 <div className="flex justify-end gap-3">
                   <Button variant="secondary" onClick={() => setPaymentAction(null)}>Hủy</Button>
-                  <Button onClick={() => setPaymentAction(null)}>
+                  <Button onClick={handleApprove}>
                     {paymentAction.action === 'approve' ? 'Xác nhận thanh toán' :
                      paymentAction.action === 'partial' ? 'Thanh toán một phần' :
                      paymentAction.action === 'hold' ? 'Giữ tạm' : 'Từ chối'}
@@ -4533,18 +4563,18 @@ function RankingsView({ selectedProject }: { selectedProject: string }) {
       <div>
         <div className="flex items-center gap-3 mb-3">
           <Award className="w-5 h-5 text-amber-500" />
-          <h2 className="text-base font-bold text-gray-900 dark:text-white">Top KOL/KOC</h2>
+          <h2 className="text-base font-bold text-slate-900 dark:text-white">Top KOL/KOC</h2>
         </div>
         {brandKOLRankings.length === 0 ? (
-          <div className="bg-white dark:bg-gray-800 rounded border border-gray-200 dark:border-gray-700 p-8 text-center">
-            <p className="text-sm text-gray-500">Chưa có dữ liệu xếp hạng.</p>
+          <div className="bg-white dark:bg-slate-800 rounded-2xl border border-slate-200/80 dark:border-slate-700/60 shadow-soft p-8 text-center">
+            <p className="text-sm text-slate-500">Chưa có dữ liệu xếp hạng.</p>
           </div>
         ) : (
           <div className="space-y-3">
             {/* Top 3 podium */}
             {brandKOLRankings.slice(0, 3).map((r, i) => {
               const kol = kols.find(k => k.id === r.kolId);
-              const podiumColors = ['bg-gray-400', 'bg-gray-400', 'bg-gray-400'];
+              const podiumColors = ['from-amber-400 to-yellow-500', 'from-slate-400 to-slate-300', 'from-amber-600 to-orange-700'];
               return (
                 <div key={r.kolId} className="flex items-center gap-4">
                   {/* Podium rank */}
@@ -4555,19 +4585,19 @@ function RankingsView({ selectedProject }: { selectedProject: string }) {
                   {/* KOL info */}
                   <div className="flex-1 min-w-0">
                     <div className="flex items-center gap-3 mb-1">
-                      <Avatar initials={kol?.avatar || 'K'} size="md" />
+                      <Avatar initials={kol?.avatar || 'K'} size="md" image={getKolImage(kol?.avatar || 'K')} />
                       <div className="flex-1 min-w-0">
-                        <p className="text-sm font-semibold text-gray-900 dark:text-white truncate">{kol?.name}</p>
-                        <p className="text-xs text-gray-500 truncate">{kol?.platform} · {kol?.niche}</p>
+                        <p className="text-sm font-semibold text-slate-900 dark:text-white truncate">{kol?.name}</p>
+                        <p className="text-xs text-slate-500 truncate">{kol?.platform} · {kol?.niche}</p>
                       </div>
                       <div className="text-right flex-shrink-0">
-                        <p className="text-sm font-bold text-gray-900 dark:text-white">{r.score}</p>
-                        <p className="text-[10px] text-gray-500">điểm</p>
+                        <p className="text-sm font-bold text-slate-900 dark:text-white">{r.score}</p>
+                        <p className="text-[10px] text-slate-500">điểm</p>
                       </div>
                     </div>
                     <div className="flex gap-4">
-                      <span className="text-xs text-gray-500">{r.totalViews >= 1000000 ? `${(r.totalViews/1000000).toFixed(1)}M` : `${Math.round(r.totalViews/1000)}K`} views</span>
-                      <span className="text-xs text-gray-600 dark:text-gray-400">ER {r.avgEngagementRate}%</span>
+                      <span className="text-xs text-slate-500">{r.totalViews >= 1000000 ? `${(r.totalViews/1000000).toFixed(1)}M` : `${Math.round(r.totalViews/1000)}K`} views</span>
+                      <span className="text-xs text-brand-500 dark:text-brand-400">ER {r.avgEngagementRate}%</span>
                     </div>
                   </div>
                 </div>
@@ -4576,24 +4606,24 @@ function RankingsView({ selectedProject }: { selectedProject: string }) {
 
             {/* Rest of rankings: compact list */}
             {brandKOLRankings.length > 3 && (
-              <div className="bg-white dark:bg-gray-800 rounded border border-gray-200 dark:border-gray-700 overflow-hidden divide-y divide-gray-100 dark:divide-gray-700">
+              <div className="bg-white dark:bg-slate-800 rounded-2xl border border-slate-200/80 dark:border-slate-700/60 shadow-soft overflow-hidden divide-y divide-slate-100/80">
                 {brandKOLRankings.slice(3).map((r, i) => {
                   const kol = kols.find(k => k.id === r.kolId);
                   const rank = i + 4;
                   return (
-                    <div key={r.kolId} className="flex items-center gap-4 px-5 py-3 hover:bg-gray-50/50 dark:hover:bg-gray-700/20">
-                      <div className="w-8 h-8 rounded-full bg-gray-100 dark:bg-gray-700 flex items-center justify-center text-xs font-bold text-gray-500 flex-shrink-0">
+                    <div key={r.kolId} className="flex items-center gap-4 px-5 py-3 hover:bg-slate-50/50 dark:hover:bg-slate-700/20">
+                      <div className="w-8 h-8 rounded-full bg-slate-100/60 dark:bg-slate-700 flex items-center justify-center text-xs font-bold text-slate-500 flex-shrink-0">
                         {rank}
                       </div>
-                      <Avatar initials={kol?.avatar || 'K'} size="sm" />
+                      <Avatar initials={kol?.avatar || 'K'} size="sm" image={getKolImage(kol?.avatar || 'K')} />
                       <div className="flex-1 min-w-0">
-                        <p className="text-sm font-medium text-gray-900 dark:text-white truncate">{kol?.name}</p>
-                        <p className="text-xs text-gray-500">{kol?.platform}</p>
+                        <p className="text-sm font-medium text-slate-900 dark:text-white truncate">{kol?.name}</p>
+                        <p className="text-xs text-slate-500">{kol?.platform}</p>
                       </div>
                       <div className="flex items-center gap-6 flex-shrink-0">
-                        <span className="text-xs text-gray-500">{r.totalViews >= 1000000 ? `${(r.totalViews/1000000).toFixed(1)}M` : `${Math.round(r.totalViews/1000)}K`}</span>
-                        <span className="text-xs text-gray-600 dark:text-gray-400">{r.avgEngagementRate}%</span>
-                        <span className="text-sm font-bold text-gray-900 dark:text-white w-8 text-right">{r.score}</span>
+                        <span className="text-xs text-slate-500">{r.totalViews >= 1000000 ? `${(r.totalViews/1000000).toFixed(1)}M` : `${Math.round(r.totalViews/1000)}K`}</span>
+                        <span className="text-xs text-brand-500 dark:text-brand-400">{r.avgEngagementRate}%</span>
+                        <span className="text-sm font-bold text-slate-900 dark:text-white w-8 text-right">{r.score}</span>
                       </div>
                     </div>
                   );
@@ -4607,12 +4637,12 @@ function RankingsView({ selectedProject }: { selectedProject: string }) {
       {/* ── Campaign Leaderboard ── */}
       <div>
         <div className="flex items-center gap-3 mb-3">
-          <TrendingUp className="w-5 h-5 text-gray-400" />
-          <h2 className="text-base font-bold text-gray-900 dark:text-white">Top Chiến dịch</h2>
+          <TrendingUp className="w-5 h-5 text-brand-400" />
+          <h2 className="text-base font-bold text-slate-900 dark:text-white">Top Chiến dịch</h2>
         </div>
         {brandCampaignRankings.length === 0 ? (
-          <div className="bg-white dark:bg-gray-800 rounded border border-gray-200 dark:border-gray-700 p-8 text-center">
-            <p className="text-sm text-gray-500">Chưa có dữ liệu xếp hạng chiến dịch.</p>
+          <div className="bg-white dark:bg-slate-800 rounded-2xl border border-slate-200/80 dark:border-slate-700/60 shadow-soft p-8 text-center">
+            <p className="text-sm text-slate-500">Chưa có dữ liệu xếp hạng chiến dịch.</p>
           </div>
         ) : (
           <div className="space-y-3">
@@ -4620,18 +4650,18 @@ function RankingsView({ selectedProject }: { selectedProject: string }) {
               const campaign = campaigns.find(c => c.id === r.campaignId);
               const medals = ['🥇', '🥈', '🥉'];
               return (
-                <div key={r.campaignId} className="flex items-center gap-4 bg-white dark:bg-gray-800 rounded border border-gray-200 dark:border-gray-700 p-4">
+                <div key={r.campaignId} className="flex items-center gap-4 bg-white dark:bg-slate-800 rounded-2xl border border-slate-200/80 dark:border-slate-700/60 shadow-soft p-4">
                   <span className="text-2xl w-8 text-center flex-shrink-0">{medals[i]}</span>
                   <div className="flex-1 min-w-0">
-                    <p className="text-sm font-semibold text-gray-900 dark:text-white truncate">{campaign?.name}</p>
-                    <p className="text-xs text-gray-500 truncate">{campaign?.productName}</p>
+                    <p className="text-sm font-semibold text-slate-900 dark:text-white truncate">{campaign?.name}</p>
+                    <p className="text-xs text-slate-500 truncate">{campaign?.productName}</p>
                   </div>
                   <div className="flex items-center gap-6 flex-shrink-0">
                     <div className="text-right">
                       <p className="text-xs font-bold text-violet-600 dark:text-violet-400">{r.totalViews >= 1000000 ? `${(r.totalViews/1000000).toFixed(1)}M` : `${Math.round(r.totalViews/1000)}K`} views</p>
                     </div>
                     <div className="text-right">
-                      <p className="text-xs font-bold text-gray-600 dark:text-gray-400">{r.avgEngagementRate}% ER</p>
+                      <p className="text-xs font-bold text-brand-500 dark:text-brand-400">{r.avgEngagementRate}% ER</p>
                     </div>
                     <div className="text-right">
                       <p className="text-xs font-bold text-amber-600 dark:text-amber-400">{r.score} điểm</p>
@@ -4642,20 +4672,20 @@ function RankingsView({ selectedProject }: { selectedProject: string }) {
             })}
             {/* Rest */}
             {brandCampaignRankings.length > 3 && (
-              <div className="bg-white dark:bg-gray-800 rounded border border-gray-200 dark:border-gray-700 overflow-hidden divide-y divide-gray-100 dark:divide-gray-700">
+              <div className="bg-white dark:bg-slate-800 rounded-2xl border border-slate-200/80 dark:border-slate-700/60 shadow-soft overflow-hidden divide-y divide-slate-100/80">
                 {brandCampaignRankings.slice(3).map((r, i) => {
                   const campaign = campaigns.find(c => c.id === r.campaignId);
                   return (
                     <div key={r.campaignId} className="flex items-center gap-4 px-5 py-3">
-                      <span className="text-sm font-bold text-gray-400 w-6 text-center flex-shrink-0">{i + 4}</span>
+                      <span className="text-sm font-bold text-slate-400 w-6 text-center flex-shrink-0">{i + 4}</span>
                       <div className="flex-1 min-w-0">
-                        <p className="text-sm font-medium text-gray-900 dark:text-white truncate">{campaign?.name}</p>
-                        <p className="text-xs text-gray-500 truncate">{campaign?.productName}</p>
+                        <p className="text-sm font-medium text-slate-900 dark:text-white truncate">{campaign?.name}</p>
+                        <p className="text-xs text-slate-500 truncate">{campaign?.productName}</p>
                       </div>
                       <div className="flex items-center gap-4 flex-shrink-0">
-                        <span className="text-xs text-gray-500">{r.totalViews >= 1000000 ? `${(r.totalViews/1000000).toFixed(1)}M` : `${Math.round(r.totalViews/1000)}K`}</span>
-                        <span className="text-xs text-gray-600">{r.avgEngagementRate}%</span>
-                        <span className="text-sm font-bold text-gray-900 dark:text-white w-8 text-right">{r.score}</span>
+                        <span className="text-xs text-slate-500">{r.totalViews >= 1000000 ? `${(r.totalViews/1000000).toFixed(1)}M` : `${Math.round(r.totalViews/1000)}K`}</span>
+                        <span className="text-xs text-brand-600">{r.avgEngagementRate}%</span>
+                        <span className="text-sm font-bold text-slate-900 dark:text-white w-8 text-right">{r.score}</span>
                       </div>
                     </div>
                   );
