@@ -521,7 +521,7 @@ function KPICard({ label, value, suffix, icon, accent = 'from-blue-500/10 to-blu
 }) {
   return (
     <motion.div whileHover={{ y: -2 }} onClick={onClick}
-      className={`bg-gradient-to-br ${accent} to-transparent rounded-2xl p-4 border border-gray-200/60 dark:border-slate-700/60 bg-white dark:bg-slate-800/80 ${onClick ? 'cursor-pointer hover:shadow-sm transition-shadow' : ''}`}>
+      className={`bg-gradient-to-br ${accent} to-white rounded-2xl p-4 border border-gray-200/60 dark:border-slate-700/60 bg-white dark:bg-slate-800/80 ${onClick ? 'cursor-pointer hover:shadow-sm transition-shadow' : ''}`}>
       <div className="flex items-start justify-between">
         <div>
           <p className="text-xs text-gray-500 dark:text-gray-400 mb-0.5">{label}</p>
