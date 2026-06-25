@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import {
   Users, Plus, Search, CheckCircle2, Lock, Ban,
   Eye, Package, Briefcase, BarChart3, DollarSign, TrendingUp,
@@ -129,15 +129,22 @@ function KPISection({ title, icon, items, defaultOpen = true, onCardClick, onNav
 // ─── ADMIN DASHBOARD ─────────────────────────────────────────────────
 interface AdminDashboardProps {
   onNavigate?: (viewId: string) => void;
+  initialView?: string;
 }
 
-export function AdminDashboard({ onNavigate }: AdminDashboardProps) {
+export function AdminDashboard({ onNavigate, initialView: initial }: AdminDashboardProps) {
   const [timeRange, setTimeRange] = useState('6tháng');
+  const [activeView, setActiveView] = useState(initial || 'dashboard');
   const [detailModal, setDetailModal] = useState<{
     type: 'brands' | 'campaigns' | 'kols' | 'products' | 'views' | 'engagement' | 'conversion' | 'payments';
     title: string;
   } | null>(null);
   const [selectedKOL, setSelectedKOL] = useState<KOL | null>(null);
+
+  // Sync activeView when initialView prop changes (e.g., sidebar navigation)
+  useEffect(() => {
+    if (initial) setActiveView(initial);
+  }, [initial]);
 
   // Calculate KPIs from real data
   const totalViews = campaigns.reduce((sum, c) => sum + c.totalViews, 0);
@@ -257,6 +264,34 @@ export function AdminDashboard({ onNavigate }: AdminDashboardProps) {
       navigateTo: 'payments'
     },
   ];
+
+  const handleNavigate = (viewId: string) => {
+    if (viewId === 'dashboard') {
+      setActiveView('dashboard');
+    } else {
+      onNavigate?.(viewId);
+    }
+  };
+
+  if (activeView !== 'dashboard') {
+    const viewMap: Record<string, React.ReactNode> = {
+      brands: <BrandManagement />,
+      products: <ProductManagement />,
+      campaigns: <CampaignManagement />,
+      kolmanagement: <KOLManagement />,
+      ranking: <SystemRanking />,
+      rankings: <SystemRanking />,
+      payments: <PaymentMonitoring />,
+      'payments-processing': <PaymentProcessing />,
+      'payments-paid': <PaymentPaid />,
+      'payments-hold': <PaymentHold />,
+      performance: <PerformanceCenter />,
+      reports: <ReportCenter />,
+      history: <WorkHistory />,
+    };
+    const content = viewMap[activeView];
+    if (content) return <>{content}</>;
+  }
 
   return (
     <div className="space-y-6">

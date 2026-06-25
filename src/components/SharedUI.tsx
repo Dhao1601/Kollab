@@ -103,8 +103,8 @@ export function Modal({ isOpen, onClose, title, children, width = 'max-w-2xl' }:
               </button>
             </div>
             <div className="p-5 max-h-[70vh] overflow-y-auto">{children}</div>
-          </div>
-        </div>
+          </motion.div>
+        </motion.div>
       )}
     </AnimatePresence>
   );
@@ -158,7 +158,7 @@ export function KPIWidget({ label, value, change, positive, icon, role = 'brand'
       <div className={`absolute top-4 right-4 p-1.5 rounded-lg ${colors.iconBg} shadow-sm`}>
         <div className="w-4 h-4">{icon}</div>
       </div>
-    </div>
+    </motion.div>
   );
 }
 

@@ -1121,7 +1121,7 @@ function ProductsView({ selectedProject }: { selectedProject: string }) {
               <Button size="sm" variant="ghost" onClick={() => setShowEdit(p.id)}><Edit3 className="w-3.5 h-3.5" /></Button>
               <Button size="sm" variant="ghost" className="text-red-500 hover:text-red-600" onClick={() => setDeleteProduct(p.id)}><Trash2 className="w-3.5 h-3.5" /></Button>
             </div>
-          </div>
+          </motion.div>
           );
         })}
       </div>
@@ -3767,7 +3767,7 @@ function ContentReviewPanel({ selectedProject, selectedTaskId, setSelectedTaskId
                       <p className="font-medium text-slate-700 dark:text-slate-200">{draft?.submittedAt?.split(' ')[0] || '-'}</p>
                     </div>
                   </div>
-                </button>
+                </motion.button>
               );
             })}
           </div>
